@@ -145,3 +145,32 @@ article {
     background: url(icons/slider-arrow.png) 0 0 no-repeat;
 }
 /* 슬라이드 */
+
+/* Think 목록*/
+ThinkListAlticle {
+    width: 90%;
+    text-aling : center;
+    display: block;
+    margin: 0px auto;
+    margin-top: 45px;
+}
+.ThinkListInfo {
+    text-aling : center;
+    display: block;
+    margin: 0px auto;
+    width: 90%;
+    height: 280px;
+    position: relative;
+    display: inline-block;
+}
+
+.ThinkListFont {
+    text-aling : center;
+    display: block;
+    margin: 0px auto;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Nanum Gothic', sans-serif;
+    color: #000000;
+}
+/* Think 목록*/

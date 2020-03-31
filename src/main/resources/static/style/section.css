@@ -17,8 +17,7 @@ section {
 /*  검색  */
 #searchBox{
     width: 88%;
-    border-radius: 30px;
-    padding: 25px;
+    padding: 20px;
     border-radius: 30px;
     background-color: #D5D5D5;
     text-aling : center;
@@ -27,6 +26,7 @@ section {
     margin-top : -225px;
 }
 input {
+    border-radius: 30px;
     font-size : 28px;
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: bold;
