@@ -1,0 +1,37 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
+
+html,body{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+
+section {
+    width: 90%;
+    height: 570px;
+    text-aling : center;
+    display: block;
+    margin: 0px auto;
+}
+
+/*  검색  */
+#searchBox{
+    width: 88%;
+    border-radius: 30px;
+    padding: 25px;
+    border-radius: 30px;
+    background-color: #D5D5D5;
+    text-aling : center;
+    display: block;
+    margin: 0px auto;
+    margin-top : -225px;
+}
+input {
+    font-size : 28px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+}
+/* Hide the browser's default radio button */
+
+/*  검색  */
+

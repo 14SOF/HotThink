@@ -5,6 +5,7 @@
     <title>Section</title>
 
     <link rel="stylesheet" type="text/css" href="style/article.css">
+    <link rel="stylesheet" type="text/css" href="style/section.css">
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="jquery.slides.min.js"></script>
@@ -12,16 +13,17 @@
 </head>
 
 <body>
+<section>
     <article>
         <div class="slider">
             <div class="bd">
                 <ul>
                     <li><a target="_blank" href="http://www.htmldrive.net"><img
-                            src="/icons/1.jpg" /></a></li>
+                            src="/icons/mainImg1.png" /></a></li>
                     <li><a target="_blank" href="http://www.htmldrive.net"><img
-                            src="/icons/2.jpg" /></a></li>
+                            src="/icons/mainImg2.png" /></a></li>
                     <li><a target="_blank" href="http://www.htmldrive.net"><img
-                            src="/icons/3.jpg" /></a></li>
+                            src="/icons/mainImg3.png" /></a></li>
                 </ul>
             </div>
             <div class="hd">
@@ -59,7 +61,21 @@
             });
         </script>
     </article>
- <section>
+
+    <form name="search_form" action="" method=post>
+            <div id=searchBox align="center">
+                <table cellpadding=5 cellspacing=0 align="center" >
+                <tr>
+                    <td><input type="text" name="search" size="100" maxlength="100" value="검색할 Think를 입력하시오."  onFocus="javascript:this.value=''"
+                               style="width : 1250px; height: 80px; border:0px;"></td>
+                    <td><input type="submit" name="search" value="검색"
+                           style="width: 200px; height: 80px; background-color: #FFFF48; border:0px;""></td>
+                </tr>
+                </table>
+
+            </div>
+    </form>
+
 </section>
 
 </body>
