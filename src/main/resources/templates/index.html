@@ -3,12 +3,241 @@
 <head>
     {{> include/header}}
 
+    <style>
+        /*slide style start*/
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        #slide {
+            position: relative;
+            overflow: hidden;
+            padding-bottom: 0px;
+            padding-top: 65px;
+            /* 여기 수정하면 슬라이드 밑에 버튼 위치가 아래로 내려감 */
+        }
+
+        #slide ul {
+            width: 300%;
+            height: 45%;
+            transition: 1s;
+        }
+
+        #slide ul:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #slide li {
+            float: left;
+            width: 33.3%;
+            height: 100%;
+        }
+
+        #slide input {
+            display: none;
+        }
+
+        #slide label {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #666;
+            background: #fff;
+            transition: 0.3s;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #slide .pos {
+            text-align: center;
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+        #pos1:checked ~ ul {
+            margin-left: 0%;
+        }
+
+        #pos2:checked ~ ul {
+            margin-left: -100%;
+        }
+
+        #pos3:checked ~ ul {
+            margin-left: -200%;
+        }
+
+        #pos1:checked ~ .pos > label:nth-child(1) {
+            background: #666;
+        }
+
+        #pos2:checked ~ .pos > label:nth-child(2) {
+            background: #666;
+        }
+
+        #pos3:checked ~ .pos > label:nth-child(3) {
+            background: #666;
+        }
+
+        img {
+            width: 100%;
+        }
+        /*slide style end*/
+        /*search Bar style start*/
+        #searchBar{
+            height: 10%;
+            width: 400px;
+            float: left;
+            border: 1px solid #ffffff;
+            background: #ffffff;
+        }
+        #searchButton{
+            font-size: 16px;
+            width: 325px;
+            padding: 10px;
+            border: 0px;
+            outline: none;
+            float: left;
+        }
+        /*search Bar style end*/
+
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="style/article.css">
+    <link rel="stylesheet" type="text/css" href="style/section.css?v=2">
+    <script src="/js/modernizr.custom.34807.js"></script>
+
 </head>
 <body>
-    {{>include/navBar}}
-    {{>include/imageSlide}}
-    {{>include/searchBar}}
-    {{>include/footer}}
-{{>include/section}}
+{{>include/navBar}}
+
+<!--slide start-->
+<div id="slide">
+    <input type="radio" name="pos" id="pos1" checked>
+    <input type="radio" name="pos" id="pos2">
+    <input type="radio" name="pos" id="pos3">
+
+    <ul>
+        <li>
+            <a href="https://locahots:8080/#">
+                <img src="image/mainImage1.jpg">
+            </a>
+        </li>
+        <li>
+            <a href="https://locahots:8080/#">
+                <img src="image/mainImage2.jpg">
+            </a>
+        </li>
+        <li>
+            <a href="https://locahots:8080/#">
+                <img src="image/mainImage3.jpg">
+            </a>
+        </li>
+    </ul>
+
+    <p class="pos">
+        <label for="pos1"></label>
+        <label for="pos2"></label>
+        <label for="pos3"></label>
+    </p>
+</div>
+<!--slide end-->
+
+<!--searchBar start-->
+<!--<div id="searchBar">-->
+<!--    <input id="searchButton" type="text" placeholder="검색어입력">-->
+<!--    <button>검색</button>-->
+<!--</div>-->
+<!--searchBar end-->
+
+
+<article>
+    <div id="container">
+
+        <span id="information" style="display:none">Your browser doesn't support CSS3 3D Transform</span>
+        <font size="20px" face="'Nanum Gothic', sans-serif" color="black">Think List</font>
+
+        <div id="portfolio"></div>
+
+        <ul id="portfolio-item">
+            // 조회순
+            <li><img src="/icons/mainImg1.png" alt="정형일"/></li>
+            <li><img src="/images/rrwooo_rrwooo_teaser.jpeg" alt="김영곤"/></li>
+            <li><img src="/images/dozer_teaser.jpeg" alt="오일권"/></li>
+            <li><img src="/images/ltah_teaser.jpeg" alt="정기혁"/></li>
+            <li><img src="/images/pirates_teaser.jpeg" alt="정형일"/></li>
+            <li><img src="/images/rustler_teaser.jpeg" alt="정형일"/></li>
+            <li><img src="/images/satellite_teaser.jpeg" alt="정형일"/></li>
+            <li><img src="/images/werewolf_teaser.jpeg" alt="정형일"/></li>
+
+
+            // 최신순
+            <li><img src="/images/box_socks_teaser.jpeg" alt="Box Socks"/></li>
+            <li><img src="/images/capt_kidd_teaser.jpeg" alt="Capt Kidd"/></li>
+            <li><img src="/images/bat_bedtime_teaser.jpeg" alt="Bat Bedtime"/></li>
+            <li><img src="/images/grrr_teaser.jpeg" alt="Grrr"/></li>
+            <li><img src="/images/eensy_teaser.jpeg" alt="Eensy"/></li>
+            <li><img src="/images/derby_lady_teaser.jpeg" alt="Derby Lady"/></li>
+            <li><img src="/images/carrot_teaser.jpeg" alt="Carrot"/></li>
+            <li><img src="/images/brush_teaser.jpeg" alt="Brush"/></li>
+
+
+
+            <li><img src="/images/nunatakdribbble_teaser.jpeg" alt="Nunatak"/></li>
+            <li><img src="/images/reefdribbble_teaser.jpeg" alt="Reef"/></li>
+            <li><img src="/images/glacier_teaser.jpeg" alt="Glacier"/></li>
+            <li><img src="/images/carddribbble_teaser.jpeg" alt="Card"/></li>
+            <li><img src="/images/cove_teaser.jpeg" alt="Cove"/></li>
+            <li><img src="/images/canal_teaser.jpeg" alt="Canal"/></li>
+            <li><img src="/images/shot_1300121080_teaser.jpeg" alt="Biome"/></li>
+            <li><img src="/images/shot_1300969987_teaser.jpeg" alt="Globe"/></li>
+
+
+
+            <li><img src="/images/bestican_teaser.jpeg" alt="Bestican"/></li>
+            <li><img src="/images/bifocal_teaser.jpeg" alt="Bifocal"/></li>
+            <li><img src="/images/soupsearch_teaser.jpeg" alt="Soup Search"/></li>
+            <li><img src="/images/sub_teaser.jpeg" alt="Submarine"/></li>
+            <li><img src="/images/tomatosoup_teaser.jpeg" alt="Tomato Soup"/></li>
+            <li><img src="/images/harry_teaser.jpeg" alt="Hipster Harry"/></li>
+            <li><img src="/images/for_the_man_teaser.jpeg" alt="For The Man"/></li>
+            <li><img src="/images/extra_teaser.jpeg" alt="Indulgence"/></li>
+
+        </ul>
+        <nav id="navigation">
+            <a href="#1" class="nav selected" data-page="1"><font size="5px" face="'Nanum Gothic', sans-serif" color="black">조회순</font></a>
+            <a href="#2" class="nav" data-page="2"><font size="5px" face="'Nanum Gothic', sans-serif" color="black">최신순</font></a>
+            <a href="#3" class="nav" data-page="3"><font size="5px" face="'Nanum Gothic', sans-serif" color="black">정형일</font></a>
+            <a href="#4" class="nav" data-page="4"><font size="5px" face="'Nanum Gothic', sans-serif" color="black">정형일</font></a>
+        </nav>
+
+    </div>
+    </div>
+
+    <script> if (!Modernizr.csstransforms3d) document.getElementById('information').style.display = 'block'; </script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="/js/jquery-1.7.2.min.js"%3E%3C/script%3E'))</script>
+    <script src="/js/demo.js"></script>
+
+</article>
+
+{{>include/footer}}
+
 </body>
 </html>

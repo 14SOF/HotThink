@@ -49,8 +49,8 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=1 );
     background-repeat: no-repeat;
     background-attachment: fixed;
-    font-family: 'Nanum Gothic', sans-serif;
-    font-weight: bold;
+    /*font-family: 'Nanum Gothic', sans-serif;*/
+    /*font-weight: bold;*/
     font-size: 20px;
     text-align: center;
     color: #000000;

@@ -2,16 +2,16 @@
 
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
 
-html,body{
-    font-family: 'Nanum Gothic', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-}
+/*html,body{*/
+/*    font-family: 'Nanum Gothic', sans-serif;*/
+/*    font-weight: bold;*/
+/*    font-size: 20px;*/
+/*    text-align: center;*/
+/*}*/
 
 article {
     width: 90%;
-    height: 570px;
+    height: 700px;
     text-aling : center;
     display: block;
     margin: 0px auto;
