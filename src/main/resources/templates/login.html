@@ -1,76 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
-    <meta charset="UTF-8">
-    <!-- bootstrap import -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-            crossorigin="anonymous"></script>
-    <!-- title icon -->
-    <link rel="shortcut icon" type="image⁄x-icon" href="/icons/logo.png">
-
-    <title>핫띵크 : 핫한 당신의 생각</title>
-
-
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/login.css">
 </head>
 <body>
-<div class="container mx-auto border border-secondary rounded" style="width: 1200px; height: 600px">
-    <h1 class="text-center">HotThink <span class="font-weight-bold">로그인</span></h1>
-    <form class="mx-auto" style="width: 500px">
-        <div class="container">
-            <div class="row">
-                <div class="col-9">
-                    <div class="row form-group">
-                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                               aria-describedby="emailHelp" placeholder="이메일">
-                    </div>
+{{> include/navBar}}
 
-                    <div class="row form-group">
-                        <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="비밀번호">
+<div class="container login-container">
+
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+
+        <div class="col-xl-10 col-lg-12 col-md-9">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                        <div class="col-lg-6">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">어서오세요!</h1>
+                                </div>
+                                <form class="user">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user"
+                                               id="exampleInputEmail" aria-describedby="emailHelp"
+                                               placeholder="이메일">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="exampleInputPassword" placeholder="비밀번호">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                            <label class="custom-control-label" for="customCheck">내 계정 기억하기</label>
+                                        </div>
+                                    </div>
+                                    <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        로그인
+                                    </a>
+                                    <hr>
+                                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <i class="fab fa-google fa-fw"></i> 구글 아이디로 로그인
+                                    </a>
+                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> 페이스북 아이디로 로그인
+                                    </a>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="/">비밀번호가 기억 안나세요?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="/">핫띵크 회원가입하기!</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 90%">로그인</button>
                 </div>
             </div>
 
         </div>
 
+    </div>
 
-        <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">내 계정 기억하기</label>
-        </div>
-
-        <div class="dropdown-divider"></div>
-
-        <div class="container">
-            <div class="row">
-                <div class="col-5">
-                    <button type="button" class="btn btn-outline-primary col">회원가입</button>
-
-                </div>
-                <div class="col-7">
-                    <button type="button" class="btn btn-outline-dark col">아이디/비밀번호 찾기</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="dropdown-divider"></div>
-
-        <div>
-            <button type="button" class="btn btn-outline-primary col">네이버 로그인 있을 곳</button>
-
-        </div>
-        <div class="dropdown-divider"></div>
-
-        <button type="button" class="btn btn-outline-primary col">페이스북 로그인 있을 곳</button>
-
-    </form>
 </div>
+<!--<div class="container mx-auto border border-secondary rounded" style="width: 1200px; height: 600px">-->
+<!--    <h1 class="text-center">HotThink <span class="font-weight-bold">로그인</span></h1>-->
+<!--    <form class="mx-auto" style="width: 500px">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-9">-->
+<!--                    <div class="row form-group">-->
+<!--                        <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"-->
+<!--                               aria-describedby="emailHelp" placeholder="이메일">-->
+<!--                    </div>-->
+
+<!--                    <div class="row form-group">-->
+<!--                        <input type="password" class="form-control form-control-lg" id="exampleInputPassword1"-->
+<!--                               placeholder="비밀번호">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <button type="submit" class="btn btn-primary" style="width: 100%; height: 90%">로그인</button>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+
+<!--        <div class="form-group form-check">-->
+<!--            <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--            <label class="form-check-label" for="exampleCheck1">내 계정 기억하기</label>-->
+<!--        </div>-->
+
+<!--        <div class="dropdown-divider"></div>-->
+
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-5">-->
+<!--                    <button type="button" class="btn btn-outline-primary col">회원가입</button>-->
+
+<!--                </div>-->
+<!--                <div class="col-7">-->
+<!--                    <button type="button" class="btn btn-outline-dark col">아이디/비밀번호 찾기</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="dropdown-divider"></div>-->
+
+<!--        <div>-->
+<!--            <button type="button" class="btn btn-outline-primary col">네이버 로그인 있을 곳</button>-->
+
+<!--        </div>-->
+<!--        <div class="dropdown-divider"></div>-->
+
+<!--        <button type="button" class="btn btn-outline-primary col">페이스북 로그인 있을 곳</button>-->
+
+<!--    </form>-->
+<!--</div>-->
+{{> include/footer}}
 
 </body>
 </html>

@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
+
+.login-container{
+    height: 700px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+.bg-login-image {
+    background-image: url("/image/login.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.btn-google {
+    color: #fff;
+    background-color: #ea4335;
+    border-color: #fff;
+}
+
+.btn-facebook {
+    color: #fff;
+    background-color: #3b5998;
+    border-color: #fff;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #4e73df;
+    border-color: #4e73df;
+}
+
+form.user .btn-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 0.75rem 1rem;
+}
+
+.text-gray-900 {
+    color: #3a3b45 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.shadow-lg {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.my-5 {
+    margin-top: 3rem !important;
+}
+
+.mb-4,
+.my-4 {
+    margin-bottom: 1.5rem !important;
+}
+.d-none {
+    display: none !important;
+}
+
+
+@media (min-width: 992px) {
+    .d-lg-block {
+        display: block !important;
+    }
+}
+
+form.user .form-control-user {
+    font-size: 0.8rem;
+    border-radius: 10rem;
+    padding: 1.5rem 1rem;
+}
+
+.custom-control-label{
+    color: #868e96;
+}
+
+.card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    height: 580px;
+}
