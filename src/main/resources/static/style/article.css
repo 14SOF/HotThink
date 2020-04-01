@@ -4,6 +4,9 @@
 
 html,body{
     font-family: 'Nanum Gothic', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
 }
 
 article {
@@ -14,7 +17,8 @@ article {
     margin: 0px auto;
 }
 
-/* 슬라이드 */
+/*
+!* 슬라이드 *!
 
 #slides {
     display: none;
@@ -144,9 +148,9 @@ article {
     left: 0;
     background: url(icons/slider-arrow.png) 0 0 no-repeat;
 }
-/* 슬라이드 */
+!* 슬라이드 *!
 
-/* Think 목록*/
+!* Think 목록*!
 ThinkListAlticle {
     width: 90%;
     text-aling : center;
@@ -156,12 +160,12 @@ ThinkListAlticle {
 }
 .ThinkListInfo {
     text-aling : center;
-    display: block;
-    margin: 0px auto;
-    width: 90%;
-    height: 280px;
-    position: relative;
-    display: inline-block;
+display: block;
+margin: 0px auto;
+width: 90%;
+height: 280px;
+position: relative;
+display: inline-block;
 }
 
 .ThinkListFont {
@@ -173,4 +177,4 @@ ThinkListAlticle {
     font-family: 'Nanum Gothic', sans-serif;
     color: #000000;
 }
-/* Think 목록*/
+!* Think 목록*!*/
