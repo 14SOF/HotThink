@@ -1,11 +1,49 @@
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
 
-.login-container{
+
+.login-container {
     height: 700px;
     font-family: 'Nanum Gothic', sans-serif;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
+}
+
+.signUp-container{
+    width: 500px;
+    height: 800px;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 50px;
+}
+
+.signUp-body{
+    flex: 1 1 auto;
+    padding: 1.25rem;
+    height: 720px;
+}
+
+.myPage-container{
+    width: 1200px;
+    height: 800px;
+    background-color: whitesmoke;
+    font-family: 'Nanum Gothic', sans-serif;
+    z-index: 2;
+}
+
+.myPage-sticker-container{
+    top: 10px;
+    z-index: 1;
+}
+
+.myPage-sticker{
+    color: white;
+    margin-left: 2px;
+    font-family: 'Nanum Gothic', sans-serif;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .bg-login-image {
@@ -47,22 +85,10 @@ form.user .btn-user {
     color: #3a3b45 !important;
 }
 
-.text-center {
-    text-align: center !important;
-}
-
 .shadow-lg {
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
-.my-5 {
-    margin-top: 3rem !important;
-}
-
-.mb-4,
-.my-4 {
-    margin-bottom: 1.5rem !important;
-}
 .d-none {
     display: none !important;
 }
