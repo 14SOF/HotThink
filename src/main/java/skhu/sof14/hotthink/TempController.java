@@ -3,7 +3,6 @@ package skhu.sof14.hotthink;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TempController {
@@ -26,5 +25,25 @@ public class TempController {
     public String myPage(Model model){
         model.addAttribute("test", "김영곤");
         return "mypage";
+    }
+
+    @GetMapping("message")
+    public String message(){
+        return "message";
+    }
+
+    @GetMapping("alarm")
+    public String alarm(){
+        return "alarm";
+    }
+
+    @GetMapping("follow")
+    public String follow(){
+        return "follow";
+    }
+
+    @GetMapping("myboards")
+    public String myBoards(){
+        return "myboards";
     }
 }

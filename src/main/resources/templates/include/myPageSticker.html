@@ -1,21 +1,31 @@
 <div class="pl-2 mt-5 position-relative myPage-sticker-container">
     <div class="row">
         <div class="col-md-auto">
-            <button type="button" class="btn btn-primary myPage-sticker">홈</button>
-            <button type="button" class="btn btn-info myPage-sticker">쪽지</button>
-            <button type="button" class="btn btn-warning myPage-sticker" style="color: white">알림</button>
-            <button type="button" class="btn btn-success myPage-sticker">팔로우</button>
-            <button type="button" class="btn btn-secondary myPage-sticker">내가쓴글</button>
+            <a href="../mypage" style="text-decoration: none">
+                <button type="button" class="btn btn-primary myPage-sticker">홈</button>
+            </a>
+            <a href="../message" style="text-decoration: none">
+                <button type="button" class="btn btn-info myPage-sticker">쪽지</button>
+            </a>
+            <a href="../alarm" style="text-decoration: none">
+                <button type="button" class="btn btn-warning myPage-sticker" style="color: white">알림</button>
+            </a>
+            <a href="../follow" style="text-decoration: none">
+                <button type="button" class="btn btn-success myPage-sticker">팔로우</button>
+            </a>
+            <a href="../myboards" style="text-decoration: none">
+                <button type="button" class="btn btn-secondary myPage-sticker">내가쓴글</button>
+            </a>
         </div>
         <div class="col">
             <div class="row justify-content-md-end">
                 <div class="col-md-auto">
-                    <a href="#" class="btn btn-primary btn-icon-split myPage-sticker">
-                    <span class="icon text-white-50">
+                    <button type="button" class="btn btn-primary btn-icon-split myPage-sticker" data-toggle="modal" data-target="#editModal">
+                        <span class="icon text-white-50">
                         <i class="fas fa-user-edit"></i>
                     </span>
                         <span class="text">개인정보수정</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>

@@ -170,11 +170,26 @@
             </div>
             <div class="row card shadow border-left-primary mt-3" style="height: 350px">
                 <div class="ml-3 card-body">
-                    <div class="row">
-                        <div class="col-auto fa-xs text-gray-500 mt-2">보유포인트 :</div>
-                        <h2 class="col">9999999</h2>
-                    </div>
                     <div class="row" style="height: 100%">
+                        <div class="col-auto align-self-center">
+                            <div class="row justify-content-center">
+                                <div class="fa-xs text-gray-500">보유포인트</div>
+                            </div>
+                            <div class="row">
+                                <h2 class="col text-center">9999999</h2>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row justify-content-center">
+                                <a href="#" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-battery-three-quarters"></i>
+
+                                    </span>
+                                    <span class="text">충전하기</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="vertical-divider"></div>
                         <div class="col-auto row">
                             <a class="btn btn-light align-self-center" href="#carouselPoint" role="button"
                                data-slide="prev">
@@ -194,7 +209,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-
                                             <tr>
                                                 <th scope="row">2020.04.04</th>
                                                 <td>+20000</td>
@@ -255,7 +269,43 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">개인정보수정</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nick" class="col-form-label">닉네임:</label>
+                        <input type="text" class="form-control" id="nick">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1" class="col-form-label">비밀번호:</label>
+                        <input type="password" class="form-control" id="password1">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2" class="col-form-label">비밀번호확인:</label>
+                        <input type="password" class="form-control" id="password2">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-form-label">휴대폰:</label>
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">확인</button>
+            </div>
         </div>
     </div>
 </div>
