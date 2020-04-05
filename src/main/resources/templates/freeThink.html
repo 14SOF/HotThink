@@ -10,7 +10,7 @@
             border-collapse: collapse;
             text-align: left;
             line-height: 1.5;
-
+            cursor: default;
         }
         .tableDegin thead th {
             padding: 10px;
@@ -92,13 +92,25 @@
             cursor: pointer;
         }
 
-        .arrow-left {
-            width: 0;
-            height: 0;
-            border-top: 10px solid transparent;
-            border-bottom: 10px solid transparent;
-            border-right:10px solid red;
+        .btn {
+            float: right;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            background-color: #2e9cdf;
+            cursor: pointer;
         }
+        .btn:hover {
+            text-decoration: underline; color: #ffffff;
+        }
+        .btn:active{
+        }
+
     </style>
 
     <link rel="stylesheet" type="text/css" href="style/article.css">
@@ -149,7 +161,12 @@
     </tr>
     </tbody>
 </table>
+
+
 <div class="page">
+
+    <a class="btn">글쓰기</a>
+
     <ul class="pagination modal">
         <li><a href="#" class="first">처음페이지</a></li>
         <li><a href="#" class="arrow left"><<</a></li>
