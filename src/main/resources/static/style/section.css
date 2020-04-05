@@ -38,7 +38,7 @@ input {
 
 section {
     width: 90%;
-    height: 2130px;
+    height: 2180px;
     text-aling : center;
     display: block;
     margin: 0px auto;
@@ -195,6 +195,9 @@ h1 {
     -o-transform: rotateX(-360deg);
     transform: rotateX(-360deg);
 }
+/*ThinkList*/
+
+/*후기, 판매완료*/
 
 #Exchangecomplet {
     margin: 0 auto;
@@ -225,36 +228,5 @@ h1 {
     display: none;
     float:left;
 }
-/*ThinkList*/
 
-/*후기, 판매완료*/
-#review {
-    margin: 0 auto;
-    width: 1290px;
-}
-
-#review img{
-    text-align: right;
-    margin: 1em;
-    width: 280px;
-    height: 180px;
-    box-shadow: 0px 0px 25px rgba(0,0,0,.3);
-
-}
-
-#reviewt div{
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    left : -450px;
-    vertical-align: top;
-    margin: 1em;
-    width: 280px;
-    height: 180px;
-    box-shadow: 0px 0px 25px rgba(0,0,0,.3);
-}
-#review-item {
-    display: none;
-    float:left;
-}
 /*후기, 판매완료*/
