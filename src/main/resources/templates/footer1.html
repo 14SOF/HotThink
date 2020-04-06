@@ -1,42 +1,54 @@
+<!--이용약관-->
 <!DOCTYPE html>
 <html >
 <head>
     <meta charset="UTF-8">
     <title>oh gu, oh good!</title>
 
-    <link rel="stylesheet" type="text/css" href="style/join.css">
-    <link rel="stylesheet" type="text/css" href="style/base.css">
-    <link rel="stylesheet" type="text/css" href="style/pdsr.css">
-    <link rel="stylesheet" type="text/css" href="style/button.css">
+    <link rel="stylesheet" type="text/css" href="/style/base.css">
+    <link rel="stylesheet" type="text/css" href="/style/button.css">
 
 
     <link href='https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css' rel='stylesheet' type='text/css'>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-
+    {{> /include/header}}
 </head>
 
+<style>
+    .d { font-family:  Georgia, serif;
+        font-size: 14px;
+    }
+
+    .c { font-family: sans-serif;
+        font-weight: bold;
+        margin: 10px;
+    }
+
+</style>
+
 <body>
+{{> /include/navBar}}
+<p></p>
+
+<p></p>
 <center>
     <table width=960px align=center>
-        <tr>
-            <td>
-                <h1>회원가입</h1>
-            </td>
-        </tr>
+        <p></p>
+        <p></p>
 
-        <tr>
-            <td align=center>
-                <center><div class="stepLine">
-                    <div title="이용약관" class="stepDot activeStep"></div>
-                    <div title="실명인증" class="stepDot"></div>
-                    <div title="정보입력" class="stepDot"></div>
-                    <div title="가입완료" class="stepDot"></div>
-                </div>
-                </center><br><br><br>
-            </td>
-        </tr>
+<!--        <tr>-->
+<!--            <td align=center>-->
+<!--                <center><div class="stepLine">-->
+<!--                    <div title="X" class="stepDot activeStep"></div>-->
+<!--                    <div title="X" class="stepDot"></div>-->
+<!--                    <div title="X" class="stepDot"></div>-->
+<!--                    <div title="X" class="stepDot"></div>-->
+<!--                </div>-->
+<!--                </center><br><br><br>-->
+<!--            </td>-->
+<!--        </tr>-->
 
-
+        <p>* 아래의 이용약관을 잘 읽어 보시기 바랍니다.
+        </p>
         <tr>
             <td align=center>
 
@@ -44,16 +56,16 @@
                 <table width=810>
                     <tr>
                         <td>
-                            <div>
+                            <div class ="c">
                                 <font color="#f67001" size=4>01</font> <font size=3>이용약관</font>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td align=center>
-               <textarea name="tos" rows=15 cols=100>
+               <textarea class ="d" name="tos" rows=15 cols=100>
 제1조(목적)
- 이 약관은 oooo 회사(전자상거래 사업자)가 운영하는 oooo 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련
+ 이 약관은  회사(전자상거래 사업자)가 운영하는 사이버 몰(이하 “몰”이라 한다)에서 제공하는 인터넷 관련
  서비스(이하 “서비스”라 한다)를 이용함에 있어 사이버 몰과 이용자의 권리ㆍ의무 및 책임사항을 규정함을 목적으로 합니다.
 
  ※「PC통신, 무선 등을 이용하는 전자상거래에 대해서도 그 성질에 반하지 않는 한 이 약관을 준용합니다」
@@ -277,37 +289,34 @@
                 </textarea>
                         </td>
                     </tr>
+
+                    <p></p>
+                    <p></p>
+
                     <tr>
                         <td>
-                            <input type="checkbox">이용약관에 동의합니다.<br><br><br><br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div>
+                            <div class="c">
+
                                 <font color="#f67001" size=4>02</font> <font size=3>개인정보 수집 및 이용에 대한 안내</font>
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td align=center>
-               <textarea name="tos" rows=15 cols=100>
-수집하는 개인정보의 항목
+               <textarea name="tos" class ="d" rows=15 cols=100>
+※수집하는 개인정보의 항목
 회사는 회원가입, 상담, 서비스 신청 및 제공 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
-- 이름, 이메일, 주소, 연락처, 핸드폰 번호, 아이디, 비밀번호, 닉네임, 팩스번호, 홈페이지 주소 또한 서비스 이용과정이나 사업
- 처리 과정에서 아래와 같은 정보들이 생성되어 수집될 수 있습니다.
+- 이름, 이메일, 주소, 연락처, 핸드폰 번호, 아이디, 비밀번호, 닉네임, 팩스번호, 홈페이지 주소 또한 서비스 이용과정이나 사업 처리 과정에서 아래와 같은 정보들이 생성되어 수집될 수 있습니다.
 - 서비스 이용기록, 접속 로그, 쿠키, 접속 IP 정보, 방문일시, 브라우저종류 및 os, 검색어, 결제기록, 이용정지 기록, 상담기록
 
 개인정보의 수집 및 이용목적
 
 회사는 수집한 개인정보를 다음의 목적을 위해 활용합니다.
-가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산
-콘텐츠 제공, 물품배송 또는 청구서 등 발송, 금융거래 본인 인증 및 금융 서비스, 구매 및 요금 결재, 요금추심
+가. 서비스 제공에 관한 계약 이행 및 서비스 제공에 따른 요금정산 콘텐츠 제공, 물품배송 또는 청구서 등 발송, 금융거래 본인 인증 및 금융 서비스, 구매 및 요금 결재, 요금추심
 
 나. 회원 관리
 회원제 서비스 이용에 따른 본인확인, 개인식별, 불량회원의 부정 이용 방지와 비인가 사용 방지, 가입 의사 확인, 가입 및
-가입횟수 제한, 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 추후 법정 대리인 본인확인, 분쟁 조정을 위한
- 기록보존, 불만처리 등 민원처리, 고지사항 전달
+가입횟수 제한, 만14세 미만 아동 개인정보 수집 시 법정 대리인 동의여부 확인, 추후 법정 대리인 본인확인, 분쟁 조정을 위한 기록보존, 불만처리 등 민원처리, 고지사항 전달
 
 개인정보의 보유/이용기간
 
@@ -393,19 +402,15 @@ NICE신용평가정보㈜(이하 “대행사”)가 “대행사”에서 제�
                 </textarea>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <input type="checkbox">개인정보 수집 및 이용에 대한 안내에 동의합니다.
-                        </td>
-                    </tr>
+
                 </table>
 
             </td>
         </tr>
     </table>
     <br><br>
-    <a href="#"> <button type = "button"  class="btn_order" style="margin:10px;">회 원 가 입</button></a>
-    <a href="#"> <button type = "button"  class="btn_cancel1" style="margin:10px;">취 소 하 기</button></a>
+    <a href="#"> <button type = "button"  class="btn_order" style="margin:10px;">약관다운로드</button></a>
+    <a href="#"> <button type = "button"  class="btn_cancel1" style="margin:10px;">메 인 으 로</button></a>
 
 
 
@@ -417,41 +422,7 @@ NICE신용평가정보㈜(이하 “대행사”)가 “대행사”에서 제�
 
 
 
-    <!--풋터-->
-    <br><br><br>
-    <table width=960  align=center>
-        <tr>
-            <td align=center colspan=2><br><br>
-                <font color="#a4a4a4" size=2>cell center </font>
-                <font color="#f67001" size=2> 1599.1234 </font>
-                <font color="#a4a4a4" size=2> wekdays am 10:00 ~ pm 6:00 </font>
-                <font color="#f67001" size=2> lunch. pm 1:00 ~ pm 2:00 </font>
-                <font color="#a4a4a4" size=2> sat, syn, holiday off.</font>
-                <hr>
-            </td>
-        </tr>
 
-        <tr>
-            <td align=center id="foot">
-                <a href=#><font size=3>풋터메뉴1&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-                <a href=#><font size=3>풋터메뉴2&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-                <a href=#><font size=3>풋터메뉴3&nbsp;&nbsp;&nbsp;&nbsp;</font></a>
-                <a href=#><font size=3>풋터메뉴4</font></a>
-            </td>
-            <td rowspan=2 width=70 align=right>
-                풋터<br>로고<br>자리
-            </td>
-        </tr>
-
-        <tr>
-            <td align=center id="foot">
-                <font color="#a4a4a4" size=2>상호 / oooo &nbsp;&nbsp; 대표자 / ooo &nbsp;&nbsp; 개인정보책임자 / ooo &nbsp;&nbsp; 이메일 / oooooooo@gmail.com<br>
-                    사업자번호 / 123-12-12345 &nbsp;&nbsp; 통신판매업신고번호 / 제 2015-서울oo-000호<br>
-                    전화번호 / 1599-1234 &nbsp;&nbsp; 주소 / 서울특별시 oo구 oo동 oo-o oo빌딩
-                </font>
-            </td>
-        </tr>
-    </table>
 
 
 
@@ -459,4 +430,42 @@ NICE신용평가정보㈜(이하 “대행사”)가 “대행사”에서 제�
 
 </center>
 </body>
+<footer>
+<!--    &lt;!&ndash;풋터&ndash;&gt;-->
+<!--    <br><br><br>-->
+<!--    <table width=960  align=center>-->
+<!--        <tr>-->
+<!--            <td align=center colspan=2><br><br>-->
+<!--                <font color="#a4a4a4" size=2>cell center </font>-->
+<!--                <font color="#f67001" size=2> 1599.1234 </font>-->
+<!--                <font color="#a4a4a4" size=2> wekdays am 10:00 ~ pm 6:00 </font>-->
+<!--                <font color="#f67001" size=2> lunch. pm 1:00 ~ pm 2:00 </font>-->
+<!--                <font color="#a4a4a4" size=2> sat, syn, holiday off.</font>-->
+<!--                <hr>-->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td align=center id="foot">-->
+<!--                <a href=#><font size=3>풋터메뉴1&nbsp;&nbsp;&nbsp;&nbsp;</font></a>-->
+<!--                <a href=#><font size=3>풋터메뉴2&nbsp;&nbsp;&nbsp;&nbsp;</font></a>-->
+<!--                <a href=#><font size=3>풋터메뉴3&nbsp;&nbsp;&nbsp;&nbsp;</font></a>-->
+<!--                <a href=#><font size=3>풋터메뉴4</font></a>-->
+<!--            </td>-->
+<!--            <td rowspan=2 width=70 align=right>-->
+<!--                풋터<br>로고<br>자리-->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td align=center id="foot">-->
+<!--                <font color="#a4a4a4" size=2>상호 / oooo &nbsp;&nbsp; 대표자 / ooo &nbsp;&nbsp; 개인정보책임자 / ooo &nbsp;&nbsp; 이메일 / oooooooo@gmail.com<br>-->
+<!--                    사업자번호 / 123-12-12345 &nbsp;&nbsp; 통신판매업신고번호 / 제 2015-서울oo-000호<br>-->
+<!--                    전화번호 / 1599-1234 &nbsp;&nbsp; 주소 / 서울특별시 oo구 oo동 oo-o oo빌딩-->
+<!--                </font>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
+    {{> /include/footer}}
+</footer>
 </html>
