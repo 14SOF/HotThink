@@ -1101,7 +1101,12 @@ td, th {
 }
 
 html {
-    font-size: 10px;
+    font-size: 15px;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+answer {
+    font-size: 5px;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
 }
 

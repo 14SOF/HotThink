@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="kr">
+<meta charset="UTF-8">
+<title>핫띵크 : 핫한 당신의 생각</title>
 <head>
-    {{> /include/header}}
-
     <link rel="stylesheet" type="text/css" href="/style/qnaList.css">
     <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
 
+    {{> /include/header}}
 </head>
+
 <body>
-{{> include/navBar}}
+{{> /include/navBar}}
 
 <div class="container" id="main">
     <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
@@ -18,19 +18,74 @@
                     <div class="wrap">
                         <div class="main">
                             <strong class="subject">
-                                <a href=""></a>
+                                <a href="./qna/show.html">마쎄 있나요?</a>
                             </strong>
                             <div class="auth-info">
                                 <i class="icon-add-comment"></i>
-                                <span class="time"></span>
-                                <a href="./user/profile.html" class="author"></a>
+                                <span class="time">2020-04-05 18:49</span>
+                                <a href="./user/profile.html" class="author">김영곤</a>
                             </div>
-                            <div class="reply" title="댓글">
+                            <div class="reply" title="답변여부">
                                 <i class="icon-reply"></i>
-                                <span class="point"></span>
+                                <span class="point">완료</span>
                             </div>
                         </div>
                     </div>
+                </li>
+                <li>
+                    <div class="wrap">
+                        <div class="main">
+                            <strong class="subject">
+                                <a href="./qna/show.html">안녕하세요. 정형일 입니다.</a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">2020-04-05 13:12</span>
+                                <a href="./user/profile.html" class="author">정형일</a>
+                            </div>
+                            <div class="reply" title="답변여부">
+                                <i class="icon-reply"></i>
+                                <span class="point">미완료</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="wrap">
+                        <div class="main">
+                            <strong class="subject">
+                                <a href="./qna/show.html">안녕하세요. 오일권 입니다.</a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">2020-04-05 18:47</span>
+                                <a href="./user/profile.html" class="author">오일권</a>
+                            </div>
+                            <div class="reply" title="답변여부">
+                                <i class="icon-reply"></i>
+                                <span class="point">미완료</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="wrap">
+                        <div class="main">
+                            <strong class="subject">
+                                <a href="./qna/show.html">안녕하세요. ㄱ입니다.</a>
+                            </strong>
+                            <div class="auth-info">
+                                <i class="icon-add-comment"></i>
+                                <span class="time">2020-04-05 07:21</span>
+                                <a href="./user/profile.html" class="author">정기혁</a>
+                            </div>
+                            <div class="reply" title="답변여부">
+                                <i class="icon-reply"></i>
+                                <span class="point">완료</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
                 </li>
             </ul>
             <div class="row">
@@ -46,14 +101,16 @@
                         <li><a href="#">»</a></li>
                     </ul>
                 </div>
-                <div class="col-md-2 qna-write">
-                    <a href="/questions/form" class="btn btn-primary pull-right" role="button">질문하기</a>
+                <div class="col-md-3 qna-write">
+                    <a href="./qna/form.html" class="btn btn-primary pull-right" role="button">질문하기</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-{{> include/footer}}
 </body>
+<footer>
+{{> /include/footer}}
+</footer>
 </html>

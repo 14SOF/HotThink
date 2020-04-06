@@ -5,16 +5,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/questions")
 public class tempcontroller {
 
-    @GetMapping("/qna")
+    @GetMapping("qna")
     public String qna(){
-        return "/qnaList";
+        return "qnaList";
     }
 
-    @GetMapping("/form")
+    @GetMapping("form")
     public String form(){
-        return "/qnaForm";
+        return "qnaForm";
+    }
+    @GetMapping("login")
+    public String login(){
+        return "login";
+    }
+    @GetMapping("free")
+    public  String free(){
+        return "freeThink";
     }
 }

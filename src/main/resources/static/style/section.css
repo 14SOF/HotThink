@@ -56,6 +56,10 @@ body {
     color: #000000;
 }
 
+footer{
+    font-size: 15px
+}
+
 a {
     color: #b6b694;
     font-family: 'Nanum Gothic', sans-serif;
