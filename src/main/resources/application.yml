@@ -1,4 +1,11 @@
 spring:
+  devtools:
+    livereload:
+      enabled: true
+  freemarker:
+    cache: false
+
+
   mustache:
     suffix: .html
   datasource:
@@ -6,8 +13,3 @@ spring:
     url: jdbc:mysql://localhost:3306?serverTimezone=UTC
     username: user1
     password: test123
-    devtools:
-      livereload:
-        enabled: true
-      freemarker:
-        cache: false
