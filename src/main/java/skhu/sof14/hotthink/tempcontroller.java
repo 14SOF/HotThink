@@ -24,4 +24,8 @@ public class tempcontroller {
     public  String free(){
         return "freeThink";
     }
+    @GetMapping("footer1")
+    public String footer1(){
+        return "footer1";
+    }
 }
