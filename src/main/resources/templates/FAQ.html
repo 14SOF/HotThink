@@ -1,33 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {{> /include/header}}
     <meta charset="UTF-8">
 </head>
 <style>
-    * {margin:0; padding:0;}
-    .accordion {position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;}
-    input[id*="answer"] {display:none;}
-    input[id*="answer"] + label {display:block;padding:20px;border:1px solid #232188;border-bottom:0;color:#fff;font-weight:900;background:#3634a5;cursor:pointer;position:relative;}
-    input[id*="answer"] + label em {position:absolute;top:50%;right:10px;width:30px;height:30px;margin-top:-15px;display:inline-block;background:url('./img/arrow.png') 0 0 no-repeat;}
-    input[id*="answer"] + label + div {max-height:0;transition: all .35s;overflow:hidden;background:#ebf8ff;font-size:11px;}
-    input[id*="answer"] + label + div p {display:inline-block;padding:20px;}
-    input[id*="answer"]:checked + label + div {max-height:100px;}
-    input[id*="answer"]:checked + label em {background-position:0 -30px;}
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .accordion1 {
+        margin : 100px;
+        top: 30%;
+        left: 200%;
+        transform: translateX(20%);
+        width: 1000px;
+    }
+
+    .accordion2 {
+        margin : 100px;
+        top: 60%;
+        left: 200%;
+        transform: translateX(50%);
+        width: 300px;
+    }
+
+
+
+    input[id*="answer"] {
+        display: none;
+    }
+
+    input[id*="answer"] + label {
+        display: block;
+        padding: 20px;
+        border: 1px solid #FFFFFF;
+        border-bottom: 0;
+        color: #fff;
+        font-weight: 900;
+        background: #4284A5;
+        cursor: pointer;
+        position: relative;
+    }
+
+    input[id*="answer"] + label em {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        display: inline-block;
+        background: url('./images/arrow.png') 0 0 no-repeat;
+    }
+
+    input[id*="answer"] + label + div {
+        max-height: 0;
+        transition: all .35s;
+        overflow: hidden;
+        background: #ebf8ff;
+        font-size: 13px;
+    }
+
+    input[id*="answer"] + label + div p {
+        display: inline-block;
+        padding: 20px;
+    }
+
+    input[id*="answer"]:checked + label + div {
+        max-height: 100px;
+    }
+
+    input[id*="answer"]:checked + label em {
+        background-position: 0 -30px;
+    }
 </style>
 <body>
-<div class="accordion">
+{{> /include/navbar}}
+<div class="accordion1">
     <input type="radio" name="accordion" id="answer01">
-    <label for="answer01">123123213123<em></em></label>
-    <div><p>?????</p></div>
+    <label for="answer01">문의사항이 있는데 고객센터 상담은 어떻게 하나요?<em></em></label>
+    <div><p> ☞ 각종 문의(휴면계정 활성화, 본인인증, ID정지, 거래관련 등등)는 QNA게시판에 글을 남겨주시면 등록된 이메일로 답변을 보내드립니다.
+
+         일반적인 업무시간 외에도 심야, 새벽, 주말 및 공휴일에도 운영자가 근무하지만 고객님의 문의사항에 따라서는 특정 담당자만 답변이나 해결이 가능하므로 답변이 빨리 달리지 않을 수도 있는 점 참고하시기 바랍니다.</p></div>
     <input type="radio" name="accordion" id="answer02">
-    <label for="answer02">내용내용<em></em></label>
-    <div><p>내용2</p></div>
+    <label for="answer02">거래 방법은 어떻게 되나요?<em></em></label>
+    <div><p>추가예정</p></div>
     <input type="radio" name="accordion" id="answer03">
-    <label for="answer03">샤라라라랄샤랄샤랄<em></em></label>
-    <div><p>12341234</p></div>
+    <label for="answer03">프리띵크, 핫띵크, 리얼띵크의 차이점이 궁금해요.<em></em></label>
+    <div><p>추가예정2</p></div>
     <input type="radio" name="accordion" id="answer04">
-    <label for="answer04">문섭킴<em></em></label>
-    <div><p>test김문섭</p></div>
+    <label for="answer04">이용 정지 기준을 알고 싶어요.<em></em></label>
+    <div><p>추가예정3</p></div>
+    <input type="radio" name="accordion" id="answer05">
+    <label for="answer05">포인트 충전은 어떻게 하는건가요?<em></em></label>
+    <div><p>추가예정4</p></div>
+    <input type="radio" name="accordion" id="answer06">
+    <label for="answer06">리얼띵크에서 제 아이디어가 팔렸어요! 돈은 언제 들어오나요?<em></em></label>
+    <div><p>추가예정5</p></div>
 </div>
+
+
 </body>
+<footer>
+    {{> /include/footer}}
+</footer>
 </html>
