@@ -39,11 +39,11 @@ section a {
     font-size: 15px;
 }
 
-a:hover {
+section a:hover {
     text-decoration: underline;
 }
 
-h1 {
+section h1 {
     font-family: 'Nanum Gothic', sans-serif;
     font-weight: normal;
     margin: 0;
