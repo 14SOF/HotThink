@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<style>
+    * {margin:0; padding:0;}
+    .accordion {position:absolute;top:30%;left:50%;transform:translateX(-50%);width:500px;}
+    input[id*="answer"] {display:none;}
+    input[id*="answer"] + label {display:block;padding:20px;border:1px solid #232188;border-bottom:0;color:#fff;font-weight:900;background:#3634a5;cursor:pointer;position:relative;}
+    input[id*="answer"] + label em {position:absolute;top:50%;right:10px;width:30px;height:30px;margin-top:-15px;display:inline-block;background:url('./img/arrow.png') 0 0 no-repeat;}
+    input[id*="answer"] + label + div {max-height:0;transition: all .35s;overflow:hidden;background:#ebf8ff;font-size:11px;}
+    input[id*="answer"] + label + div p {display:inline-block;padding:20px;}
+    input[id*="answer"]:checked + label + div {max-height:100px;}
+    input[id*="answer"]:checked + label em {background-position:0 -30px;}
+</style>
+<body>
+<div class="accordion">
+    <input type="radio" name="accordion" id="answer01">
+    <label for="answer01">123123213123<em></em></label>
+    <div><p>?????</p></div>
+    <input type="radio" name="accordion" id="answer02">
+    <label for="answer02">내용내용<em></em></label>
+    <div><p>내용2</p></div>
+    <input type="radio" name="accordion" id="answer03">
+    <label for="answer03">샤라라라랄샤랄샤랄<em></em></label>
+    <div><p>12341234</p></div>
+    <input type="radio" name="accordion" id="answer04">
+    <label for="answer04">문섭킴<em></em></label>
+    <div><p>test김문섭</p></div>
+</div>
+</body>
+</html>

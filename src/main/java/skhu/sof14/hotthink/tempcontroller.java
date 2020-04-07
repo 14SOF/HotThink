@@ -28,4 +28,8 @@ public class tempcontroller {
     public String footer1(){
         return "footer1";
     }
+    @GetMapping("faq")
+    public String faq(){
+        return "FAQ";
+    }
 }
