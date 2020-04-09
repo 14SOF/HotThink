@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class tempcontroller {
+public class Controller {
 
     @GetMapping("qna")
     public String qna(){
