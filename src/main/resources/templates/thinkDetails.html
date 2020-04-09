@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ThinkDatails</title>
+    <meta charset="UTF-8">
+    <style>
+        section {
+            text-align: center;
+            width: 1340px;
+            height: 1000px;
+            margin: 10px auto;
+
+        }
+
+        /*구매*/
+        article1 {
+            padding-left: 35px;
+            margin-bottom: 12px;
+        }
+
+        #makeBox {
+            margin-top: 80px;
+            float: right;
+            dispaly: inline-block;
+            width: 600px;
+            padding: 25px;
+            border-radius: 30px;
+            background-color: #EAEAEA;
+        }
+
+        article1 input[type="text"] {
+            background-color: white;
+            width: 550px;
+            border: 0px;
+            border-radius: 25px;
+            height: 40px;
+            margin: 10px;
+        }
+
+        article1 textarea {
+            width: 540px;
+            height: 100px;
+            background-color: white;
+            border: 0px;
+            border-radius: 17px;
+            margin: 10px;
+            font-size: 20px;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        article1 input[type="button"] {
+            cursor: pointer;
+            background-color: #ff502f;
+            border: 0px;
+            border-radius: 20px;
+            height: 30px;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: white;
+            font-weight: bold;
+        }
+
+        article1 tr, td, th {
+            font-size: 20px;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: black;
+            padding: 5px;
+            text-align: left;
+        }
+
+        /*구매*/
+        /*Think 상세*/
+        #details {
+            float: left;
+            border: 1px black solid;
+            width: 640px;
+            height: 800px;
+            margin: 100px auto 0 auto;
+            font-family: 'Nanum Gothic', sans-serif
+            font-size: 20px;
+            background: white;
+        }
+
+        /* ------------------------------------------------- */
+
+        #tabs {
+            font-weight: bold;
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #tabs li {
+            float: left;
+            margin: 0 .5em 0 0;
+        }
+
+        #tabs a {
+            position: relative;
+            background: #ddd;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+            background-image: -webkit-linear-gradient(top, #fff, #ddd);
+            background-image: -moz-linear-gradient(top, #fff, #ddd);
+            background-image: -ms-linear-gradient(top, #fff, #ddd);
+            background-image: -o-linear-gradient(top, #fff, #ddd);
+            background-image: linear-gradient(to bottom, #fff, #ddd);
+            padding: .7em 3.5em;
+            float: left;
+            text-decoration: none;
+            color: #444;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+            border-radius: 5px 0 0 0;
+            -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+            -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+        }
+
+        #tabs a:hover,
+        #tabs a:hover::after,
+        #tabs a:focus,
+        #tabs a:focus::after {
+            background: #fff;
+        }
+
+        #tabs a:focus {
+            outline: 0;
+        }
+
+        #tabs a::after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: -.5em;
+            bottom: 0;
+            width: 1em;
+            background: #ddd;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+            background-image: -webkit-linear-gradient(top, #fff, #ddd);
+            background-image: -moz-linear-gradient(top, #fff, #ddd);
+            background-image: -ms-linear-gradient(top, #fff, #ddd);
+            background-image: -o-linear-gradient(top, #fff, #ddd);
+            background-image: linear-gradient(to bottom, #fff, #ddd);
+            -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            -webkit-transform: skew(10deg);
+            -moz-transform: skew(10deg);
+            -ms-transform: skew(10deg);
+            -o-transform: skew(10deg);
+            transform: skew(10deg);
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+            border-radius: 0 5px 0 0;
+        }
+
+        #tabs #current a,
+        #tabs #current a::after {
+            background: #fff;
+            z-index: 3;
+        }
+
+        /* ------------------------------------------------- */
+
+        #content {
+            font-family: 'Nanum Gothic', sans-serif;
+            font-size: 20px;
+            background: #fff;
+            padding: 2em;
+            height: 220px;
+            position: relative;
+            z-index: 2;
+            -moz-border-radius: 0 5px 5px 5px;
+            -webkit-border-radius: 0 5px 5px 5px;
+            border-radius: 0 5px 5px 5px;
+            -moz-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+            -webkit-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+            box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+        }
+
+        #content h2, #content h3, #content p {
+            margin: 0 0 15px 0;
+        }
+
+        /* ------------------------------------------------- */
+
+        #about {
+            color: #999;
+        }
+
+        #about a {
+            color: #eee;
+        }
+
+        /*Think 상세*/
+        /*판매자정보*/
+        article2 {
+            margin-top: 20px;
+            margin-right: 20px;
+            float: right;
+            dispaly: inline-block;
+            width: 600px;
+            height: 299px;
+            /*border: 1px black solid;*/
+            font-family: 'Nanum Gothic', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        article2 table, tr, td, th {
+            text-align: left;
+            margin-top: auto;
+        }
+
+        /*판매자정보*/
+    </style>
+</head>
+
+<body>
+<section>
+    <div id="details">
+        <ul id="tabs">
+            <li><a href="#" title="tab1">내용</a></li>
+            <li><a href="#" title="tab2">가격정보</a></li>
+
+            <li><a href="#" title="tab3">미정</a></li>
+            <li><a href="#" title="tab4">미정</a></li>
+        </ul>
+
+        <div id="content">
+            <div id="tab1">
+                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                </p>
+            </div>
+            <div id="tab2">
+                <p>가격정보</p>
+
+            </div>
+            <div id="tab3">
+                <p>미정</p>
+            </div>
+            <div id="tab4">
+                <p>미정</p>
+            </div>
+        </div>
+
+
+        <br><br>
+
+        <script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#content div").hide(); // Initially hide all content
+                $("#tabs li:first").attr("id", "current"); // Activate first tab
+                $("#content div:first").fadeIn(); // Show first tab content
+
+                $('#tabs a').click(function (e) {
+                    e.preventDefault();
+                    $("#content div").hide(); //Hide all content
+                    $("#tabs li").attr("id", ""); //Reset id's
+                    $(this).parent().attr("id", "current"); // Activate this
+                    $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+                });
+            })();
+        </script>
+
+
+    </div>
+
+    <article1>
+        <form name="makeForm" action="RegistrtionDb.jsp" method=post>
+            <div id=makeBox align="center">
+                <table>
+                    <tr>
+                        <th><font color="blue">*</font> 100,000 <font color="black"> ~</font></th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><font color="blue">*</font> 작성날짜 : 2000-01-01</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><font color="black"><font color="blue">*</font> 제목 : </font>
+                            제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목제목
+                        </th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th><font color="blue">*</font> 댓글</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <form name="content">
+                                <textarea onfocus="this.value=''">내용을 입력하시오.</textarea>
+                                <!--<textarea rows="13" cols="123"></textarea>-->
+                            </form>
+                        </td>
+                    </tr>
+                </table>
+
+                <hr width=80% color="#EAEAEA">
+                <input type="button" name="registin" value="상담"
+                       style="width: 130px; height: 50px; font-family: 'Nanum Gothic', sans-serif; font-size: 30px; background-color: #2196f3;">&nbsp;&nbsp;
+                <input type="button" name="registin" value="구매"
+                       style="width: 130px; height: 50px; font-family: 'Nanum Gothic', sans-serif; font-size: 30px; background-color: #2196f3;">&nbsp;&nbsp;
+                <input type="button" name="registin" value="좋아요"
+                       style="width: 130px; height: 50px; font-family: 'Nanum Gothic', sans-serif; font-size: 30px; background-color: #2196f3;">
+            </div>
+        </form>
+    </article1>
+        <article2>
+            <table>
+                <tr>
+                    <td>판매자 이름 : 정형일</td>
+                </tr>
+                <tr>
+                    <td>소개 : 안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.안녕하세요.</td>
+                </tr>
+                <tr>
+                    <td>신고건수 : 1건</td>
+                </tr>
+                <tr>
+                    <td>미정 : 뭐 넣을까? 넣지 말까?</td>
+                </tr>
+
+                <tr>
+                    <td>별점 : ★★★☆☆</td>
+                </tr>
+            </table>
+        </article2>
+</section>
+</body>
+</html>
