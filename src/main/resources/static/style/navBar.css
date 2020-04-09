@@ -24,3 +24,7 @@
     height: calc(4.375rem - 2rem);
     margin: auto 1rem;
 }
+
+footer{
+    font-size: 15px
+}

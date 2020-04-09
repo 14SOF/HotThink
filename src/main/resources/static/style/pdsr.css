@@ -1,0 +1,12 @@
+﻿@charset "utf-8";
+
+@font-face {
+font-family: 'KoreanPDSRR';
+src: url('../font/KoreanPDSRR.eot');
+src: url('../font/KoreanPDSRR.eot?#iefix') format('embedded-opentype'), /* ie 6,7,8 적용 embedded-opentype ie 8,9 적용 */
+url('../font/KoreanPDSRR.woff') format('woff'), /* ie 제외한 나머지 */
+url('../font/KoreanPDSRR.ttf') format('truetype'),
+url('../font/KoreanPDSRR.svg#KoreanPDSRR') format('svg'); /*모바일브라우져를 위해서*/
+font-weight: normal;
+font-style: normal;
+}
