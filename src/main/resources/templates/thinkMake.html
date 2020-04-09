@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-
     <meta charset="UTF-8">
     <style>
         section {
@@ -68,7 +67,7 @@
     <p style=" margin-top: 60px">
     <font size="30px" color="blue" face = "'Nanum Gothic', sans-serif"><strong>프리띵크 작성</strong></font>
     </p>
-    <form name="makeForm" action="RegistrtionDb.jsp" method=post>
+    <form name="makeForm" action="RegistrtionDb.jsp"  enctype="multipart/form-data" method=post>
         <div id=makeBox align="center">
             <table>
                 <tr>
@@ -96,6 +95,14 @@
                             <textarea onfocus="this.value=''">내용을 입력하시오.</textarea>
                             <!--<textarea rows="13" cols="123"></textarea>-->
                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th><font color="blue">*</font> 파일첨부</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="file" name="FileName">
                     </td>
                 </tr>
             </table>
