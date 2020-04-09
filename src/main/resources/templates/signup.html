@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/user.css">
+
+</head>
+<body>
+{{> include/navBar}}
+
+<div class="container signUp-container">
+    <div class="signUp-body align-items-center justify-content-center card border-0 shadow-lg ">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">핫띵크 회원가입</h1>
+        </div>
+
+        <form class="user">
+            <div class="form-group">
+                <input type="email" class="form-control form-control-user"
+                       id="InputEmail" aria-describedby="emailHelp"
+                       placeholder="이메일">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form-control-user"
+                       id="InputPassword" placeholder="비밀번호">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control form-control-user"
+                       id="InputPasswordConfirm" placeholder="비밀번호 확인">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                       id="InputName" placeholder="이름">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control form-control-user"
+                        id="InputNickName" placeholder="닉네임">
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox small">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label" for="customCheck">
+                        <a href="/">이용약관</a> 및
+                        <a href="/">개인정보 취급방침</a> 에 동의합니다
+                    </label>
+                </div>
+            </div>
+            <hr>
+            <a href="index.html" class="btn btn-primary btn-user btn-block">
+                회원가입
+            </a>
+
+            <div class="text-center small mt-2"
+            style="color: red">
+                에러 표시될 곳
+            </div>
+
+            <hr>
+            <a href="index.html" class="btn btn-google btn-user btn-block">
+                <i class="fab fa-google fa-fw"></i> 구글 아이디로 회원가입하기
+            </a>
+            <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                <i class="fab fa-facebook-f fa-fw"></i> 페이스북 아이디로 회원가입하기
+            </a>
+        </form>
+
+
+    </div>
+</div>
+
+{{> include/footer}}
+</body>
+</html>

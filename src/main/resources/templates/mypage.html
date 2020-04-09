@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/user.css">
+</head>
+<body>
+{{> include/navBar}}
+<div class="container myPage-container">
+    {{> include/myPageSticker}}
+    <div class="shadow-lg myPage-component">
+        <div class="mypage-inner-component">
+            <div class="row">
+                <div class="col-md-4 border-left-primary shadow card mr-3">
+                    <div class="card-body row">
+                        <i class="col-auto fas fa-id-card text-gray-400 fa-3x align-self-center"></i>
+                        <div class="col">
+                            <div class="row text-gray-700 font-weight-bolder justify-content-center"
+                                 style="font-size: xx-large; letter-spacing: 5px">김영곤
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row text-gray-500 justify-content-center">
+                                zeroGone
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 border-left-danger shadow card mr-3">
+                    <div class="card-body row">
+                        <span class="btn-google btn-circle col-auto fa-3x align-self-center">
+                                    <i class="fab fa-google"></i>
+                        </span>
+                        <div class="col text-gray-600 align-self-center" style="font-size: large">
+                            dudrhs571@gmail.com
+                        </div>
+
+                        <!--                                페북일때-->
+                        <!--                                <span class="btn-facebook btn-circle col-auto">-->
+                        <!--                                    <i class="fab fa-facebook-f"></i>-->
+                        <!--                                </span>-->
+                    </div>
+                </div>
+                <div class="col-md-3 border-left-info shadow card">
+                    <div class="card-body row">
+                        <i class="col-auto fas fa-mobile-alt text-gray-400  fa-3x align-self-center"></i>
+                        <!--                                <div class="col ml-4 mr-2 text-gray-600">-->
+                        <!--                                    01072470968-->
+                        <!--                                </div>-->
+                        <!--                                휴대폰인증안하면-->
+                        <button type="button" class="col btn btn-secondary btn-block ml-3 fa-xs align-self-center ">휴대폰
+                            인증하기
+                        </button>
+                        <!--                                <button type="button" class="btn btn-success btn-circle ml-4">-->
+                        <!--                                    <i class="fas fa-check"></i>-->
+                        <!--                                </button>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row card shadow border-left-warning mt-3">
+                <div class="ml-3 row card-body">
+                    <div class="col-auto align-self-center">
+                        <div class="row fa-xs text-gray-500 justify-content-center">구매자들의 평가</div>
+                        <div class="row justify-content-center">
+                            <h1 style="font-size: 48px">0.0</h1>
+                        </div>
+                        <div class="row justify-content-center">
+                            <i class="fas fa-star" style="color:gold"></i>
+                            <i class="far fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="vertical-divider"></div>
+                    <div class="col-auto row">
+                        <a class="btn btn-light align-self-center" href="#carouselRating" role="button"
+                           data-slide="prev">
+                            <i class="fas fa-arrow-left"></i>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <div id="carouselRating" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">1</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">2</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">4</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">5</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="carousel-item">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">6</th>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">7</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">8</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">9</th>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">3</th>
+                                            <td colspan="2">Larry the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto row mr-3">
+                        <a class="btn btn-light align-self-center" href="#carouselRating" role="button"
+                           data-slide="next">
+                            <i class="fas fa-arrow-right"></i>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row card shadow border-left-primary mt-3" style="height: 350px">
+                <div class="ml-3 card-body">
+                    <div class="row" style="height: 100%">
+                        <div class="col-auto align-self-center">
+                            <div class="row justify-content-center">
+                                <div class="fa-xs text-gray-500">보유포인트</div>
+                            </div>
+                            <div class="row">
+                                <h2 class="col text-center">9999999</h2>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <div class="row justify-content-center">
+                                <a href="#" class="btn btn-primary btn-icon-split">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-battery-three-quarters"></i>
+
+                                    </span>
+                                    <span class="text">충전하기</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="vertical-divider"></div>
+                        <div class="col-auto row">
+                            <a class="btn btn-light align-self-center" href="#carouselPoint" role="button"
+                               data-slide="prev">
+                                <i class="fas fa-arrow-left"></i>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <div id="carouselPoint" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <table class="table table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">날짜</th>
+                                                <th scope="col">사용내역</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">2020.04.04</th>
+                                                <td>+20000</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="carousel-item">
+                                        <table class="table table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">날짜</th>
+                                                <th scope="col">사용내역</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">7</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">8</th>
+                                                <td colspan="2">Larry the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">9</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td colspan="2">Larry the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto row mr-3">
+                            <a class="btn btn-light align-self-center" href="#carouselPoint" role="button"
+                               data-slide="next">
+                                <i class="fas fa-arrow-right"></i>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">개인정보수정</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="nick" class="col-form-label">닉네임:</label>
+                        <input type="text" class="form-control" id="nick">
+                    </div>
+                    <div class="form-group">
+                        <label for="password1" class="col-form-label">비밀번호:</label>
+                        <input type="password" class="form-control" id="password1">
+                    </div>
+                    <div class="form-group">
+                        <label for="password2" class="col-form-label">비밀번호확인:</label>
+                        <input type="password" class="form-control" id="password2">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-form-label">휴대폰:</label>
+                        <input type="number" class="form-control" id="phone">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+{{> include/footer}}
+</body>
+</html>

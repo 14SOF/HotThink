@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbarGlobal"
      style="border-bottom: solid 2px; border-bottom-color: #f1f3f5;">
 
-    <a class="navbar-brand font-italic ml-3" href="#" id="navbarBrand"
+    <a class="navbar-brand font-italic ml-3" href="/" id="navbarBrand"
        style="color: red; font-size: xx-large; font-family: Arial;">HotThink</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -13,13 +13,13 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="#" style="color: royalblue; margin-left: 30px">
+                <a class="nav-link" href="/freethink" style="color: royalblue; margin-left: 30px">
                     프리띵크
                 </a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="#" style="color: red">
+                <a class="nav-link" href="/hotthink" style="color: red">
                     핫띵크
                 </a>
             </li>
@@ -62,6 +62,21 @@
                 </div>
             </li>
         </ul>
-        <button type="button" class="btn btn-outline-secondary mr-4">로그인</button>
+        {{#test}}
+        <i class="fas fa-bell mr-3" style="font-size: xx-large; color: gold"></i>
+<!--        <i class="far fa-bell"style="font-size: larger"></i>-->
+        <i class="fas fa-envelope mr-3 text-info" style="font-size: xx-large"></i>
+<!--        <i class="far fa-envelope" style="font-size: larger"></i>-->
+
+        <div class="navbar-divider"></div>
+
+        <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{test}}</span>
+        {{/test}}
+        {{^test}}
+        <a href="/mypage"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
+        {{/test}}
     </div>
 </nav>
+
+<!--    여백추가-->
+<div style="height: 100px"></div>
