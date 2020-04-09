@@ -1,15 +1,43 @@
 <meta charset="UTF-8">
 <head>
     <link rel="stylesheet" type="text/css" href="/style/qnaList.css">
-    <link rel="stylesheet" type="text/css" href="/style/bootstrap.min.css">
 
     {{> /include/header}}
 </head>
 
+<style>
+    .pagination {
+        display: inline-block;
+        padding-left: 0;
+        margin: 25px 0;
+        border-radius: 4px;
+    }
+    .pagination > li > a, .pagination > li > span {
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        color: #428bca;
+        text-decoration: none;
+        background-color: #fff;
+        border: 1px solid #ddd
+    }
+    .center-block {
+
+    }
+
+    .pagination > li {
+        display: inline-block;
+    }
+
+
+
+</style>
 <body>
 {{> /include/navBar}}
 
-<div class="container" id="main">
+<div class="container" id="main" style="margin : 30px 250px;  padding: 30px;  " >
     <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
         <div class="panel panel-default qna-list">
             <ul class="list">
@@ -90,7 +118,7 @@
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6 text-center">
-                    <ul class="pagination center-block" style="display:inline-block;">
+                    <ul class="pagination" style="font-size:20px;" style="display:inline-block;" >
                         <li><a href="#">«</a></li>
                         <li><a href="#">1</a></li>
                         <li><a href="#">2</a></li>
