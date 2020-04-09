@@ -47,6 +47,11 @@ public class TempController {
         return "myboards";
     }
 
+    @GetMapping("freethink")
+    public String freeThink(){
+        return "freethinklist";
+    }
+
     @GetMapping("hotthink")
     public String hotThink(){
         return "hotthink";
