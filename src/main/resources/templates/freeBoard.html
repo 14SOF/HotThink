@@ -1,9 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>핫띵크 : 핫한 당신의 생각</title>
     <style>
+        @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
+
+        body {
+            font-family: 'Nanum Gothic', sans-serif;
+        }
         .tableDegin {
             width: 100%;
             height: 100%;
@@ -77,8 +83,6 @@
             width: 30px;
             height: 30px;
             line-heignt: 30px;
-            -moz-border-radius: 100%;
-            -webkit-border-radius: 100%;
             border-radius: 100%;
         }
 
@@ -111,57 +115,132 @@
         .btn:active{
         }
 
+        .con_title {
+            font-size: 34px;
+            color: #333;
+            margin-top: 60px;
+            width: 100%;
+            float: left;
+            margin-bottom: 30px;
+            height: 40px;
+        }
+
+        .board_search_wrap {
+            float: right;
+            margin-right: 29px;
+        }
+
+        .word_input {
+            float: right;
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .word_input span.btn {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            height: 21px;
+        }
+
+        .sort_wrap {
+            float: right;
+            padding: 0 30px 0 10px;
+            font-size: 13px;
+            color: #333;
+            height: 38px;
+            line-height: 38px;
+            border: 1px solid #e3e3e3;
+            border-right: 0;
+            margin-top: 16px;
+            background: #fff right center no-repeat;
+            min-width: 67px;
+            position: relative;
+        }
+
     </style>
 
-    <link rel="stylesheet" type="text/css" href="style/article.css">
-    <link rel="stylesheet" type="text/css" href="style/section.css?v=2">
-    <script src="/js/modernizr.custom.34807.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 </head>
 <body>
-
-<table class="tableDegin">
-    <thead>
-    <tr>
-        <th scope="cols">번호</th>
-        <th scope="cols">제목</th>
-        <th scope="cols">작성자</th>
-        <th scope="cols">날짜</th>
-        <th scope="cols">조회수</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>내용이 들어갑니다.</td>
-        <td>오일권</td>
-        <td>2020-04-04</td>
-        <td>528</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>내용이 들어갑니다.</td>
-        <td>김영곤</td>
-        <td>2020-04-04</td>
-        <td>18</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>내용이 들어갑니다.</td>
-        <td>정기혁</td>
-        <td>2020-04-04</td>
-        <td>20</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>내용이 들어갑니다test.</td>
-        <td>정형일</td>
-        <td>2020-04-04</td>
-        <td>312</td>
-    </tr>
-    </tbody>
-</table>
-
+<div>
+    <h1 class = con_title>
+        자유게시판
+        <div class="board_search_wrap" style="float:right; margin-right: 0px">
+            <span class="word_input" style="margin-top:0;">
+                <input type="text" name="search_text">
+                <span class="btn">
+                    <a href="#">
+                        <i class="fas fa-search"></i>
+                    </a>
+                </span>
+            </span>
+            <span class="sort_wrap" style="margin-top:0;">
+                <a href="#" class="cus_sel_a">제목</a>
+                <ul style="display: none;">
+                    <li>
+                        <a href="#">제목</a>
+                    </li>
+                    <li>
+                        <a href="#">작성자</a>
+                    </li>
+                    <li>
+                        <a href="#">태그</a>
+                    </li>
+                </ul>
+                <select name="search_type">
+                    <option value="t">제목</option>
+                    <option value="n">작성자</option>
+                    <option value="h">태그</option>
+                </select>
+            </span>
+        </div>
+    </h1>
+</div>
+<div>
+    <table class="tableDegin">
+        <thead>
+        <tr>
+            <th scope="cols">번호</th>
+            <th scope="cols">제목</th>
+            <th scope="cols">작성자</th>
+            <th scope="cols">날짜</th>
+            <th scope="cols">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>내용이 들어갑니다.</td>
+            <td>오일권</td>
+            <td>2020-04-04</td>
+            <td>528</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>내용이 들어갑니다.</td>
+            <td>김영곤</td>
+            <td>2020-04-04</td>
+            <td>18</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>내용이 들어갑니다.</td>
+            <td>정기혁</td>
+            <td>2020-04-04</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>내용이 들어갑니다.</td>
+            <td>정형일</td>
+            <td>2020-04-04</td>
+            <td>312</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 <div class="page">
 
