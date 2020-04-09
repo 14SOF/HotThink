@@ -56,4 +56,27 @@ public class TempController {
     public String hotThink(){
         return "hotthink";
     }
+
+    @GetMapping("qna")
+    public String qna(){
+        return "qnaList";
+    }
+
+    @GetMapping("form")
+    public String form(){
+        return "qnaForm";
+    }
+    
+    @GetMapping("free")
+    public  String free(){
+        return "freeThink";
+    }
+    @GetMapping("footer1")
+    public String footer1(){
+        return "footer1";
+    }
+    @GetMapping("faq")
+    public String faq(){
+        return "FAQ";
+    }
 }
