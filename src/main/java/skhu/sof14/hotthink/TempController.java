@@ -66,7 +66,7 @@ public class TempController {
     public String form(){
         return "qnaForm";
     }
-    
+
     @GetMapping("free")
     public  String free(){
         return "freeThink";
@@ -79,4 +79,6 @@ public class TempController {
     public String faq(){
         return "FAQ";
     }
+
+
 }
