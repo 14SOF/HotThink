@@ -1,15 +1,9 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>핫띵크 : 핫한 당신의 생각</title>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700,800&display=swap&subset=korean');
-
-        body {
-            font-family: 'Nanum Gothic', sans-serif;
-        }
         .tableDegin {
             width: 100%;
             height: 100%;
@@ -18,6 +12,7 @@
             line-height: 1.5;
             cursor: default;
         }
+
         .tableDegin thead th {
             padding: 10px;
             font-weight: bold;
@@ -25,20 +20,22 @@
             color: #369;
             border-bottom: 3px solid #036;
         }
+
         .tableDegin tbody th {
             width: 150px;
             padding: 10px;
         }
+
         .tableDegin tbody tr td {
             padding: 10px;
         }
 
-        .page{
+        .page {
             text-align: center;
             width: 100%;
         }
 
-        .pagination{
+        .pagination {
             list-style: none;
             display: inline-block;
             padding: 0;
@@ -109,96 +106,41 @@
             background-color: #2e9cdf;
             cursor: pointer;
         }
+
         .btn:hover {
-            text-decoration: underline; color: #ffffff;
-        }
-        .btn:active{
-        }
-
-        .con_title {
-            font-size: 34px;
-            color: #333;
-            margin-top: 60px;
-            width: 100%;
-            float: left;
-            margin-bottom: 30px;
-            height: 40px;
+            text-decoration: underline;
+            color: #ffffff;
         }
 
-        .board_search_wrap {
-            float: right;
-            margin-right: 29px;
-        }
-
-        .word_input {
-            float: right;
-            position: relative;
-            margin-top: 16px;
-        }
-
-        .word_input span.btn {
-            position: absolute;
-            right: 8px;
-            top: 8px;
-            height: 21px;
-        }
-
-        .sort_wrap {
-            float: right;
-            padding: 0 30px 0 10px;
-            font-size: 13px;
-            color: #333;
-            height: 38px;
-            line-height: 38px;
-            border: 1px solid #e3e3e3;
-            border-right: 0;
-            margin-top: 16px;
-            background: #fff right center no-repeat;
-            min-width: 67px;
-            position: relative;
+        .btn:active {
         }
 
     </style>
 
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-
 </head>
 <body>
 <div>
-    <h1 class = con_title>
-        자유게시판
-        <div class="board_search_wrap" style="float:right; margin-right: 0px">
-            <span class="word_input" style="margin-top:0;">
-                <input type="text" name="search_text">
-                <span class="btn">
-                    <a href="#">
+    <div>
+        <h1>
+            자유게시판
+        </h1>
+        <div style="width: 100%; height: 40px; border: 3px solid black;">
+            <div style="float: right;">
+                <span>
+                    <select style="height: 40px; width: 100px;">
+                        <option value="t">제목</option>
+                        <option value="n">작성자</option>
+                        <option value="c">내용</option>
+                </select>
+                    <input type="text" style="height: 40px;">
+                    <a>
                         <i class="fas fa-search"></i>
                     </a>
                 </span>
-            </span>
-            <span class="sort_wrap" style="margin-top:0;">
-                <a href="#" class="cus_sel_a">제목</a>
-                <ul style="display: none;">
-                    <li>
-                        <a href="#">제목</a>
-                    </li>
-                    <li>
-                        <a href="#">작성자</a>
-                    </li>
-                    <li>
-                        <a href="#">태그</a>
-                    </li>
-                </ul>
-                <select name="search_type">
-                    <option value="t">제목</option>
-                    <option value="n">작성자</option>
-                    <option value="h">태그</option>
-                </select>
-            </span>
+            </div>
         </div>
-    </h1>
-</div>
-<div>
+    </div>
     <table class="tableDegin">
         <thead>
         <tr>
@@ -240,23 +182,23 @@
         </tr>
         </tbody>
     </table>
-</div>
 
-<div class="page">
+    <div class="page">
 
-    <a class="btn">글쓰기</a>
+        <a class="btn">글쓰기</a>
 
-    <ul class="pagination modal">
-        <li><a href="#" class="first">처음페이지</a></li>
-        <li><a href="#" class="arrow left"><<</a></li>
-        <li><a href="#" class="active num" style="padding-top: 5px">1</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">2</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">3</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">4</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">5</a></li>
-        <li><a href="#" class="arrow right">>></a></li>
-        <li><a href="#" class="last">끝 페이지</a></li>
-    </ul>
+        <ul class="pagination modal">
+            <li><a href="#" class="first">처음페이지</a></li>
+            <li><a href="#" class="arrow left"><<</a></li>
+            <li><a href="#" class="active num" style="padding-top: 5px">1</a></li>
+            <li><a href="#" class="num" style="padding-top: 5px">2</a></li>
+            <li><a href="#" class="num" style="padding-top: 5px">3</a></li>
+            <li><a href="#" class="num" style="padding-top: 5px">4</a></li>
+            <li><a href="#" class="num" style="padding-top: 5px">5</a></li>
+            <li><a href="#" class="arrow right">>></a></li>
+            <li><a href="#" class="last">끝 페이지</a></li>
+        </ul>
+    </div>
 </div>
 
 </body>
