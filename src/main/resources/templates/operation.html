@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> /include/header}}
+    <meta charset="UTF-8">
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .accordion1 {
+        margin : 100px;
+        top: 30%;
+        left: 200%;
+        transform: translateX(20%);
+        width: 1000px;
+    }
+
+    .accordion2 {
+        margin : 100px;
+        top: 60%;
+        left: 200%;
+        transform: translateX(50%);
+        width: 300px;
+    }
+
+
+
+    input[id*="answer"] {
+        display: none;
+    }
+
+    input[id*="answer"] + label {
+        display: block;
+        padding: 20px;
+        border: 1px solid #FFFFFF;
+        border-bottom: 0;
+        color: #fff;
+        font-weight: 900;
+        background: #4284A5;
+        cursor: pointer;
+        position: relative;
+    }
+
+    input[id*="answer"] + label em {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+        margin-top: -15px;
+        display: inline-block;
+        background: url('./images/arrow.png') 0 0 no-repeat;
+    }
+
+    input[id*="answer"] + label + div {
+        max-height: 0;
+        transition: all .135s;
+        overflow: hidden;
+        background: #ebf8ff;
+        font-size: 13px;
+    }
+
+    input[id*="answer"] + label + div p {
+        display: inline-block;
+        padding: 20px;
+    }
+
+    input[id*="answer"]:checked + label + div {
+        max-height: 100px;
+    }
+
+    input[id*="answer"]:checked + label em {
+        background-position: 0 -30px;
+    }
+</style>
+<body>
+{{> /include/navbar}}
+<div class="accordion1">
+    <input type="radio" name="accordion" id="answer01">
+    <label for="answer01">1. 기본원칙<em></em></label>
+    <div><p>1. 본 운영 정책은 HotThink의 운영의 가장 기본적인 원칙이며 사용자에게 제공되는 모든 서비스는 이 원칙에 따라 제공됩니다.
+<!--        2. 본 운영 정책은 사이트 내 각종 지원이나 발생할 수 있는 문제 상황에 대해 신속하고 일관성 있는 처리를 위한 것으로 사용자께서 이를 위반할시 원칙에 따른 제재를 받을 수 있습니다.-->
+<!--       3. 본 사이트 운영팀은 운영의 효율적인 방안이나 더욱 안정된 운영을 할 수 있는 정책 내용이 있을 경우 상시로-->
+<!--            추가/변경/삭제할 수 있으며 변경된 내용은 홈페이지를 통해 공지합니다. 변경되어 공지된 운영정책을 사용자가-->
+<!--            숙지하지 않아 발생할 수 있는 모든 형태의 피해에 대해서는 도움을 드릴 수 없습니다.-->
+<!--       4. 운영 정책에 어긋나는 행동을 한 사용자 확인 시 운영진이 문제의 심각성이나 사이트 운영에 미치는 영향의 정도를 판단해-->
+<!--            계정의 이용을 제한할 수 있습니다.-->
+<!--        5. 운영 방침에 자세히 언급되지 않은 모든 사항에 대해서는 사용자와 운영진이 공유하는 일반적인-->
+<!--            사이트 내 규율을 적용해 사안을 판단하거나 조율할 수 있습니다.-->
+<!--        본 내용은 사이트 상의 사례 혹은 유사 사례 발생시 취할 수 있는 최선책을 정리해 놓은 것 입니다.-->
+<!--     6. 이 외 운영 정책에 구체적으로 명시되지 않은 모든 사항은 "서비스 이용약관" 및 기타 법령에 의해 처리됩니다.-->
+</p>
+    </div>
+
+        <input type="radio" name="accordion" id="answer02">
+    <label for="answer02">2.사용자의 의무 및 권리<em></em></label>
+    <div><p>추가예정</p>
+    </div>
+    <input type="radio" name="accordion" id="answer03">
+    <label for="answer03">3. 사이트 내 사용자간 분쟁<em></em></label>
+    <div><p>추가예정2</p></div>
+    <input type="radio" name="accordion" id="answer04">
+    <label for="answer04">4.시스템의 악용<em></em></label>
+    <div><p>추가예정3</p></div>
+    <input type="radio" name="accordion" id="answer05">
+    <label for="answer05">5. 사용제한 대상 항목 및 내용<em></em></label>
+    <div><p>추가예정4</p></div>
+    <input type="radio" name="accordion" id="answer06">
+    <label for="answer06">6. 포인트 환불 / 출금 정책<em></em></label>
+    <div><p>추가예정5</p></div>
+        <input type="radio" name="accordion" id="answer07">
+        <label for="answer07">7. 회원 탈퇴<em></em></label>
+        <div><p>추가예정6</p></div>
+
+    </div>
+
+
+</body>
+<footer>
+    {{> /include/footer}}
+</footer>
+</html>
