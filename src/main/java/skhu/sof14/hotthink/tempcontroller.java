@@ -32,4 +32,8 @@ public class tempcontroller {
     public String faq(){
         return "FAQ";
     }
+    @GetMapping("operation")
+    public String op(){
+        return "operation";
+    }
 }
