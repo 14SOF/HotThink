@@ -83,6 +83,7 @@ a[class="dosirak"]:hover{
   border-radius:7px 7px 7px 7px;
   width:115px; height:34px;   
   font-size: 15px;
+  margin : 30px;
 }
 
 .btn_cancel1{
