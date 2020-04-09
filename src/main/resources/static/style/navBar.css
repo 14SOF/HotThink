@@ -17,3 +17,10 @@
     margin-left: 10px;
     margin-right: 10px;
 }
+
+.navbar-divider {
+    width: 0;
+    border-right: 1px solid #e3e6f0;
+    height: calc(4.375rem - 2rem);
+    margin: auto 1rem;
+}
