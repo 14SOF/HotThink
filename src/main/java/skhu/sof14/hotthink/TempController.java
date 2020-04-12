@@ -29,32 +29,42 @@ public class TempController {
 
     @GetMapping("message")
     public String message(){
-        return "message";
+        return "mypage_message";
     }
 
     @GetMapping("alarm")
     public String alarm(){
-        return "alarm";
+        return "mypage_alarm";
     }
 
     @GetMapping("follow")
     public String follow(){
-        return "follow";
+        return "mypage_follow";
     }
 
     @GetMapping("myboards")
     public String myBoards(){
-        return "myboards";
+        return "mypage_myboards";
     }
 
     @GetMapping("freethink")
     public String freeThink(){
-        return "freethinklist";
+        return "freethink";
+    }
+
+    @GetMapping("freethinklist")
+    public String freeThinkList(){
+        return "freethink_list";
+    }
+
+    @GetMapping("freethinkwrite")
+    public String freeThinkWrite(){
+        return "freethink_write";
     }
 
     @GetMapping("hotthink")
     public String hotThink(){
-        return "hotthink";
+        return "hotthink_list";
     }
 
     @GetMapping("qna")
@@ -83,5 +93,6 @@ public class TempController {
     public String op(){
         return "operation";
     }
+
 
 }

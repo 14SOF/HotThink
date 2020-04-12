@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;800&family=Noto+Sans+KR:wght@900&display=swap&subset=korean');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean');
 
 .hot-container{
     height:1100px;
@@ -24,7 +24,7 @@
 }
 
 .search_input {
-    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     border: 0;
     outline: 0;
     background: none;
@@ -74,6 +74,11 @@
     z-index: 1;
     padding-left: 5%;
     padding-right: 5%;
+}
+
+.hot-card-title{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bolder;
 }
 
 .hot-card-header-hits{
