@@ -81,7 +81,13 @@ public class TempController {
     }
     @GetMapping("operation")
     public String op(){
-        return "operation";
+        return "footer_operation";
     }
 
+
+//    qna 글 내용 test  실제구현은 id값으로
+    @GetMapping("list/1")
+    public String qnaPage(){
+        return "qnaPage";
+    }
 }
