@@ -83,9 +83,15 @@ public class TempController {
     public String op(){
         return "operation";
     }
-    @GetMapping("thinkDetails")
-    public String thinkDetails(){
-        return "thinkDetails";
+
+    @GetMapping("realThinkDetails")
+    public String realThinkDetails(){
+        return "realThinkDetails";
+    }
+
+    @GetMapping("thinkMake")
+    public String thinkMake(){
+        return "thinkMake";
     }
 
 }

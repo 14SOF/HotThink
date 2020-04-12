@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {{> include/header}}
+    {{> /include/header}}
     <title>ThinkDatails</title>
     <meta charset="UTF-8">
     <style>
@@ -108,7 +108,7 @@
             background-image: -ms-linear-gradient(top, #fff, #ddd);
             background-image: -o-linear-gradient(top, #fff, #ddd);
             background-image: linear-gradient(to bottom, #fff, #ddd);
-            padding: .7em 2.75em;
+            padding: .7em 1.75em;
             float: left;
             text-decoration: none;
             color: #444;
@@ -223,13 +223,14 @@
 </head>
 
 <body>
-{{>include/navBar}}
+{{> /include/navBar}}
 <section>
     <div id="details">
         <ul id="tabs">
             <li><a href="#" title="tab1">개요</a></li>
             <li><a href="#" title="tab2">핵심내용</a></li>
-            <li><a href="#" title="tab3">가격정보</a></li>
+            <li><a href="#" title="tab3">기대효과</a></li>
+            <li><a href="#" title="tab4">차별성</a></li>
             <li><a href="#" title="tab4">파일첨부</a></li>
         </ul>
 
@@ -247,6 +248,9 @@
                 <p>미정</p>
             </div>
             <div id="tab4">
+                <p>미정</p>
+            </div>
+            <div id="tab5">
                 <p>미정</p>
             </div>
         </div>
@@ -342,10 +346,10 @@
             </table>
         </article2>
 </section>
-<footer>
-    {{>include/footer}}
-</footer>
 </body>
+<footer>
+    {{> /include/footer}}
+</footer>
 </html>
 <!--
 기대효과, 차별성 -->
