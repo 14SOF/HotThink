@@ -59,12 +59,12 @@ public class TempController {
 
     @GetMapping("qna")
     public String qna(){
-        return "qnaList";
+        return "qna_list";
     }
 
     @GetMapping("form")
     public String form(){
-        return "qnaForm";
+        return "qna_form";
     }
 
     @GetMapping("free")
@@ -73,11 +73,11 @@ public class TempController {
     }
     @GetMapping("footer1")
     public String footer1(){
-        return "footer1";
+        return "footer_policy";
     }
     @GetMapping("faq")
     public String faq(){
-        return "FAQ";
+        return "footer_faq";
     }
     @GetMapping("operation")
     public String op(){
@@ -88,6 +88,11 @@ public class TempController {
 //    qna 글 내용 test  실제구현은 id값으로
     @GetMapping("list/1")
     public String qnaPage(){
-        return "qnaPage";
+        return "qna_contents";
+    }
+
+    @GetMapping("list/1/update")
+    public String qnaUpdate() {
+        return "qna_updateForm";
     }
 }
