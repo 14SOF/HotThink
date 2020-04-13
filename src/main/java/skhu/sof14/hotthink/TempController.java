@@ -105,4 +105,14 @@ public class TempController {
     }
 
 
+    @GetMapping("realThinkDetails")
+    public String realThinkDetails(){
+        return "realThinkDetails";
+    }
+
+    @GetMapping("thinkMake")
+    public String thinkMake(){
+        return "thinkMake";
+    }
+
 }
