@@ -62,6 +62,16 @@ public class TempController {
         return "freethink_write";
     }
 
+    @GetMapping("realthinklist")
+    public String realThinkList(){
+        return "realthink_list";
+    }
+
+    @GetMapping("realthink")
+    public String realThink(){
+        return "realthink";
+    }
+
     @GetMapping("hotthink")
     public String hotThink(){
         return "hotthink_list";
