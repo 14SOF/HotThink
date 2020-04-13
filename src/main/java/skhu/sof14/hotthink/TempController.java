@@ -49,7 +49,7 @@ public class TempController {
 
     @GetMapping("freethink")
     public String freeThink(){
-        return "freethink";
+        return "freethink_read";
     }
 
     @GetMapping("freethinklist")
@@ -67,14 +67,19 @@ public class TempController {
         return "realthink_list";
     }
 
-    @GetMapping("realthink")
-    public String realThink(){
-        return "realthink";
+    @GetMapping("realthinkwrite")
+    public String realThinkWrite(){
+        return "realthink_write";
     }
 
     @GetMapping("hotthink")
     public String hotThink(){
         return "hotthink_list";
+    }
+
+    @GetMapping("realthink")
+    public String realThink(){
+        return "realthink_read";
     }
 
     @GetMapping("qna")
