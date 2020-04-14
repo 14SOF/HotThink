@@ -106,7 +106,7 @@ img {
 #searchBar{
     padding-left: 10px;
     padding-right: 10px;
-    width: 950px;
+    width: 1000px;
     height: 50px;
     margin-top: 10px;
     border: 1px solid #ffffff;
@@ -120,6 +120,8 @@ img {
     float: right;
     border: none;
     outline: none;
+    background: red;
+    font-family: 'Nanum Gothic', sans-serif;
     background-image: linear-gradient(to top,#fad0c4 0,#ffd1ff 100%);
 }
 .spring-warmth-gradient {
@@ -128,13 +130,14 @@ img {
 }
 #searchContainer{
     background: #ffffff;
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 70px;
+    margin-right: 70px;
     height: 70px;
     box-shadow: -10px 10px 30px -10px gray;
     position: relative;
     z-index: 2;
     top: -40px;
+    padding-left: 30px;
 }
 /*search Bar style end*/
 

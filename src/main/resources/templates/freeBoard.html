@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>핫띵크 : 핫한 당신의 생각</title>
     <style>
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
         .tableDegin {
             width: 100%;
             height: 100%;
@@ -12,6 +15,7 @@
             line-height: 1.5;
             cursor: default;
         }
+
         .tableDegin thead th {
             padding: 10px;
             font-weight: bold;
@@ -19,24 +23,28 @@
             color: #369;
             border-bottom: 3px solid #036;
         }
+
         .tableDegin tbody th {
             width: 150px;
             padding: 10px;
         }
+
         .tableDegin tbody tr td {
             padding: 10px;
         }
 
-        .page{
+        .page {
             text-align: center;
             width: 100%;
         }
 
-        .pagination{
+        .pagination {
             list-style: none;
             display: inline-block;
             padding: 0;
             margin-top: 20px;
+            text-align: center;
+            margin-left: 80px;
         }
 
         .pagination li {
@@ -77,8 +85,6 @@
             width: 30px;
             height: 30px;
             line-heignt: 30px;
-            -moz-border-radius: 100%;
-            -webkit-border-radius: 100%;
             border-radius: 100%;
         }
 
@@ -105,79 +111,229 @@
             background-color: #2e9cdf;
             cursor: pointer;
         }
+
         .btn:hover {
-            text-decoration: underline; color: #ffffff;
+            text-decoration: underline;
+            color: #ffffff;
         }
-        .btn:active{
+
+        .btn:active {
         }
+
+        .searchBox {
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-top: 1px solid #e7e8e9;
+            border-bottom: 1px solid #e7e8e9;
+            margin: 0;
+            display: block;
+            word-break: break-all;
+            letter-spacing: -0.050em;
+            font-family: "Noto Sans KR", sans-serif;
+            color: black;
+        }
+
+        .searchSelect {
+            width: 133px;
+            height: 40px;
+            border: 1px solid #cfd2d4;
+            padding-left: 8px;
+            font-size: 12px;
+            color: #999999;
+            vertical-align: middle;
+            overflow: visible !important;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: menulist;
+            box-sizing: border-box;
+            align-items: center;
+            white-space: pre;
+            -webkit-rtl-ordering: logical;
+            cursor: default;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            border-radius: 0px;
+            word-break: break-all;
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .searchOption {
+            padding-right: 6px;
+            font-weight: normal;
+            display: block;
+            white-space: pre;
+            min-height: 1.2em;
+            padding: 0px 2px 1px;
+            font-size: 12px;
+            color: #999999;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            text-align: start;
+            -webkit-rtl-ordering: logical;
+            cursor: default;
+            font: 400 13.3333px Arial;
+            word-break: break-all;
+        }
+
+        .searchInputText {
+            width: 273px;
+            height: 38px;
+            padding: 0 0 0 10px;
+            font-size: 14px;
+            color: #838d93;
+            border: 1px solid #cfd2d4;
+            border-right: 0;
+            vertical-align: middle;
+            font-family: "Noto Sans KR", sans-serif;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            -webkit-appearance: textfield;
+            background-color: #FFFFFF;
+            -webkit-rtl-ordering: logical;
+            cursor: text;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+            word-break: break-all;
+        }
+
+        .searchInputSubmit {
+            width: 78px;
+            height: 41px;
+            padding: 0 0 4px 0;
+            color: white;
+            cursor: pointer;
+            background-color: #2e9cdf;
+            border: 0;
+            vertical-align: middle;
+            font-family: "Noto Sans KR", sans-serif;
+            box-sizing: border-box;
+            -webkit-appearance: push-button;
+            user-select: none;
+            white-space: pre;
+            align-items: flex-start;
+            text-align: center;
+            -webkit-writing-mode: horizontal-tb !important;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            -webkit-rtl-ordering: logical;
+            margin: 0em;
+            margin-left: -5px;
+            font: 400 13.3333px Arial;
+            word-break: break-all;
+        }
+
+        .head {
+            font-family: "Noto Sans KR", sans-serif;
+            color: #2e9cdf;
+        }
+
 
     </style>
 
-    <link rel="stylesheet" type="text/css" href="style/article.css">
-    <link rel="stylesheet" type="text/css" href="style/section.css?v=2">
-    <script src="/js/modernizr.custom.34807.js"></script>
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
+<div>
+    <div>
+        <h1 class="head">
+            자유게시판
+        </h1>
+    </div>
+    <table class="tableDegin">
+        <thead>
+        <tr>
+            <th scope="cols">번호</th>
+            <th scope="cols">제목</th>
+            <th scope="cols">작성자</th>
+            <th scope="cols">날짜</th>
+            <th scope="cols">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>내용이 들어갑니다.</td>
+            <td>오일권</td>
+            <td>2020-04-04</td>
+            <td>528</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>내용이 들어갑니다.</td>
+            <td>김영곤</td>
+            <td>2020-04-04</td>
+            <td>18</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>내용이 들어갑니다.</td>
+            <td>정기혁</td>
+            <td>2020-04-04</td>
+            <td>20</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>내용이 들어갑니다.</td>
+            <td>정형일</td>
+            <td>2020-04-04</td>
+            <td>312</td>
+        </tr>
+        </tbody>
+    </table>
 
-<table class="tableDegin">
-    <thead>
-    <tr>
-        <th scope="cols">번호</th>
-        <th scope="cols">제목</th>
-        <th scope="cols">작성자</th>
-        <th scope="cols">날짜</th>
-        <th scope="cols">조회수</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>1</td>
-        <td>내용이 들어갑니다.</td>
-        <td>오일권</td>
-        <td>2020-04-04</td>
-        <td>528</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>내용이 들어갑니다.</td>
-        <td>김영곤</td>
-        <td>2020-04-04</td>
-        <td>18</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>내용이 들어갑니다.</td>
-        <td>정기혁</td>
-        <td>2020-04-04</td>
-        <td>20</td>
-    </tr>
-    <tr>
-        <td>4</td>
-        <td>내용이 들어갑니다test.</td>
-        <td>정형일</td>
-        <td>2020-04-04</td>
-        <td>312</td>
-    </tr>
-    </tbody>
-</table>
-
-
-<div class="page">
-
-    <a class="btn">글쓰기</a>
-
-    <ul class="pagination modal">
-        <li><a href="#" class="first">처음페이지</a></li>
-        <li><a href="#" class="arrow left"><<</a></li>
-        <li><a href="#" class="active num" style="padding-top: 5px">1</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">2</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">3</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">4</a></li>
-        <li><a href="#" class="num" style="padding-top: 5px">5</a></li>
-        <li><a href="#" class="arrow right">>></a></li>
-        <li><a href="#" class="last">끝 페이지</a></li>
-    </ul>
+    <div class="page">
+        <a class="btn">글쓰기</a>
+        <div>
+            <ul class="pagination modal">
+                <li><a href="#" class="first">처음페이지</a></li>
+                <li><a href="#" class="arrow left"><<</a></li>
+                <li><a href="#" class="active num" style="padding-top: 5px">1</a></li>
+                <li><a href="#" class="num" style="padding-top: 5px">2</a></li>
+                <li><a href="#" class="num" style="padding-top: 5px">3</a></li>
+                <li><a href="#" class="num" style="padding-top: 5px">4</a></li>
+                <li><a href="#" class="num" style="padding-top: 5px">5</a></li>
+                <li><a href="#" class="arrow right">>></a></li>
+                <li><a href="#" class="last">끝 페이지</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="searchBox">
+    <select class="searchSelect">
+        <option class="searchOption" value="Title">제목</option>
+        <option class="searchOption" value="Content">내용</option>
+        <option class="searchOption" value="Full">제목+내용</option>
+        <option class="searchOption" value="writerName">작성자</option>
+    </select>
+    <input class="searchInputText" type="text" title="검색어를 입력하세요" placeholder="검색어를 입력하세요">
+    <input class="searchInputSubmit" type="sumbit" value="검색" alternatetext="검색">
 </div>
 
 </body>
