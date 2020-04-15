@@ -95,4 +95,9 @@ public class TempController {
     public String qnaUpdate() {
         return "qna_updateForm";
     }
+
+    @GetMapping("producer")
+    public String producer() {
+        return "footer_producer";
+    }
 }
