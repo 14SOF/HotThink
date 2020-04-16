@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-
     <meta charset="UTF-8">
     <style>
         section {
@@ -62,13 +61,17 @@
             text-align: left;
         }
     </style>
+
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+    </script>
 </head>
 <body>
 <section>
     <p style=" margin-top: 60px">
     <font size="30px" color="blue" face = "'Nanum Gothic', sans-serif"><strong>프리띵크 작성</strong></font>
     </p>
-    <form name="makeForm" action="RegistrtionDb.jsp" method=post>
+    <form name="makeForm" action="RegistrtionDb.jsp"  enctype="multipart/form-data" method=post>
         <div id=makeBox align="center">
             <table>
                 <tr>
@@ -88,7 +91,18 @@
                     <font style="font-family: 'Nanum Gothic', sans-serif; font-size: 20px"> 원 이상</font></td>
                 </tr>
                 <tr>
-                    <th><font color="blue">*</font> 내용</th>
+                    <th><font color="blue">*</font> 개요</th>
+                </tr>
+                <tr>
+                    <td>
+                        <form name="content">
+                            <textarea onfocus="this.value=''">개요을 입력하시오.</textarea>
+                            <!--<textarea rows="13" cols="123"></textarea>-->
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th><font color="blue">*</font> 핵심내용</th>
                 </tr>
                 <tr>
                     <td>
@@ -98,11 +112,59 @@
                         </form>
                     </td>
                 </tr>
+                <tr>
+                    <th><font color="blue">*</font> 기대효과</th>
+                </tr>
+                <tr>
+                    <td>
+                        <form name="content">
+                            <textarea onfocus="this.value=''">내용을 입력하시오.</textarea>
+                            <!--<textarea rows="13" cols="123"></textarea>-->
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <th><font color="blue">*</font> 차별성</th>
+                </tr>
+                <tr>
+                    <td>
+                        <form name="content">
+                            <textarea onfocus="this.value=''">내용을 입력하시오.</textarea>
+                            <!--<textarea rows="13" cols="123"></textarea>-->
+                        </form>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>
+                        <font color="blue">*</font> 특허 관련
+<!--                        <input type="radio" name="radio" id="yes" value="yes" checked><label>YES</label>
+                        <input type="radio" name="radio" id="no" value="no"><label>No</label>-->
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <form name=frm method=post>
+                            <textarea name="petent" onfocus="this.value=''" >내용을 입력하시오.</textarea>
+                            <!--<textarea rows="13" cols="123"></textarea>-->
+                        </form>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <th><font color="blue">*</font> 파일첨부</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="file" name="FileName">
+                    </td>
+                </tr>
             </table>
 
 
             <hr width=80% color="#EAEAEA">
-            <input type="button" name="registin" value="완료"
+            <input type="button" name="registin" value="등록"
                    style="width: 200px; height: 50px; font-family: 'Nanum Gothic', sans-serif; font-size: 30px; background-color: #2196f3;">
 
         </div>

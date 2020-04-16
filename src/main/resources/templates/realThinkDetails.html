@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    {{> /include/header}}
     <title>ThinkDatails</title>
     <meta charset="UTF-8">
     <style>
@@ -71,13 +72,15 @@
         /*Think 상세*/
         #details {
             float: left;
-            border: 1px black solid;
-            width: 640px;
+            border: 7px #EAEAEA solid;
+            border-radius: 10px;
+            width: 615px;
             height: 800px;
             margin: 100px auto 0 auto;
             font-family: 'Nanum Gothic', sans-serif
             font-size: 20px;
             background: white;
+
         }
 
         /* ------------------------------------------------- */
@@ -105,7 +108,7 @@
             background-image: -ms-linear-gradient(top, #fff, #ddd);
             background-image: -o-linear-gradient(top, #fff, #ddd);
             background-image: linear-gradient(to bottom, #fff, #ddd);
-            padding: .7em 3.5em;
+            padding: .7em 1.75em;
             float: left;
             text-decoration: none;
             color: #444;
@@ -220,14 +223,15 @@
 </head>
 
 <body>
+{{> /include/navBar}}
 <section>
     <div id="details">
         <ul id="tabs">
-            <li><a href="#" title="tab1">내용</a></li>
-            <li><a href="#" title="tab2">가격정보</a></li>
-
-            <li><a href="#" title="tab3">미정</a></li>
-            <li><a href="#" title="tab4">미정</a></li>
+            <li><a href="#" title="tab1">개요</a></li>
+            <li><a href="#" title="tab2">핵심내용</a></li>
+            <li><a href="#" title="tab3">기대효과</a></li>
+            <li><a href="#" title="tab4">차별성</a></li>
+            <li><a href="#" title="tab4">파일첨부</a></li>
         </ul>
 
         <div id="content">
@@ -244,6 +248,9 @@
                 <p>미정</p>
             </div>
             <div id="tab4">
+                <p>미정</p>
+            </div>
+            <div id="tab5">
                 <p>미정</p>
             </div>
         </div>
@@ -340,4 +347,10 @@
         </article2>
 </section>
 </body>
+<footer>
+    {{> /include/footer}}
+</footer>
 </html>
+<!--
+기대효과, 차별성 -->
+

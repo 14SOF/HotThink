@@ -14,27 +14,25 @@
             <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">핫띵크 회원가입</h1>
         </div>
 
-        <form class="user">
+        <form class="user" id="user" name="user" method="post" action="/create">
             <div class="form-group">
-                <input type="email" class="form-control form-control-user"
-                       id="InputEmail" aria-describedby="emailHelp"
-                       placeholder="이메일">
+                <input class="form-control form-control-user" id="user_id" name="user_id" placeholder="이메일 형식의 ID를 입력하세요.">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="InputPassword" placeholder="비밀번호">
+                       id="user_pw" name="user_pw" placeholder="비밀번호">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="InputPasswordConfirm" placeholder="비밀번호 확인">
+                      id="user_pwCk" name="user_pwCk" placeholder="비밀번호 확인">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                       id="InputName" placeholder="이름">
+                       id="user_name" name="user_name" placeholder="이름">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                        id="InputNickName" placeholder="닉네임">
+                        id="user_nick" name="user_nick" placeholder="닉네임">
             </div>
 
             <div class="form-group">
@@ -47,10 +45,7 @@
                 </div>
             </div>
             <hr>
-            <a href="index.html" class="btn btn-primary btn-user btn-block">
-                회원가입
-            </a>
-
+            <button type="submit" class="btn btn-primary btn-user btn-block">회원가입</button>
             <div class="text-center small mt-2"
             style="color: red">
                 에러 표시될 곳

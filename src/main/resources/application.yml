@@ -1,4 +1,10 @@
 spring:
+  datasource:
+    url: jdbc:mysql://hotthinkdatabase.cjditpwe7bq8.ap-northeast-2.rds.amazonaws.com/HotThink?serverTimezone=UTC
+    username: admin
+    password: test1234
+    driver-class-name: com.mysql.jdbc.Driver
+
   devtools:
     livereload:
       enabled: true
@@ -7,9 +13,5 @@ spring:
 
   mustache:
     suffix: .html
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306?serverTimezone=UTC
-    username: user1
-    password: test123
+
 

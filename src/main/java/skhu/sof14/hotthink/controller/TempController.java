@@ -1,4 +1,4 @@
-package skhu.sof14.hotthink;
+package skhu.sof14.hotthink.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,32 +29,57 @@ public class TempController {
 
     @GetMapping("message")
     public String message(){
-        return "message";
+        return "mypage_message";
     }
 
     @GetMapping("alarm")
     public String alarm(){
-        return "alarm";
+        return "mypage_alarm";
     }
 
     @GetMapping("follow")
     public String follow(){
-        return "follow";
+        return "mypage_follow";
     }
 
     @GetMapping("myboards")
     public String myBoards(){
-        return "myboards";
+        return "mypage_myboards";
     }
 
     @GetMapping("freethink")
     public String freeThink(){
-        return "freethinklist";
+        return "freethink_read";
+    }
+
+    @GetMapping("freethinklist")
+    public String freeThinkList(){
+        return "freethink_list";
+    }
+
+    @GetMapping("freethinkwrite")
+    public String freeThinkWrite(){
+        return "freethink_write";
+    }
+
+    @GetMapping("realthinklist")
+    public String realThinkList(){
+        return "realthink_list";
+    }
+
+    @GetMapping("realthinkwrite")
+    public String realThinkWrite(){
+        return "realthink_write";
     }
 
     @GetMapping("hotthink")
     public String hotThink(){
-        return "hotthink";
+        return "hotthink_list";
+    }
+
+    @GetMapping("realthink")
+    public String realThink(){
+        return "realthink_read";
     }
 
     @GetMapping("qna")
@@ -100,4 +125,19 @@ public class TempController {
     public String producer() {
         return "footer_producer";
     }
+    @GetMapping("realThinkDetails")
+    public String realThinkDetails(){
+        return "realThinkDetails";
+    }
+
+    @GetMapping("thinkMake")
+    public String thinkMake(){
+        return "thinkMake";
+    }
+
+//    @GetMapping("signup_success")
+//    public String signup_success() {
+//        return "signup_success";
+//    }
+
 }
