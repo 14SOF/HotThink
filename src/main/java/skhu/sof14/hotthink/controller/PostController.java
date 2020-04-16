@@ -1,20 +1,29 @@
 package skhu.sof14.hotthink.controller;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import skhu.sof14.hotthink.model.dto.PostDto;
+import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.service.PostService;
 
 
+@Controller
 public class PostController {
-    private PostService memberService;
+    private PostService postService;
+    @Autowired
+    private PostRepository postRepository;
 
-    @GetMapping("freethinkwrite")
-    public String freeThinkWrite(){
+    @GetMapping("write")
+    public String write(){
         return "freethink_write";
     }
 
-    @GetMapping("freethinklist")
-    public String freeThinkList(){
+    @PostMapping("post")
+    public String freeThinkWrite(PostDto postDto) {
+        postService.savePost(postDto);
+
         return "freethink_list";
     }
 }

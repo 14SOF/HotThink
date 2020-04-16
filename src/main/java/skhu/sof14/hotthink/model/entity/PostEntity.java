@@ -10,23 +10,30 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @Entity
-/*@Table(name = "post")*/
-public class Post extends TimeEntity{
+@Table(name = "post")
+public class PostEntity extends TimeEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long post_idx;
 
-    private int post_idx;
+    @Column
     private String post_title;
+    @Column
     private String post_content;
-    private int post_hit;
-    private int post_like;
+    @Column
+    private int post_hit = 0;
+    @Column
+    private int post_like = 0;
+    @Column
     private LocalDateTime post_dateTime;
-    private String post_type;
-    private int user_user_idx;
+    @Column
+    private String post_type = "프리";
+    @Column
+    private int user_user_idx = 0;
 
     @Builder
-    public Post(int post_idx, String post_title, String post_content, int post_hit, int post_like, LocalDateTime post_dateTime, String post_type, int user_user_idx) {
+    public PostEntity(Long post_idx, String post_title, String post_content, int post_hit, int post_like, LocalDateTime post_dateTime, String post_type, int user_user_idx) {
         this.post_idx = post_idx;
         this.post_title = post_title;
         this.post_content = post_content;

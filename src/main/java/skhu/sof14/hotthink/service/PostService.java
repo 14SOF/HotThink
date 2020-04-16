@@ -9,11 +9,12 @@ import javax.transaction.Transactional;
 
 @AllArgsConstructor
 @Service
-public class BoardService {
+public class PostService {
     private PostRepository postRepository;
 
     @Transactional
     public Long savePost(PostDto postDto) {
-        return PostRepository.save(postDto.toEntity()).getPost_title();
+        return postRepository.save(postDto.toEntity()).getPost_idx();
     }
+    
 }
