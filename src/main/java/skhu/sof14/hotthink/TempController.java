@@ -121,6 +121,11 @@ public class TempController {
         return "qna_updateForm";
     }
 
+    @GetMapping("producer")
+    public String producer() {
+        return "footer_producer";
+    }
+
     @GetMapping("realThinkDetails")
     public String realThinkDetails(){
         return "realThinkDetails";
