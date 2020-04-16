@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/user.css">
+</head>
+<body>
+{{> include/navBar}}
+<div class="container shadow-lg realWriteForm mt-5 mb-5">
+
+    <div style="padding: 20px">
+        <form class="user">
+            <p class="h1 text-center" style="font-family: 'Noto Sans KR', sans-serif">리얼띵크 작성안</p>
+            <hr class="my-4">
+            <div class="form-group">
+                <label classfor="InputTitle">제목 <i class="fas fa-check" style="color: red"></i>
+                </label>
+                <input class="form-control form-control-user"
+                       id="InputTitle">
+            </div>
+            <div class="form-group">
+                <label for="InputSummary">요약 <span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputSummary" rows="2"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputOutline">개요 <span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputOutline" rows="5"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputContents">상세내용 <span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputContents" rows="20"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputEffects">기대효과 <span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputEffects" rows="20"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputSimilar">유사 아이디어<span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputSimilar" rows="10"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputDifference">차별성<span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputDifference" rows="20"
+                          style="border-radius: 1rem;"
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputPatent">특허관련<span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputPatent" rows="20"
+                          style="border-radius: 1rem;" placeholder="특허 계획, 여부 등"
+                ></textarea>
+            </div>
+
+
+            <div class="form-group ml-3">
+                <label for="InputFile" style="text-align: left">첨부파일<span style="color: red">*</span></label>
+                <div class="row justify-content-start">
+                    <input type="file" id="InputFile">
+                </div>
+            </div>
+
+            <div class="form-group ml-3">
+                <label for="InputPrice" style="text-align: left">희망가격</label>
+                <div class="row justify-content-start">
+                    <input class="col-6 form-control form-control-user" type="number"
+                           id="InputPrice" style="font-size: x-large">
+                    <i class="mt-2 col-auto fas fa-won-sign" style="font-size: xx-large"></i>
+                </div>
+            </div>
+
+
+
+            <hr class="my-4">
+            <div class="form-group" style="text-align: right">
+                <a href="/" class="btn btn-primary btn-user">
+                    작성완료
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+<footer>
+    {{> include/footer}}
+</footer>
+</html>
+

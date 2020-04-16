@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/user.css">
+
+    <style>
+        .real-container {
+            font-family: "Noto Sans KR", sans-serif;
+            width: 1340px;
+            padding: 20px;
+        }
+
+        .real-container-header {
+            padding: 20px;
+        }
+
+        /* ------------------------------------------------- */
+        #tabs {
+            font-weight: bold;
+            overflow: hidden;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #tabs li {
+            float: left;
+            font-weight: normal;
+            /*margin: 0 .5em 0 0;*/
+        }
+
+        #tabs a {
+            position: relative;
+            background: #ddd;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+            background-image: -webkit-linear-gradient(top, #fff, #ddd);
+            background-image: -moz-linear-gradient(top, #fff, #ddd);
+            background-image: -ms-linear-gradient(top, #fff, #ddd);
+            background-image: -o-linear-gradient(top, #fff, #ddd);
+            background-image: linear-gradient(to bottom, #fff, #ddd);
+            padding: .7em 1.75em;
+            float: left;
+            text-decoration: none;
+            color: #444;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+            -webkit-border-radius: 5px 0 0 0;
+            -moz-border-radius: 5px 0 0 0;
+            border-radius: 5px 0 0 0;
+            -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+            -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+            box-shadow: 0 2px 2px rgba(0, 0, 0, .4);
+        }
+
+        #tabs a:hover,
+        #tabs a:hover::after,
+        #tabs a:focus,
+        #tabs a:focus::after {
+            background: #fff;
+        }
+
+        #tabs a:focus {
+            outline: 0;
+        }
+
+        #tabs a::after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: -.5em;
+            bottom: 0;
+            width: 1em;
+            background: #ddd;
+            background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#ddd));
+            background-image: -webkit-linear-gradient(top, #fff, #ddd);
+            background-image: -moz-linear-gradient(top, #fff, #ddd);
+            background-image: -ms-linear-gradient(top, #fff, #ddd);
+            background-image: -o-linear-gradient(top, #fff, #ddd);
+            background-image: linear-gradient(to bottom, #fff, #ddd);
+            -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            box-shadow: 2px 2px 2px rgba(0, 0, 0, .4);
+            -webkit-transform: skew(10deg);
+            -moz-transform: skew(10deg);
+            -ms-transform: skew(10deg);
+            -o-transform: skew(10deg);
+            transform: skew(10deg);
+            -webkit-border-radius: 0 5px 0 0;
+            -moz-border-radius: 0 5px 0 0;
+            border-radius: 0 5px 0 0;
+        }
+
+        #tabs #current a,
+        #tabs #current a::after {
+            background: #fff;
+            z-index: 3;
+        }
+
+        /* ------------------------------------------------- */
+        #content {
+            font-size: x-large;
+            background: ghostwhite;
+            padding: 2em;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            -moz-border-radius: 0 5px 5px 5px;
+            -webkit-border-radius: 0 5px 5px 5px;
+            border-radius: 0 5px 5px 5px;
+            -moz-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+            -webkit-box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+            box-shadow: 0 -2px 3px -2px rgba(0, 0, 0, .5);
+        }
+
+
+    </style>
+</head>
+<body>
+{{> include/navBar}}
+<div class="container real-container shadow-lg mt-5 mb-5">
+    <div class="row real-container-header">
+        <div class="col">
+            <h1 class="display-4" style="font-weight: bolder">제목 쌸라쌸라</h1>
+        </div>
+        <div class="col-auto">
+            <div>2020/04/12</div>
+            <div class="text-gray-800" style="float: right"><i class="far fa-eye"></i>
+                991329
+            </div>
+        </div>
+    </div>
+    <div class="dropdown-divider"></div>
+
+    <div class="row">
+        <ul id="tabs">
+            <li><a href="#" title="tab1">개요</a></li>
+            <li><a href="#" title="tab2">상세내용</a></li>
+            <li><a href="#" title="tab3">기대효과</a></li>
+            <li><a href="#" title="tab4">유사아이디어</a></li>
+            <li><a href="#" title="tab4">차별성</a></li>
+            <li><a href="#" title="tab4">특허관련</a></li>
+            <li><a href="#" title="tab4">첨부파일</a></li>
+        </ul>
+    </div>
+    <div class="row" style="height: 600px">
+        <div id="content" class="shadow">
+            <div id="tab1">
+                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
+                </p>
+            </div>
+            <div id="tab2">
+                <p>가격정보</p>
+
+            </div>
+            <div id="tab3">
+                <p>미정</p>
+            </div>
+            <div id="tab4">
+                <p>미정</p>
+            </div>
+            <div id="tab5">
+                <p>미정</p>
+            </div>
+        </div>
+    </div>
+    <div class="dropdown-divider mt-2"></div>
+
+    <div class="row justify-content-between">
+        <div class="col-auto ml-3">
+            <div class="row">
+                <div class="col-auto shadow border-left-warning card mr-5" style="padding: 20px">
+                    <div class="mx-auto mt-1 text-gray-500">
+                        희망가격
+                    </div>
+                    <div class="row ml-2" style="font-size: x-large">
+                        50130210310<i class="mt-2 ml-2 mr-4 fas fa-won-sign"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <a href="myapge" class="btn btn-info btn-icon-split shadow">
+                    <span class="icon text-white-50">
+<i class="fas fa-paper-plane"></i>
+                    </span>
+                    <span class="text">쪽지보내기</span>
+                </a>
+
+                <a href="/" class="ml-3 btn btn-warning btn-icon-split shadow">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-won-sign"></i>
+                    </span>
+                    <span class="text">구매하기</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-auto justify-content-end mr-4">
+            <a href="mypage" class="shadow border-left-secondary card small"
+               style="padding: 20px; text-decoration: none; color: black">
+                <div class="mx-auto mt-1 text-gray-500">
+                    작성자
+                </div>
+                <div class="mx-auto text-gray-900">
+                    <div class="h1">내이름은홍성빈</div>
+                </div>
+                <div class="row justify-content-center">
+                    <i class="fas fa-star" style="color:gold"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#content div").hide(); // Initially hide all content
+        $("#tabs li:first").attr("id", "current"); // Activate first tab
+        $("#content div:first").fadeIn(); // Show first tab content
+
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $("#content div").hide(); //Hide all content
+            $("#tabs li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+    })();
+</script>
+</body>
+<footer>
+    {{> /include/footer}}
+</footer>
+</html>

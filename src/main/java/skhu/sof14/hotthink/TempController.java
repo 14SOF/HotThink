@@ -29,42 +29,67 @@ public class TempController {
 
     @GetMapping("message")
     public String message(){
-        return "message";
+        return "mypage_message";
     }
 
     @GetMapping("alarm")
     public String alarm(){
-        return "alarm";
+        return "mypage_alarm";
     }
 
     @GetMapping("follow")
     public String follow(){
-        return "follow";
+        return "mypage_follow";
     }
 
     @GetMapping("myboards")
     public String myBoards(){
-        return "myboards";
+        return "mypage_myboards";
     }
 
     @GetMapping("freethink")
     public String freeThink(){
-        return "freethinklist";
+        return "freethink_read";
+    }
+
+    @GetMapping("freethinklist")
+    public String freeThinkList(){
+        return "freethink_list";
+    }
+
+    @GetMapping("freethinkwrite")
+    public String freeThinkWrite(){
+        return "freethink_write";
+    }
+
+    @GetMapping("realthinklist")
+    public String realThinkList(){
+        return "realthink_list";
+    }
+
+    @GetMapping("realthinkwrite")
+    public String realThinkWrite(){
+        return "realthink_write";
     }
 
     @GetMapping("hotthink")
     public String hotThink(){
-        return "hotthink";
+        return "hotthink_list";
+    }
+
+    @GetMapping("realthink")
+    public String realThink(){
+        return "realthink_read";
     }
 
     @GetMapping("qna")
     public String qna(){
-        return "qnaList";
+        return "qna_list";
     }
 
     @GetMapping("form")
     public String form(){
-        return "qnaForm";
+        return "qna_form";
     }
 
     @GetMapping("free")
@@ -73,15 +98,42 @@ public class TempController {
     }
     @GetMapping("footer1")
     public String footer1(){
-        return "footer1";
+        return "footer_policy";
     }
     @GetMapping("faq")
     public String faq(){
-        return "FAQ";
+        return "footer_faq";
     }
     @GetMapping("operation")
     public String op(){
-        return "operation";
+        return "footer_operation";
+    }
+
+
+//    qna 글 내용 test  실제구현은 id값으로
+    @GetMapping("list/1")
+    public String qnaPage(){
+        return "qna_contents";
+    }
+
+    @GetMapping("list/1/update")
+    public String qnaUpdate() {
+        return "qna_updateForm";
+    }
+
+    @GetMapping("producer")
+    public String producer() {
+        return "footer_producer";
+    }
+
+    @GetMapping("realThinkDetails")
+    public String realThinkDetails(){
+        return "realThinkDetails";
+    }
+
+    @GetMapping("thinkMake")
+    public String thinkMake(){
+        return "thinkMake";
     }
 
 }

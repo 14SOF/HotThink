@@ -5,17 +5,8 @@
     <link rel="stylesheet" type="text/css" href="style/hotthink.css">
 </head>
 <body>
-{{> include/navBar}}
-
-<div class="container h-100">
-    <div class="d-flex justify-content-center h-100">
-        <div class="searchbar bg-light shadow-lg">
-            <input class="search_input" type="text" name="" placeholder="검색">
-            <button type="button" class="btn search_icon"><i class="fas fa-search"></i></button>
-        </div>
-    </div>
-</div>
-
+{{> include/navbar}}
+{{> include/searchbar}}
 <div class="hot-container">
 
     <div class="row mt-5">
@@ -45,7 +36,7 @@
                 <!-- Content -->
                 <div class="card-body">
                     <!-- Name -->
-                    <h4 class="card-title font-weight-bold">핫띵크 만들어버리기</h4>
+                    <h4 class="card-title hot-card-title">핫띵크 만들어버리기</h4>
                     <hr>
                     <!-- Quotation -->
                     <p><i class="fas fa-quote-left"></i> 이씨발내가이걸 만들수 있을까 존나힘드네 내가모하고있는건지 나혼자하는기분인기분</i>
@@ -54,7 +45,7 @@
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
+                    <a href="/realThinkDetails" style="text-decoration: none">
                         <button type="button" class="btn btn-block hot-card-btn  warm-flame-gradient">더보기</button>
                     </a>
                 </div>
@@ -324,6 +315,8 @@
     </nav>
 </div>
 
-{{> include/footer}}
 </body>
+<footer>
+    {{> include/footer}}
+</footer>
 </html>
