@@ -99,7 +99,6 @@
             font-size: 16px;
             color: black;
             word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
             vertical-align: middle;
         }
 
@@ -119,31 +118,47 @@
         }
 
         .userInfoBox {
-            position: relative;
-            height: 60px;
-            padding: 0 20px;
-            font-size: 13px;
+            height: 40px;
+            font-size: 15px;
             color: black;
             border-bottom: 1px solid #e7e8e9;
-            margin: 0;
             display: block;
             word-break: break-all;
             content: "";
             display: inline-block;
-            height: 100%;
             vertical-align: middle;
-            font-family: "Noto Sans KR", sans-serif;
         }
 
         .profileImg {
-            font-size: 13px;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            font-style: italic;
+            font-size: 16px;
             color: black;
+            word-break: break-all;
+            vertical-align: middle;
+            background-image: url("../static/icons/userprofile.png");
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        .username {
+            font-size: 14px;
+            vertical-align: -10px;
+            display: inline-block;
+            padding-right: 1px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
             word-break: break-all;
         }
 
         .btn_follow {
-            position: relative;
-            margin: 0 0 0 10px;
+            vertical-align: -5px;
             display: inline-block;
             height: 18px;
             padding: 5px 8px;
@@ -158,51 +173,6 @@
             word-break: break-all;
         }
 
-        .btn_follow span {
-            osition: absolute;
-            top: 38px;
-            left: 0;
-            width: 440px;
-            padding: 4px 10px;
-            font-size: 11px;
-            color: #555;
-            text-align: center;
-            background-color: white;
-            border: 1px solid #cacac8;
-            border-radius: 2px;
-            display: none;
-            font-weight: bold;
-            cursor: pointer;
-            word-break: break-all;
-        }
-        
-        .boardView .bInfo .btn_rss span:before {
-            position: absolute;
-            top: -8px;
-            left: 42px;
-            margin: 0 0 0 -8px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 8px solid #cacac8;
-        }
-
-        .btn_rss span:after {
-            position: absolute;
-            top: -6px;
-            left: 42px;
-            margin: 0 0 0 -6px;
-            content: "";
-            width: 0;
-            height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-bottom: 6px solid white;
-        }
-
-        .btn_follow.tip :
 
         .followimg {
             margin: 0 6px 0 0;
@@ -221,130 +191,453 @@
             word-break: break-all;
         }
 
+        .InfoRight {
+            float: right;
+            margin-left: 960px;
+            top: 22px;
+            right: 12px;
+            color: #999999;
+            display: block;
+            font-size: 13px;
+            word-break: break-all;
+        }
+
+        .boardButton {
+            position: relative;
+            height: 40px;
+            text-align: right;
+            display: block;
+            word-break: break-all;
+        }
+
+        .boardButton a:hover {
+            text-decoration: underline;
+            text-underline-color: white;
+        }
+
+        .button-write {
+            argin: 0 0 0 -3px;
+            background-color: #554843;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .button-list {
+            margin: 0 0 0 -3px;
+            background-color: #554843;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .listMove {
+            margin-top: 50px;
+            border-top: 1px solid #e7e8e9;
+            list-style: none;
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+            word-break: break-all;
+            color: black;
+        }
+
+        .up {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            margin: 0 20px 0 0;
+            font-size: 12px;
+            color: black;
+            list-style: none;
+            word-break: break-all;
+        }
+
+        .listMove .up:before {
+            position: relative;
+            top: -10px;
+            content: "";
+            width: 0;
+            height: 0;
+            margin: 0 15px 0 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid #554843;
+        }
+
+        .listMove .up:after {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            content: '';
+            display: block;
+            width: 1px;
+            height: 11px;
+            background-color: #c7cacc;
+        }
+
+        .down {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            margin: 0 20px 0 0;
+            font-size: 12px;
+            color: black;
+            list-style: none;
+            word-break: break-all;
+        }
+
+        .listMove .down:before {
+            position: relative;
+            top: 14px;
+            content: "";
+            width: 0;
+            height: 0;
+            margin: 0 15px 0 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #554843;
+        }
+
+        .listMove .down:after {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            content: '';
+            display: block;
+            width: 1px;
+            height: 11px;
+            background-color: #c7cacc;
+        }
+
+        .comment {
+            position: relative;
+            margin-bottom: 25px;
+            padding-top: 30px;
+            display: block;
+            word-break: break-all;
+            color: black;
+        }
+
+        .text {
+            position: relative;
+            margin-bottom: 10px;
+            word-break: break-all;
+            color: black;
+            font-weight: bold;
+        }
+
+        .gap {
+            margin: 0 5px;
+            font-size: 15px;
+            font-weight: normal;
+            word-break: break-all;
+            color: black;
+        }
+
+        .cmt_cnt {
+            font-size: 14px;
+            color: #f46c3b;
+            font-weight: bold;
+            word-break: break-all;
+        }
+
+        .commentArea {
+            position: relative;
+            border: 1px solid #cfd2d4;
+            height: 80px;
+            padding: 0 90px 0 78px;
+            display: block;
+            word-break: break-all;
+        }
+
+        .selectBar {
+            display: block;
+            height: 0px;
+            word-break: break-all;
+        }
+
+        .editWindow {
+            width: 100%;
+            height: 60px;
+            padding: 10px 0px;
+            display: block;
+            border: 0 none;
+            word-break: break-all;
+            color: black;
+        }
+
+        textarea {
+            display: none;
+            position: relative;
+            width: 98%;
+            height: 60px;
+            padding: 10px 1%;
+            color: #999999;
+            background-color: white;
+            border: 0;
+            resize: none;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            text-align: start;
+            flex-direction: column;
+            cursor: text;
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+        }
+
+        .btn {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+            display: block;
+            word-break: break-all;
+            color: black;
+        }
+
+        .buttonbrown {
+            width: 90px;
+            height: 52px;
+            padding: 30px 0 0 0;
+            background-color: #554843;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            word-break: break-all;
+        }
+
+        .btn a:hover {
+            text-decoration: underline;
+            text-underline-color: white;
+        }
+
+        .div_comment_list {
+            display: block;
+            word-break: break-all;
+            color: black;
+        }
+
+        .comtList {
+            display: block;
+            word-break: break-all;
+        }
+
+        .comt {
+            position: relative;
+            min-height: 50px;
+            padding: 20px 0;
+            padding-left: 78px;
+            border-top: 1px solid #fefefe;
+            border-bottom: 1px solid #e6e6e6;
+            display: block;
+            word-break: break-all;
+            color: black;
+        }
+
+        .img {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            word-break: break-all;
+            color: black;
+        }
+
+        .who {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            word-break: break-all;
+            color: black;
+        }
+        .nickname {
+            font-size: 14px;
+            color: #f46c3b;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .message {
+            font-size: 13px;
+            color: #686868;
+            line-height: 16px;
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            word-break: break-all;
+        }
+
+        .time {
+            font-size: 11px;
+            font-weight: normal;
+            color: #a6a6a6;
+            line-height: 16px;
+            word-break: break-all;
+        }
+
+
     </style>
 </head>
 <body>
-    <div class="center clear">
-        <div class="body_left">
-            <div class="title">
-                <h1 class="h1">자유게시판</h1>
-                <span class="sentence">핫띵크 : 핫한 당신의 생각</span>
-            </div>
-            <div class="boardView">
-                <div class="bSubject">
-                    <i class="freeBoardImage"></i>
-                    <b class="ellipsis">[자유글] 게시글 제목</b>
-                </div>
-
-                <div calss="userInfoBox">
-                    <span class="profileImg">
-                        <img src="../static/icons/userprofile.png" alt="내사진" width="24" height="24">
-                    </span>
-                    <a>oilkwon</a>
-                    <a class="btn_follow">
-                        <i class="followimg"></i>
-                        <b>팔로우</b>
-                        <span>팔로우 신청 시, 해당 사용자가 작성하는 모든 게시글을 확인할 수 있습니다</span>
-                    </a>
-                    <div>
-                        <span>
-                            <b>작성일</b>
-                        </span>
-                        <span>
-                            <b>조회</b>
-                        </span>
-                        <span>
-                            <b>댓글</b>
-                        </span>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <P>
-                            자유게시글 내용이 추가됩니다용
-                            정기혁 오일권 김영곤 정형일
-                        </P>
-                        <P>
-                            불라ㄴㅇ늴부룹라바
-                        </P>
-                    </div>
-                </div>
+<div class="center clear">
+    <div class="body_left">
+        <div class="title">
+            <h1 class="h1">자유게시판</h1>
+            <span class="sentence">핫띵크 : 핫한 당신의 생각</span>
+        </div>
+        <div class="boardView">
+            <div class="bSubject">
+                <i class="freeBoardImage"></i>
+                <b class="ellipsis">[자유글] 게시글 제목</b>
             </div>
 
-            <div>
-                <a>글쓰기</a>
-                <a>목록</a>
-            </div>
-            <ul>
-                <li>
+            <div class="userInfoBox">
+                <i class="profileImg"></i>
+                <a class="username">oilkwon</a>
+                <a class="btn_follow">
+                    <i class="followimg"></i>
+                    <b>팔로우</b>
+                </a>
+                <div class="InfoRight">
+                        <span>
+                            <b>작성일 : 2020-04-16</b>
+                        </span>
                     <span>
+                            <b>조회 : 100</b>
+                        </span>
+                    <span>
+                            <b>댓글 : 2</b>
+                        </span>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <P>
+                        ㅅㅂ플젝 개어렵다. html css jsp mybatis 뭔소린지모르겠다
+                    </P>
+                    <P>
+                        인므ㅏㄴ우한무하ㅜㅁㄴ히ㅏㅁ늬ㅏㅎㅁ늬'ㅎ늠히ㅡㅏㄴㅁ'ㄹㄴ뭉ㄻㄴㅇ
+                        ㅁㅁ나ㅜㄹ인마ㅜ히ㅏㄴㅇ무히ㅏ;ㄴ우히;ㅁㄴ이게 내용물
+                    </P>
+                </div>
+            </div>
+        </div>
+
+        <div class="boardButton">
+            <a class="button-write">글쓰기</a>
+            <a class="button-list">목록</a>
+        </div>
+        <ul class="listMove">
+            <li>
+                    <span class="up">
                         윗글
                     </span>
-                    <a>윗글 게시글의 제목이들어감</a>
-                </li>
-                <li>
-                    <span>
+                <a>윗글 게시글의 제목이들어감</a>
+            </li>
+            <li>
+                    <span class="down">
                         아랫글
                     </span>
-                    <a>아랫글 게시글의 제목이 들어감</a>
-                </li>
-            </ul>
-            <div>
-                <div>
+                <a>아랫글 게시글의 제목이 들어감</a>
+            </li>
+        </ul>
+        <div class="comment">
+            <div class="text">
                     <span>
                         전체댓글
-                        <span>몇개</span>
+                        <sapn class="gap">|</sapn>
+                        <span class="cmt_cnt">2</span>
+                        건
                     </span>
+            </div>
+            <div class="commentArea" id="commnetArea">
+                <div style="width: 100%; height: 60px;">
+                    <div class=selectBar style="display: block; height: 0px">
+                        <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="width: 100%; height: 60px; padding: 10px 0px; display: block">
+                            #document
+                            <html>
+                            <head>
+                                <style type="text/css">
+                                    body { margin: 0; padding: 0; background-color: transparent; font: normal 12px 'Noto Sans KR', sans-serif; color: #606060; word-break: break-all;} * { margin: 0; padding: 0; }
+                                </style>
+                            </head>
+                            <body style="color: rgb(104, 104, 104);">
+                            </body>
+                            </html>
+                        </iframe>
+                        <textarea class="editWindow" name="textWindow" id="textWindow" rows="3" col="40" style="display: none"></textarea>
+                    </div>
                 </div>
-                <div>
-                    <div>
-                        <a>
-                            <img src="image/mainImage1.jpg">//프로필이미지들어감
-                        </a>
-                    </div>
-                    <div>
-                        <div>
-                            <iframe>
-                                #document
-                            </iframe>
-                        </div>
-                    </div>
-                    <div>
-                        <a>등록</a>
-                    </div>
+                <div class="btn">
+                    <a id="btnCommentCreate" class="buttonbrown">등록</a>
                 </div>
-                <div>
-                    <div>
-                        <span>
-                            <img src="image/mainImage1.jpg">//유저프로필사진
+            </div>
+            <div class="div_comment_list">
+                <div class="comtList">
+                    <div class="comt">
+                        <span class="img">
+                            <img src="../static/icons/userprofile60x60.png">
                         </span>
-                        <div>
-                           <a>
-                               <b>유저아이디</b>
-                           </a>
-                        </div>
-                        <P>
-                            "댓글 내용이 들어감"
-                            <span> pm 04:29 </span>
-                        </P>
-                    </div>
-                    <div>
-                        <span>
-                            <img src="image/mainImage2.jpg">//유저프로필사진
-                        </span>
-                        <div>
-                            <a>
-                                <b>유저아이디2</b>
+                        <div class="who">
+                            <a class="nickname">
+                                <b>유저아이디</b>
                             </a>
                         </div>
-                        <P>
+                        <P class="message">
+                            "댓글 내용이 들어감1"
+                            <span class="gap">|</span>
+                            <span class="time">pm 04:29 </span>
+                        </P>
+                    </div>
+                    <div class="comt">
+                        <span class="img">
+                            <img src="../static/icons/userprofile60x60.png">
+                        </span>
+                        <div class="who">
+                            <a class="nickname">
+                                <b>유저아이디</b>
+                            </a>
+                        </div>
+                        <P class="message">
                             "댓글 내용이 들어감2"
-                            <span> pm 04:54 </span>
+                            <span class="gap">|</span>
+                            <span class="time">pm 04:29 </span>
                         </P>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
