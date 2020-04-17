@@ -3,8 +3,38 @@
 <head>
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="style/user.css">
-
 </head>
+<style>
+    .myButton {
+        box-shadow:inset -4px 2px 0px 0px #ffffff;
+        background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color:#ffffff;
+        border-radius:35px;
+        border:1px solid #dcdcdc;
+        display:inline-block;
+        cursor:pointer;
+        color:#666666;
+        font-size:13px;
+        font-weight:bold;
+        padding:11px 13px;
+        text-decoration:none;
+        text-shadow:0px 0px 0px #ffffff;
+    }
+    .myButton:hover {
+        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color:#f6f6f6;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+        .em{
+            font-size: 0.8rem;
+            border-radius: 3rem;
+            padding: 0.8rem 2rem;
+        }
+
+</style>
 <body>
 {{> include/navBar}}
 
@@ -16,7 +46,10 @@
 
         <form class="user" id="user" name="user" method="post" action="/create">
             <div class="form-group">
-                <input class="form-control form-control-user" id="user_id" name="user_id" placeholder="이메일 형식의 ID를 입력하세요.">
+
+                <input class="em" id="user_id" name="user_id" placeholder="이메일 형식의 ID를 입력하세요.">
+                <input type="button" class="myButton" id="checkid" value="중복체크">
+
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
