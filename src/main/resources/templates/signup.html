@@ -6,33 +6,36 @@
 </head>
 <style>
     .myButton {
-        box-shadow:inset -4px 2px 0px 0px #ffffff;
-        background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-        background-color:#ffffff;
-        border-radius:35px;
-        border:1px solid #dcdcdc;
-        display:inline-block;
-        cursor:pointer;
-        color:#666666;
-        font-size:13px;
-        font-weight:bold;
-        padding:11px 13px;
-        text-decoration:none;
-        text-shadow:0px 0px 0px #ffffff;
+        box-shadow: inset -4px 2px 0px 0px #ffffff;
+        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color: #ffffff;
+        border-radius: 35px;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        cursor: pointer;
+        color: #666666;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 11px 13px;
+        text-decoration: none;
+        text-shadow: 0px 0px 0px #ffffff;
     }
+
     .myButton:hover {
-        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-        background-color:#f6f6f6;
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
     }
+
     .myButton:active {
-        position:relative;
-        top:1px;
+        position: relative;
+        top: 1px;
     }
-        .em{
-            font-size: 0.8rem;
-            border-radius: 3rem;
-            padding: 0.8rem 2rem;
-        }
+
+    .em {
+        font-size: 0.8rem;
+        border-radius: 3rem;
+        padding: 0.8rem 2rem;
+    }
 
 </style>
 <body>
@@ -47,25 +50,25 @@
         <form class="user" id="user" name="user" method="post" action="/create">
             <div class="form-group">
 
-                <input class="em" id="user_id" name="user_id" placeholder="이메일 형식의 ID를 입력하세요.">
-                <input type="button" class="myButton" id="checkid" value="중복체크">
 
+                <input type="email" class="em" id="userId" name="userId" placeholder="이메일을 입력하세요"/>
+<!--                <input type="button" class="myButton" id="checkBtn" value="중복체크">-->
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="user_pw" name="user_pw" placeholder="비밀번호">
+                       id="userPw" name="userPw" placeholder="비밀번호">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                      id="user_pwCk" name="user_pwCk" placeholder="비밀번호 확인">
+                       id="userPwCk" name="userPwCk" placeholder="비밀번호 확인">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                       id="user_name" name="user_name" placeholder="이름">
+                       id="userName" name="userName" placeholder="이름">
             </div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                        id="user_nick" name="user_nick" placeholder="닉네임">
+                       id="userNick" name="userNick" placeholder="닉네임">
             </div>
 
             <div class="form-group">
@@ -79,11 +82,7 @@
             </div>
             <hr>
             <button type="submit" class="btn btn-primary btn-user btn-block">회원가입</button>
-            <div class="text-center small mt-2"
-            style="color: red">
-                에러 표시될 곳
-            </div>
-
+            <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
             <hr>
             <a href="index.html" class="btn btn-google btn-user btn-block">
                 <i class="fab fa-google fa-fw"></i> 구글 아이디로 회원가입하기
@@ -98,5 +97,26 @@
 </div>
 
 {{> include/footer}}
+<!--<script src="https://code.jquery.com/jquery-3.0.0.min.js">-->
+
+<!--    $('.myButton').click(function () {-->
+<!--        console.log("클릭");-->
+<!--        $.ajax({-->
+<!--            type: 'post',-->
+<!--            url: '/idCheck',-->
+<!--            data: {"id": $("#userId").val()},-->
+<!--            success: function (data) {-->
+<!--                if ($.trim(data) === 0) {-->
+<!--                    $('#checkMsg').html('<p style="color:blue">사용가능</p>');-->
+<!--                } else {-->
+<!--                    $('#checkMsg').html('<p style="color:red">사용불가능</p>');-->
+<!--                }-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+
+
+<!--</script>-->
 </body>
+
 </html>
