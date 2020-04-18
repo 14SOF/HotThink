@@ -25,7 +25,7 @@ public class UserController {
     @PostMapping("create")
     public String create(User user, Model model) {
         userRegService.create(user);
-        model.addAttribute("users", userRepository.findById(user.userIdx).get());
+        model.addAttribute("users", userRepository.findById(user.user_idx).get());
         return "signup_success";
     }
 
