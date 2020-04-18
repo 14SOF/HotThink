@@ -17,18 +17,17 @@ public class UserRegService {
         return userRepository.save(user);
     }
 
-//    public int idCheck(String userId){
-//        System.out.println(userRepository.findByUserId(userId));
-//        if(userRepository.findByUserId(userId) == null){
-//            return 0;
-//        }else if(userId.equals("")){
-//            return 1;
-//        }
-//        else {
-//            return 1;
-//        }
-//
-//    }
+    public String idCheck(String userId){
+        System.out.println(userRepository.findUserByUserId(userId));
+
+        if(userRepository.findUserByUserId(userId) == null){
+            return "YES";
+        }else {
+            return "NO";
+        }
+
+
+    }
 
 
 }

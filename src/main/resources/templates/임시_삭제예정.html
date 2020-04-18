@@ -1,0 +1,18 @@
+    $('.myButton').click(function () {
+        console.log("클릭");
+        $.ajax({
+            type: 'post',
+            url: '/idCheck',
+            data: {"id": $("#userId").val()},
+            success: function (data) {
+                if ($.trim(data) === 0) {
+                    $('#checkMsg').html('<p style="color:blue">사용가능</p>');
+                } else {
+                    $('#checkMsg').html('<p style="color:red">사용불가능</p>');
+                }
+            }
+        });
+    });
+
+
+</script>
