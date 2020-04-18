@@ -39,10 +39,6 @@ public class TempController {
         return "freethink_read";
     }
 
-    @GetMapping("freethinklist")
-    public String freeThinkList(){
-        return "freethink_list";
-    }
 
     @GetMapping("freethinkwrite")
     public String freeThinkWrite(){

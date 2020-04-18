@@ -11,5 +11,4 @@ public class UserController {
         model.addAttribute("test", "김영곤");
         return "mypage";
     }
-
 }

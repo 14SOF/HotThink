@@ -7,8 +7,14 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import skhu.sof14.hotthink.model.entity.User;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
@@ -22,8 +28,11 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String userPassword = authentication.getCredentials().toString();
         User entity = userService.login(userId, userPassword);
         if (entity == null) return null;
-        System.out.println("로그인성공");
-        return new UserToken(userId, userPassword, entity);
+
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        System.out.println("성공");
+        return new UserToken(userId, userPassword, grantedAuthorities, entity);
     }
 
     @Override
@@ -38,9 +47,10 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         @Setter
         User user;
 
-        public UserToken(String userId, String userPassword, User user){
-            super(userId, userPassword);
+        public UserToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, User user) {
+            super(principal, credentials, authorities);
             this.user = user;
         }
+
     }
 }

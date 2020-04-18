@@ -37,31 +37,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signup").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/login_processing").permitAll();
 
-//                .anyRequest().authenticated();
+        http.authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/signup").permitAll()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login_processing")
+                .defaultSuccessUrl("/home", true)
+                .failureForwardUrl("/login?error")
+                .usernameParameter("userId")
+                .passwordParameter("userPassword")
+                .permitAll();
+//                .and()
+//                .authorizeRequests().anyRequest().hasRole("ROLE_USER");
+//                .and()
+//                .authorizeRequests().anyRequest().authenticated();
+
 
         http.csrf().disable();
 
-        http.formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login_processing")
-                .usernameParameter("userId")
-                .passwordParameter("userPassword")
-                .successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                                        Authentication authentication) throws IOException, ServletException {
-                        redirectStrategy.sendRedirect(request, response, "/mypage");
-                    }
-                })
-                .failureForwardUrl("/login?error");
+//                .successHandler(new AuthenticationSuccessHandler() {
+//                    @Override
+//                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+//                                                        Authentication authentication) throws IOException, ServletException {
+//                        System.out.println("성공"+" "+request.getMethod()+" "+request.getPathInfo());
+//                        redirectStrategy.sendRedirect(request, response, "/home");
+//                    }
+//                })
 
         http.authenticationProvider(authenticationProvider);
     }
