@@ -10,16 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class GuestController {
     @GetMapping({"/", "home"})
+    @PostMapping("home")
     public String index(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         System.out.println(auth);
         if (!auth.getPrincipal().equals("anonymousUser")) model.addAttribute("test", auth.getPrincipal());
         return "index";
-    }
-
-    @PostMapping("home")
-    public String home() {
-        return "mypage";
     }
 
     @GetMapping("login")
