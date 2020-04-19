@@ -1,6 +1,7 @@
 package skhu.sof14.hotthink.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -10,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.firewall.DefaultHttpFirewall;
+import org.springframework.security.web.firewall.HttpFirewall;
 import skhu.sof14.hotthink.service.MyAuthenticationProvider;
 
 import javax.servlet.ServletException;
@@ -35,13 +38,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/images/**")
                 .antMatchers("/font/**");
 
+        web.httpFirewall(defaultHttpFirewall());
     }
 
+    @Bean
+    public HttpFirewall defaultHttpFirewall() {
+        return new DefaultHttpFirewall();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
+        http.csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 .antMatchers("/signup").permitAll()
                 .and()
@@ -52,14 +61,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .failureForwardUrl("/login?error")
                 .usernameParameter("userId")
                 .passwordParameter("userPassword")
-                .permitAll();
+                .permitAll()
+                .and().authorizeRequests().anyRequest().authenticated();
 //                .and()
 //                .authorizeRequests().anyRequest().hasRole("ROLE_USER");
 //                .and()
 //                .authorizeRequests().anyRequest().authenticated();
 
 
-        http.csrf().disable();
 
 //                .successHandler(new AuthenticationSuccessHandler() {
 //                    @Override
