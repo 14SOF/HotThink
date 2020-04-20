@@ -3,7 +3,6 @@ package skhu.sof14.hotthink.service;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,5 +49,10 @@ public class AuthProvider implements AuthenticationProvider {
             this.user = user;
         }
 
+        @Override
+        public Object getDetails() {
+            return user;
+        }
     }
+
 }

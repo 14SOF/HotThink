@@ -7,29 +7,37 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
+import skhu.sof14.hotthink.model.dto.UserDetail;
 import skhu.sof14.hotthink.service.AuthProvider;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+
+    public static String getUserNickFromAuth() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
+            return ((UserDetail) auth.getDetails()).getNick();
+        }
+        return "anonymousUser";
+    }
+
 
     @Autowired
     AuthProvider authenticationProvider;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        String[] strings = new String[]{
+                "/style/**", "/icons/**", "/image/**", "/images/**", "/js/**", "/font/**"
+        };
         web.ignoring()
 //                .antMatchers("/resources/**")
-                .antMatchers("/style/**")
-                .antMatchers("/icons/**")
-                .antMatchers("/image/**")
-                .antMatchers("/images/**")
-                .antMatchers("/font/**");
+                .antMatchers(strings);
 
         web.httpFirewall(defaultHttpFirewall());
     }
@@ -55,6 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("userId")
                 .passwordParameter("userPassword")
                 .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout_processing")
+                .logoutSuccessUrl("/home")
+                .invalidateHttpSession(true)
                 .and().authorizeRequests().anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider);

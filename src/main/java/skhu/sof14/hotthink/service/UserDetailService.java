@@ -27,4 +27,5 @@ public class UserDetailService implements UserDetailsService {
         if(entity == null) throw new UsernameNotFoundException("해당 아이디를 가진 유저를 찾을 수 없습니다");
         return modelMapper.map(entity, UserDetail.class);
     }
+
 }
