@@ -1,18 +1,22 @@
-    $('.myButton').click(function () {
-        console.log("클릭");
-        $.ajax({
-            type: 'post',
-            url: '/idCheck',
-            data: {"id": $("#userId").val()},
-            success: function (data) {
-                if ($.trim(data) === 0) {
-                    $('#checkMsg').html('<p style="color:blue">사용가능</p>');
-                } else {
-                    $('#checkMsg').html('<p style="color:red">사용불가능</p>');
-                }
+<script type="text/javascript">
+    $(function () {
+    $("#alert-success").hide();
+    $("#alert-danger").hide();
+    $("input").keyup(function () {
+        var pwd1 = $("#pwd1").val();
+        var pwd2 = $("#pwd2").val();
+        if (pwd1 != "" || pwd2 != "") {
+            if (pwd1 == pwd2) {
+                $("#alert-success").show();
+                $("#alert-danger").hide();
+                $("#submit").removeAttr("disabled");
+            } else {
+                $("#alert-success").hide();
+                $("#alert-danger").show();
+                $("#submit").attr("disabled", "disabled");
             }
-        });
+        }
     });
-
-
+});
 </script>
+

@@ -17,15 +17,14 @@ public class UserRegService {
         return userRepository.save(user);
     }
 
-    public String idCheck(String userId){
+    public String idCheck(String userId) {
         System.out.println(userRepository.findUserByUserId(userId));
 
-        if(userRepository.findUserByUserId(userId) == null){
+        if (userRepository.findUserByUserId(userId) == null) {
             return "YES";
-        }else {
+        } else {
             return "NO";
         }
-
 
     }
 
