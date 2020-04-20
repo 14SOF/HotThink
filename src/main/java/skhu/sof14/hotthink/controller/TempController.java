@@ -8,111 +8,115 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TempController {
 
     @GetMapping("login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @GetMapping("signup")
-    public String signUp(){
+    public String signUp() {
         return "signup";
     }
 
     @GetMapping("404")
-    public String pageNotFound(){
+    public String pageNotFound() {
         return "404";
     }
+
     @GetMapping("mypage")
-    public String myPage(Model model){
+    public String myPage(Model model) {
         model.addAttribute("test", "김영곤");
         return "mypage";
     }
 
     @GetMapping("message")
-    public String message(){
+    public String message() {
         return "mypage_message";
     }
 
     @GetMapping("alarm")
-    public String alarm(){
+    public String alarm() {
         return "mypage_alarm";
     }
 
     @GetMapping("follow")
-    public String follow(){
+    public String follow() {
         return "mypage_follow";
     }
 
     @GetMapping("myboards")
-    public String myBoards(){
+    public String myBoards() {
         return "mypage_myboards";
     }
 
     @GetMapping("freethink")
-    public String freeThink(){
+    public String freeThink() {
         return "freethink_read";
     }
 
     @GetMapping("freethinklist")
-    public String freeThinkList(){
+    public String freeThinkList() {
         return "freethink_list";
     }
 
     @GetMapping("freethinkwrite")
-    public String freeThinkWrite(){
+    public String freeThinkWrite() {
         return "freethink_write";
     }
 
     @GetMapping("realthinklist")
-    public String realThinkList(){
+    public String realThinkList() {
         return "realthink_list";
     }
 
     @GetMapping("realthinkwrite")
-    public String realThinkWrite(){
+    public String realThinkWrite() {
         return "realthink_write";
     }
 
     @GetMapping("hotthink")
-    public String hotThink(){
+    public String hotThink() {
         return "hotthink_list";
     }
 
     @GetMapping("realthink")
-    public String realThink(){
+    public String realThink() {
         return "realthink_read";
     }
 
     @GetMapping("qna")
-    public String qna(){
+    public String qna() {
         return "qna_list";
     }
 
     @GetMapping("form")
-    public String form(){
+    public String form() {
         return "qna_form";
     }
 
     @GetMapping("free")
-    public  String free(){
+    public String free() {
         return "freeThink";
     }
+
     @GetMapping("footer1")
-    public String footer1(){
+    public String footer1() {
         return "footer_policy";
     }
+
     @GetMapping("faq")
-    public String faq(){
+    public String faq() {
         return "footer_faq";
     }
+
     @GetMapping("operation")
-    public String op(){
+    public String op() {
         return "footer_operation";
     }
 
 
-//    qna 글 내용 test  실제구현은 id값으로
+    //    qna 글 내용 test  실제구현은 id값으로
     @GetMapping("list/1")
-    public String qnaPage(){
+    public String qnaPage() {
         return "qna_contents";
     }
 
@@ -125,13 +129,14 @@ public class TempController {
     public String producer() {
         return "footer_producer";
     }
+
     @GetMapping("realThinkDetails")
-    public String realThinkDetails(){
+    public String realThinkDetails() {
         return "realThinkDetails";
     }
 
     @GetMapping("thinkMake")
-    public String thinkMake(){
+    public String thinkMake() {
         return "thinkMake";
     }
 

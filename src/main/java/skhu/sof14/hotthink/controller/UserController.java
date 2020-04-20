@@ -4,33 +4,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import skhu.sof14.hotthink.model.User;
-import skhu.sof14.hotthink.repository.UserRepository;
+import skhu.sof14.hotthink.model.dto.UserCreateDTO;
 import skhu.sof14.hotthink.service.UserRegService;
+import skhu.sof14.hotthink.service.UserService;
 
-import java.sql.SQLOutput;
 
-
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
     private UserRegService userRegService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping("create")
-    public String create(User user, Model model) {
+    public String create(UserCreateDTO user, Model model) {
         userRegService.create(user);
-        model.addAttribute("users", userRepository.findById(user.getId()).get());
-        return "signup_success";
+        model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
+        return "signup_suc";
     }
 
-    @GetMapping("idCheck")
-    public String id_check(String id) {
-        System.out.println(id);
-        String str = userRegService.idCheck(id);
-        return str;
-    }
 
 }

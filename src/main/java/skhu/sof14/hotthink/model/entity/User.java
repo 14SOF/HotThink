@@ -1,6 +1,7 @@
-package skhu.sof14.hotthink.model;
+package skhu.sof14.hotthink.model.entity;
 
 import lombok.Data;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ public class User {
     @Column(name = "user_idx")
     int id;
 
+    @Setter
     @Column(name = "user_id")
     String userId;
 
