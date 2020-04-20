@@ -21,25 +21,39 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">어서오세요!</h1>
                                 </div>
-                                <form class="user" method="post" action="login_processing">
+                                <form id="login-form" class="user" method="post" action="login_processing">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                                name="userId"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
-                                               placeholder="이메일"/>
+                                               id="userId" aria-describedby="emailHelp"
+                                               placeholder="이메일"
+                                               {{#userId}}
+                                               value="{{userId}}"
+                                               {{/userId}}
+                                        />
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
                                                name="userPassword"
-                                               id="exampleInputPassword" placeholder="비밀번호"/>
+                                               id="userPassword" placeholder="비밀번호"/>
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">
                                             <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">내 계정 기억하기</label>
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <label class="custom-control-label" for="customCheck">내 계정
+                                                        기억하기</label>
+                                                </div>
+                                                {{#userId}}
+                                                <div class="col small pt-1" style="color: red; padding-left: 0px">입력된
+                                                    아이디와 비밀번호를 가진 계정이 없습니다
+                                                </div>
+                                                {{/userId}}
+                                            </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                    <button id="loginButton" type="submit" class="btn btn-primary btn-user btn-block">
                                         로그인
                                     </button>
                                     <hr>
@@ -62,13 +76,20 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
-{{> include/footer}}
+<!--<script>-->
+<!--    $(function () {-->
+<!--        $('#login-form').submit(function (event) {-->
+<!--            event.preventDefault();-->
 
+<!--            console.log( $('#userId').val())-->
+<!--        })-->
+<!--    })-->
+<!--</script>-->
 </body>
+<footer>
+    {{> include/footer}}
+</footer>
 </html>

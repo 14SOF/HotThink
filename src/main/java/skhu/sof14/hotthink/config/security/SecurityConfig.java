@@ -1,4 +1,4 @@
-package skhu.sof14.hotthink.config;
+package skhu.sof14.hotthink.config.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,6 +30,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthProvider authenticationProvider;
 
+    @Autowired
+    AuthFailHandler failHandler;
+
     @Override
     public void configure(WebSecurity web) throws Exception {
         String[] strings = new String[]{
@@ -59,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll()
                 .loginProcessingUrl("/login_processing").permitAll()
                 .defaultSuccessUrl("/home", true)
-                .failureForwardUrl("/login?error")
+                .failureHandler(failHandler)
+//                .failureForwardUrl("/login?error")
                 .usernameParameter("userId")
                 .passwordParameter("userPassword")
                 .permitAll()
