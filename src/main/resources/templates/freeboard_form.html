@@ -3,8 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+        }
+        .center clear {
+            position: relative;
+            width: 1200px;
+            padding: 0 40px;
+            margin: 0 auto;
+            display: block;
+            word-break: break-all;
+            font-family: "Noto Sans KR", sans-serif;
+            color: black;
+        }
+
+        .body_left {
+            position: relative;
+            display: block;
+            word-break: break-all;
+            font-family: "Noto Sans KR", sans-serif;
+            color: black;
+        }
+
+        .title {
+            position: relative;
+            height: 39px;
+            margin: 0 0 50px 0;
+            font-size: 16px;
+            color: #777777;
+            padding: 0;
+            display: block;
+            word-break: break-all;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        .h1 {
+            position: relative;
+            display: inline-block;
+            margin: 0 14px 0 -4px;
+            font-size: 42px;
+            font-weight: normal;
+            color: black;
+            line-height: 28px;
+            letter-spacing: -5px;
+            padding: 0px;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            word-break: break-all;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        .sentence {
+            vertical-align: -4px;
+            font-size: 16px;
+            color: #777777;
+            word-break: break-all;
+            font-family: "Noto Sans KR", sans-serif;
+        }
+
+        .boardWrite {
+            display: block;
+            color: black;
+        }
+
+        .wTop {
+            height: 31px;
+            padding: 45px 0 0 0;
+            font-size: 13px;
+            color: #666666;
+            border-top: 2px solid black;
+        }
+
+        .wTitle {
+            position: relative;
+            border-top: 2px solid black;
+            margin-bottom: 20px;
+            background-color: #ccc;
+        }
+
+        .rowBox valign {
+            position: relative;
+            height: 60px;
+            padding: 0 20px;
+            font-size: 13px;
+            color: #3a3a40;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #e3e4e5;
+        }
+
+        #Contents_m_txtTitle {
+            width: 720px;
+            height: 28px;
+            padding: 0 0 0 10px;
+            color: #666666;
+            border: 1px solid #dddddd;
+            vertical-align: middle;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0px;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            cursor: text;
+            margin: 0em;
+            font: 400 13.3333px Arial;
+        }
+
+        .boardButtons {
+            position: relative;
+            height: 40px;
+            text-align: right;
+        }
+
+        .btn-cancel {
+            margin: 0 0 0 -3px;
+            background-color: #cac6c5;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+
+        }
+
+        .btn-cancel a:hover {
+            text-decoration: underline;
+            text-underline-color: #FFFFFF;
+        }
+
+        .btn-apply {
+            margin: 0 0 0 -3px;
+            background-color: #554843;
+            position: relative;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn-apply a:hover {
+            text-decoration: underline;
+            text-underline-color: #FFFFFF;
+        }
+    </style>
 </head>
 <body>
+<div class="center clear">
+    <div id="body_left">
+        <!-- Title -->
+        <div class="title">
+            <h1 class="h1">자유게시판</h1>
+            <span class="sentence">핫띵크 : 핫한 당신의 생각</span>
+        </div>
+        <!-- //Title -->
+        <!-- Board write -->
+        <div class="boardWrite">
+            <!-- Warning -->
+            <div class="wTop">
+                <p>※ 욕설, 도배, 비방, 루머 등 게시판 운영정책에 어긋나는 게시물 등록시 삭제 및 글쓰기 제한 등 불이익을 받으실 수 있습니다.</p>
+            </div>
+            <!-- Warning -->
 
+            <!-- Type select & Subject -->
+            <div class="wTitle">
+                <div class="rowBox valign">
+                    <span><b>제목</b></span>
+                    <input name="ctl00$Contents$m_txtTitle" type="text" id="Contents_m_txtTitle" title="글쓰기" n4maxlength="50" placeholder="제목을 입력해 주세요">
+                </div>
+            </div>
+            <!-- //Type select & Subject -->
+            <!-- Editor tool -->
+            <div class="writeTool">
+                <div class="edSec">
+                    <div class="edSelectStyleBar bwList" id="selectBar" style="display: block;">
+                        <div class="edWSec">
+                            <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="display: block;"></iframe>
+                            <textarea class="editWindow" name="textWindow" id="textWindow" rows="9" cols="40" title="글쓰기" style="display: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- //Editor tool -->
+
+                <!-- Buttons -->
+                <div class="boardButtons">
+                    <a href="#" onclick="history.back(-1);return false;" class="btn-cancel">취소</a>
+                    <a id="Contents_btnWrite" class="btn-apply" href="javascript:__doPostBack('ctl00$Contents$btnWrite','')">등록</a>
+                </div>
+                <!-- //Buttons -->
+            </div>
+            <!-- //Board write -->
+        </div>
+
+    </div>
+</div>
 </body>
 </html>
