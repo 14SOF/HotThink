@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 @ToString
-public class UserDetail  extends UserBase implements UserDetails{
+public class UserLoginDto extends UserBase implements UserDetails{
     @Setter
     private String userId;
     @Setter

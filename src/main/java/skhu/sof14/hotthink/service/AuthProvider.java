@@ -10,7 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import skhu.sof14.hotthink.model.dto.UserDetail;
+import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 
 import java.util.Collection;
@@ -26,7 +26,7 @@ public class AuthProvider implements AuthenticationProvider {
         String userId = authentication.getName();
         String userPassword = authentication.getCredentials().toString();
 
-        UserDetail user = (UserDetail) userDetailsService.loadUserByUsername(userId);
+        UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
 
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
         return new UserToken(userId, userPassword, null, user);
@@ -42,9 +42,9 @@ public class AuthProvider implements AuthenticationProvider {
 
         @Getter
         @Setter
-        UserDetail user;
+        UserLoginDto user;
 
-        public UserToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, UserDetail user) {
+        public UserToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, UserLoginDto user) {
             super(principal, credentials, user.getAuthorities());
             this.user = user;
         }

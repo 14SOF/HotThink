@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import skhu.sof14.hotthink.model.dto.UserDetail;
+import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.UserRepository;
 
@@ -25,7 +25,7 @@ public class UserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User entity = userRepository.findUserByUserId(username);
         if(entity == null) throw new UsernameNotFoundException("해당 아이디를 가진 유저를 찾을 수 없습니다");
-        return modelMapper.map(entity, UserDetail.class);
+        return modelMapper.map(entity, UserLoginDto.class);
     }
 
 }

@@ -11,20 +11,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import skhu.sof14.hotthink.model.dto.UserDetail;
+import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.service.AuthProvider;
 
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    public static String getUserNickFromAuth() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
-            return ((UserDetail) auth.getDetails()).getNick();
-        }
-        return "anonymousUser";
-    }
 
 
     @Autowired
