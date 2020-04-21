@@ -29,6 +29,7 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mustache', version: '2.2.5.RELEASE'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     compileOnly 'org.projectlombok:lombok'
+    compile('javax.xml.bind:jaxb-api:2.3.0')
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'

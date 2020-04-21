@@ -75,32 +75,32 @@
             <div class="form-group">
 
 
-                <input type="email" class="em" id="userId" name="userId" placeholder="이메일 형식의 ID를    입력하세요"/>
+                <input type="email" class="em" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" required/>
                 <input type="button" class="myButton" id="temp" value="중복체크">
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="userPassword" name="userPassword" placeholder="비밀번호">
+                       id="userPassword" name="userPassword" placeholder="비밀번호" required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="user_PwCk" name="user_PwCk" placeholder="비밀번호 확인">
+                       id="user_PwCk" name="user_PwCk" placeholder="비밀번호 확인" required>
             </div>
             <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                       id="name" name="name" placeholder="이름">
+                       id="name" name="name" placeholder="이름" required>
             </div>
             <div class="form-group">
                 <input type="text" class="em"
-                       id="nick" name="nick" placeholder="닉네임">
+                       id="nick" name="nick" placeholder="닉네임" required>
                 <input type="button" class="myButton2" id="nickCk" value="중복체크">
 
             </div>
 
             <div class="form-group">
                 <div class="custom-control custom-checkbox small">
-                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <input type="checkbox" class="custom-control-input" id="customCheck" required>
                     <label class="custom-control-label" for="customCheck">
                         <a href="/">이용약관</a> 및
                         <a href="/">개인정보 취급방침</a> 에 동의합니다
@@ -135,11 +135,6 @@
         $("input").keyup(function () {
             var pwd1 = $("#userPassword").val();
             var pwd2 = $("#user_PwCk").val();
-
-            if(pw1 =="" || pw2 == ""){
-                $("#regi").attr("disabled", "disabled");
-
-            }
 
             if (pwd1 != "" || pwd2 != "") {
                 if (pwd1 == pwd2) {
