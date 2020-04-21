@@ -4,72 +4,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .center clear {
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            width: 100%;
+            height: 100%;
+            display: block;
+            word-break: break-all;
+            color: black;
             position: relative;
-            width: 1200px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .center {
             padding: 0 40px;
             margin: 0 auto;
-            display: block;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
-            color: black;
-        }
-
-        .body_left {
-            position: relative;
-            display: block;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
-            color: black;
         }
 
         .title {
             position: relative;
-            height: 39px;
-            margin: 0 0 50px 0;
+            height: 30px;
+            margin: 50px 0 50px 0;
             font-size: 16px;
-            color: #777777;
-            padding: 0;
-            display: block;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
         }
 
         .h1 {
-            position: relative;
             display: inline-block;
-            margin: 0 14px 0 -4px;
             font-size: 42px;
             font-weight: normal;
-            color: black;
             line-height: 28px;
             letter-spacing: -5px;
-            padding: 0px;
             margin-block-start: 0.67em;
             margin-block-end: 0.67em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
         }
 
         .sentence {
             vertical-align: -4px;
-            font-size: 16px;
             color: #777777;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
+            padding-left: 30px;
+            font-size: 15px;
         }
 
         .boardView {
-            osition: relative;
             border-top: 2px solid #141313;
-            margin: 0;
-            padding: 0;
-            display: block;
-            word-break: break-all;
-            color: black;
-            font-family: "Noto Sans KR", sans-serif;
         }
 
         .bSubject {
@@ -79,10 +59,6 @@
             color: black;
             border-bottom: 1px solid #e7e8e9;
             background-color: #f0f0f0;
-            margin: 0;
-            display: block;
-            word-break: break-all;
-            font-family: "Noto Sans KR", sans-serif;
         }
 
         .freeBoardImage {
@@ -90,10 +66,7 @@
             height: 24px;
             display: inline-block;
             background-image: url("../static/icons/freeBoardIcon.png");
-            font-style: italic;
             font-size: 16px;
-            color: black;
-            word-break: break-all;
             vertical-align: middle;
         }
 
@@ -107,18 +80,12 @@
             vertical-align: middle;
             font-weight: bold;
             font-size: 16px;
-            color: black;
-            word-break: break-all;
-            font-family: 'Noto Sans KR', sans-serif;
         }
 
         .userInfoBox {
             height: 40px;
             font-size: 15px;
-            color: black;
             border-bottom: 1px solid #e7e8e9;
-            display: block;
-            word-break: break-all;
             content: "";
             display: inline-block;
             vertical-align: middle;
@@ -128,10 +95,7 @@
             width: 24px;
             height: 24px;
             display: inline-block;
-            font-style: italic;
             font-size: 16px;
-            color: black;
-            word-break: break-all;
             vertical-align: middle;
             background-image: url("../static/icons/userprofile.png");
             margin-top: 5px;
@@ -149,10 +113,14 @@
             color: black;
             text-decoration: none;
             cursor: pointer;
-            word-break: break-all;
         }
 
-        .btn_follow {
+        .username:hover {
+            text-decoration: underline;
+            text-decoration-color: black;
+        }
+
+        .followbtn {
             vertical-align: -5px;
             display: inline-block;
             height: 18px;
@@ -161,11 +129,8 @@
             font-weight: bold;
             color: #24272c;
             text-align: center;
-            background-color: white;
             border: 1px solid #d4d1d1;
-            text-decoration: none;
             cursor: pointer;
-            word-break: break-all;
         }
 
 
@@ -173,36 +138,25 @@
             margin: 0 6px 0 0;
             width: 16px;
             height: 16px;
-            background-position: -5px -1792px;
             background: url(../static/icons/follow.png) no-repeat;
             display: inline-block;
             vertical-align: middle;
-            font-style: italic;
             font-size: 12px;
             font-weight: bold;
-            color: #24272c;
             text-align: center;
             cursor: pointer;
-            word-break: break-all;
         }
 
         .InfoRight {
             float: right;
-            margin-left: 1260px;
-            top: 22px;
-            right: 12px;
+            margin-left: 1010px;
             color: #999999;
-            display: block;
             font-size: 13px;
-            word-break: break-all;
         }
 
         .boardButton {
-            position: relative;
             height: 40px;
             text-align: right;
-            display: block;
-            word-break: break-all;
         }
 
         .boardButton a:hover {
@@ -213,7 +167,6 @@
         .button-write {
             argin: 0 0 0 -3px;
             background-color: #554843;
-            position: relative;
             display: inline-block;
             min-width: 68px;
             height: 30px;
@@ -223,13 +176,11 @@
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            word-break: break-all;
         }
 
         .button-list {
             margin: 0 0 0 -3px;
             background-color: #554843;
-            position: relative;
             display: inline-block;
             min-width: 68px;
             height: 30px;
@@ -239,21 +190,17 @@
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            word-break: break-all;
         }
 
         .listMove {
             margin-top: 50px;
             border-top: 1px solid #e7e8e9;
             list-style: none;
-            display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
             padding-inline-start: 40px;
-            word-break: break-all;
-            color: black;
         }
 
         .up {
@@ -325,19 +272,12 @@
         }
 
         .comment {
-            position: relative;
             margin-bottom: 25px;
             padding-top: 30px;
-            display: block;
-            word-break: break-all;
-            color: black;
         }
 
         .text {
-            position: relative;
             margin-bottom: 10px;
-            word-break: break-all;
-            color: black;
             font-weight: bold;
         }
 
@@ -345,15 +285,12 @@
             margin: 0 5px;
             font-size: 15px;
             font-weight: normal;
-            word-break: break-all;
-            color: black;
         }
 
         .cmt_cnt {
             font-size: 14px;
             color: #f46c3b;
             font-weight: bold;
-            word-break: break-all;
         }
 
         .commentArea {
@@ -361,58 +298,18 @@
             border: 1px solid #cfd2d4;
             height: 80px;
             padding: 0 90px 0 78px;
-            display: block;
-            word-break: break-all;
-        }
-
-        .selectBar {
-            display: block;
-            height: 0px;
-            word-break: break-all;
         }
 
         .editWindow {
             width: 100%;
             height: 60px;
             padding: 10px 0px;
-            display: block;
-            border: 0 none;
-            word-break: break-all;
-            color: black;
         }
 
-        textarea {
-            display: none;
-            position: relative;
-            width: 98%;
-            height: 60px;
-            padding: 10px 1%;
-            color: #999999;
-            background-color: white;
-            border: 0;
-            resize: none;
-            text-rendering: auto;
-            letter-spacing: normal;
-            word-spacing: normal;
-            text-transform: none;
-            text-indent: 0px;
-            text-shadow: none;
-            text-align: start;
-            flex-direction: column;
-            cursor: text;
-            white-space: pre-wrap;
-            overflow-wrap: break-word;
-            margin: 0em;
-            font: 400 13.3333px Arial;
-        }
-
-        .btn {
+        .commnetButton {
             position: absolute;
             top: -1px;
             right: -1px;
-            display: block;
-            word-break: break-all;
-            color: black;
         }
 
         .buttonbrown {
@@ -420,7 +317,6 @@
             height: 52px;
             padding: 30px 0 0 0;
             background-color: #554843;
-            position: relative;
             display: inline-block;
             min-width: 68px;
             font-size: 14px;
@@ -428,68 +324,47 @@
             text-align: center;
             text-decoration: none;
             cursor: pointer;
-            word-break: break-all;
         }
 
-        .btn a:hover {
+        .commnetButton a:hover {
             text-decoration: underline;
             text-underline-color: white;
         }
 
-        .div_comment_list {
-            display: block;
-            word-break: break-all;
-            color: black;
-        }
-
-        .comtList {
-            display: block;
-            word-break: break-all;
-        }
 
         .comt {
             position: relative;
             min-height: 50px;
-            padding: 20px 0;
-            padding-left: 78px;
+            padding: 15px 0 15px 78px;
             border-top: 1px solid #fefefe;
             border-bottom: 1px solid #e6e6e6;
-            display: block;
-            word-break: break-all;
-            color: black;
         }
 
         .img {
             position: absolute;
             top: 20px;
             left: 0;
-            word-break: break-all;
-            color: black;
         }
 
         .who {
-            margin: 0 0 8px 0;
             font-size: 14px;
-            word-break: break-all;
-            color: black;
+            margin: 10px 0 8px;
         }
+
         .nickname {
             font-size: 14px;
             color: #f46c3b;
             text-decoration: none;
-            word-break: break-all;
         }
 
         .message {
             font-size: 13px;
             color: #686868;
             line-height: 16px;
-            display: block;
             margin-block-start: 1em;
             margin-block-end: 1em;
             margin-inline-start: 0px;
             margin-inline-end: 0px;
-            word-break: break-all;
         }
 
         .time {
@@ -497,14 +372,13 @@
             font-weight: normal;
             color: #a6a6a6;
             line-height: 16px;
-            word-break: break-all;
         }
 
 
     </style>
 </head>
 <body>
-<div class="center clear">
+<div class="center">
     <div class="body_left">
         <div class="title">
             <h1 class="h1">자유게시판</h1>
@@ -519,7 +393,7 @@
             <div class="userInfoBox">
                 <i class="profileImg"></i>
                 <a class="username">oilkwon</a>
-                <a class="btn_follow">
+                <a class="followbtn">
                     <i class="followimg"></i>
                     <b>팔로우</b>
                 </a>
@@ -577,28 +451,18 @@
             </div>
             <div class="commentArea" id="commnetArea">
                 <div style="width: 100%; height: 60px;">
-                    <div class=selectBar style="display: block; height: 0px">
+                    <div>
                         <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="width: 100%; height: 60px; padding: 10px 0px; display: block">
-                            #document
-                            <html>
-                            <head>
-                                <style type="text/css">
-                                    body { margin: 0; padding: 0; background-color: transparent; font: normal 12px 'Noto Sans KR', sans-serif; color: #606060; word-break: break-all;} * { margin: 0; padding: 0; }
-                                </style>
-                            </head>
-                            <body style="color: rgb(104, 104, 104);">
-                            </body>
-                            </html>
                         </iframe>
                         <textarea class="editWindow" name="textWindow" id="textWindow" rows="3" col="40" style="display: none"></textarea>
                     </div>
                 </div>
-                <div class="btn">
+                <div class="commnetButton">
                     <a id="btnCommentCreate" class="buttonbrown">등록</a>
                 </div>
             </div>
-            <div class="div_comment_list">
-                <div class="comtList">
+            <div>
+                <div>
                     <div class="comt">
                         <span class="img">
                             <img src="../static/icons/userprofile60x60.png">
