@@ -129,12 +129,18 @@
 <script>
 
 
-
+    $("#regi").attr("disabled", "disabled");
 
     $(function () { //비밀번호 일치여부
         $("input").keyup(function () {
             var pwd1 = $("#userPassword").val();
             var pwd2 = $("#user_PwCk").val();
+
+            if(pw1 =="" || pw2 == ""){
+                $("#regi").attr("disabled", "disabled");
+
+            }
+
             if (pwd1 != "" || pwd2 != "") {
                 if (pwd1 == pwd2) {
                     $('#checkMsgPW').html('<p style="color:blue">비밀번호가 일치합니다.</p>');
@@ -169,6 +175,10 @@
                 "id": $('#userId').val()
             },
             success: function (data) {	//data : checkSignup에서 넘겨준 결과값
+                if($('#userId').val() ==''){
+                    $("#regi").attr("disabled", "disabled");
+                }
+
                 if ($.trim(data) == "YES") {
                     if ($('#userId').val() != '') {
                         $('#checkMsg').html('<p style="color:blue">사용가능한 ID 입니다!</p>');

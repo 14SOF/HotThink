@@ -18,7 +18,7 @@ public class UserRegService {
     @Autowired
     ModelMapper modelMapper;
 
-    public User create(UserCreateDTO user) {
+    public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
         System.out.println("dto"+user.toString());
         User entity = new User();
         entity.setUserId(user.getUserId());

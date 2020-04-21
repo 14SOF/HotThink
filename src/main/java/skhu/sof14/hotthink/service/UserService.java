@@ -14,6 +14,7 @@ public class UserService {
 
     @Autowired
     ModelMapper modelMapper;
+
     public UserCreateDTO findUserByUserId(String userId){
         User entity = userRepository.findUserByUserId(userId);
         if(entity == null) return null;
