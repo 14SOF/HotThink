@@ -14,9 +14,10 @@ import java.time.LocalDateTime;
     @Getter
     @MappedSuperclass
     @EntityListeners(AuditingEntityListener.class)
+
     public abstract class TimeEntity {
+        @Column(updatable = false, name="localdatetime" )
         @CreatedDate
-        @Column(updatable = false)
         private LocalDateTime post_dateTime;
     }
 

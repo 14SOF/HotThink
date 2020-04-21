@@ -1,9 +1,17 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306?serverTimezone=UTC
-    username: user1
-    password: test123
+    url: jdbc:mysql://hotthinkdatabase.cjditpwe7bq8.ap-northeast-2.rds.amazonaws.com/HotThink?serverTimezone=UTC
+    username: admin
+    password: test1234
     driver-class-name: com.mysql.jdbc.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+      format_sql: true
 
   devtools:
     livereload:
@@ -13,5 +21,27 @@ spring:
 
   mustache:
     suffix: .html
+
+
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+
+
+
+
+
+
+
+
+
 
 
