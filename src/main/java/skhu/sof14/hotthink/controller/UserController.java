@@ -9,7 +9,6 @@ import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.UserDetailDto;
 import skhu.sof14.hotthink.model.vo.UserUpdateVo;
-import skhu.sof14.hotthink.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +38,7 @@ public class UserController {
     @GetMapping("nickCheck")
     public @ResponseBody Map<String, Boolean> nick_check(String nick) {
         Map<String, Boolean> json = new HashMap<>();
-        json.put("check", userService.nickCheck(nick));
+        json.put("check", userService.nickDuplicationCheck(nick));
         return json;
     }
 
@@ -50,8 +49,6 @@ public class UserController {
         json.put("check", true);
         return json;
     }
-    private UserService userService;
-
 
     @PostMapping("create")
     public String create(UserCreateDTO user, Model model) {

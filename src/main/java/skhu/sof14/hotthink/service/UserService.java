@@ -7,6 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.UserBase;
+import skhu.sof14.hotthink.model.dto.UserCreateDTO;
 import skhu.sof14.hotthink.model.dto.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.model.entity.User;
@@ -59,20 +60,17 @@ public class UserService {
         return entity.getNick();
     }
 
-    public boolean nickCheck(String nick) {
+    public boolean nickDuplicationCheck(String nick) {
         User entity = userRepository.findUserByNick(nick);
         return entity == null;
     }
-    ModelMapper modelMapper;
 
     public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
-        System.out.println("dto" + user.toString());
         User entity = new User();
         entity.setUserId(user.getUserId());
         entity.setName(user.getName());
         entity.setNick(user.getNick());
         entity.setUserPassword(user.getUserPassword());
-        System.out.println("엔티티" + entity);
         return userRepository.save(entity);
     }
 
@@ -86,19 +84,12 @@ public class UserService {
         }
     }
 
-    public String nickCheck(String nick) {
-        if (userRepository.findUserByNick(nick) == null) {
-            return "YES";
-        } else {
-            return "NO";
-        }
-    }
-
 
     public UserCreateDTO findUserByUserId(String userId) {
         User entity = userRepository.findUserByUserId(userId);
         if (entity == null) return null;
-        UserCreateDTO dto = modelMapper.map(entity, UserCreateDTO.class);
+        UserCreateDTO dto = mapper.map(entity, UserCreateDTO.class);
+        System.out.println(dto);
         return dto;
     }
 

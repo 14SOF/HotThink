@@ -198,10 +198,10 @@
             type: "GET",
             url: "nickCheck",
             data: {
-                "id": $('#nick').val()
+                "nick": $('#nick').val()
             },
             success: function (data) {	//data : checkSignup에서 넘겨준 결과값
-                if ($.trim(data) == "YES") {
+                if (data['check']) {
                     if ($('#nick').val() != '') {
                         $('#checkMsg').html('<p style="color:blue">사용가능한 닉네임 입니다!</p>');
                         $("#regi").removeAttr("disabled");
