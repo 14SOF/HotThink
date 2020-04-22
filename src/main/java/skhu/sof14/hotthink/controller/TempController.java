@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class TempController {
 
-//    @GetMapping("login")
-//    public String login() {
-//        return "login";
-//    }
+    @GetMapping("login")
+    public String login() {
+        return "login";
+    }
 
     @GetMapping("signup")
     public String signUp() {
@@ -83,15 +83,15 @@ public class TempController {
         return "realthink_read";
     }
 
-//    @GetMapping("qna")
-//    public String qna() {
-//        return "qna_list";
-//    }
+    @GetMapping("qna")
+    public String qna() {
+        return "qna_list";
+    }
 
-//    @GetMapping("form")
-//    public String form() {
-//        return "qna_form";
-//    }
+    @GetMapping("form")
+    public String form() {
+        return "qna_form";
+    }
 
     @GetMapping("free")
     public String free() {
@@ -115,15 +115,15 @@ public class TempController {
 
 
     //    qna 글 내용 test  실제구현은 id값으로
-//    @GetMapping("list/1")
-//    public String qnaPage() {
-//        return "qna_contents";
-//    }
+    @GetMapping("list/1")
+    public String qnaPage() {
+        return "qna_contents";
+    }
 
-//    @GetMapping("list/1/update")
-//    public String qnaUpdate() {
-//        return "qna_updateForm";
-//    }
+    @GetMapping("list/1/update")
+    public String qnaUpdate() {
+        return "qna_updateForm";
+    }
 
     @GetMapping("producer")
     public String producer() {
