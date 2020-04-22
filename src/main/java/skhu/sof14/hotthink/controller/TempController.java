@@ -1,4 +1,4 @@
-package skhu.sof14.hotthink;
+package skhu.sof14.hotthink.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,93 +9,96 @@ public class TempController {
 
 
     @GetMapping("404")
-    public String pageNotFound(){
+    public String pageNotFound() {
         return "404";
     }
 
 
     @GetMapping("message")
-    public String message(){
+    public String message() {
         return "mypage_message";
     }
 
     @GetMapping("alarm")
-    public String alarm(){
+    public String alarm() {
         return "mypage_alarm";
     }
 
     @GetMapping("follow")
-    public String follow(){
+    public String follow() {
         return "mypage_follow";
     }
 
     @GetMapping("myboards")
-    public String myBoards(){
+    public String myBoards() {
         return "mypage_myboards";
     }
 
     @GetMapping("freethink")
-    public String freeThink(){
+    public String freeThink() {
         return "freethink_read";
     }
 
 
     @GetMapping("freethinkwrite")
-    public String freeThinkWrite(){
+    public String freeThinkWrite() {
         return "freethink_write";
     }
 
     @GetMapping("realthinklist")
-    public String realThinkList(){
+    public String realThinkList() {
         return "realthink_list";
     }
 
     @GetMapping("realthinkwrite")
-    public String realThinkWrite(){
+    public String realThinkWrite() {
         return "realthink_write";
     }
 
     @GetMapping("hotthink")
-    public String hotThink(){
+    public String hotThink() {
         return "hotthink_list";
     }
 
     @GetMapping("realthink")
-    public String realThink(){
+    public String realThink() {
         return "realthink_read";
     }
 
     @GetMapping("qna")
-    public String qna(){
+    public String qna() {
         return "qna_list";
     }
 
     @GetMapping("form")
-    public String form(){
+    public String form() {
         return "qna_form";
     }
 
     @GetMapping("free")
-    public  String free(){
+    public String free() {
         return "freeThink";
     }
+
     @GetMapping("footer1")
-    public String footer1(){
+    public String footer1() {
         return "footer_policy";
     }
+
     @GetMapping("faq")
-    public String faq(){
+    public String faq() {
         return "footer_faq";
     }
+
     @GetMapping("operation")
-    public String op(){
+    public String op() {
         return "footer_operation";
     }
 
 
-//    qna 글 내용 test  실제구현은 id값으로
+    //    qna 글 내용 test  실제구현은 id값으로
     @GetMapping("list/1")
-    public String qnaPage(){
+    public String qnaPage() {
         return "qna_contents";
     }
 
@@ -110,13 +113,18 @@ public class TempController {
     }
 
     @GetMapping("realThinkDetails")
-    public String realThinkDetails(){
+    public String realThinkDetails() {
         return "realThinkDetails";
     }
 
     @GetMapping("thinkMake")
-    public String thinkMake(){
+    public String thinkMake() {
         return "thinkMake";
     }
+
+//    @GetMapping("signup_success")
+//    public String signup_success() {
+//        return "signup_success";
+//    }
 
 }

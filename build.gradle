@@ -31,6 +31,8 @@ dependencies {
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
     compileOnly 'org.projectlombok:lombok'
+    compile('javax.xml.bind:jaxb-api:2.3.0')
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'

@@ -11,5 +11,3 @@ spring:
     cache: false
   mustache:
     suffix: .html
-
-
