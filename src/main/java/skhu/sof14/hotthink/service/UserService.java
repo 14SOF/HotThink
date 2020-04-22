@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.UserCreateDTO;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.UserRepository;
-
 @Service
 public class UserService {
     @Autowired

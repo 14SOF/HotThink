@@ -32,5 +32,5 @@ public class User {
     String phone;
 
     @Column(name="user_status")
-    boolean status;
+    boolean status=true;
 }

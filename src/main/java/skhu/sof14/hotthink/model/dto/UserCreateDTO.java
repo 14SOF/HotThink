@@ -23,4 +23,7 @@ public class UserCreateDTO {
     @Setter
     @Getter
     String phone;
+    @Setter
+    @Getter
+    boolean status = true;
 }

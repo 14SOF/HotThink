@@ -8,4 +8,5 @@ import skhu.sof14.hotthink.model.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserByUserId(String userId);
     User findUserByNick(String nick);
+    
 }
