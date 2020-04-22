@@ -21,15 +21,15 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">어서오세요!</h1>
                                 </div>
-                                <form class="user">
+                                <form id="login-form" class="user" method="post" action="login_processing">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
-                                               id="exampleInputEmail" aria-describedby="emailHelp"
+                                               id="exampleInputEmail" name="userId" aria-describedby="emailHelp"
                                                placeholder="이메일">
                                     </div>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user"
-                                               id="exampleInputPassword" placeholder="비밀번호">
+                                               id="exampleInputPassword" name="password" placeholder="비밀번호">
                                     </div>
                                     <div class="form-group">
                                         <div class="custom-control custom-checkbox small">

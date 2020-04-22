@@ -21,6 +21,7 @@ public class UserController {
         model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
         return "signup_suc";
     }
+  
 
 
 }
