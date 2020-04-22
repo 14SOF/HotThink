@@ -31,4 +31,9 @@ public class GuestController {
         return "signup";
     }
 
+    @GetMapping("user_delete")
+    public String user_delete(){
+        return "user_delete";
+    }
+
 }
