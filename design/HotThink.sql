@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `HotThink`.`user` (
   `user_pw` VARCHAR(32) NOT NULL,
   `user_nick` VARCHAR(20) NOT NULL,
   `user_name` VARCHAR(20) NULL,
-  `user_phoneNum` VARCHAR(20) NULL,
+  `user_phone` VARCHAR(20) NULL,
   `user_status` TINYINT(1) NOT NULL,
   PRIMARY KEY (`user_idx`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC),
