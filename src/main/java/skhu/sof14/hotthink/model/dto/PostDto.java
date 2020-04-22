@@ -15,7 +15,7 @@ public class PostDto {
     private String post_content;
     private int post_hit = 0;
     private int post_like = 0;
-    private LocalDateTime post_dateTime;
+    private LocalDateTime post_dateTime = LocalDateTime.now();
     private String post_type = "프리";
     private int user_user_idx = 28;
 
@@ -26,6 +26,7 @@ public class PostDto {
                 .post_content(post_content)
                 .post_hit(post_hit)
                 .post_like(post_like)
+                .post_dateTime(post_dateTime)
                 .post_type(post_type)
                 .user_user_idx(user_user_idx)
                 .build();

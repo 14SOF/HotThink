@@ -1,3 +1,4 @@
+/*
 package skhu.sof14.hotthink.model.entity;
 
 import lombok.Getter;
@@ -16,8 +17,9 @@ import java.time.LocalDateTime;
     @EntityListeners(AuditingEntityListener.class)
 
     public abstract class TimeEntity {
-        @Column(updatable = false, name="localdatetime" )
+        @Column(updatable = false, name="post_dateTime")
         @CreatedDate
         private LocalDateTime post_dateTime;
     }
 
+*/
