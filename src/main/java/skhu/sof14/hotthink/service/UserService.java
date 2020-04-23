@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.UserBase;
-import skhu.sof14.hotthink.model.dto.UserCreateDTO;
+import skhu.sof14.hotthink.model.dto.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.model.entity.User;
@@ -65,30 +65,23 @@ public class UserService {
         return entity == null;
     }
 
-    public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
-        User entity = new User();
-        entity.setUserId(user.getUserId());
-        entity.setName(user.getName());
-        entity.setNick(user.getNick());
-        entity.setUserPassword(user.getUserPassword());
-        return userRepository.save(entity);
+    public boolean idDuplicationCheck(String id){
+        User entity = userRepository.findUserByUserId(id);
+        return entity == null;
     }
 
-    public String idCheck(String userId) {
-        System.out.println(userRepository.findUserByUserId(userId));
-
-        if (userRepository.findUserByUserId(userId) == null) {
-            return "YES";
-        } else {
-            return "NO";
-        }
+    public UserDetailDto create(UserCreateDto user) { //회원가입 , 회원 정보를 DB에 저장
+        user.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
+        User entity = mapper.map(user, User.class);
+        entity.setStatus(true);
+        entity = userRepository.save(entity);
+        return mapper.map(entity, UserDetailDto.class);
     }
 
-
-    public UserCreateDTO findUserByUserId(String userId) {
+    public UserCreateDto findUserByUserId(String userId) {
         User entity = userRepository.findUserByUserId(userId);
         if (entity == null) return null;
-        UserCreateDTO dto = mapper.map(entity, UserCreateDTO.class);
+        UserCreateDto dto = mapper.map(entity, UserCreateDto.class);
         System.out.println(dto);
         return dto;
     }

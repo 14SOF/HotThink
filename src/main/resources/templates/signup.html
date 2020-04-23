@@ -2,7 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <style>
     .myButton {
@@ -30,31 +30,7 @@
         position: relative;
         top: 1px;
     }
-    .myButton2 {
-        box-shadow: inset -4px 2px 0px 0px #ffffff;
-        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-        background-color: #ffffff;
-        border-radius: 35px;
-        border: 1px solid #dcdcdc;
-        display: inline-block;
-        cursor: pointer;
-        color: #666666;
-        font-size: 13px;
-        font-weight: bold;
-        padding: 11px 13px;
-        text-decoration: none;
-        text-shadow: 0px 0px 0px #ffffff;
-    }
 
-    .myButton2:hover {
-        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-        background-color: #f6f6f6;
-    }
-
-    .myButton2:active {
-        position: relative;
-        top: 1px;
-    }
     .em {
         font-size: 0.8rem;
         border-radius: 3rem;
@@ -71,12 +47,10 @@
             <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">핫띵크 회원가입</h1>
         </div>
 
-        <form class="user" id="user" name="user" method="post" action="/create">
+        <form class="user" id="user" name="user" method="post" action="/create/user">
             <div class="form-group">
-
-
                 <input type="email" class="em" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" required/>
-                <input type="button" class="myButton" id="temp" value="중복체크">
+                <button type="button" class="myButton" id="idCheckBtn">중복확인</button>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
@@ -94,7 +68,7 @@
             <div class="form-group">
                 <input type="text" class="em"
                        id="nick" name="nick" placeholder="닉네임" required>
-                <input type="button" class="myButton2" id="nickCk" value="중복체크">
+                <button type="button" class="myButton" id="nickCheckBtn">중복확인</button>
 
             </div>
 
@@ -122,13 +96,11 @@
 
     </div>
 </div>
-
-{{> include/footer}}
-
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<footer>
+    {{> include/footer}}
+</footer>
+</body>
 <script>
-
-
     $("#regi").attr("disabled", "disabled");
 
     $(function () { //비밀번호 일치여부
@@ -148,77 +120,71 @@
         });
     });
 
-    $(function(){ // 이름 칸 비어있으면 회원가입버튼 비활성
-        $("input").keyup(function(){
+    $(function () { // 이름 칸 비어있으면 회원가입버튼 비활성
+        $("input").keyup(function () {
             var userName = $("#name").val();
-            if(userName =="") {
+            if (userName == "") {
                 $("#regi").attr("disabled", "disabled");
-            }else {
+            } else {
                 $("#regi").removeAttr("disabled");
 
             }
         });
     });
 
-    $('.myButton').click(function () { //ID 체크하는 JS
-        console.log("클릭")
+    $("#idCheckBtn").click(function () { //ID 체크하는 JS
+        let userId = $('#userId').val();
 
-        $.ajax({
-            type: "GET",
-            url: "idCheck",
-            data: {
-                "id": $('#userId').val()
-            },
-            success: function (data) {	//data : checkSignup에서 넘겨준 결과값
-                if($('#userId').val() ==''){
-                    $("#regi").attr("disabled", "disabled");
-                }
-
-                if ($.trim(data) == "YES") {
-                    if ($('#userId').val() != '') {
+        console.log(userId)
+        if (userId === "") {
+            $("#regi").attr("disabled", "disabled");
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/check/user/id",
+                data: {
+                    "id": userId
+                },
+                success: function (data) {	//data : checkSignup에서 넘겨준 결과값
+                    if (data['check']) {
                         $('#checkMsg').html('<p style="color:blue">사용가능한 ID 입니다!</p>');
                         $("#regi").removeAttr("disabled");
-                    }
-                } else {
-                    if ($('#userId').val() != '') {
+                    } else {
                         $('#checkMsg').html('<p style="color:red">이미 사용중인 ID 입니다. 다른 ID를 입력하세요.</p>');
                         $('#userId').val('');
                         $('#userId').focus();
                         $("#regi").attr("disabled", "disabled");
                     }
                 }
-            }
-        })
+            })
+        }
     });
 
-    $('.myButton2').click(function () {
-        console.log("클릭")
-
+    $("#nickCheckBtn").click(function () {
         $.ajax({
-            type: "GET",
-            url: "nickCheck",
-            data: {
-                "nick": $('#nick').val()
-            },
-            success: function (data) {	//data : checkSignup에서 넘겨준 결과값
-                if (data['check']) {
-                    if ($('#nick').val() != '') {
-                        $('#checkMsg').html('<p style="color:blue">사용가능한 닉네임 입니다!</p>');
-                        $("#regi").removeAttr("disabled");
-                    }
-                } else {
-                    if ($('#nick').val() != '') {
-                        $('#checkMsg').html('<p style="color:red">이미 사용중인 닉네임 입니다. 다른 닉네임을 입력하세요.</p>');
-                        $('#nick').val('');
-                        $('#nick').focus();
-                        $("#regi").attr("disabled", "disabled");
+                type: "GET",
+                url: "/check/user/nick",
+                data: {
+                    "nick": $('#nick').val()
+                },
+                success: function (data) {
+                    if (data['check']) {
+                        if ($('#nick').val() != '') {
+                            $('#checkMsg').html('<p style="color:blue">사용가능한 닉네임 입니다!</p>');
+                            $("#regi").removeAttr("disabled");
+                        }
+                    } else {
+                        if ($('#nick').val() != '') {
+                            $('#checkMsg').html('<p style="color:red">이미 사용중인 닉네임 입니다. 다른 닉네임을 입력하세요.</p>');
+                            $('#nick').val('');
+                            $('#nick').focus();
+                            $("#regi").attr("disabled", "disabled");
+                        }
                     }
                 }
             }
-        })
-    });
+        )
+    })
 
 </script>
-</body>
-
 </html>

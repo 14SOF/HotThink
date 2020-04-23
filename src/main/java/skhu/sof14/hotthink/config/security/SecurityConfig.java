@@ -7,11 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.firewall.DefaultHttpFirewall;
 import org.springframework.security.web.firewall.HttpFirewall;
-import skhu.sof14.hotthink.model.dto.UserLoginDto;
 import skhu.sof14.hotthink.service.AuthProvider;
 
 @EnableWebSecurity
@@ -27,6 +24,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**");
+
         String[] strings = new String[]{
                 "/style/**", "/icons/**", "/image/**", "/images/**", "/js/**", "/font/**"
         };
@@ -46,16 +50,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
+                .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/signup").permitAll()
+                .antMatchers("/check/**").permitAll()
+                .antMatchers("/create/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login").permitAll()
-                .loginProcessingUrl("/login_processing").permitAll()
+                .loginPage("/login")
                 .defaultSuccessUrl("/home", true)
                 .failureHandler(failHandler)
-//                .failureForwardUrl("/login?error")
+//                .failureForwardUrl("/login")
                 .usernameParameter("userId")
                 .passwordParameter("userPassword")
                 .permitAll()
@@ -63,8 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout_processing")
                 .logoutSuccessUrl("/home")
-                .invalidateHttpSession(true);
-//                .and().authorizeRequests().anyRequest().authenticated();
+                .invalidateHttpSession(true)
+                .and().authorizeRequests().anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider);
     }

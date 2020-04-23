@@ -3,7 +3,6 @@ package skhu.sof14.hotthink.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 @Setter
 @Getter

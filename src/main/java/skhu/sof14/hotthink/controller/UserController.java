@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import skhu.sof14.hotthink.model.dto.UserCreateDTO;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.UserDetailDto;
@@ -35,13 +34,6 @@ public class UserController {
         return "mypage";
     }
 
-    @GetMapping("nickCheck")
-    public @ResponseBody Map<String, Boolean> nick_check(String nick) {
-        Map<String, Boolean> json = new HashMap<>();
-        json.put("check", userService.nickDuplicationCheck(nick));
-        return json;
-    }
-
     @PutMapping("update/user")
     public @ResponseBody Map<String, Boolean> updateUser(@RequestBody UserUpdateVo vo){
         userService.updateUser(vo);
@@ -49,13 +41,5 @@ public class UserController {
         json.put("check", true);
         return json;
     }
-
-    @PostMapping("create")
-    public String create(UserCreateDTO user, Model model) {
-        userService.create(user);
-        model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
-        return "signup_suc";
-    }
-
 
 }

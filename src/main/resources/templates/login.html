@@ -21,7 +21,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">어서오세요!</h1>
                                 </div>
-                                <form id="login-form" class="user" method="post" action="login_processing">
+                                <form id="login-form" class="user" method="post" action="login">
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user"
                                                name="userId"
@@ -69,7 +69,7 @@
                                     <a class="small" href="/">비밀번호가 기억 안나세요?</a>
                                 </div>
                                 <div class="text-center mt-1">
-                                    <a class="small" href="/signup">핫띵크 회원가입하기!</a>
+                                    <a class="small" href="/create/user">핫띵크 회원가입하기!</a>
                                 </div>
                             </div>
                         </div>
@@ -79,15 +79,6 @@
         </div>
     </div>
 </div>
-<!--<script>-->
-<!--    $(function () {-->
-<!--        $('#login-form').submit(function (event) {-->
-<!--            event.preventDefault();-->
-
-<!--            console.log( $('#userId').val())-->
-<!--        })-->
-<!--    })-->
-<!--</script>-->
 </body>
 <footer>
     {{> include/footer}}
