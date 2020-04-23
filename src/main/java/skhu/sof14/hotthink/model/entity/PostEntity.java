@@ -1,10 +1,12 @@
 package skhu.sof14.hotthink.model.entity;
 
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@ToString
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -13,33 +15,36 @@ public class PostEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long post_idx;
+    @Column(name="post_idx")
+    private Long postIdx;
 
     @Column(name = "post_title")
-    private String post_title;
+    private String postTitle;
     @Column(name = "post_content")
-    private String post_content;
+    private String postContent;
     @Column(name = "post_hit")
-    private int post_hit = 0;
+    private int postHit = 0;
     @Column(name = "post_like")
-    private int post_like = 0;
-    @Column(name = "post_dateTime")
-    private LocalDateTime post_dateTime = LocalDateTime.now();
+    private int postLike = 0;
+    @Column(name = "post_date_time")
+    @DateTimeFormat(pattern = "yyyy-MM-dd kk:mm:ss")
+    private LocalDateTime creatTime = LocalDateTime.now();
     @Column(name = "post_type")
-    private String post_type = "프리";
+    private String postType = "1";
     @Column(name = "user_user_idx")
-    private int user_user_idx = 28;
+    private int userIdx = 28; // 포링키라 우선 user 테이블에 있는 user_id값 임의로 넣었음
+
 
     @Builder
-    public PostEntity(Long post_idx, String post_title, String post_content, int post_hit, int post_like, LocalDateTime post_dateTime,String post_type, int user_user_idx) {
-        this.post_idx = post_idx;
-        this.post_title = post_title;
-        this.post_content = post_content;
-        this.post_hit = post_hit;
-        this.post_like = post_like;
-        this.post_dateTime = post_dateTime;
-        this.post_type = post_type;
-        this.user_user_idx = user_user_idx;
+    public PostEntity(Long postIdx, String postTitle, String postContent, int postHit, int postLike, LocalDateTime creatTime, String postType, int userIdx) {
+        this.postIdx = postIdx;
+        this.postTitle = postTitle;
+        this.postContent = postContent;
+        this.postHit = postHit;
+        this.postLike = postLike;
+        this.creatTime = creatTime;
+        this.postType = postType;
+        this.userIdx = userIdx;
     }
 
 }
