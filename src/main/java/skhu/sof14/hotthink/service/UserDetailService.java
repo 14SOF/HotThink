@@ -25,7 +25,7 @@ public class UserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User entity = userRepository.findUserByUserId(username); // 유저 아이디를 찾음.
         if(entity == null) throw new UsernameNotFoundException("해당 아이디를 가진 유저를 찾을 수 없습니다");
-        return modelMapper.map(entity, UserLoginDto.class);
+        return modelMapper.map(entity, UserLoginDto.class); //UserLoginDto : userId,password,status를 보내줌.
     }
 
 }

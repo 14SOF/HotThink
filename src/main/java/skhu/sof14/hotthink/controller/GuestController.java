@@ -1,5 +1,6 @@
 package skhu.sof14.hotthink.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +33,8 @@ public class GuestController {
     }
 
     @GetMapping("user_delete")
-    public String user_delete(){
+    public String user_delete(Model model){
+        model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "user_delete";
     }
 
