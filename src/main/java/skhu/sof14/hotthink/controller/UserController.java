@@ -6,8 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.service.UserService;
 
-import skhu.sof14.hotthink.model.dto.UserDetailDto;
-import skhu.sof14.hotthink.model.vo.UserUpdateVo;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @PutMapping("update/user")
-    public @ResponseBody Map<String, Boolean> updateUser(@RequestBody UserUpdateVo vo){
+    public @ResponseBody Map<String, Boolean> updateUser(@RequestBody UserUpdateDto vo){
         userService.updateUser(vo);
         Map<String, Boolean> json = new HashMap<>();
         json.put("check", true);

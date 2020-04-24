@@ -1,18 +1,20 @@
 package skhu.sof14.hotthink.model.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
 @Table(name="post")
+@ToString
+@Setter
 public class Post {
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="post_idx")
-    private Long postIdx;
+    private Long id;
 
     @Column(name="post_title")
     private String title;
@@ -26,13 +28,14 @@ public class Post {
     @Column(name="post_like")
     private int like;
 
-    @Column(name="post_dateTime")
+    @Column(name="post_date_time")
     private LocalDateTime createDate;
 
     @Column(name="post_type")
     private String type;
 
-    @Column(name="user_user_idx")
-    private int userIdx;
+    @ManyToOne
+    @JoinColumn(name = "user_user_idx")
+    private User user;
 
 }

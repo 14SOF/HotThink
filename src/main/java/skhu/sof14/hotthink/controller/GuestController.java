@@ -5,9 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import skhu.sof14.hotthink.model.dto.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.UserDetailDto;
-import skhu.sof14.hotthink.model.dto.UserLoginDto;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
