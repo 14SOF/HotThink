@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @Table(name="post")
 @ToString
 @Setter
+@Getter
 public class Post {
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="post_idx")

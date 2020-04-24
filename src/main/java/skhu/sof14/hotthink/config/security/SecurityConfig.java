@@ -68,8 +68,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout_processing")
                 .logoutSuccessUrl("/home")
-                .invalidateHttpSession(true)
-                .and().authorizeRequests().anyRequest().authenticated();
+                .invalidateHttpSession(true);
+//                .and().authorizeRequests().anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider);
     }

@@ -7,22 +7,24 @@
 <body>
 {{> include/navBar}}
 
+
 <div class="container mt-5 mb-5 shadow-lg" style="font-family: Noto Sans KR,sans-serif; width: 1000px">
     <div style="padding: 20px">
         <div class="row">
             <div class="col">
-                <h1 class="display-4" style="font-weight: bolder">제목 쌸라쌸라</h1>
+                {{#free}}
+                <h1 class="display-4" style="font-weight: bolder">{{title}}</h1>
             </div>
             <div class="col-auto">
                 <div>2020/04/12</div>
                 <div class="text-gray-800" style="float: right"><i class="far fa-eye"></i>
-                    991329
+                    {{hit}}
                 </div>
             </div>
         </div>
         <div class="dropdown-divider"></div>
         <h3 style="width: 100%; height: 350px">
-            내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라
+            {{content}}
         </h3>
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
@@ -30,7 +32,7 @@
                     좋아요 취소<span class="badge badge-light ml-1">4</span>
                 </button>
                 <button type="button" class="btn btn-light" style="border:solid 1px red">
-                    좋아요<span class="badge badge-danger ml-1">4</span>
+                    좋아요<span class="badge badge-danger ml-1">{{like}}</span>
                 </button>
                 <button type="button" class="btn btn-primary">신고하기</button>
             </div>
@@ -40,13 +42,15 @@
                     <div class="mx-auto mt-1 text-gray-500">
                         작성자
                     </div>
+                    {{#user}}
                     <div class="mx-auto text-gray-900">
-                        <h2>내이름은홍성빈</h2>
+                        <h2>{{nick}}</h2>
                     </div>
-
+                    {{/user}}
                 </a>
             </div>
         </div>
+        {{/free}}
 
         <div class="dropdown-divider"></div>
 

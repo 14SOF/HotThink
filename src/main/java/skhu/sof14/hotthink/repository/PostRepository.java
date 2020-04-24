@@ -6,4 +6,5 @@ import skhu.sof14.hotthink.model.entity.Post;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
+    Post findPostById(Long id);
 }
