@@ -140,12 +140,10 @@ public class TempController {
 
     //자유게시판 맵핑
     @GetMapping("freeboardlist")
-    public String freeboardlist() { return "freeboard_listText"; }
+    public String freeboardlist() { return "freeboard_list"; }
 
-    @GetMapping("freeboardkwrite")
-    public String freeboardWrite(){
-        return "freeboard_write";
-    }
+    @GetMapping("freeboardwrite")
+    public String freeboardwrite(){ return "freeboard_write"; }
 
 
 }

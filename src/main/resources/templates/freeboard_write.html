@@ -1,16 +1,236 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <style>-->
+<!--        body {-->
+<!--            font-family: "Noto Sans KR", sans-serif;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            display: block;-->
+<!--            word-break: break-all;-->
+<!--            color: black;-->
+<!--            position: relative;-->
+<!--        }-->
+<!--        * {-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+<!--        .center {-->
+<!--            padding: 0 40px;-->
+<!--            margin: 0 auto;-->
+<!--        }-->
+
+<!--        .title {-->
+<!--            position: relative;-->
+<!--            height: 30px;-->
+<!--            margin: 50px 0 50px 0;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+<!--        .h1 {-->
+<!--            display: inline-block;-->
+<!--            font-size: 42px;-->
+<!--            font-weight: normal;-->
+<!--            line-height: 28px;-->
+<!--            letter-spacing: -5px;-->
+<!--            margin-block-start: 0.67em;-->
+<!--            margin-block-end: 0.67em;-->
+<!--            margin-inline-start: 0px;-->
+<!--            margin-inline-end: 0px;-->
+<!--        }-->
+
+<!--        .sentence {-->
+<!--            vertical-align: -4px;-->
+<!--            color: #777777;-->
+<!--            padding-left: 30px;-->
+<!--            font-size: 15px;-->
+<!--        }-->
+
+<!--        .wTop {-->
+<!--            height: 30px;-->
+<!--            padding: 45px 0 0 0;-->
+<!--            font-size: 13px;-->
+<!--            color: #666666;-->
+<!--            border-top: 2px solid black;-->
+<!--        }-->
+
+<!--        .wTitle {-->
+<!--            border-top: 2px solid black;-->
+<!--            margin-bottom: 20px;-->
+<!--            background-color: white;-->
+<!--        }-->
+
+<!--        .rowBox {-->
+<!--            height: 40px;-->
+<!--            padding: 0 20px;-->
+<!--            font-size: 15px;-->
+<!--            color: #3a3a40;-->
+<!--            background-color: #f9f9f9;-->
+<!--            border-bottom: 1px solid #e3e4e5;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        .writeTool {-->
+<!--            margin-bottom: 20px;-->
+<!--            background-color: white;-->
+<!--        }-->
+
+<!--        /*.edSec {*/-->
+<!--        /*    width: 848px;*/-->
+<!--        /*    height: 410px;*/-->
+<!--        /*    border: 1px solid #e7e8e9;*/-->
+<!--        /*    background-color: #fff;*/-->
+<!--        /*    position: relative;*/-->
+<!--        /*    margin: 0 auto;*/-->
+<!--        /*    display: block;*/-->
+<!--        /*}*/-->
+
+<!--        .edSelectStyleBar {-->
+<!--            background-color: white;-->
+<!--            border-bottom: 1px solid #e7e8e9;-->
+<!--            padding: 8px 0;-->
+<!--            margin-bottom: 10px;-->
+<!--            background-color: white;-->
+<!--            /*overflow: hidden;*/-->
+<!--        }-->
+
+<!--        .editWindow {-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            border: 1px solid #e7e8e9;-->
+<!--            background-color: white;-->
+<!--            margin: 0 auto;-->
+<!--            overflow:scroll;-->
+<!--        }-->
+
+<!--        .content_text {-->
+<!--            width: 800px;-->
+<!--            height: 30px;-->
+<!--            padding: 0 0 0 10px;-->
+<!--            color: #666666;-->
+<!--            border: 1px solid #dddddd;-->
+<!--            vertical-align: middle;-->
+<!--            text-rendering: auto;-->
+<!--            letter-spacing: normal;-->
+<!--            word-spacing: normal;-->
+<!--            text-transform: none;-->
+<!--            text-indent: 0px;-->
+<!--            text-shadow: none;-->
+<!--            display: inline-block;-->
+<!--            text-align: start;-->
+<!--            cursor: text;-->
+<!--            margin: 0 0 0 20px;-->
+<!--            font: 400 13.3333px Arial;-->
+<!--        }-->
+
+<!--        .boardButton {-->
+<!--            height: 40px;-->
+<!--            text-align: right;-->
+<!--        }-->
+
+<!--        .boardButton a:hover {-->
+<!--            text-decoration: underline;-->
+<!--            text-decoration-color: white;-->
+<!--        }-->
+
+<!--        .boardButton-cancel {-->
+<!--            margin: 0 0 0 -3px;-->
+<!--            background-color: #cac6c5;-->
+<!--            display: inline-block;-->
+<!--            min-width: 68px;-->
+<!--            height: 30px;-->
+<!--            padding: 10px 8px 0 8px;-->
+<!--            font-size: 14px;-->
+<!--            color: white;-->
+<!--            text-align: center;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--        .boardButton-apply {-->
+<!--            margin: 0 0 0 -3px;-->
+<!--            background-color: #554843;-->
+<!--            display: inline-block;-->
+<!--            min-width: 68px;-->
+<!--            height: 30px;-->
+<!--            padding: 10px 8px 0 8px;-->
+<!--            font-size: 14px;-->
+<!--            color: white;-->
+<!--            text-align: center;-->
+<!--            cursor: pointer;-->
+<!--        }-->
+
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="center">-->
+<!--    <div>-->
+<!--        &lt;!&ndash; Title &ndash;&gt;-->
+<!--        <div class="title">-->
+<!--            <h1 class="h1">자유게시판</h1>-->
+<!--            <span class="sentence">핫띵크 : 핫한 당신의 생각</span>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; //Title &ndash;&gt;-->
+<!--        &lt;!&ndash; Board write &ndash;&gt;-->
+<!--        <div>-->
+<!--            &lt;!&ndash; Warning &ndash;&gt;-->
+<!--            <div class="wTop">-->
+<!--                <p>※ 욕설, 도배, 비방, 루머 등 게시판 운영정책에 어긋나는 게시물 등록시 삭제 및 글쓰기 제한 등 불이익을 받으실 수 있습니다.</p>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; Warning &ndash;&gt;-->
+
+<!--            &lt;!&ndash; Type select & Subject &ndash;&gt;-->
+<!--            <div class="wTitle">-->
+<!--                <div class="rowBox">-->
+<!--                    <span><b>제목</b></span>-->
+<!--                    <input type="text" class="content_text" title="글쓰기" placeholder="제목을 입력해 주세요">-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; //Type select & Subject &ndash;&gt;-->
+<!--            &lt;!&ndash; Editor tool &ndash;&gt;-->
+<!--            <div class="writeTool">-->
+<!--                <div class="edSec">-->
+<!--                    <div class="edSelectStyleBar" id="selectBar" style="display: block;">-->
+<!--                        <div class="edWSec">-->
+<!--                            <iframe class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="display: block;"></iframe>-->
+<!--                            <textarea class="editWindow" name="textWindow" id="textWindow" rows="9" cols="40" title="글쓰기" style="display: none;"></textarea>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                &lt;!&ndash; //Editor tool &ndash;&gt;-->
+
+<!--                &lt;!&ndash; Buttons &ndash;&gt;-->
+<!--                <div class="boardButton">-->
+<!--                    <a class="boardButton-cancel">취소</a>-->
+<!--                    <a class="boardButton-apply">등록</a>-->
+<!--&lt;!&ndash;                    <a href="#" onclick="history.back(-1);return false;" class="cancel">취소</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <a id="apply" class="apply" href="javascript:__doPostBack('ctl00$Contents$btnWrite','')">등록</a>&ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash; //Buttons &ndash;&gt;-->
+<!--            </div>-->
+<!--            &lt;!&ndash; //Board write &ndash;&gt;-->
+<!--        </div>-->
+
+<!--    </div>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {{> include/header}}
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean');
         body {
             font-family: "Noto Sans KR", sans-serif;
             width: 100%;
             height: 100%;
             display: block;
             word-break: break-all;
-            color: black;
+            /*color: black;*/
             position: relative;
         }
         * {
@@ -49,11 +269,12 @@
         }
 
         .wTop {
-            height: 30px;
-            padding: 45px 0 0 0;
+            height: 80px;
+            padding: 60px 0 0 0;
             font-size: 13px;
             color: #666666;
             border-top: 2px solid black;
+            margin-top: 10px;
         }
 
         .wTitle {
@@ -141,7 +362,7 @@
             display: inline-block;
             min-width: 68px;
             height: 30px;
-            padding: 10px 8px 0 8px;
+            padding: 5px 8px 0 8px;
             font-size: 14px;
             color: white;
             text-align: center;
@@ -154,9 +375,9 @@
             display: inline-block;
             min-width: 68px;
             height: 30px;
-            padding: 10px 8px 0 8px;
+            padding: 5px 8px 0 8px;
             font-size: 14px;
-            color: white;
+            color: white !important;
             text-align: center;
             cursor: pointer;
         }
@@ -164,6 +385,7 @@
     </style>
 </head>
 <body>
+{{> include/navbar}}
 <div class="center">
     <div>
         <!-- Title -->
@@ -205,8 +427,8 @@
                 <div class="boardButton">
                     <a class="boardButton-cancel">취소</a>
                     <a class="boardButton-apply">등록</a>
-<!--                    <a href="#" onclick="history.back(-1);return false;" class="cancel">취소</a>-->
-<!--                    <a id="apply" class="apply" href="javascript:__doPostBack('ctl00$Contents$btnWrite','')">등록</a>-->
+                    <!--                    <a href="#" onclick="history.back(-1);return false;" class="cancel">취소</a>-->
+                    <!--                    <a id="apply" class="apply" href="javascript:__doPostBack('ctl00$Contents$btnWrite','')">등록</a>-->
                 </div>
                 <!-- //Buttons -->
             </div>
@@ -216,4 +438,8 @@
     </div>
 </div>
 </body>
+
+<footer>
+    {{> include/footer}}
+</footer>
 </html>

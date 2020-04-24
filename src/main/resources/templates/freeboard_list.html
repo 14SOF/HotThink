@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="kr">
 <head>
-    <meta charset="UTF-8">
-    <title>핫띵크 : 핫한 당신의 생각</title>
+    {{> include/header}}
     <style>
-
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean');
         body {
             font-family: "Noto Sans KR", sans-serif;
             width: 100%;
@@ -82,95 +81,51 @@
             border-bottom: 1px solid #dddddd;
         }
 
-        .page {
-            text-align: center;
+        .pagination>li>a { border-radius: 50% !important;margin: 0 5px;}
+
+        .pagination .page-item .page-link {
+            font-size: .9rem;
+            color: #212529;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
         }
 
-        .pagination {
-            list-style: none;
-            display: inline-block;
-            padding: 0;
-            margin-top: 20px;
-            text-align: center;
-            margin-left: 80px;
+        .pagination .page-item.active .page-link {
+            color: #fff;
+            background-color: darkviolet;
+            border-radius: .125rem;
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+            -webkit-transition: all .2s linear;
+            transition: all .2s linear;
         }
 
-        .pagination li {
-            display: inline;
-            text-align: center;
-        }
-
-        .pagination a {
-            float: left;
-            display: block;
-            font-size: 14px;
-            text-decoration: none;
-            padding: 5px 12px;
-            color: #666666;
-            line-height: 1.5;
-        }
-
-        .first {
-            margin-right: 15px;
-        }
-
-        .last {
-            margin-left: 15px;
-        }
-
-        .first:hover, .last:hover, .left:hover, .right:hover {
-            color: #cf5228;
-        }
-
-        .pagination a.active {
-            cursor: default;
-            color: #ffffff;
-        }
-
-        .modal .num {
-            margin-left: 3px;
-            padding: 0;
-            width: 30px;
-            height: 30px;
-            line-heignt: 30px;
-        }
-
-        .modal .num:hover {
-            text-decoration: underline;
-            text-decoration-color: black;
-        }
-
-        .modal .num.active, .modal .num:active {
-            font-weight: bolder;
-            color: #cf5228;
-            cursor: default;
-            text-decoration: none;
-        }
-
-        .btn {
+        .buttonWriting {
             float: right;
             display: inline-block;
             min-width: 68px;
             height: 30px;
-            padding: 10px 8px 0 8px;
+            padding: 5px 8px 0 8px;
             font-size: 14px;
-            color: white;
+            color: white !important;
             text-align: center;
             background-color: #554843;
             cursor: pointer;
-            margin-top:  15px;
+            margin-top: -90px;
         }
 
-        .btn:hover {
+        .buttonWriting:hover {
             text-decoration: underline;
             color: #ffffff;
         }
 
-        .btn:active {
+        .buttonWriting:active {
         }
 
         .searchBox {
-            width: 100%;
             padding: 15px 0;
             text-align: center;
             background-color: #f9f9f9;
@@ -270,6 +225,8 @@
     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
+{{> include/navbar}}
+
 <div class="center">
     <div>
         <div class="title">
@@ -320,21 +277,29 @@
             </table>
         </div>
 
-        <div class="page">
-            <a class="btn">글쓰기</a>
-            <div>
-                <ul class="pagination modal">
-                    <li><a href="#" class="first">처음페이지</a></li>
-                    <li><a href="#" class="arrow left"><<</a></li>
-                    <li><a href="#" class="active num" style="padding-top: 5px">1</a></li>
-                    <li><a href="#" class="num" style="padding-top: 5px">2</a></li>
-                    <li><a href="#" class="num" style="padding-top: 5px">3</a></li>
-                    <li><a href="#" class="num" style="padding-top: 5px">4</a></li>
-                    <li><a href="#" class="num" style="padding-top: 5px">5</a></li>
-                    <li><a href="#" class="arrow right">>></a></li>
-                    <li><a href="#" class="last">끝 페이지</a></li>
+        <div class="mt-5" style="height: 200px">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link">First</a></li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="">1</a></li>
+                    <li class="page-item"><a class="page-link" href="">2</a></li>
+                    <li class="page-item"><a class="page-link" href="">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link">Last</a></li>
                 </ul>
-            </div>
+            </nav>
+            <a class="buttonWriting" href="/freeboardwrite">글쓰기</a>
         </div>
     </div>
     <div class="searchBox">
@@ -348,5 +313,10 @@
         <input class="searchInputSubmit" type="sumbit" value="검색" alternatetext="검색">
     </div>
 </div>
+
+<footer>
+    {{> include/footer}}
+</footer>
+
 </body>
 </html>
