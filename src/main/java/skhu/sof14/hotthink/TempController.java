@@ -21,6 +21,7 @@ public class TempController {
     public String pageNotFound(){
         return "404";
     }
+
     @GetMapping("mypage")
     public String myPage(Model model){
         model.addAttribute("test", "김영곤");
@@ -135,5 +136,16 @@ public class TempController {
     public String thinkMake(){
         return "thinkMake";
     }
+
+
+    //자유게시판 맵핑
+    @GetMapping("freeboardlist")
+    public String freeboardlist() { return "freeboard_listText"; }
+
+    @GetMapping("freeboardkwrite")
+    public String freeboardWrite(){
+        return "freeboard_write";
+    }
+
 
 }

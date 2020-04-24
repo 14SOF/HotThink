@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean');
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            width: 100%;
+            height: 100%;
+            display: block;
+            word-break: break-all;
+            color: black;
+            position: relative;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .center {
+            padding: 0 40px;
+            margin: 0 auto;
+        }
+
+        .title {
+            position: relative;
+            height: 30px;
+            margin: 50px 0 50px 0;
+            font-size: 16px;
+        }
+
+        .h1 {
+            display: inline-block;
+            font-size: 42px;
+            font-weight: normal;
+            line-height: 28px;
+            letter-spacing: -5px;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .sentence {
+            vertical-align: -4px;
+            color: #777777;
+            padding-left: 30px;
+            font-size: 15px;
+        }
+
+        .boardView {
+            border-top: 2px solid #141313;
+            border-bottom: 2px solid #141313;
+        }
+
+        .tableDegin {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            line-height: 1.5;
+            cursor: default;
+            margin-top: 50px;
+        }
+
+        .tableDegin thead th {
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            background-color: #554843;
+            color: white;
+        }
+
+        .tableDegin tbody th {
+            width: 150px;
+            padding: 10px;
+        }
+
+        .tableDegin tbody tr td {
+            padding: 10px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .pagination>li>a { border-radius: 50% !important;margin: 0 5px;}
+
+        .pagination .page-item .page-link {
+            font-size: .9rem;
+            color: #212529;
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+            -webkit-transition: all .3s linear;
+            transition: all .3s linear;
+        }
+
+        .pagination .page-item.active .page-link {
+            color: #fff;
+            background-color: darkviolet;
+            border-radius: .125rem;
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+            -webkit-transition: all .2s linear;
+            transition: all .2s linear;
+        }
+
+        .buttonWriting {
+            float: right;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 5px 8px 0 8px;
+            font-size: 14px;
+            color: white;
+            text-align: center;
+            background-color: #554843;
+            cursor: pointer;
+            margin-top: -90px;
+        }
+
+        .buttonWriting:hover {
+            text-decoration: underline;
+            color: #ffffff;
+        }
+
+        .buttonWriting:active {
+        }
+
+        .searchBox {
+            padding: 15px 0;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-top: 1px solid #e7e8e9;
+            border-bottom: 1px solid #e7e8e9;
+            margin: 40px 0 0;
+            letter-spacing: -0.050em;
+        }
+
+        .searchSelect {
+            width: 133px;
+            height: 40px;
+            border: 1px solid #cfd2d4;
+            padding-left: 8px;
+            font-size: 12px;
+            color: #999999;
+            vertical-align: middle;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            box-sizing: border-box;
+            align-items: center;
+            white-space: pre;
+            background-color: #FFFFFF;
+            cursor: pointer;
+        }
+
+        .searchOption {
+            white-space: pre;
+            min-height: 1.2em;
+            padding: 0 2px 1px;
+            color: #999999;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0;
+            text-shadow: none;
+            text-align: start;
+            cursor: pointer;
+            font: 400 13px Arial;
+        }
+
+        .searchInputText {
+            width: 273px;
+            height: 38px;
+            padding: 0 0 0 10px;
+            color: #838d93;
+            border: 1px solid #cfd2d4;
+            border-right: 0;
+            vertical-align: middle;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0;
+            text-shadow: none;
+            display: inline-block;
+            text-align: start;
+            background-color: #FFFFFF;
+            cursor: text;
+            font: 400 13px Arial;
+        }
+
+        .searchInputSubmit {
+            width: 78px;
+            height: 41px;
+            padding: 0 0 4px 0;
+            color: white;
+            cursor: pointer;
+            background-color: #cf5228;
+            border: 0;
+            vertical-align: middle;
+            box-sizing: border-box;
+            user-select: none;
+            white-space: pre;
+            align-items: flex-start;
+            text-align: center;
+            text-rendering: auto;
+            letter-spacing: normal;
+            word-spacing: normal;
+            text-transform: none;
+            text-indent: 0;
+            text-shadow: none;
+            display: inline-block;
+            margin: 0 0 0 -5px;
+            font: 400 13px Arial;
+        }
+
+    </style>
+
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+</head>
+<body>
+{{> include/navbar}}
+
+<div class="center">
+    <div>
+        <div class="title">
+            <h1 class="h1">자유게시판</h1>
+            <span class="sentence">핫띵크 : 핫한 당신의 생각</span>
+        </div>
+        <div class="boardView">
+            <table class="tableDegin">
+                <thead>
+                <tr>
+                    <th scope="cols">번호</th>
+                    <th scope="cols">제목</th>
+                    <th scope="cols">작성자</th>
+                    <th scope="cols">날짜</th>
+                    <th scope="cols">조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>내용이 들어갑니다.</td>
+                    <td>오일권</td>
+                    <td>2020-04-04</td>
+                    <td>528</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>내용이 들어갑니다.</td>
+                    <td>김영곤</td>
+                    <td>2020-04-04</td>
+                    <td>18</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>내용이 들어갑니다.</td>
+                    <td>정기혁</td>
+                    <td>2020-04-04</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>내용이 들어갑니다.</td>
+                    <td>정형일</td>
+                    <td>2020-04-04</td>
+                    <td>312</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-5" style="height: 200px">
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled"><a class="page-link">First</a></li>
+                    <li class="page-item disabled">
+                        <a class="page-link" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="">1</a></li>
+                    <li class="page-item"><a class="page-link" href="">2</a></li>
+                    <li class="page-item"><a class="page-link" href="">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                    <li class="page-item"><a class="page-link">Last</a></li>
+                </ul>
+            </nav>
+            <span class="buttonWriting" href="freeboardWrite">글쓰기</span>
+        </div>
+    </div>
+    <div class="searchBox">
+        <select class="searchSelect">
+            <option class="searchOption" value="Title">제목</option>
+            <option class="searchOption" value="Content">내용</option>
+            <option class="searchOption" value="Full">제목+내용</option>
+            <option class="searchOption" value="writerName">작성자</option>
+        </select>
+        <input class="searchInputText" type="text" title="검색어를 입력하세요" placeholder="검색어를 입력하세요">
+        <input class="searchInputSubmit" type="sumbit" value="검색" alternatetext="검색">
+    </div>
+</div>
+
+<footer>
+    {{> include/footer}}
+</footer>
+
+</body>
+</html>
