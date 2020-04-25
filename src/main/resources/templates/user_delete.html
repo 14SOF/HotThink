@@ -4,7 +4,7 @@
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="style/user.css">
     <link rel="stylesheet" type="text/css" href="style/select-css.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
 </head>
 <style>
@@ -52,13 +52,15 @@
 
         <form class="user" id="user" name="user" method="post" action="/create">
 <!--            {{#userId}}-->
-            <div class="form-group">
+            <div class="form-group" style="font-weight: bold">
 <!--                <input type="email" class="form-control form-control-user" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" value="여기아이디"/>-->
-                회원 ID : {{userId}}
+                             탈퇴하려는 회원 ID : {{userId}}
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="userPassword" name="userPassword" placeholder="비밀번호" required>
+                       id="userPassword" name="userPassword" placeholder="비밀번호를 입력하세요." required>
+                <div class="text-center small mt-2" id="" style="color: red">메시지확인</div>
+
             </div>
 <!--            {{/userId}}-->
             <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
@@ -68,12 +70,12 @@
                 <select class="select-css">
                     <center>r>
                         <option value="">--탈퇴 사유를 선택하세요.--</option>
-                        <option value="dog">Dog</option>
-                        <option value="cat">Cat</option>
-                        <option value="hamster">Hamster</option>
-                        <option value="parrot">Parrot</option>
-                        <option value="spider">Spider</option>
-                        <option value="goldfish">Goldfish</option>
+                        <option value="dog">사이트 이용방법이 너무 어렵습니다.</option>
+                        <option value="cat">원하는 아이디어를 찾을 수 없습니다.</option>
+                        <option value="hamster">가격이 너무 비싸서 구매를 할 수가 없습니다.</option>
+                        <option value="parrot">사이트 사용 빈도가 낮아서 필요가 없습니다.</option>
+                        <option value="spider">사이트 장애가 많습니다.</option>
+                        <option value="goldfish">내 맘 입니다.</option>
 
                 </select>
             </div>
@@ -82,9 +84,11 @@
             <hr>
             <button type="submit" class="deleteBtn" id="temp">탈 퇴 하 기</button>
             <hr>
-            <div>
-                여기에 탈퇴를 하게된다면 ~~~~~어쩌구저쩌구 </br>
-                서비스를 더이상 이용못해요 같은 문구
+            <div style="font-family: 'Anton', sans-serif;">
+                HOTTHINK 탈퇴를 하시면 대화내용, 구매내역을<br/>
+                포함한 회원정보가 모두 초기화되며 복구하실 수 <br/>
+               없습니다. 정말로 탈퇴를 원하신다면 비밀번호 및<br/>
+                탈퇴사유를 선택하시고 [탈퇴하기]를 눌러주세요.
 
             </div>
             <hr>
@@ -93,7 +97,9 @@
 
 
     </div>
+
 </div>
+{{>include/mypage_delete_modal}}
 <footer>
     {{> include/footer}}
 </footer>
