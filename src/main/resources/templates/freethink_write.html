@@ -59,11 +59,8 @@
             }),
             success: function (data) {
                 console.log(data['id']);
-                window.location.href = "/" + data['id'];
+                window.location.href = "/read/post/free?id=" + data['id'];
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert('Error: ' + textStatus + ' ' + errorThrown);
-            }
         })
     })
 </script>
