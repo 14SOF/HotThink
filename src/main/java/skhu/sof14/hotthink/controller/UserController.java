@@ -42,6 +42,14 @@ public class UserController {
         return json;
     }
 
+    @PostMapping("check/user/pw")
+    public @ResponseBody Map<String, Boolean> pw_check(String userPassword){
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("check", userService.pwCheck(userPassword));
+        return json;
+    }
+
+
     @PutMapping("update/user")
     public @ResponseBody Map<String, Boolean> updateUser(@RequestBody UserUpdateVo vo){
         userService.updateUser(vo);

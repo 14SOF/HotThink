@@ -12,7 +12,7 @@
     .em {
         font-size: 0.8rem;
         border-radius: 3rem;
-        padding: 0.8rem 2rem;
+        padding: 0.8rem 3rem;
     }
     .deleteBtn {
         box-shadow:inset 0px 1px 0px -5px #f5978e;
@@ -39,6 +39,31 @@
         top:1px;
     }
 
+    .myButton {
+        box-shadow: inset -4px 2px 0px 0px #ffffff;
+        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color: #ffffff;
+        border-radius: 35px;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        cursor: pointer;
+        color: #666666;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 11px 13px;
+        text-decoration: none;
+        text-shadow: 0px 0px 0px #ffffff;
+    }
+
+    .myButton:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }
 
 </style>
 <body>
@@ -54,12 +79,13 @@
 <!--            {{#userId}}-->
             <div class="form-group" style="font-weight: bold">
 <!--                <input type="email" class="form-control form-control-user" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" value="여기아이디"/>-->
-                             탈퇴하려는 회원 ID : {{userId}}
+                              [ {{userId}} ] 님의 계정 탈퇴됩니다.
             </div>
             <div class="form-group">
-                <input type="password" class="form-control form-control-user"
-                       id="userPassword" name="userPassword" placeholder="비밀번호를 입력하세요." required>
-                <div class="text-center small mt-2" id="" style="color: red">메시지확인</div>
+                <input type="password" class="em"
+                       id="userPassword" name="userPassword" placeholder="비밀번호를 입력하세요."  required>
+                <input type="button" class="myButton" id="pwCk" value="확인">
+                <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
 
             </div>
 <!--            {{/userId}}-->
@@ -82,7 +108,7 @@
 
 
             <hr>
-            <button type="submit" class="deleteBtn" id="temp">탈 퇴 하 기</button>
+            <button type="submit" class="deleteBtn" id="pwCheck">탈 퇴 하 기</button>
             <hr>
             <div style="font-family: 'Anton', sans-serif;">
                 HOTTHINK 탈퇴를 하시면 대화내용, 구매내역을<br/>
@@ -105,6 +131,25 @@
 </footer>
 <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script>
+    $("#pwCk").click(function () {
+        $.ajax({
+                type: "POST",
+                url: "/check/user/pw",
+                data: {
+                    "userPassword": $('#userPassword').val()
+                },
+                success: function (data) {
+                    if (data['check']) {
+                            $('#checkMsg').html('<p style="color:blue">비밀번호가 일치합니다. </p>');
+                    } else {
+                            $('#checkMsg').html('<p style="color:red">비밀번호가 일치하지 않습니다.</p>');
+                            $("#pwCheck").attr("disabled", "disabled");
+                    }
+                }
+            }
+        )
+    })
+
 
 </script>
 </body>

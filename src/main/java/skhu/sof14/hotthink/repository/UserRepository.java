@@ -13,6 +13,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findUserByUserId(String userId);
     User findUserByNick(String nick);
 
+
     @Modifying
     @Query("update User u set u.nick = ?2 where u.id = ?1")
     void updateNick(int id, String nick);

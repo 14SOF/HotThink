@@ -17,6 +17,8 @@ import skhu.sof14.hotthink.utils.EncryptionUtils;
 
 @Service
 public class UserService {
+    @Autowired
+    UserDetailService userDetailsService;
 
     @Autowired
     UserRepository userRepository;
@@ -64,6 +66,23 @@ public class UserService {
         User entity = userRepository.findUserByNick(nick);
         return entity == null;
     }
+
+    public boolean pwCheck(String userPassword){
+
+        String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
+
+        System.out.println(user.getPassword());
+
+        if(user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) {
+            return true;
+        }
+        return false;
+
+
+    }
+
 
     public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
         User entity = new User();
