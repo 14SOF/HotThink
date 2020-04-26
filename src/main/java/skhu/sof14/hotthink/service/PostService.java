@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostCreateDto;
 import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
 import skhu.sof14.hotthink.model.dto.post.PostReadDto;
@@ -48,9 +49,8 @@ public class PostService {
         return postRepository.save(entity).getId();
     }
 
-    public List<PostListElementDto> findAllFree(int page) {
-        Pageable pageable = PageRequest.of(page-1, 10);
-        List<Post> postList = postRepository.findAllByType("프리", pageable);
+    public List<PostListElementDto> findAllFree(Pagination page) {
+        List<Post> postList = postRepository.findAllByType("프리", page);
         Type listType = new TypeToken<List<PostListElementDto>>(){}.getType();
         return mapper.map(postList, listType);
     }
