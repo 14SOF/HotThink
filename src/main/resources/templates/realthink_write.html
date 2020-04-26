@@ -2,14 +2,14 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <body>
 {{> include/navBar}}
 <div class="container shadow-lg realWriteForm mt-5 mb-5">
 
     <div style="padding: 20px">
-        <form class="user">
+        <form class="user" onsubmit="return false">
             <p class="h1 text-center" style="font-family: 'Noto Sans KR', sans-serif">리얼띵크 작성안</p>
             <hr class="my-4">
             <div class="form-group">
@@ -33,8 +33,8 @@
             </div>
 
             <div class="form-group">
-                <label for="InputContents">상세내용 <span style="color: red">*</span></label>
-                <textarea class="form-control" id="InputContents" rows="20"
+                <label for="InputContent">상세내용 <span style="color: red">*</span></label>
+                <textarea class="form-control" id="InputContent" rows="20"
                           style="border-radius: 1rem;"
                 ></textarea>
             </div>
@@ -84,19 +84,71 @@
                 </div>
             </div>
 
-
-
             <hr class="my-4">
             <div class="form-group" style="text-align: right">
-                <a href="/" class="btn btn-primary btn-user">
+                <button href="/" class="btn btn-primary btn-user" disabled id="submitBtn">
                     작성완료
-                </a>
+                </button>
             </div>
         </form>
     </div>
 </div>
-
 </body>
+<script>
+    let values = [$('#InputTitle'), $('#InputSummary'), $('#InputOutline'), $('#InputEffects'),
+        $('#InputContent'), $('#InputSimilar'), $('#InputDifference'), $('#InputPatent')];
+
+    $(function () {
+        $('.form-control').keyup(function (event) {
+            let check = true;
+            for (let i = 0; i < values.length; i++) {
+                if (values[i].val() === "") {
+                    console.log(values[i])
+                    check = false;
+                }
+            }
+            if (check) {
+                $("#submitBtn").removeAttr("disabled");
+            } else {
+                $("#submitBtn").attr("disabled", "disabled");
+            }
+        })
+    })
+
+    let id = {{id}};
+    $("#submitBtn").click(function () {
+        let price = $('#InputPrice').val();
+        if(price === ""){
+            price = 0;
+        }
+        let content =  {
+            "summary": $('#InputSummary').val(),
+            "outline": $('#InputOutline').val(),
+            "content": $('#InputContent').val(),
+            "effect": $('#InputEffects').val(),
+            "similar": $('#InputSimilar').val(),
+            "difference": $('#InputDifference').val(),
+            "patent": $('#InputPatent').val(),
+            "price": price
+        }
+        $.ajax(
+            {
+                type: "PUT",
+                url: "/create/post/real?id=" + id,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "title": $('#InputTitle').val(),
+                    "content": content
+                }),
+                // success(data) {
+                //     window.location.href = "mypage"
+                //     // location.href="mypage"
+                // }
+            })
+    })
+
+</script>
 <footer>
     {{> include/footer}}
 </footer>

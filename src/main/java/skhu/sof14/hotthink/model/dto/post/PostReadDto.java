@@ -1,5 +1,6 @@
 package skhu.sof14.hotthink.model.dto.post;
 
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
@@ -14,6 +15,8 @@ public final class PostReadDto extends PostBase{
     int hit;
     int like;
     LocalDateTime createDate;
+
+    @Getter
     String type;
     UserPostDto user;
 }

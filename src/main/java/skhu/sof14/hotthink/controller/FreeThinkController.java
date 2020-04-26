@@ -26,7 +26,6 @@ public class FreeThinkController {
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
-        System.out.println(page.getPage()+" "+pageSize);
         model.addAttribute("hasNext", page.getPage()<pageSize);
         model.addAttribute("hasPre", 1<page.getPage());
         return "freethink_list";
