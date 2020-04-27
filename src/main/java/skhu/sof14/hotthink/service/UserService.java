@@ -67,20 +67,20 @@ public class UserService {
         return entity == null;
     }
 
-    public boolean pwCheck(String userPassword){
+    public boolean pwCheck(String userPassword) { //회원탈퇴페이지 pw 일치 여부
 
         String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
-
-        System.out.println(user.getPassword());
-
-        if(user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) {
+//        System.out.println(user.getPassword());
+        if (user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) {
             return true;
         }
         return false;
+    }
 
-
+    public void deleteUser(){
+        int id = getIdFromAuth();
+        userRepository.updateStatus(id);
     }
 
 

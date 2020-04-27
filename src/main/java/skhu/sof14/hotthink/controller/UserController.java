@@ -58,13 +58,24 @@ public class UserController {
         return json;
     }
 
+    @PostMapping("user/delete")
+    public String deleteUser(){
+        userService.deleteUser();
+        return "temp_delete";
+
+    }
+
+
+
+
     @PostMapping("create")
     public String create(UserCreateDTO user, Model model) {
         userService.create(user);
         model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
         return "signup_suc";
     }
-  
+
+
 
 
 }
