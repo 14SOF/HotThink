@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.post.*;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
@@ -36,7 +37,12 @@ public class PostService {
     public PostReadDto findPostById(Long id) {
         Post entity = postRepository.findPostById(id);
         if(entity==null) return null;
-        return mapper.map(entity, PostReadDto.class);
+        PostReadDto dto = mapper.map(entity, PostReadDto.class);
+        for(CommentReadDto comment : dto.getCommentList()){
+            if (comment.getUser().getId() == UserService.getIdFromAuth())
+                comment.getUser().setWriter(true);
+        }
+        return dto;
     }
 
     public Long createFree(PostCreateDto dto) {

@@ -7,4 +7,5 @@ import lombok.ToString;
 @ToString
 public class UserPostDto extends UserBase{
     String nick;
+    boolean writer;
 }

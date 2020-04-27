@@ -22,5 +22,6 @@ public final class PostReadDto extends PostBase{
     String type;
     UserPostDto user;
 
+    @Getter
     List<CommentReadDto> commentList;
 }

@@ -61,10 +61,17 @@
                     <!--                <button class="btn btn-circle btn-danger btn-sm">-->
                     <!--                    <i class="fas fa-heart text-white"></i>-->
                     <!--                </button>-->
+                    {{#user.writer}}
+                    <button id="deleteReplyBtn" class="btn btn-circle btn-light btn-sm" onclick="deleteComment({{id}})">
+                        <i class="fas fa-trash-alt black"></i>
+                    </button>
+                    {{/user.writer}}
+                    {{^user.writer}}
                     <button class="btn btn-circle btn-light btn-sm">
                         <i class="fas fa-heart" style="color: red"> </i>
                     </button>
                     <span class="badge badge-warning">{{like}}</span>
+                    {{/user.writer}}
                 </div>
             </div>
             <a href="/404" style="float: right; font-size: 2px" role="button">
@@ -94,7 +101,7 @@
         </div>
     </div>
 </div>
-{{/free}}
+
 </body>
 <script>
     let reply = $('#InputReply');
@@ -126,8 +133,20 @@
         )
     }
 
-
+    //todo:url로 지우는거 방어해야함
+    function deleteComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/comment?id=" + commentId,
+                complete:function() {
+                    window.location.href = "/read/post/free?id=" + {{id}}
+                }
+            }
+        )
+    }
 </script>
+{{/free}}
 <footer>
     {{> include/footer}}
 </footer>

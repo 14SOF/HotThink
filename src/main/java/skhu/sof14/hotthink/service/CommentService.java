@@ -11,7 +11,6 @@ import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.CommentRepository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 public class CommentService {
@@ -19,11 +18,6 @@ public class CommentService {
     CommentRepository repository;
     @Autowired
     ModelMapper mapper;
-
-//    //해당 게시물의 댓글들 조회
-//    List<Comment> findAllByPost(PostBase post){
-//        return repository.findAllByPost(mapper.map(post, Post.class));
-//    }
 
     //생성
     public void create(Long postId, CommentCreateDto dto){
@@ -38,5 +32,9 @@ public class CommentService {
         dto.setPost(post);
         Comment entity = mapper.map(dto, Comment.class);
         repository.save(entity);
+    }
+
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 }
