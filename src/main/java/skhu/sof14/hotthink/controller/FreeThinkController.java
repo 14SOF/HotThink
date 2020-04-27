@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostCreateDto;
 import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
+import skhu.sof14.hotthink.model.dto.post.PostReadDto;
 import skhu.sof14.hotthink.service.PostService;
 
 import java.util.HashMap;
@@ -38,9 +39,11 @@ public class FreeThinkController {
 
     @GetMapping("/read/post/free")
     public String readFreeThink(@RequestParam Long id, Model model){
-        model.addAttribute("free",postService.findPostById(id));
+        PostReadDto dto = postService.findPostById(id);
+        model.addAttribute("free", dto);
         return "freethink_read";
     }
+
 
     @PostMapping("/create/post/free")
     public @ResponseBody

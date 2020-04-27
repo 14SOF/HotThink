@@ -7,12 +7,11 @@
 <body>
 {{> include/navBar}}
 
-
+{{#free}}
 <div class="container mt-5 mb-5 shadow-lg" style="font-family: Noto Sans KR,sans-serif; width: 1000px">
     <div style="padding: 20px">
         <div class="row">
             <div class="col">
-                {{#free}}
                 <h1 class="display-4" style="font-weight: bolder">{{title}}</h1>
             </div>
             <div class="col-auto">
@@ -50,13 +49,13 @@
                 </a>
             </div>
         </div>
-        {{/free}}
 
         <div class="dropdown-divider"></div>
 
+        {{#commentList}}
         <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
+            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">{{user.nick}}</a>
+            <div class="col">{{content}}</div>
             <div class="col-auto">
                 <div>
                     <!--                <button class="btn btn-circle btn-danger btn-sm">-->
@@ -65,86 +64,14 @@
                     <button class="btn btn-circle btn-light btn-sm">
                         <i class="fas fa-heart" style="color: red"> </i>
                     </button>
-                    <span class="badge badge-warning">123</span>
+                    <span class="badge badge-warning">{{like}}</span>
                 </div>
             </div>
             <a href="/404" style="float: right; font-size: 2px" role="button">
                 신고하기
             </a>
         </div>
-
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
+        {{/commentList}}
 
         <div class="row mt-1">
             <div class="col-auto">
@@ -167,7 +94,7 @@
         </div>
     </div>
 </div>
-
+{{/free}}
 </body>
 <footer>
     {{> include/footer}}
