@@ -12,4 +12,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     //읽기
     List<Comment> findAllByPost(Post post);
+
 }

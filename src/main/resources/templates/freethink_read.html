@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <body>
 {{> include/navBar}}
@@ -78,7 +78,7 @@
                 <i class="fas fa-share pt-3" style="font-size: x-large"></i>
             </div>
             <div class="col">
-                <form class="user">
+                <form class="user" onsubmit="return false">
                     <div class="form-group">
                         <input class="form-control form-control-user"
                                id="InputReply"
@@ -87,15 +87,47 @@
                 </form>
             </div>
             <div class="col-auto">
-                <a href="/" class="btn btn-block" style="background-color: #f1f3f5">
+                <button id="replyBtn" onclick="f({{id}})" type="button" class="btn btn-block" style="background-color: #f1f3f5" disabled>
                     <i class="far fa-keyboard" style="font-size: xx-large"></i>
-                </a>
+                </button>
             </div>
         </div>
     </div>
 </div>
 {{/free}}
 </body>
+<script>
+    let reply = $('#InputReply');
+    let replyBtn = $('#replyBtn');
+    $(function () {
+        reply.keyup(function () {
+            if (reply.val() !== "") {
+                replyBtn.removeAttr("disabled")
+            } else {
+                replyBtn.attr("disabled", "disabled")
+            }
+        })
+    })
+
+    function f(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/comment?id=" + postId,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "content": reply.val()
+                }),
+                complete:function() {
+                    window.location.href = "/read/post/free?id=" + postId
+                }
+            }
+        )
+    }
+
+
+</script>
 <footer>
     {{> include/footer}}
 </footer>
