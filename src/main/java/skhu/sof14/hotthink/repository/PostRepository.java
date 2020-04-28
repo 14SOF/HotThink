@@ -18,11 +18,15 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostById(Long id);
 
+    Page<Post> findAllByTitleContainingAndType(String title, String type, Pageable pageable);
+
     Page<Post> findAllByType(String type, Pageable pageable);
 
     default List<Post> findAllByType(String type, Pagination pagination) {
-        Pageable pageable = PageRequest.of(pagination.getPage()-1, 10);
-        Page<Post> page = findAllByType(type, pageable);
+        Pageable pageable = PageRequest.of(pagination.getPage() - 1, 10);
+        Page<Post> page;
+        if(pagination.getTitle() == null) page = findAllByType(type, pageable);
+        else page = findAllByTitleContainingAndType(pagination.getTitle(), type, pageable);
         pagination.setRecordCount((int) page.getTotalElements());
         return page.getContent();
     }

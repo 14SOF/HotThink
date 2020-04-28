@@ -343,8 +343,10 @@
         </ul>
     </nav>
 </div>
-
 <script>
+    $('#searchBtn').click(function () {
+        window.location.href = "/read/post/free/list?page=1&title=" +$('#searchInput').val();
+    })
     if({{hasPre}}){
         $("#pre").removeAttr("disabled");
         $("#first").removeAttr("disabled");
@@ -394,6 +396,8 @@
         page[2].remove();
     }else if(pageSize===2){
         page[2].remove();
+    }else if(pageSize===0){
+        $('.pagination').remove()
     }
 
     for(let i=0; i<3; i++){
