@@ -1,6 +1,7 @@
 package skhu.sof14.hotthink.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -59,14 +60,12 @@ public class UserController {
     }
 
     @PostMapping("user/delete")
-    public String deleteUser(){
+    public String deleteUser(Model model){
         userService.deleteUser();
-        return "temp_delete";
+        model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "user_delete_success";
 
     }
-
-
-
 
     @PostMapping("create")
     public String create(UserCreateDTO user, Model model) {

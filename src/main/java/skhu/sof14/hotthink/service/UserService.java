@@ -78,18 +78,19 @@ public class UserService {
         return false;
     }
 
-    public void deleteUser(){
+    public void deleteUser(){  //회원탈퇴버튼 누르면 요청되는 service , user의 status를 0으로 변경한다.
         int id = getIdFromAuth();
         userRepository.updateStatus(id);
     }
 
 
     public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
+
         User entity = new User();
         entity.setUserId(user.getUserId());
         entity.setName(user.getName());
         entity.setNick(user.getNick());
-        entity.setUserPassword(user.getUserPassword());
+        entity.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
         return userRepository.save(entity);
     }
 
