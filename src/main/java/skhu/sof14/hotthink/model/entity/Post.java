@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name="post")
-@ToString(exclude = "commentList")
+@ToString
 @Setter
 @Getter
 public class Post {

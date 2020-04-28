@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    {{> include/header}}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean" rel="stylesheet">    {{> include/header}}
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean');
-
         .btn-icon-split {
             padding: 0;
             overflow: hidden;
@@ -301,7 +299,7 @@
                         <p class="desc">{{user.nick}}</p>
                         <ul>
                             <li style="width: 33%"><span class="far fa-heart"></span> {{like}}</li>
-                            <li style="width: 33%"><span class="far fa-comments"></span> 892</li>
+                            <li style="width: 33%"><span class="far fa-comments"></span> {{commentList}}</li>
                             <li style="width: 33%"><span class="far fa-eye"></span> {{hit}}</li>
                         </ul>
                     </div>

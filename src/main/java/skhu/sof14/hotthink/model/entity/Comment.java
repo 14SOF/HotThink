@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Table(name = "comment")
-@ToString
+@ToString(exclude = "post")
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

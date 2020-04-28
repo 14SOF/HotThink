@@ -1,8 +1,12 @@
 package skhu.sof14.hotthink.service;
 
+import io.swagger.models.Model;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeMap;
 import org.modelmapper.TypeToken;
 import org.modelmapper.convention.MatchingStrategies;
+import org.modelmapper.spi.MappingContext;
 import org.modelmapper.spi.MatchingStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +39,7 @@ public class PostService {
     UserRepository userRepository;
 
     public PostReadDto findPostById(Long id) {
+        postRepository.updatePostByHit(id);
         Post entity = postRepository.findPostById(id);
         if(entity==null) return null;
         PostReadDto dto = mapper.map(entity, PostReadDto.class);
@@ -55,8 +60,8 @@ public class PostService {
 
     public List<PostListElementDto> findAllFree(Pagination page) {
         List<Post> postList = postRepository.findAllByType("프리", page);
-        Type listType = new TypeToken<List<PostListElementDto>>(){}.getType();
-        return mapper.map(postList, listType);
+        Type dtoListType = new TypeToken<List<PostListElementDto>>(){}.getType();
+        return mapper.map(postList, dtoListType);
     }
 
     @Transactional

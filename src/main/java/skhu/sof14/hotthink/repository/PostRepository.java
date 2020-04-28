@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.entity.Post;
 
@@ -26,8 +27,13 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
         return page.getContent();
     }
 
+    @Transactional
+    @Modifying
+    @Query("update Post p set p.hit = p.hit+1 where p.id =?1")
+    void updatePostByHit(Long id);
+
+
     @Modifying
     @Query("update Post p set p.title = ?2, p.content = ?3, p.createDate = ?4, p.type='리얼' where p.id = ?1")
     void createReal(Long id, String title, String content, LocalDateTime time);
-
 }
