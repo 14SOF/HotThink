@@ -6,10 +6,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import skhu.sof14.hotthink.model.dto.UserBase;
-import skhu.sof14.hotthink.model.dto.UserCreateDTO;
-import skhu.sof14.hotthink.model.dto.UserDetailDto;
-import skhu.sof14.hotthink.model.dto.UserLoginDto;
+import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDTO;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.model.vo.UserUpdateVo;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -35,7 +35,7 @@ public class UserService {
         return "anonymousUser";
     }
 
-    public int getIdFromAuth() {
+    public static int getIdFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int id = ((UserBase) auth.getDetails()).getId();
         return id;
@@ -110,7 +110,7 @@ public class UserService {
         if (entity == null) return null;
         UserCreateDTO dto = mapper.map(entity, UserCreateDTO.class);
         System.out.println(dto);
-        return dto;
+    return dto;
     }
 
 

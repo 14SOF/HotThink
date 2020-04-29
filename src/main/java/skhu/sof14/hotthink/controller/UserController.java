@@ -5,10 +5,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import skhu.sof14.hotthink.model.dto.UserCreateDTO;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDTO;
 import skhu.sof14.hotthink.service.UserService;
 
-import skhu.sof14.hotthink.model.dto.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.vo.UserUpdateVo;
 
 import java.util.HashMap;
@@ -73,6 +73,7 @@ public class UserController {
         model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
         return "signup_suc";
     }
+
 
 
 

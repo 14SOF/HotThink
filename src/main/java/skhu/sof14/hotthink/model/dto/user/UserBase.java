@@ -1,4 +1,4 @@
-package skhu.sof14.hotthink.model.dto;
+package skhu.sof14.hotthink.model.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

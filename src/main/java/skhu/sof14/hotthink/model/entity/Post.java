@@ -1,38 +1,43 @@
 package skhu.sof14.hotthink.model.entity;
-
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
 @Entity
 @Table(name="post")
+@ToString(exclude = "commentList")
+@Setter
+@Getter
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="post_idx")
-    private Long postIdx;
+    @Column(name = "post_idx")
+    private Long id;
 
-    @Column(name="post_title")
+    @Column(name = "post_title")
     private String title;
 
-    @Column(name="post_content")
+    @Column(name = "post_content")
     private String content;
 
-    @Column(name="post_hit")
+    @Column(name = "post_hit")
     private int hit;
 
-    @Column(name="post_like")
+    @Column(name = "post_like")
     private int like;
 
-    @Column(name="post_dateTime")
+    @Column(name = "post_date_time")
     private LocalDateTime createDate;
 
-    @Column(name="post_type")
+    @Column(name = "post_type")
     private String type;
 
-    @Column(name="user_user_idx")
-    private int userIdx;
+    @ManyToOne
+    @JoinColumn(name = "user_user_idx")
+    private User user;
 
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    private List<Comment> commentList;
 }

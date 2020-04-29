@@ -65,10 +65,7 @@ public class TempController {
         return "realthink_read";
     }
 
-    @GetMapping("qna")
-    public String qna() {
-        return "qna_list";
-    }
+
 
     @GetMapping("form")
     public String form() {
@@ -96,16 +93,7 @@ public class TempController {
     }
 
 
-    //    qna 글 내용 test  실제구현은 id값으로
-    @GetMapping("list/1")
-    public String qnaPage() {
-        return "qna_contents";
-    }
 
-    @GetMapping("list/1/update")
-    public String qnaUpdate() {
-        return "qna_updateForm";
-    }
 
     @GetMapping("producer")
     public String producer() {
@@ -121,6 +109,8 @@ public class TempController {
     public String thinkMake() {
         return "thinkMake";
     }
+
+
 
 //    @GetMapping("signup_success")
 //    public String signup_success() {
