@@ -2,13 +2,18 @@ package skhu.sof14.hotthink.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
+import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.repository.PostRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.service.PostService;
 import skhu.sof14.hotthink.service.UserService;
+import org.modelmapper.ModelMapper;
+
+import java.lang.reflect.Type;
 
 @Controller
 public class QnaController {
@@ -19,7 +24,12 @@ public class QnaController {
 
     @Autowired
     UserService userService;
-
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    ModelMapper mapper;
+    @Autowired
+    PostRepository postRepository;
 
 
     @GetMapping("qnaForm")
@@ -44,10 +54,8 @@ public class QnaController {
     }
 
     @PostMapping("create/post/qna")
-    public String qnaSubmit(String title, String content, Model model){
-        int Useridx = UserService.getIdFromAuth();
-        model.addAttribute("userNick", )
-
+    public String qnaSubmit(String title, String content) {
+        postService.createQna(new QnaCreateDto(title, content));
+        return "qna_list";
     }
-
 }

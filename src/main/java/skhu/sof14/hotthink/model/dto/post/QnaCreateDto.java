@@ -3,17 +3,17 @@ package skhu.sof14.hotthink.model.dto.post;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.User;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
-public class PostCreateDto extends PostBase {
+@RequiredArgsConstructor
+public class QnaCreateDto extends PostBase {
     @NonNull
     @Setter
     String title;
@@ -26,11 +26,6 @@ public class PostCreateDto extends PostBase {
     @Setter
     String type;
     @Setter
-    User user;
+    UserBase user;
 
-    public PostCreateDto(String title, String content) {
-        this.title = title;
-        this.content = content;
-        this.createDate = LocalDateTime.now();
-    }
 }

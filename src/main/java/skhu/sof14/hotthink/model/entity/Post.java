@@ -40,4 +40,12 @@ public class Post {
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private List<Comment> commentList;
+
+//    public Post(User user, String title, String content){
+//        this.user = user;
+//        this.title = title;
+//        this.content= content;
+//        this.createDate = LocalDateTime.now();
+//        this.type="QNA";
+//    }
 }
