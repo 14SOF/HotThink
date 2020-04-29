@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbarGlobal"
      style="border-bottom: solid 2px; border-bottom-color: #f1f3f5;">
 
-    <a class="navbar-brand font-italic ml-3" href="/" id="navbarBrand"
+    <a class="navbar-brand font-italic ml-3" href="/home" id="navbarBrand"
        style="color: red; font-size: xx-large; font-family: Arial;">HotThink</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -13,7 +13,7 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item">
-                <a class="nav-link" href="/freethinklist" style="color: royalblue; margin-left: 30px">
+                <a class="nav-link" href="/read/post/free/list?page=1" style="color: royalblue; margin-left: 30px">
                     프리띵크
                 </a>
             </li>
@@ -25,7 +25,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/realthinklist" style="color: goldenrod">
+                <a class="nav-link" href="/read/post/real/list" style="color:goldenrod">
                     리얼띵크
                 </a>
             </li>
@@ -68,21 +68,58 @@
                 </div>
             </li>
         </ul>
-        {{#test}}
-        <i class="fas fa-bell mr-3" style="font-size: xx-large; color: gold"></i>
-<!--        <i class="far fa-bell"style="font-size: larger"></i>-->
-        <i class="fas fa-envelope mr-3 text-info" style="font-size: xx-large"></i>
-<!--        <i class="far fa-envelope" style="font-size: larger"></i>-->
-
-        <div class="navbar-divider"></div>
-
-        <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{test}}</span>
-        {{/test}}
-        {{^test}}
-        <a href="/mypage"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
-        {{/test}}
     </div>
+
+    {{#userNick}}
+    <i class="fas fa-bell mr-3" style="font-size: xx-large; color: gold"></i>
+    <!--        <i class="far fa-bell"style="font-size: larger"></i>-->
+    <i class="fas fa-envelope mr-3 text-info" style="font-size: xx-large"></i>
+    <!--        <i class="far fa-envelope" style="font-size: larger"></i>-->
+
+    <div class="navbar-divider"></div>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarUser" role="button" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{userNick}}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarSupport">
+                <a class="dropdown-item" href="/mypage">마이페이지</a>
+                <div class="dropdown-divider"></div>
+                <button type="button" class="dropdown-item btn" data-toggle="modal" data-target="#exampleModal">
+                    로그아웃
+                </button>
+<!--                <a class="dropdown-item" href="#">로그아웃</a>-->
+            </div>
+        </li>
+    </ul>
+
+    <!--        <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{userNick}}</span>-->
+    {{/userNick}}
+    {{^userNick}}
+    <a href="/login"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
+    {{/userNick}}
 </nav>
 
 <!--    여백추가-->
 <div style="height: 100px"></div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">에이 설마</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                로그아웃 하실 꺼에여?????
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <a type="button"  href="/logout_processing" class="btn btn-primary">확인</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -25,7 +25,7 @@
 }
 
 .myPage-container{
-    height: 1000px;
+    height: 1100px;
     font-family: "Noto Sans KR", sans-serif;
 }
 
@@ -44,7 +44,7 @@
 
 .myPage-component{
     width: 1200px;
-    height: 900px;
+    height: 950px;
     background-color: whitesmoke;
     z-index: 2;
     position: absolute;
@@ -113,7 +113,7 @@
     border-color: #4e73df;
 }
 
-form.user .btn-user {
+form.user .btn-user{
     font-size: 0.8rem;
     border-radius: 10rem;
     padding: 0.75rem 1rem;
@@ -207,7 +207,7 @@ form.user .btn-user {
     }
 }
 
-form.user .form-control-user {
+form.user .form-control-user{
     font-size: 0.8rem;
     border-radius: 10rem;
     padding: 1.5rem 1rem;

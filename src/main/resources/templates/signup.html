@@ -2,9 +2,42 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
-
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
+<style>
+    .myButton {
+        box-shadow: inset -4px 2px 0px 0px #ffffff;
+        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color: #ffffff;
+        border-radius: 35px;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        cursor: pointer;
+        color: #666666;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 11px 13px;
+        text-decoration: none;
+        text-shadow: 0px 0px 0px #ffffff;
+    }
+
+    .myButton:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }
+
+    .em {
+        font-size: 0.8rem;
+        border-radius: 3rem;
+        padding: 0.8rem 2rem;
+    }
+
+</style>
 <body>
 {{> include/navBar}}
 
@@ -14,48 +47,43 @@
             <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">핫띵크 회원가입</h1>
         </div>
 
-        <form class="user">
+        <form class="user" id="user" name="user" method="post" action="/create/user">
             <div class="form-group">
-                <input type="email" class="form-control form-control-user"
-                       id="InputEmail" aria-describedby="emailHelp"
-                       placeholder="이메일">
+                <input type="email" class="em" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" required/>
+                <button type="button" class="myButton" id="idCheckBtn">중복확인</button>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="InputPassword" placeholder="비밀번호">
+                       id="userPassword" name="userPassword" placeholder="비밀번호" required>
             </div>
             <div class="form-group">
                 <input type="password" class="form-control form-control-user"
-                       id="InputPasswordConfirm" placeholder="비밀번호 확인">
+                       id="user_PwCk" name="user_PwCk" placeholder="비밀번호 확인" required>
             </div>
+            <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
             <div class="form-group">
                 <input type="text" class="form-control form-control-user"
-                       id="InputName" placeholder="이름">
+                       id="name" name="name" placeholder="이름" required>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control form-control-user"
-                        id="InputNickName" placeholder="닉네임">
+                <input type="text" class="em"
+                       id="nick" name="nick" placeholder="닉네임" required>
+                <button type="button" class="myButton" id="nickCheckBtn">중복확인</button>
+
             </div>
 
             <div class="form-group">
                 <div class="custom-control custom-checkbox small">
-                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <input type="checkbox" class="custom-control-input" id="customCheck" required>
                     <label class="custom-control-label" for="customCheck">
-                        <a href="/">이용약관</a> 및
-                        <a href="/">개인정보 취급방침</a> 에 동의합니다
+                        <a href="/footer1">이용약관</a> 및
+                        <a href="/footer1">개인정보 취급방침</a> 에 동의합니다
                     </label>
                 </div>
             </div>
             <hr>
-            <a href="index.html" class="btn btn-primary btn-user btn-block">
-                회원가입
-            </a>
-
-            <div class="text-center small mt-2"
-            style="color: red">
-                에러 표시될 곳
-            </div>
-
+            <button type="submit" class="btn btn-primary btn-user btn-block" id="regi">회원가입</button>
+            <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
             <hr>
             <a href="index.html" class="btn btn-google btn-user btn-block">
                 <i class="fab fa-google fa-fw"></i> 구글 아이디로 회원가입하기
@@ -68,7 +96,95 @@
 
     </div>
 </div>
-
-{{> include/footer}}
+<footer>
+    {{> include/footer}}
+</footer>
 </body>
+<script>
+    $("#regi").attr("disabled", "disabled");
+
+    $(function () { //비밀번호 일치여부
+        $("input").keyup(function () {
+            var pwd1 = $("#userPassword").val();
+            var pwd2 = $("#user_PwCk").val();
+
+            if (pwd1 != "" || pwd2 != "") {
+                if (pwd1 == pwd2) {
+                    $('#checkMsgPW').html('<p style="color:blue">비밀번호가 일치합니다.</p>');
+                    $("#regi").removeAttr("disabled");
+                } else {
+                    $('#checkMsgPW').html('<p style="color:red">비밀번호가 일치하지 않습니다.</p>');
+                    $("#regi").attr("disabled", "disabled");
+                }
+            }
+        });
+    });
+
+    $(function () { // 이름 칸 비어있으면 회원가입버튼 비활성
+        $("input").keyup(function () {
+            var userName = $("#name").val();
+            if (userName == "") {
+                $("#regi").attr("disabled", "disabled");
+            } else {
+                $("#regi").removeAttr("disabled");
+
+            }
+        });
+    });
+
+    $("#idCheckBtn").click(function () { //ID 체크하는 JS
+        let userId = $('#userId').val();
+
+        console.log(userId)
+        if (userId === "") {
+            $("#regi").attr("disabled", "disabled");
+        } else {
+            $.ajax({
+                type: "GET",
+                url: "/check/user/id",
+                data: {
+                    "id": userId
+                },
+                success: function (data) {	//data : checkSignup에서 넘겨준 결과값
+                    if (data['check']) {
+                        $('#checkMsg').html('<p style="color:blue">사용가능한 ID 입니다!</p>');
+                        $("#regi").removeAttr("disabled");
+                    } else {
+                        $('#checkMsg').html('<p style="color:red">이미 사용중인 ID 입니다. 다른 ID를 입력하세요.</p>');
+                        $('#userId').val('');
+                        $('#userId').focus();
+                        $("#regi").attr("disabled", "disabled");
+                    }
+                }
+            })
+        }
+    });
+
+    $("#nickCheckBtn").click(function () {
+        $.ajax({
+                type: "GET",
+                url: "/check/user/nick",
+                data: {
+                    "nick": $('#nick').val()
+                },
+                success: function (data) {
+                    if (data['check']) {
+                        if ($('#nick').val() != '') {
+                            $('#checkMsg').html('<p style="color:blue">사용가능한 닉네임 입니다!</p>');
+                            $("#regi").removeAttr("disabled");
+                        }
+                    } else {
+                        if ($('#nick').val() != '') {
+                            $('#checkMsg').html('<p style="color:red">이미 사용중인 닉네임 입니다. 다른 닉네임을 입력하세요.</p>');
+                            $('#nick').val('');
+                            $('#nick').focus();
+                            $("#regi").attr("disabled", "disabled");
+                        }
+                    }
+                }
+            }
+        )
+    })
+
+</script>
 </html>

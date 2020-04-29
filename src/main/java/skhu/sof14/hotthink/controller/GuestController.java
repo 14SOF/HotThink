@@ -1,0 +1,48 @@
+package skhu.sof14.hotthink.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.service.UserService;
+
+import javax.servlet.http.HttpServletRequest;
+
+@Controller
+public class GuestController {
+
+    @Autowired
+    UserService userService;
+
+    @GetMapping("home")
+    public String index() {
+        return "index";
+    }
+
+    // TODO: 2020-04-23 : 로그인한 유저가 url에 치고 들어오는거 막기
+    @GetMapping("login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("login")
+    public String loginFail(HttpServletRequest request, Model model){
+        model.addAttribute("userId", request.getAttribute("userId"));
+        return "login";
+    }
+
+    @GetMapping("create/user")
+    public String signUp() {
+        return "signup";
+    }
+
+    @PostMapping("create/user")
+    public String create(UserCreateDto user, Model model) {
+        UserDetailDto dto = userService.create(user);
+        model.addAttribute("users", dto);
+        return "signup_suc";
+    }
+}
