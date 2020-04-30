@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Setter
@@ -21,9 +22,6 @@ public class Comment {
     @Column(name = "comment_content")
     String content;
 
-    @Column(name = "comment_like")
-    int like;
-
     @Column(name = "comment_date_time")
     LocalDateTime dateTime;
 
@@ -37,4 +35,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_user_idx")
     User user;
+
+    @OneToMany(mappedBy = "comment", fetch = FetchType.EAGER)
+    private List<Like> likeList;
 }

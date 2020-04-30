@@ -40,6 +40,7 @@ public class FreeThinkController {
     @GetMapping("/read/post/free")
     public String readFreeThink(@RequestParam Long id, Model model){
         PostReadDto dto = postService.findPostById(id);
+        System.out.println(dto);
         model.addAttribute("free", dto);
         return "freethink_read";
     }

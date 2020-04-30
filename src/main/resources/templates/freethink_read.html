@@ -27,12 +27,17 @@
         </h3>
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
+                {{#userLikeStatus}}
                 <button type="button" class="btn btn-danger">
-                    좋아요 취소<span class="badge badge-light ml-1">4</span>
+                    좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
+                {{/userLikeStatus}}
+                {{^userLikeStatus}}
                 <button type="button" class="btn btn-light" style="border:solid 1px red">
-                    좋아요<span class="badge badge-danger ml-1">{{like}}</span>
+<!--                    좋아요-->
+                    좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
+                {{/userLikeStatus}}
                 <button type="button" class="btn btn-primary">신고하기</button>
             </div>
             <div class="col-auto justify-content-end">
@@ -70,7 +75,7 @@
                     <button class="btn btn-circle btn-light btn-sm">
                         <i class="fas fa-heart" style="color: red"> </i>
                     </button>
-                    <span class="badge badge-warning">{{like}}</span>
+                    <span class="badge badge-warning">{{likeList}}</span>
                     {{/user.writer}}
                 </div>
             </div>

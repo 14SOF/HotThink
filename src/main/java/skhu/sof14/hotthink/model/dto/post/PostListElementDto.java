@@ -4,6 +4,7 @@ import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 import skhu.sof14.hotthink.model.entity.Comment;
+import skhu.sof14.hotthink.model.entity.Like;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +19,10 @@ public class PostListElementDto extends PostBase{
     UserPostDto user;
     int commentList;
 
+    public void setLike(List<Like> like){
+        if(like == null) this.like = 0;
+        else this.like = like.size();
+    }
     public void setCommentList(List<Comment> commentList){
         this.commentList = commentList.size();
     }

@@ -5,17 +5,17 @@ import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
+import skhu.sof14.hotthink.model.entity.Like;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter
 @ToString
-public final class PostReadDto extends PostBase{
+public class PostReadDto extends PostBase {
     String title;
     String content;
     int hit;
-    int like;
     LocalDateTime createDate;
 
     @Getter
@@ -23,5 +23,16 @@ public final class PostReadDto extends PostBase{
     UserPostDto user;
 
     @Getter
+    int likeList;
+
+    public void setLikeList(List<Like> likeList) {
+        this.likeList = likeList == null ? 0 : likeList.size();
+    }
+
+
+    @Getter
     List<CommentReadDto> commentList;
+
+
+    boolean userLikeStatus;
 }
