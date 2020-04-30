@@ -16,7 +16,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostById(Long id);
-
+    Page<Post> findAllByTitleContainingAndType(String title, String type, Pageable pageable);
     Page<Post> findAllByType(String type, Pageable pageable);
 
     default List<Post> findAllByType(String type, Pagination pagination) {

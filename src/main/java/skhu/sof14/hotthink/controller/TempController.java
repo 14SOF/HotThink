@@ -110,6 +110,10 @@ public class TempController {
         return "thinkMake";
     }
 
+    @GetMapping("temptest")
+    public String temptest(){
+        return "temptest";
+    }
 
 
 //    @GetMapping("signup_success")

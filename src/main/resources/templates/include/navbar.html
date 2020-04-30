@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" id="navbarGlobal"
      style="border-bottom: solid 2px; border-bottom-color: #f1f3f5;">
 
-    <a class="navbar-brand font-italic ml-3" href="home" id="navbarBrand"
+    <a class="navbar-brand font-italic ml-3" href="/home" id="navbarBrand"
        style="color: red; font-size: xx-large; font-family: Arial;">HotThink</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -55,7 +55,7 @@
                     고객지원
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarSupport">
-                    <a class="dropdown-item" href="/qna">QNA</a>
+                    <a class="dropdown-item" href="/read/post/qna/list?page=1">QNA</a>
                     <a class="dropdown-item" href="#">머넣지</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
@@ -91,7 +91,7 @@
     <!--        <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{userNick}}</span>-->
     {{/userNick}}
     {{^userNick}}
-    <a href="login"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
+    <a href="/login"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
     {{/userNick}}
 </nav>
 

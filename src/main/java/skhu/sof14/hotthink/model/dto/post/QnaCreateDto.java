@@ -8,11 +8,12 @@ import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.User;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class QnaCreateDto extends PostBase {
     @NonNull
     @Setter
@@ -27,5 +28,16 @@ public class QnaCreateDto extends PostBase {
     String type;
     @Setter
     UserBase user;
+
+    public QnaCreateDto(String title, String content, LocalDateTime createDate){
+        this.title = title;
+        this.content= content;
+        this.createDate= createDate;
+    }
+
+
+
+
+
 
 }
