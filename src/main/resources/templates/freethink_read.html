@@ -28,12 +28,12 @@
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
                 {{#userLikeStatus}}
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})">
                     좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
                 {{/userLikeStatus}}
                 {{^userLikeStatus}}
-                <button type="button" class="btn btn-light" style="border:solid 1px red">
+                <button type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red">
 <!--                    좋아요-->
                     좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
@@ -150,6 +150,31 @@
             }
         )
     }
+
+    function likePost(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelPost(postId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
 </script>
 {{/free}}
 <footer>
