@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.post.PostBase;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
@@ -21,34 +22,47 @@ public class LikeService {
     @Autowired
     ModelMapper mapper;
 
-    public int createPostLike(Long id) {
-        Post post = new Post();
-        post.setId(id);
-
+    //좋아요 생성
+    public int createLike(Long id, boolean check) {
         Like entity = new Like();
 
-        // TODO: 2020-04-30 시큐리티에서 받아올 것 수정바람
         User user = new User();
-        user.setId(28);
-
-        entity.setPost(post);
+        user.setId(UserService.getIdFromAuth());
         entity.setUser(user);
+        List<Like> likeList;
+        //true면 게시판
+        if (check) {
+            Post post = new Post();
+            post.setId(id);
+            entity.setPost(post);
+            repository.save(entity);
+            likeList = repository.findAllByPost(post);
+        } else {//댓글
+            Comment comment = new Comment();
+            comment.setId(id);
+            entity.setComment(comment);
+            repository.save(entity);
+            likeList = repository.findAllByComment(comment);
+        }
+        return likeList == null ? 0 : likeList.size();
 
-        repository.save(entity);
-
-        return repository.findAllByPost(post).size();
     }
 
-    public int deletePostLike(Long id) {
-        Post post = new Post();
-        post.setId(id);
+    public int deleteLike(Long id, boolean check) {
         User user = new User();
-        user.setId(28);
-
-        repository.deleteLikeByUserAndPost(user, post);
-
-        List<Like> list = repository.findAllByPost(post);
-        if (list == null) return 0;
-        else return list.size();
+        user.setId(UserService.getIdFromAuth());
+        List<Like> likeList;
+        if (check) {
+            Post post = new Post();
+            post.setId(id);
+            repository.deleteLikeByUserAndPost(user, post);
+            likeList = repository.findAllByPost(post);
+        } else {
+            Comment comment = new Comment();
+            comment.setId(id);
+            repository.deleteLikeByUserAndComment(user, comment);
+            likeList = repository.findAllByComment(comment);
+        }
+        return likeList == null ? 0 : likeList.size();
     }
 }

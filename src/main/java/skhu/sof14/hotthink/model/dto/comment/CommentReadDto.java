@@ -18,7 +18,9 @@ public class CommentReadDto extends CommentBase {
     UserPostDto user;
     boolean status;
 
-    void setLikeList(List<Like> likeList){
+    public void setLikeList(List<Like> likeList){
         this.likeList = likeList == null? 0 : likeList.size();
     }
+
+    boolean userLikeStatus;
 }

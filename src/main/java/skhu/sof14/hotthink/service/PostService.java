@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.post.*;
+import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
@@ -58,6 +59,18 @@ public class PostService {
             if (nowUser == like.getUser().getId()) {
                 dto.setUserLikeStatus(true);
                 break;
+            }
+        }
+
+        //댓글 좋아요 여부
+        for(int i=0; i<entity.getCommentList().size(); i++){
+            Comment comment = entity.getCommentList().get(i);
+            likeList = comment.getLikeList();
+            for (Like like : likeList) {
+                if (nowUser == like.getUser().getId()) {
+                    dto.getCommentList().get(i).setUserLikeStatus(true);
+                    break;
+                }
             }
         }
 
