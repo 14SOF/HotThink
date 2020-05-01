@@ -6,6 +6,7 @@ import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,12 +14,20 @@ import java.util.List;
 @Setter
 public class PostListElementDto extends PostBase{
     String title;
+    String content;
     int like;
     int hit;
-    LocalDateTime createDate;
+    LocalDate createDate;
     UserPostDto user;
     int commentList;
 
+    public void setContent(String content){
+        if(content.length()>=50) this.content = content.substring(0, 50);
+        else this.content = content;
+    }
+    public void setCreateDate(LocalDateTime createDate){
+        this.createDate = createDate.toLocalDate();
+    }
     public void setLike(List<Like> like){
         if(like == null) this.like = 0;
         else this.like = like.size();

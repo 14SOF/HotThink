@@ -85,8 +85,8 @@ public class PostService {
         return postRepository.save(entity).getId();
     }
 
-    public List<PostListElementDto> findAllFree(Pagination page) {
-        List<Post> postList = postRepository.findAllByType("프리", page);
+    public List<PostListElementDto> findAllPage(Pagination page, String type) {
+        List<Post> postList = postRepository.findAllByType(type, page);
         Type dtoListType = new TypeToken<List<PostListElementDto>>() {
         }.getType();
         return mapper.map(postList, dtoListType);
