@@ -1,20 +1,23 @@
 package skhu.sof14.hotthink.model.dto.post;
 
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 
 import java.time.LocalDateTime;
 
-@ToString
 @Setter
-public class QnaListElementDto extends PostBase {
-
+@ToString
+public class QnaReadDto extends PostBase {
     String title;
-    LocalDateTime createDate;
-    UserPostDto user;
+    String content;
     int hit;
+    LocalDateTime createDate;
 
-
+    @Getter
+    String type;
+    UserPostDto user;
 
 }
+

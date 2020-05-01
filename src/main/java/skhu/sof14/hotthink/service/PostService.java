@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
+import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
@@ -41,6 +42,17 @@ public class PostService {
         List<Post> qnaList = postRepository.findAllByType("QNA",page);
         Type dtoListType = new TypeToken<List<QnaListElementDto>>(){}.getType();
         return mapper.map(qnaList,dtoListType);
+    }
+
+    public QnaReadDto findPostById(Long id){
+        postRepository.updatePostByHit(id);
+        Post entity = postRepository.findPostById(id);
+        if(entity == null) return null;
+
+        QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
+        return dto;
+
+
     }
 
 

@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
+import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PostRepository;
@@ -74,6 +76,13 @@ public class QnaController {
         model.addAttribute("hasNext", page.getPage() <pageSize); //현재페이지보다, 총페이지의 수가 크다면 다음으로 갈수있음
         model.addAttribute("hasPre", 1<page.getPage()); //1보다 크다면,
         return "qna_list";
+    }
+
+    @GetMapping("read/post/qna")
+    public String readQna(@RequestParam Long id, Model model){
+        QnaReadDto dto = postService.findPostById(id);
+        model.addAttribute("qna", dto);
+        return "qna_contents";
     }
 
 
