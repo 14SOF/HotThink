@@ -1,6 +1,7 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
@@ -14,12 +15,14 @@ import java.util.List;
 @ToString
 public class PostReadDto extends PostBase {
     String title;
+    @Getter
     String content;
     int hit;
     LocalDateTime createDate;
 
     @Getter
     String type;
+    @Getter
     UserPostDto user;
 
     @Getter
@@ -29,10 +32,9 @@ public class PostReadDto extends PostBase {
         this.likeList = likeList == null ? 0 : likeList.size();
     }
 
-
     @Getter
     List<CommentReadDto> commentList;
 
-
     boolean userLikeStatus;
+
 }

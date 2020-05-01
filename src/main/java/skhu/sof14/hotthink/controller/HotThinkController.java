@@ -9,6 +9,7 @@ import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
 import skhu.sof14.hotthink.model.dto.post.PostReadDto;
 import skhu.sof14.hotthink.service.PostService;
+import skhu.sof14.hotthink.service.UserService;
 
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class HotThinkController {
     @GetMapping("/read/post/hot")
     public String readHotThink(@RequestParam Long id, Model model){
         PostReadDto dto = postService.findPostById(id);
+        if(dto.getUser().getId()==UserService.getIdFromAuth()) model.addAttribute("writer", true);
         model.addAttribute("hot", dto);
         return "hotthink_read";
     }

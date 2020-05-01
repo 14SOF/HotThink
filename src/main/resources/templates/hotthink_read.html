@@ -27,11 +27,16 @@
         </h3>
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
-                <button type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})">
+                <button type="button" class="btn btn-danger">
                     좋아요 <span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
                 <button type="button" class="btn btn-primary">신고하기</button>
             </div>
+            {{#writer}}
+            <div class="col-auto">
+                <button type="button" class="btn" style="background: goldenrod; color: white" onclick="f({{id}})">리얼띵크 작성하기</button>
+            </div>
+            {{/writer}}
             <div class="col-auto justify-content-end">
                 <a href="mypage" class="shadow border-left-secondary card small"
                    style="height: 100px; padding: 10px; text-decoration: none">
@@ -69,6 +74,12 @@
     </div>
 </div>
 {{/hot}}
+</body>
+<script>
+    function f(data) {
+        window.location.href = "/create/post/real?id="+data
+    }
+</script>
 <footer>
     {{> include/footer}}
 </footer>

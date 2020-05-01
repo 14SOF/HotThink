@@ -270,15 +270,17 @@
     let pageSize = {{pageSize}}
     let nowPage = {{nowPage}}
     let pageUrl = '/user/mypage/myboards?page='
-    let pageSet = {{pageSet}}
+    let pageSet = Math.floor(nowPage/10) * 10;
 
-    if (nowPage === 1+pageSet){
+    console.log(nowPage/10)
+    if (nowPage === 1){
         $('#pagination').append("<li class='page-item'><button type='button' class='button page-link' disabled>Previous</button></li>")
     }else{
         $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+(nowPage-1)+">Previous</a></li>")
     }
-    for(let i=1+pageSet; i<= pageSize+pageSet; i++){
-        $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
+    for(let i=1+pageSet; i<= 10+pageSet; i++){
+        if (nowPage===i) $('#pagination').append("<li class='page-item active'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
+        else $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
     }
     if(nowPage===pageSize){
         $('#pagination').append("<li class='page-item'><button type='button' class='button page-link' disabled>Next</button></li>")
@@ -289,7 +291,6 @@
     let items = [  $('#item1'), $('#item2'), $('#item3'), $('#item4') ]
     for(let i=0; i<4; i++){
         let item = items[i]
-        console.log(item.text())
         if(item.text() === "프리띵크"){
             item.addClass("btn-primary")
         }else if(item.text() === "핫띵크"){

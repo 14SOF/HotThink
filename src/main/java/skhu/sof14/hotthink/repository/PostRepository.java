@@ -53,4 +53,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Modifying
     @Query("update Post p set p.title = ?2, p.content = ?3, p.createDate = ?4, p.type='리얼' where p.id = ?1")
     void createReal(Long id, String title, String content, LocalDateTime time);
+
+    @Transactional
+    @Modifying
+    @Query("update Post p set p.hit= 0, p.type='핫' where p.id = ?1")
+    void updatePostToHot(Long id);
 }

@@ -12,15 +12,14 @@ import java.util.List;
 
 @ToString
 @Setter
-public class PostListElementDto extends PostBase{
-    String title;
-    String content;
+public class PostListElementDto extends RealListElementDto{
     int like;
     int hit;
     LocalDate createDate;
     UserPostDto user;
     int commentList;
 
+    @Override
     public void setContent(String content){
         if(content.length()>=50) this.content = content.substring(0, 50);
         else this.content = content;

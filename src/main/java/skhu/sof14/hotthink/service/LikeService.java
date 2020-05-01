@@ -20,6 +20,9 @@ public class LikeService {
     LikeRepository repository;
 
     @Autowired
+    PostService postService;
+
+    @Autowired
     ModelMapper mapper;
 
     //좋아요 생성
@@ -37,6 +40,7 @@ public class LikeService {
             entity.setPost(post);
             repository.save(entity);
             likeList = repository.findAllByPost(post);
+            if(likeList!=null && likeList.size()>=2) postService.freeToHot(id);
         } else {//댓글
             Comment comment = new Comment();
             comment.setId(id);

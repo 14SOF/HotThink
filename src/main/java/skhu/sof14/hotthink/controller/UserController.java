@@ -11,7 +11,6 @@ import skhu.sof14.hotthink.service.UserService;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,15 +61,14 @@ public class UserController {
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {
         List<MyPostDto> dtoList = userService.findMyPost(page);
-        model.addAttribute("item1", dtoList.get(0));
-        model.addAttribute("item2", dtoList.get(1));
-        model.addAttribute("item3", dtoList.get(2));
-        model.addAttribute("item4", dtoList.get(3));
+        for(int i=0; i<dtoList.size(); i++){
+            model.addAttribute("item"+(i+1), dtoList.get(i));
+        }
 
         int pageSize = page.getRecordCount()%4 > 0? page.getRecordCount()/4+1 : page.getRecordCount()/4;
         model.addAttribute("nowPage", page.getPage());
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("pageSet", page.getRecordCount()/40*10);
+        model.addAttribute("pageSet", page.getPage()/40*10);
 
         return "mypage_myboards";
     }

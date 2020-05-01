@@ -2,7 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 
     <style>
         .real-container {
@@ -123,12 +123,12 @@
 <div class="container real-container shadow-lg mt-5 mb-5">
     <div class="row real-container-header">
         <div class="col">
-            <h1 class="display-4" style="font-weight: bolder">제목 쌸라쌸라</h1>
+            <h1 class="display-4" style="font-weight: bolder">{{real.title}}</h1>
         </div>
         <div class="col-auto">
             <div>2020/04/12</div>
             <div class="text-gray-800" style="float: right"><i class="far fa-eye"></i>
-                991329
+                {{real.hit}}
             </div>
         </div>
     </div>
@@ -140,30 +140,30 @@
             <li><a href="#" title="tab2">상세내용</a></li>
             <li><a href="#" title="tab3">기대효과</a></li>
             <li><a href="#" title="tab4">유사아이디어</a></li>
-            <li><a href="#" title="tab4">차별성</a></li>
-            <li><a href="#" title="tab4">특허관련</a></li>
-            <li><a href="#" title="tab4">첨부파일</a></li>
+            <li><a href="#" title="tab5">차별성</a></li>
+            <li><a href="#" title="tab6">특허관련</a></li>
+            <li><a href="#" title="tab7">첨부파일</a></li>
         </ul>
     </div>
     <div class="row" style="height: 600px">
         <div id="content" class="shadow">
             <div id="tab1">
-                <p>내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                    내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용
-                </p>
+                <p>{{realContent.outline}}</p>
             </div>
             <div id="tab2">
-                <p>가격정보</p>
-
+                <p>{{realContent.content}}</p>
             </div>
             <div id="tab3">
-                <p>미정</p>
+                <p>{{realContent.effect}}</p>
             </div>
             <div id="tab4">
-                <p>미정</p>
+                <p>{{realContent.similar}}</p>
             </div>
             <div id="tab5">
-                <p>미정</p>
+                <p>{{realContent.difference}}</p>
+            </div>
+            <div id="tab6">
+                <p>{{realContent.patent}}</p>
             </div>
         </div>
     </div>
@@ -177,7 +177,7 @@
                         희망가격
                     </div>
                     <div class="row ml-2" style="font-size: x-large">
-                        50130210310<i class="mt-2 ml-2 mr-4 fas fa-won-sign"></i>
+                        {{realContent.price}}<i class="mt-2 ml-2 mr-4 fas fa-won-sign"></i>
                     </div>
                 </div>
             </div>
@@ -205,7 +205,7 @@
                     작성자
                 </div>
                 <div class="mx-auto text-gray-900">
-                    <div class="h1">내이름은홍성빈</div>
+                    <div class="h1">{{real.user.nick}}</div>
                 </div>
                 <div class="row justify-content-center">
                     <i class="fas fa-star" style="color:gold"></i>
@@ -217,7 +217,6 @@
             </a>
         </div>
     </div>
-
 </div>
 
 <script>

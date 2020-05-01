@@ -103,7 +103,6 @@
             let check = true;
             for (let i = 0; i < values.length; i++) {
                 if (values[i].val() === "") {
-                    console.log(values[i])
                     check = false;
                 }
             }
@@ -141,10 +140,10 @@
                     "title": $('#InputTitle').val(),
                     "content": content
                 }),
-                // success(data) {
-                //     window.location.href = "mypage"
-                //     // location.href="mypage"
-                // }
+                complete:function(data) {
+                    window.location.href = "/read/post/real?id="+id
+                    // location.href="mypage"
+                }
             })
     })
 

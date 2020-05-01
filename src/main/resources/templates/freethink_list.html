@@ -377,19 +377,19 @@
         btn[1].text(2);
         btn[2].text(3);
     }else if(nowPage===pageSize){
-        page[1].addClass("active");
-        page[0].removeClass("active");
-        page[2].removeClass("active");
-        btn[0].text(nowPage-1);
-        btn[1].text(nowPage);
-        btn[2].text(nowPage+1);
-    }else{
         page[2].addClass("active");
         page[1].removeClass("active");
         page[0].removeClass("active");
         btn[0].text(nowPage-2);
         btn[1].text(nowPage-1);
         btn[2].text(nowPage);
+    }else{
+        page[1].addClass("active");
+        page[0].removeClass("active");
+        page[2].removeClass("active");
+        btn[0].text(nowPage-1);
+        btn[1].text(nowPage);
+        btn[2].text(nowPage+1);
     }
 
     if(pageSize===1){
