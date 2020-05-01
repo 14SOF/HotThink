@@ -270,15 +270,14 @@
     let pageSize = {{pageSize}}
     let nowPage = {{nowPage}}
     let pageUrl = '/user/mypage/myboards?page='
-    let pageSet = Math.floor(nowPage/10) * 10;
+    let pageSet = (nowPage % 10 === 0 ? (nowPage / 10 - 1) : Math.floor(nowPage / 10)) * 10;
 
-    console.log(nowPage/10)
     if (nowPage === 1){
         $('#pagination').append("<li class='page-item'><button type='button' class='button page-link' disabled>Previous</button></li>")
     }else{
         $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+(nowPage-1)+">Previous</a></li>")
     }
-    for(let i=1+pageSet; i<= 10+pageSet; i++){
+    for(let i=1+pageSet; i<= 10+pageSet && i<=pageSize; i++){
         if (nowPage===i) $('#pagination').append("<li class='page-item active'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
         else $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
     }

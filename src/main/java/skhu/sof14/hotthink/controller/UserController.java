@@ -68,7 +68,6 @@ public class UserController {
         int pageSize = page.getRecordCount()%4 > 0? page.getRecordCount()/4+1 : page.getRecordCount()/4;
         model.addAttribute("nowPage", page.getPage());
         model.addAttribute("pageSize", pageSize);
-        model.addAttribute("pageSet", page.getPage()/40*10);
 
         return "mypage_myboards";
     }
