@@ -26,7 +26,7 @@ public class UserService {
     @Autowired
     ModelMapper mapper;
 
-    public String getNickFromAuth() {
+    public String getNickFromAuth() { //현재 로그인된 닉네임 가져오기
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
             int id = ((UserLoginDto) auth.getDetails()).getId();
@@ -34,6 +34,8 @@ public class UserService {
         }
         return "anonymousUser";
     }
+
+
 
     public static int getIdFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -61,6 +63,17 @@ public class UserService {
         User entity = userRepository.findUserById(id);
         return entity.getNick();
     }
+
+//    public boolean deleteCkForNick(String nick){
+//        System.out.println(nick);
+//        String currentNick = getNickFromAuth(); //로그인 된 닉네임
+//        if(currentNick.equals(nick)) {
+//            return true;
+//        }
+//        return false;
+//
+//    }
+
 
     public boolean nickDuplicationCheck(String nick) {
         User entity = userRepository.findUserByNick(nick);

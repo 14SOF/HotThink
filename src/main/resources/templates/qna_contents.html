@@ -20,10 +20,10 @@
                     <div class="article-header">
                         <div class="article-header-thumb">
                             <img src="/icons/bono.PNG" class="article-author-thumb" alt="">
-<!--                            url('./images/arrow.png')-->
+                            <!--                            url('./images/arrow.png')-->
                         </div>
                         <div class="article-header-text">
-<!--                            사용자 이름 누르면 프로필 볼수 있도록??-->
+                            <!--                            사용자 이름 누르면 프로필 볼수 있도록??-->
                             <a href="#" class="article-author-name">{{user.nick}}</a>
                             <a href="#" class="article-header-time" title="시간">
                                 {{createDate}}
@@ -37,7 +37,7 @@
                     <div class="article-util">
                         <ul class="article-util-list">
                             <li>
-                                <a class="link-delete-article"  href="/"  >삭제</a>
+                                <a class="link-delete-article" id="deleteCk"  href="/deleteCk?id={{id}}" >삭제</a>
                             </li>
                             <li>
                                 <a class="link-modify-article" href="/read/post/qna/list?page=1">목록</a>
@@ -51,9 +51,35 @@
     {{/qna}}
 </div>
 <header class="qna-header"></header>
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script>
+
+    //todo : 게시글 삭제 권한 관리 수정.
+
+   // function f(postId) { //닉넴체크
+   //      $.ajax(
+   //      onsole.log("클릭딜리트씨케이")
+   //          $.ajax({
+   //          type: "GET",
+   //          url: "deleteCk?id=" + postId,
+   //          contentType: 'application/json;charset=UTF-8',
+   //          data: JSON.stringify({
+   //              "id": $('#deleteCk')
+   //          }),
+   //          success: function (data) {
+   //              if (data['check']) {
+   //                  alert("정말 삭제하실껴?")
+   //              } else {
+   //                  alert("본인꺼만 ㄱㄴ")
+   //              }
+   //          }
+   //      })
+   //  }
+
+</script>
+
 </body>
 <footer>
     {{> /include/footer}}
 </footer>
-
 </html>

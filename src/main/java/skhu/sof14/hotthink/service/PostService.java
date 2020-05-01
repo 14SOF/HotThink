@@ -8,6 +8,7 @@ import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
 import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -51,7 +52,18 @@ public class PostService {
 
         QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
         return dto;
+    }
 
+    // TODO: 2020-05-01  일단 nick을 비교해야함.
+    public boolean checkOfdelete(Long id){
+        String postNick =postRepository.findPostById(id).getUser().getNick();
+        String curNick = userService.getNickFromAuth();
+
+        if(postNick.equals(curNick)) {
+            return  true;
+        }else{
+            return  false;
+        }
 
     }
 

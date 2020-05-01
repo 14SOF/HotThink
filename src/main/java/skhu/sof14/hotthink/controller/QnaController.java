@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
@@ -20,7 +21,9 @@ import org.modelmapper.ModelMapper;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class QnaController {
@@ -84,6 +87,15 @@ public class QnaController {
         model.addAttribute("qna", dto);
         return "qna_contents";
     }
+
+    @GetMapping("deleteCk")
+    public @ResponseBody Map<String, Boolean> deleteCk(Long id){
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("check", postService.checkOfdelete(id));
+        return json;
+    }
+
+
 
 
 }
