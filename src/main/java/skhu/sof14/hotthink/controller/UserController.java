@@ -4,12 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import skhu.sof14.hotthink.model.dto.post.MyPostDto;
+import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -18,9 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    // TODO: 2020-04-21
-    // 마이페이지 조회를 rest에 맞게 mypage/users/1 을 할 것인지..
-    @GetMapping("mypage")
+    @GetMapping("/user/mypage/home")
     public String myPage(Model model){
 
         UserDetailDto dto = userService.getUserDetailFromAuth();
@@ -40,6 +42,37 @@ public class UserController {
         Map<String, Boolean> json = new HashMap<>();
         json.put("check", true);
         return json;
+    }
+
+    @GetMapping("/user/mypage/message")
+    public String message() {
+        return "mypage_message";
+    }
+
+    @GetMapping("/user/mypage/alarm")
+    public String alarm() {
+        return "mypage_alarm";
+    }
+
+    @GetMapping("/user/mypage/follow")
+    public String follow() {
+        return "mypage_follow";
+    }
+
+    @GetMapping("/user/mypage/myboards")
+    public String myBoards(Model model, Pagination page) {
+        List<MyPostDto> dtoList = userService.findMyPost(page);
+        model.addAttribute("item1", dtoList.get(0));
+        model.addAttribute("item2", dtoList.get(1));
+        model.addAttribute("item3", dtoList.get(2));
+        model.addAttribute("item4", dtoList.get(3));
+
+        int pageSize = page.getRecordCount()%4 > 0? page.getRecordCount()/4+1 : page.getRecordCount()/4;
+        model.addAttribute("nowPage", page.getPage());
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("pageSet", page.getRecordCount()/40*10);
+
+        return "mypage_myboards";
     }
 
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.entity.Post;
+import skhu.sof14.hotthink.model.entity.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +28,15 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
         Page<Post> page;
         if(pagination.getTitle() == null) page = findAllByType(type, pageable);
         else page = findAllByTitleContainingAndType(pagination.getTitle(), type, pageable);
+        pagination.setRecordCount((int) page.getTotalElements());
+        return page.getContent();
+    }
+
+    Page<Post> findAllByUser(User user, Pageable pageable);
+
+    default List<Post> findAllByUser(User user, Pagination pagination){
+        Pageable pageable = PageRequest.of(pagination.getPage() - 1, 4);
+        Page<Post> page = findAllByUser(user, pageable);
         pagination.setRecordCount((int) page.getTotalElements());
         return page.getContent();
     }

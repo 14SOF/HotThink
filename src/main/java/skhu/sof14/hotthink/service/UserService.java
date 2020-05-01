@@ -1,19 +1,28 @@
 package skhu.sof14.hotthink.service;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.post.MyPostDto;
+import skhu.sof14.hotthink.model.dto.post.Pagination;
+import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
+import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
+import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -23,6 +32,17 @@ public class UserService {
 
     @Autowired
     ModelMapper mapper;
+
+    @Autowired
+    PostRepository postRepository;
+
+    //유저 작성 게시판들
+    public List<MyPostDto> findMyPost(Pagination pagination) {
+        User user = new User();
+        user.setId(getIdFromAuth());
+        Type dtoListType = new TypeToken<List<MyPostDto>>() {}.getType();
+        return mapper.map(postRepository.findAllByUser(user, pagination), dtoListType);
+    }
 
     public String getNickFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -65,7 +85,7 @@ public class UserService {
         return entity == null;
     }
 
-    public boolean idDuplicationCheck(String id){
+    public boolean idDuplicationCheck(String id) {
         User entity = userRepository.findUserByUserId(id);
         return entity == null;
     }
