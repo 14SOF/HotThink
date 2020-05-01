@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
+import skhu.sof14.hotthink.model.dto.post.PostReadDto;
 import skhu.sof14.hotthink.service.PostService;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class HotThinkController {
     @Autowired
     PostService postService;
 
-    // TODO: 2020-05-01 리스트 뷰 코드중복 
+    // TODO: 2020-05-01 리스트 뷰 코드중복
     @GetMapping("/read/post/hot/list")
     public String hotThinkListView(Model model, Pagination page) {
         List<PostListElementDto> list = postService.findAllPage(page,"핫");
@@ -29,5 +31,12 @@ public class HotThinkController {
         model.addAttribute("hasNext", page.getPage()<pageSize);
         model.addAttribute("hasPre", 1<page.getPage());
         return "hotthink_list";
+    }
+
+    @GetMapping("/read/post/hot")
+    public String readHotThink(@RequestParam Long id, Model model){
+        PostReadDto dto = postService.findPostById(id);
+        model.addAttribute("hot", dto);
+        return "hotthink_read";
     }
 }

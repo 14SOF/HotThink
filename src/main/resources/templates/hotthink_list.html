@@ -40,15 +40,15 @@
                     <h4 class="card-title hot-card-title">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="/realThinkDetails" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn  warm-flame-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn  warm-flame-gradient"
+                            onclick=readHot({{id}})>더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -65,19 +65,20 @@
 
             <div class="hot-card-header ripe-malinka-gradient shadow-lg mx-auto">
                 <div class="row" style="height: 100%">
-                        <div class="col-auto  align-self-center">
-                            <div class="text-center text-white font-weight-bold" style="font-size: larger">{{like}}</div>
-                            <div class="small text-center text-white-50 font-weight-bold">좋아요</div>
-                        </div>
-                        <div class="col">
-                            <div class="text-center hot-card-header-hits text-white">{{hit}}</div>
-                            <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
-                        </div>
-                        <div class="col-auto  align-self-center">
-                            <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}</div>
-                            <div class="small text-center text-white-50 font-weight-bold">댓글</div>
-                        </div>
+                    <div class="col-auto  align-self-center">
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{like}}</div>
+                        <div class="small text-center text-white-50 font-weight-bold">좋아요</div>
                     </div>
+                    <div class="col">
+                        <div class="text-center hot-card-header-hits text-white">{{hit}}</div>
+                        <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
+                    </div>
+                    <div class="col-auto  align-self-center">
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}
+                        </div>
+                        <div class="small text-center text-white-50 font-weight-bold">댓글</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Card content -->
@@ -89,15 +90,14 @@
                     <h4 class="card-title hot-card-title">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn  ripe-malinka-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn ripe-malinka-gradient" onclick="readHot({{id}})">더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -113,21 +113,21 @@
 
             <div class="hot-card-header peach-gradient shadow-lg mx-auto">
                 <div class="row" style="height: 100%">
-                        <div class="col-auto  align-self-center">
-                            <div class="text-center text-white font-weight-bold" style="font-size: larger">{{like}}
-                            </div>
-                            <div class="small text-center text-white-50 font-weight-bold">좋아요</div>
+                    <div class="col-auto  align-self-center">
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{like}}
                         </div>
-                        <div class="col">
-                            <div class="text-center hot-card-header-hits text-white">{{hit}}</div>
-                            <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
+                        <div class="small text-center text-white-50 font-weight-bold">좋아요</div>
+                    </div>
+                    <div class="col">
+                        <div class="text-center hot-card-header-hits text-white">{{hit}}</div>
+                        <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
+                    </div>
+                    <div class="col-auto  align-self-center">
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">
+                            {{commentList}}
                         </div>
-                        <div class="col-auto  align-self-center">
-                            <div class="text-center text-white font-weight-bold" style="font-size: larger">
-                                {{commentList}}
-                            </div>
-                            <div class="small text-center text-white-50 font-weight-bold">댓글</div>
-                        </div>
+                        <div class="small text-center text-white-50 font-weight-bold">댓글</div>
+                    </div>
                 </div>
             </div>
 
@@ -140,15 +140,15 @@
                     <h4 class="card-title hot-card-title">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn peach-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn peach-gradient" onclick="readHot({{id}})">
+                        더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -192,15 +192,15 @@
                     <h4 class="card-title font-weight-bold">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn purple-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn purple-gradient" onclick="readHot({{id}})">
+                        더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -225,7 +225,8 @@
                         <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
                     </div>
                     <div class="col-auto  align-self-center">
-                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}</div>
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}
+                        </div>
                         <div class="small text-center text-white-50 font-weight-bold">댓글</div>
                     </div>
                 </div>
@@ -240,15 +241,15 @@
                     <h4 class="card-title hot-card-title">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn aqua-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn aqua-gradient" onclick="readHot({{id}})">
+                        더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -272,7 +273,8 @@
                         <div class="text-center mt-2 text-white-50 font-weight-bold">조회수</div>
                     </div>
                     <div class="col-auto  align-self-center">
-                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}</div>
+                        <div class="text-center text-white font-weight-bold" style="font-size: larger">{{commentList}}
+                        </div>
                         <div class="small text-center text-white-50 font-weight-bold">댓글</div>
                     </div>
                 </div>
@@ -287,15 +289,15 @@
                     <h4 class="card-title hot-card-title">{{title}}</h4>
                     <hr>
                     <!-- Quotation -->
-                    <p><i class="fas fa-quote-left"></i> {{content}}</i>
+                    <p><i class="fas fa-quote-left"></i> {{content}}
                     </p>
                     <div class="text-center"><i class="fas fa-ellipsis-v"></i></div>
                 </div>
                 <!-- Button -->
                 <div class="text-center">
-                    <a href="#" style="text-decoration: none">
-                        <button type="button" class="btn btn-block hot-card-btn blue-gradient">더보기</button>
-                    </a>
+                    <button type="button" class="btn btn-block hot-card-btn blue-gradient" onclick="readHot({{id}})">
+                        더보기
+                    </button>
                 </div>
                 <div class="mt-3 dropdown-divider peach-gradient"></div>
                 <div class="mt-3 small text-gray-500 text-center">
@@ -321,13 +323,13 @@
                     <span class="sr-only">Previous</span>
                 </button>
             </li>
-            <li class="page-item " id="page1" >
+            <li class="page-item " id="page1">
                 <button class="page-link" href="" id="page1btn"></button>
             </li>
-            <li class="page-item" id="page2" >
+            <li class="page-item" id="page2">
                 <button class="page-link" href="?page=2" id="page2btn"></button>
             </li>
-            <li class="page-item" id="page3" >
+            <li class="page-item" id="page3">
                 <button class="page-link" href="" id="page3btn"></button>
             </li>
             <li class="page-item">
@@ -336,7 +338,7 @@
                     <span class="sr-only">Next</span>
                 </button>
             </li>
-            <li class="page-item" onclick=pagingLast({{size}}) >
+            <li class="page-item" onclick=pagingLast({{size}})>
                 <button class="page-link" id="last">Last</button>
             </li>
         </ul>
@@ -344,7 +346,7 @@
 </div>
 <script>
     $('#searchBtn').click(function () {
-        window.location.href = "/read/post/hot/list?page=1&title=" +$('#searchInput').val();
+        window.location.href = "/read/post/hot/list?page=1&title=" + $('#searchInput').val();
     })
 
     if({{hasPre}}){
@@ -368,39 +370,39 @@
     var page = [$("#page1"), $("#page2"), $("#page3")];
     var btn = [$("#page1btn"), $("#page2btn"), $("#page3btn")];
 
-    if(nowPage===1) {
+    if (nowPage === 1) {
         page[0].addClass("active");
         page[1].removeClass("active");
         page[2].removeClass("active");
         btn[0].text(1);
         btn[1].text(2);
         btn[2].text(3);
-    }else if(nowPage===pageSize){
+    } else if (nowPage === pageSize) {
         page[1].addClass("active");
         page[0].removeClass("active");
         page[2].removeClass("active");
-        btn[0].text(nowPage-1);
+        btn[0].text(nowPage - 1);
         btn[1].text(nowPage);
-        btn[2].text(nowPage+1);
-    }else{
+        btn[2].text(nowPage + 1);
+    } else {
         page[2].addClass("active");
         page[1].removeClass("active");
         page[0].removeClass("active");
-        btn[0].text(nowPage-2);
-        btn[1].text(nowPage-1);
+        btn[0].text(nowPage - 2);
+        btn[1].text(nowPage - 1);
         btn[2].text(nowPage);
     }
 
-    if(pageSize===1){
+    if (pageSize === 1) {
         page[1].remove();
         page[2].remove();
-    }else if(pageSize===2){
+    } else if (pageSize === 2) {
         page[2].remove();
-    }else if(pageSize===0){
+    } else if (pageSize === 0) {
         $('.pagination').remove()
     }
 
-    for(let i=0; i<3; i++){
+    for (let i = 0; i < 3; i++) {
         btn[i].click(function () {
             window.location.href = "/read/post/hot/list?page=" + btn[i].text()
         })
@@ -419,11 +421,11 @@
     }
 
     function pagingNext(page) {
-        window.location.href = "/read/post/hot/list?page=" + (page+1);
+        window.location.href = "/read/post/hot/list?page=" + (page + 1);
     }
 
     function pagingPre(page) {
-        window.location.href = "/read/post/hot/list?page=" + (page-1);
+        window.location.href = "/read/post/hot/list?page=" + (page - 1);
     }
 </script>
 </body>
