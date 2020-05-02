@@ -15,6 +15,8 @@ import java.util.List;
 @Controller
 @AllArgsConstructor
 public class PostController {
+
+
     @Autowired
     private PostService postService;
 
@@ -29,7 +31,7 @@ public class PostController {
         List<PostDto> postList = postService.getPostlist();
         model.addAttribute("postList", postList);
 
-        return "redirect:/freethink_list";
+        return "freethink_list";
     }
 
 }
