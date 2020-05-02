@@ -11,11 +11,7 @@ public class TempController {
     public String pageNotFound() {
         return "404";
     }
-    @GetMapping("mypage")
-    public String myPage(Model model){
-        model.addAttribute("test", "김영곤");
-        return "mypage";
-    }
+
 
     @GetMapping("message")
     public String message() {
