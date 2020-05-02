@@ -53,14 +53,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
+                .antMatchers("/create/user").permitAll()
                 .antMatchers("/check/**").permitAll()
-                .antMatchers("/create/**").permitAll()
+                .antMatchers("/read/**").hasRole("USER")
+                .antMatchers("/create/**").hasRole("USER")
+                .antMatchers("/delete/**").hasRole("USER")
+                .antMatchers("/update/**").hasRole("USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/home", true)
                 .failureHandler(failHandler)
-//                .failureForwardUrl("/login")
                 .usernameParameter("userId")
                 .passwordParameter("userPassword")
                 .permitAll()
@@ -68,8 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutUrl("/logout_processing")
                 .logoutSuccessUrl("/home")
-                .invalidateHttpSession(true);
-//                .and().authorizeRequests().anyRequest().authenticated();
+                .invalidateHttpSession(true)
+                .and().authorizeRequests().anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider);
     }

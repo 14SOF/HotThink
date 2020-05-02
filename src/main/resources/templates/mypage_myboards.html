@@ -15,7 +15,8 @@
                 <div class="card-body">
                     <div class="row row-cols-2" style="height: 40%">
                         {{#item1}}
-                        <div class="col btn">
+                        <div class="col" id="card1">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
@@ -68,10 +69,14 @@
                                     작성일 : {{createDate}}
                                 </div>
                             </div>
+                            </a>
+
                         </div>
                         {{/item1}}
                         {{#item2}}
-                        <div class="col btn">
+                        <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
+
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
@@ -124,12 +129,15 @@
                                     작성일 : {{createDate}}
                                 </div>
                             </div>
+                            </a>
                         </div>
                         {{/item2}}
                     </div>
                     <div class="row row-cols-2" style="height: 40%">
                         {{#item3}}
-                        <div class="col btn">
+                        <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
+
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
@@ -182,11 +190,13 @@
                                     작성일 : {{createDate}}
                                 </div>
                             </div>
-
+                            </a>
                         </div>
                         {{/item3}}
                         {{#item4}}
-                        <div class="col btn">
+                        <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
+
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
@@ -239,10 +249,11 @@
                                     작성일 : {{createDate}}
                                 </div>
                             </div>
-
+                            </a>
                         </div>
                         {{/item4}}
                     </div>
+
                     <nav aria-label="..." class="mt-5">
                         <ul class="pagination justify-content-center" id="pagination">
 <!--                            <li class="page-item disabled">-->
@@ -267,6 +278,13 @@
 </div>
 </body>
 <script>
+    function cardClick(type, id){
+        if(type === "프리띵크") type = "free"
+        else if(type === "핫띵크") type = "hot"
+        else if(type === "리얼띵크") type = "real"
+        window.location.href = "/read/post/"+type+"?id="+id;
+    }
+
     let pageSize = {{pageSize}}
     let nowPage = {{nowPage}}
     let pageUrl = '/user/mypage/myboards?page='
