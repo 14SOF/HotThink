@@ -59,6 +59,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/create/**").hasRole("USER")
                 .antMatchers("/delete/**").hasRole("USER")
                 .antMatchers("/update/**").hasRole("USER")
+                //임시
+                .antMatchers("/user_delete").permitAll()
+                .antMatchers("/deleteCk").permitAll()
+                .antMatchers("/delete/**").permitAll()
+                .antMatchers("list/**").permitAll()
+                //임시끝
                 .and()
                 .formLogin()
                 .loginPage("/login")

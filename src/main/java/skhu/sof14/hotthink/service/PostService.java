@@ -10,6 +10,17 @@ import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import skhu.sof14.hotthink.model.dto.post.Pagination;
+import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
+import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
+import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
+import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 
@@ -69,6 +80,15 @@ public class PostService {
         return dto;
     }
 
+    public QnaReadDto findQnaById(Long id){
+        postRepository.updatePostByHit(id);
+        Post entity = postRepository.findPostById(id);
+        if(entity == null) return null;
+
+        QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
+        return dto;
+    }
+
     public Long createFree(PostCreateDto dto) {
         User writer = userRepository.findUserById(UserService.getIdFromAuth());
         dto.setUser(writer);
@@ -92,5 +112,36 @@ public class PostService {
     public void freeToHot(Long id){
         postRepository.updatePostToHot(id);
     }
+
+    @Autowired
+    UserService userService;
+
+    public Post createQna(QnaCreateDto dto) {
+        UserBase user = new UserBase();
+        user.setId(UserService.getIdFromAuth());
+        dto.setUser(user);
+        dto.setType("QNA");
+        dto.setCreateDate(LocalDateTime.now());
+        return postRepository.save(mapper.map(dto, Post.class));
+    }
+
+    public List<QnaListElementDto> findAllQna(Pagination page){
+        List<Post> qnaList = postRepository.findAllByType("QNA",page);
+        Type dtoListType = new TypeToken<List<QnaListElementDto>>(){}.getType();
+        return mapper.map(qnaList,dtoListType);
+    }
+
+    public boolean checkOfdelete(Long id){
+        String postNick =postRepository.findPostById(id).getUser().getNick();
+        String curNick = userService.getNickFromAuth();
+
+        if(postNick.equals(curNick)) {
+            return  true;
+        }else{
+            return  false;
+        }
+
+    }
+
 
 }

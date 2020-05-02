@@ -14,7 +14,7 @@ public class CheckController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("check/user/id")
+    @GetMapping("/check/user/id")
     public @ResponseBody
     Map<String, Boolean> checkUserId(String id) {
         Map<String, Boolean> json = new HashMap<>();
@@ -22,11 +22,19 @@ public class CheckController {
         return json;
     }
 
-    @GetMapping("check/user/nick")
+    @GetMapping("/check/user/nick")
     public @ResponseBody
     Map<String, Boolean> checkUserNick(String nick) {
         Map<String, Boolean> json = new HashMap<>();
         json.put("check", userService.nickDuplicationCheck(nick));
         return json;
     }
+
+    @PostMapping("/check/user/pw")
+    public @ResponseBody Map<String, Boolean> pw_check(String userPassword){
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("check", userService.pwCheck(userPassword));
+        return json;
+    }
+
 }

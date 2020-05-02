@@ -346,6 +346,11 @@
 {{> include/think_pagination}}
 
 <script>
+    $('#searchBtn').click(function () {
+        window.location.href = "/read/post/free/list?page=1&title=" + $('#searchInput').val();
+    })
+
+
     // TODO: 2020-05-01 로직 클린하게
     for(let i=0; i<3; i++){
         btn[i].click(function () {

@@ -5,16 +5,15 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
-import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 import skhu.sof14.hotthink.repository.PostRepository;
@@ -35,6 +34,9 @@ public class UserService {
 
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    UserDetailService userDetailService;
 
     //유저 작성 게시판들
     public List<MyPostDto> findMyPost(Pagination pagination) {
@@ -89,6 +91,22 @@ public class UserService {
         User entity = userRepository.findUserByUserId(id);
         return entity == null;
     }
+
+    public boolean pwCheck(String userPassword) { //회원탈퇴페이지 pw 일치 여부
+        String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserLoginDto user = (UserLoginDto) userDetailService.loadUserByUsername(userId);
+//        System.out.println(user.getPassword());
+        if (user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) {
+            return true;
+        }
+        return false;
+    }
+
+    public void deleteUser(){  //회원탈퇴버튼 누르면 요청되는 service , user의 status를 0으로 변경한다.
+        int id = getIdFromAuth();
+        userRepository.updateStatus(id);
+    }
+
 
     public UserDetailDto create(UserCreateDto user) { //회원가입 , 회원 정보를 DB에 저장
         user.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));

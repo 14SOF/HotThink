@@ -1,142 +1,164 @@
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/style/qnaList.css">
-
     {{> /include/header}}
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <style>
-    .pagination {
-        display: inline-block;
-        padding-left: 0;
-        margin: 25px 0;
-        border-radius: 4px;
-    }
-    .pagination > li > a, .pagination > li > span {
-        position: relative;
-        float: left;
-        padding: 6px 12px;
-        margin-left: -1px;
-        line-height: 1.42857143;
-        color: #428bca;
-        text-decoration: none;
-        background-color: #fff;
-        border: 1px solid #ddd
-    }
-    .center-block {
-
-    }
-
-    .pagination > li {
-        display: inline-block;
-    }
 
 
 </style>
 <body>
-{{> /include/navBar}}
+{{> /include/navbar}}
+<div class="container row">
+    <div class="page-hearder col-md-offset-3" style="padding-bottom: 20px">
+    </div>
+<!--    <div class="col-sm-offset-9">-->
+<!--        <form action="" method="get">-->
+<!--            <select name="search" id="">-->
+<!--                <option value="writer">작성자</option>-->
+<!--                <option value="content">내용</option>-->
+<!--            </select>-->
+<!--            <input type="text" name="searchkeyword" id="search">-->
+<!--            <input class="btn btn-sm btn-default" type="submit" value="검색">-->
+<!--        </form>-->
+<!--    </div>-->
+    <div class="col-md-12 col-md-offset-3" style="margin-top: -80px">
 
-<div class="container" id="main" style="margin : 30px 250px;  padding: 30px;  " >
-    <div class="col-md-12 col-sm-12 col-lg-10 col-lg-offset-1">
-        <div class="panel panel-default qna-list">
-            <ul class="list">
-                <li>
-                    <div class="wrap">
-                        <div class="main">
-                            <strong class="subject">
-                                <a href="/list/1">마쎄 있나요?</a>
-                            </strong>
-                            <div class="auth-info">
-                                <i class="icon-add-comment"></i>
-                                <span class="time">2020-04-05 18:49</span>
-                                <a href="./user/profile.html" class="author">김영곤</a>
-                            </div>
-                            <div class="reply" title="답변여부">
-                                <i class="icon-reply"></i>
-                                <span class="point">완료</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="wrap">
-                        <div class="main">
-                            <strong class="subject">
-                                <a href="./qna/show.html">안녕하세요. 정형일 입니다.</a>
-                            </strong>
-                            <div class="auth-info">
-                                <i class="icon-add-comment"></i>
-                                <span class="time">2020-04-05 13:12</span>
-                                <a href="./user/profile.html" class="author">정형일</a>
-                            </div>
-                            <div class="reply" title="답변여부">
-                                <i class="icon-reply"></i>
-                                <span class="point">미완료</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="wrap">
-                        <div class="main">
-                            <strong class="subject">
-                                <a href="./qna/show.html">안녕하세요. 오일권 입니다.</a>
-                            </strong>
-                            <div class="auth-info">
-                                <i class="icon-add-comment"></i>
-                                <span class="time">2020-04-05 18:47</span>
-                                <a href="./user/profile.html" class="author">오일권</a>
-                            </div>
-                            <div class="reply" title="답변여부">
-                                <i class="icon-reply"></i>
-                                <span class="point">미완료</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="wrap">
-                        <div class="main">
-                            <strong class="subject">
-                                <a href="./qna/show.html">안녕하세요. ㄱ입니다.</a>
-                            </strong>
-                            <div class="auth-info">
-                                <i class="icon-add-comment"></i>
-                                <span class="time">2020-04-05 07:21</span>
-                                <a href="./user/profile.html" class="author">정기혁</a>
-                            </div>
-                            <div class="reply" title="답변여부">
-                                <i class="icon-reply"></i>
-                                <span class="point">완료</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                </li>
-            </ul>
-            <div class="row">
-                <div class="col-md-3"></div>
-                <div class="col-md-6 text-center">
-                    <ul class="pagination" style="font-size:20px;" style="display:inline-block;" >
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-push-12 qna-write">
-                    <a href="/form" class="btn btn-primary pull-right" role="button">질문하기</a>
-                </div>
-            </div>
-        </div>
+
+        <h1 style="font-family: 'Baloo Bhai 2', cursive; ">HotThink Q&A</h1><br/>
+        <p style="color: #ac2925">게시판에 글을 남겨주시면 회원가입시 등록된 이메일(ID)로 답변이 전송됩니다.</p>
+
+        <table class="table table-striped ">
+            <tr class="text-center">
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>등록일</th>
+                <th>조회</th>
+            </tr>
+            {{#list}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/read/post/qna?id={{id}}" >{{title}}</a></td>
+                <td>{{user.nick}}</td>
+                <td>{{createDate}}</td>
+                <td class="col-sm-1">{{hit}}</td>
+            </tr>
+            {{/list}}
+        </table>
+
+    </div>
+    <div class="btn-group col-md-offset-12">
+        <a href="/create/post/qna" class="btn btn-md btn-default" style="margin-left: 180px; font-weight: bold">질문하기</a>
+    </div>
+    <div class="col-md-offset-6">
+        <ul class="pagination" style="margin-left: 160px">
+            <li><a href="#" id="pre" onclick=pagingPre({{page}}) >이전</a></li>
+            <li id="page1"><a href="" id="page1btn"></a></li>
+            <li id="page2"><a href="?page=2" id="page2btn"></a></li>
+            <li id="page3"><a href="" id="page3btn"></a></li>
+            <li><a href="#" id="next" onclick=pagingNext({{page}})>다음</a></li>
+
+        </ul>
     </div>
 </div>
 
+<!--TODO: 조회수 구현 / 페이지네이션 확인(왜 1번이 안눌리지 씨8)-->
+
+<script>
+    var nowPage = {{page}}
+    var pageSize = {{size}}
+
+
+    if(nowPage == pageSize) {
+        $('#next').click(function(e) { e.preventDefault(); });
+        $("#next").css({ 'pointer-events': 'none' });
+    }
+
+    if(nowPage == 1){
+        $('#pre').click(function(e) { e.preventDefault(); });
+        $("#pre").css({ 'pointer-events': 'none' });
+    }
+
+    // if({{hasPre}}) { //hasPre가 true이면 , 즉 현재 페이지가 1보다 크다면?
+    //     //
+    // }else{
+    // }
+    //
+    // if({{hasNext}}){
+    //     $('#next').removeAttr("disabled");
+    // }else {
+    //     $('next').attr("disabled","disabled");
+    // }
+
+
+    var page = [$("#page1"), $("#page2") , $("#page3")];
+    var btn = [$("#page1btn"), $("#page2btn"), $("#page3btn")];
+
+    if(nowPage===1) {
+        page[0].addClass("active");
+        page[1].removeClass("active");
+        page[2].removeClass("active");
+        btn[0].text(1);
+        btn[1].text(2);
+        btn[2].text(3);
+    }else if(nowPage===pageSize){
+        page[1].addClass("active");
+        page[0].removeClass("active");
+        page[2].removeClass("active");
+        btn[0].text(nowPage-1);
+        btn[1].text(nowPage);
+        btn[2].text(nowPage+1);
+    }else{
+        page[2].addClass("active");
+        page[1].removeClass("active");
+        page[0].removeClass("active");
+        btn[0].text(nowPage-2);
+        btn[1].text(nowPage-1);
+        btn[2].text(nowPage);
+    }
+
+    if(pageSize===1){
+        page[1].remove();
+        page[2].remove();
+    }else if(pageSize===2){
+        page[2].remove();
+    }else if(pageSize===0){
+        $('.pagination').remove()
+    }
+
+    for(let i=0; i<3; i++){
+        btn[i].click(function () {
+            window.location.href = "/read/post/qna/list?page=" + btn[i].text()
+        })
+    }
+
+
+
+    function pagingNext(page) {
+        window.location.href = "/read/post/qna/list?page=" + (page+1);
+    }
+
+    function pagingPre(page) {
+        window.location.href = "/read/post/qna/list?page=" + (page-1);
+    }
+
+    function f(data) {
+        window.location.href = "/read/post/qna?id=" + data
+    }
+
+</script>
+
 </body>
 <footer>
-{{> /include/footer}}
+    {{> /include/footer}}
 </footer>
 </html>

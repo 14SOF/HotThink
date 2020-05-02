@@ -347,6 +347,11 @@
 {{> include/think_pagination}}
 
 <script>
+
+    $('#searchBtn').click(function () {
+        window.location.href = "/read/post/hot/list?page=1&title=" + $('#searchInput').val();
+    })
+
     for (let i = 0; i < 3; i++) {
         btn[i].click(function () {
             window.location.href = "/read/post/hot/list?page=" + btn[i].text()
