@@ -2,7 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/hotthink.css">
+    <link rel="stylesheet" type="text/css" href="/style/hotthink.css">
 
     <style>
         .jumbotron {
@@ -135,77 +135,13 @@
         </ul>
     </nav>
 </div>
+{{> include/think_pagination}}
+
 <script>
-    $('#searchBtn').click(function () {
-        window.location.href = "/read/post/real/list?page=1&title=" + $('#searchInput').val();
-    })
-
-    if({{hasPre}}){
-        $("#pre").removeAttr("disabled");
-        $("#first").removeAttr("disabled");
-    }else{
-        $('#pre').attr("disabled", "disabled");
-        $('#first').attr("disabled", "disabled");
-    }
-
-    if({{hasNext}}){
-        $("#next").removeAttr("disabled");
-        $("#last").removeAttr("disabled");
-    }else{
-        $('#next').attr("disabled", "disabled");
-        $('#last').attr("disabled", "disabled");
-    }
-
-    var nowPage = {{page}}
-    var pageSize = {{size}}
-    var page = [$("#page1"), $("#page2"), $("#page3")];
-    var btn = [$("#page1btn"), $("#page2btn"), $("#page3btn")];
-
-    if (nowPage === 1) {
-        page[0].addClass("active");
-        page[1].removeClass("active");
-        page[2].removeClass("active");
-        btn[0].text(1);
-        btn[1].text(2);
-        btn[2].text(3);
-    } else if (pageSize === 2 && nowPage === 2) {
-        page[1].addClass("active");
-        page[0].removeClass("active");
-        btn[0].text(nowPage - 1);
-        btn[1].text(nowPage);
-    } else if (nowPage === pageSize) {//페이지크기2 & 페이지2 버그
-        page[2].addClass("active");
-        page[1].removeClass("active");
-        page[0].removeClass("active");
-        btn[0].text(nowPage - 2);
-        btn[1].text(nowPage - 1);
-        btn[2].text(nowPage);
-    } else {
-        page[1].addClass("active");
-        page[0].removeClass("active");
-        page[2].removeClass("active");
-        btn[0].text(nowPage - 1);
-        btn[1].text(nowPage);
-        btn[2].text(nowPage + 1);
-    }
-
-    if (pageSize === 1) {
-        page[1].remove();
-        page[2].remove();
-    } else if (pageSize === 2) {
-        page[2].remove();
-    } else if (pageSize === 0) {
-        $('.pagination').remove()
-    }
-
     for (let i = 0; i < 3; i++) {
         btn[i].click(function () {
             window.location.href = "/read/post/real/list?page=" + btn[i].text()
         })
-    }
-
-    function readReal(data) {
-        window.location.href = "/read/post/real?id=" + data
     }
 
     function pagingFirst() {

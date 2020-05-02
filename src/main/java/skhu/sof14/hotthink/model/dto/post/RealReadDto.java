@@ -1,6 +1,7 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import skhu.sof14.hotthink.service.PostService;
+import skhu.sof14.hotthink.utils.RealContentUtil;
 
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ public class RealReadDto {
     String patent;
     int price;
     public RealReadDto(String content){
-        String[] strings = PostService.getRealContent(content);
+        String[] strings = RealContentUtil.getRealContent(content);
         this.summary = strings[0];
         this.outline = strings[1];
         this.content = strings[2];
