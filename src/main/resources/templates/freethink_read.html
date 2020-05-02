@@ -2,36 +2,42 @@
 <html lang="en">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <body>
 {{> include/navBar}}
 
+{{#free}}
 <div class="container mt-5 mb-5 shadow-lg" style="font-family: Noto Sans KR,sans-serif; width: 1000px">
     <div style="padding: 20px">
         <div class="row">
             <div class="col">
-                <h1 class="display-4" style="font-weight: bolder">제목 쌸라쌸라</h1>
+                <h1 class="display-4" style="font-weight: bolder">{{title}}</h1>
             </div>
             <div class="col-auto">
                 <div>2020/04/12</div>
                 <div class="text-gray-800" style="float: right"><i class="far fa-eye"></i>
-                    991329
+                    {{hit}}
                 </div>
             </div>
         </div>
         <div class="dropdown-divider"></div>
         <h3 style="width: 100%; height: 350px">
-            내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라내용쌸라쌸라
+            {{content}}
         </h3>
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
-                <button type="button" class="btn btn-danger">
-                    좋아요 취소<span class="badge badge-light ml-1">4</span>
+                {{#userLikeStatus}}
+                <button type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})">
+                    좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
-                <button type="button" class="btn btn-light" style="border:solid 1px red">
-                    좋아요<span class="badge badge-danger ml-1">4</span>
+                {{/userLikeStatus}}
+                {{^userLikeStatus}}
+                <button type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red">
+<!--                    좋아요-->
+                    좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
+                {{/userLikeStatus}}
                 <button type="button" class="btn btn-primary">신고하기</button>
             </div>
             <div class="col-auto justify-content-end">
@@ -40,114 +46,56 @@
                     <div class="mx-auto mt-1 text-gray-500">
                         작성자
                     </div>
+                    {{#user}}
                     <div class="mx-auto text-gray-900">
-                        <h2>내이름은홍성빈</h2>
+                        <h2>{{nick}}</h2>
                     </div>
-
+                    {{/user}}
                 </a>
             </div>
         </div>
 
         <div class="dropdown-divider"></div>
 
+        {{#commentList}}
         <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
+            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">{{user.nick}}</a>
+            <div class="col">{{content}}</div>
             <div class="col-auto">
                 <div>
                     <!--                <button class="btn btn-circle btn-danger btn-sm">-->
                     <!--                    <i class="fas fa-heart text-white"></i>-->
                     <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
+                    {{#userLikeStatus}}
+                    <button class="btn btn-circle btn-light btn-sm" onclick="likeCancelComment({{id}})">
                         <i class="fas fa-heart" style="color: red"> </i>
                     </button>
-                    <span class="badge badge-warning">123</span>
+                    {{/userLikeStatus}}
+                    {{^userLikeStatus}}
+                    <button class="btn btn-circle btn-light btn-sm" onclick="likeComment({{id}})">
+                        <i class="far fa-heart" style="color: red"> </i>
+                    </button>
+                    {{/userLikeStatus}}
+                    <span class="badge badge-warning">{{likeList}}</span>
+                    {{#user.writer}}
+                    <button id="deleteReplyBtn" class="btn btn-circle btn-light btn-sm" onclick="deleteComment({{id}})">
+                        <i class="fas fa-trash-alt black"></i>
+                    </button>
+                    {{/user.writer}}
                 </div>
             </div>
             <a href="/404" style="float: right; font-size: 2px" role="button">
                 신고하기
             </a>
         </div>
-
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
-        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">김영곤</a>
-            <div class="col">존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군존나좋군</div>
-            <div class="col-auto">
-                <div>
-                    <!--                <button class="btn btn-circle btn-danger btn-sm">-->
-                    <!--                    <i class="fas fa-heart text-white"></i>-->
-                    <!--                </button>-->
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">123</span>
-                </div>
-            </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
-            </a>
-        </div>
+        {{/commentList}}
 
         <div class="row mt-1">
             <div class="col-auto">
                 <i class="fas fa-share pt-3" style="font-size: x-large"></i>
             </div>
             <div class="col">
-                <form class="user">
+                <form class="user" onsubmit="return false">
                     <div class="form-group">
                         <input class="form-control form-control-user"
                                id="InputReply"
@@ -156,15 +104,108 @@
                 </form>
             </div>
             <div class="col-auto">
-                <a href="/" class="btn btn-block" style="background-color: #f1f3f5">
+                <button id="replyBtn" onclick="f({{id}})" type="button" class="btn btn-block" style="background-color: #f1f3f5" disabled>
                     <i class="far fa-keyboard" style="font-size: xx-large"></i>
-                </a>
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 </body>
+<script>
+    let reply = $('#InputReply');
+    let replyBtn = $('#replyBtn');
+    $(function () {
+        reply.keyup(function () {
+            if (reply.val() !== "") {
+                replyBtn.removeAttr("disabled")
+            } else {
+                replyBtn.attr("disabled", "disabled")
+            }
+        })
+    })
+
+    function f(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/comment?id=" + postId,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "content": reply.val()
+                }),
+                complete:function() {
+                    window.location.href = "/read/post/free?id=" + postId
+                }
+            }
+        )
+    }
+
+    //todo:url로 지우는거 방어해야함
+    function deleteComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/comment?id=" + commentId,
+                complete:function() {
+                    window.location.href = "/read/post/free?id=" + {{id}}
+                }
+            }
+        )
+    }
+
+    function likePost(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelPost(postId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeComment(commentId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+</script>
+{{/free}}
 <footer>
     {{> include/footer}}
 </footer>

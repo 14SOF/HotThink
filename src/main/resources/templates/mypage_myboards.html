@@ -2,7 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <body>
 {{> include/navbar}}
@@ -14,14 +14,16 @@
             <div class="card mb-4 py-3 border-left-secondary" style="height: 100%">
                 <div class="card-body">
                     <div class="row row-cols-2" style="height: 40%">
-                        <div class="col btn">
+                        {{#item1}}
+                        <div class="col" id="card1">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
                                         <div class="col-auto">
-                                            <button type="button" class="btn btn-sm btn-primary" disabled>프리띵크</button>
+                                            <button type="button" id="item1" class="btn btn-sm" disabled>{{type}}</button>
                                         </div>
-                                        <div class="col">제목쌰랄라라ㅏ사랴쌰라</div>
+                                        <div class="col">{{title}}</div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="row" style="height: 100%">
@@ -33,7 +35,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{hit}}
                                                 </div>
                                             </div>
                                         </div>
@@ -45,7 +47,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{likeList}}
                                                 </div>
                                             </div>
                                         </div>
@@ -57,84 +59,92 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{commentList}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer small text-gray-500 text-center">
-                                    작성일 : 2020-04-05
+                                    작성일 : {{createDate}}
                                 </div>
                             </div>
-                        </div>
-                        <div class="col btn">
-                            <div class="card" style="height: 90%">
-                                <div class="card-body">
-                                    <div class="row card-title">
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-sm btn-danger" disabled>핫띵크</button>
-                                        </div>
-                                        <div class="col">제목쌰랄라라ㅏ사랴쌰라</div>
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <div class="row" style="height: 100%">
-                                        <div class="col mt-5">
-                                            <div class="row">
-                                                <div class="col-auto">
-                                                    <div class="btn icon-circle bg-primary">
-                                                        <i class="far fa-eye text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col small text-gray-600 align-self-center">
-                                                    99999999
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col mt-5 ml-2">
-                                            <div class="row">
-                                                <div class="col-auto">
-                                                    <div class="btn icon-circle bg-danger">
-                                                        <i class="fas fa-thumbs-up text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col small text-gray-600 align-self-center">
-                                                    99999999
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col mt-5 ml-2">
-                                            <div class="row">
-                                                <div class="col-auto">
-                                                    <div class="btn icon-circle bg-secondary">
-                                                        <i class="fas fa-comment-dots text-white"></i>
-                                                    </div>
-                                                </div>
-                                                <div class="col small text-gray-600 align-self-center">
-                                                    99999999
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer small text-gray-500 text-center">
-                                    작성일 : 2020-04-05
-                                </div>
-                            </div>
-                        </div>
+                            </a>
 
+                        </div>
+                        {{/item1}}
+                        {{#item2}}
+                        <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
+
+                            <div class="card" style="height: 90%">
+                                <div class="card-body">
+                                    <div class="row card-title">
+                                        <div class="col-auto">
+                                            <button type="button" id="item2" class="btn btn-sm" disabled>{{type}}</button>
+                                        </div>
+                                        <div class="col">{{title}}</div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="row" style="height: 100%">
+                                        <div class="col mt-5">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-primary">
+                                                        <i class="far fa-eye text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{hit}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col mt-5 ml-2">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-danger">
+                                                        <i class="fas fa-thumbs-up text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{likeList}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col mt-5 ml-2">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-secondary">
+                                                        <i class="fas fa-comment-dots text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{commentList}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer small text-gray-500 text-center">
+                                    작성일 : {{createDate}}
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        {{/item2}}
                     </div>
                     <div class="row row-cols-2" style="height: 40%">
-                        <div class="col btn">
+                        {{#item3}}
+                        <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
+
                             <div class="card" style="height: 90%">
                                 <div class="card-body">
                                     <div class="row card-title">
                                         <div class="col-auto">
-                                            <button type="button" class="btn btn-sm text-white" disabled
-                                                    style="background-color: goldenrod">리얼띵크
-                                            </button>
+                                            <button type="button" id="item3" class="btn btn-sm" disabled>{{type}}</button>
                                         </div>
-                                        <div class="col">제목쌰랄라라ㅏ사랴쌰라</div>
+                                        <div class="col">{{title}}</div>
                                     </div>
                                     <div class="dropdown-divider"></div>
                                     <div class="row" style="height: 100%">
@@ -146,7 +156,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{hit}}
                                                 </div>
                                             </div>
                                         </div>
@@ -158,7 +168,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{likeList}}
                                                 </div>
                                             </div>
                                         </div>
@@ -170,36 +180,95 @@
                                                     </div>
                                                 </div>
                                                 <div class="col small text-gray-600 align-self-center">
-                                                    99999999
+                                                    {{commentList}}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer small text-gray-500 text-center">
-                                    작성일 : 2020-04-05
+                                    작성일 : {{createDate}}
                                 </div>
                             </div>
+                            </a>
                         </div>
-
+                        {{/item3}}
+                        {{#item4}}
                         <div class="col">
+                            <a class="btn" style="height: 100%; width: 100%" onclick=cardClick("{{type}}",+"{{id}}")>
 
+                            <div class="card" style="height: 90%">
+                                <div class="card-body">
+                                    <div class="row card-title">
+                                        <div class="col-auto">
+                                            <button type="button" id="item4" class="btn btn-sm" disabled>{{type}}</button>
+                                        </div>
+                                        <div class="col">{{title}}</div>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="row" style="height: 100%">
+                                        <div class="col mt-5">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-primary">
+                                                        <i class="far fa-eye text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{hit}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col mt-5 ml-2">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-danger">
+                                                        <i class="fas fa-thumbs-up text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{likeList}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col mt-5 ml-2">
+                                            <div class="row">
+                                                <div class="col-auto">
+                                                    <div class="btn icon-circle bg-secondary">
+                                                        <i class="fas fa-comment-dots text-white"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col small text-gray-600 align-self-center">
+                                                    {{commentList}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer small text-gray-500 text-center">
+                                    작성일 : {{createDate}}
+                                </div>
+                            </div>
+                            </a>
                         </div>
+                        {{/item4}}
                     </div>
 
                     <nav aria-label="..." class="mt-5">
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
+                        <ul class="pagination justify-content-center" id="pagination">
+<!--                            <li class="page-item disabled">-->
+<!--                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>-->
+<!--                            </li>-->
+
+<!--                            <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                            <li class="page-item active" aria-current="page">-->
+<!--                                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>-->
+<!--                            </li>-->
+<!--                            <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+
+<!--                            <li class="page-item">-->
+<!--                                <a class="page-link" href="#">Next</a>-->
+<!--                            </li>-->
                         </ul>
                     </nav>
                 </div>
@@ -207,6 +276,53 @@
         </div>
     </div>
 </div>
-{{> include/footer}}
 </body>
+<script>
+    function cardClick(type, id){
+        if(type === "프리띵크") type = "free"
+        else if(type === "핫띵크") type = "hot"
+        else if(type === "리얼띵크") type = "real"
+        else if(type === "QNA") type = "qna"
+        window.location.href = "/read/post/"+type+"?id="+id;
+    }
+
+    let pageSize = {{pageSize}}
+    let nowPage = {{nowPage}}
+    let pageUrl = '/user/mypage/myboards?page='
+    let pageSet = (nowPage % 10 === 0 ? (nowPage / 10 - 1) : Math.floor(nowPage / 10)) * 10;
+
+    if (nowPage === 1){
+        $('#pagination').append("<li class='page-item'><button type='button' class='button page-link' disabled>Previous</button></li>")
+    }else{
+        $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+(nowPage-1)+">Previous</a></li>")
+    }
+    for(let i=1+pageSet; i<= 10+pageSet && i<=pageSize; i++){
+        if (nowPage===i) $('#pagination').append("<li class='page-item active'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
+        else $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+i+">" +i+ "</a></li>")
+    }
+    if(nowPage===pageSize){
+        $('#pagination').append("<li class='page-item'><button type='button' class='button page-link' disabled>Next</button></li>")
+    }else{
+        $('#pagination').append("<li class='page-item'><a class='page-link' href="+pageUrl+(nowPage+1)+">Next</a></li>")
+    }
+
+    let items = [  $('#item1'), $('#item2'), $('#item3'), $('#item4') ]
+    for(let i=0; i<4; i++){
+        let item = items[i]
+        if(item.text() === "프리띵크"){
+            item.addClass("btn-primary")
+        }else if(item.text() === "핫띵크"){
+            item.addClass("btn-danger")
+        }else if(item.text() === "리얼띵크"){
+            item.addClass("text-white")
+            item.css("background-color" , "goldenrod")
+        }else if(item.text() === "QNA"){
+            item.addClass("btn-secondary")
+        }
+    }
+
+</script>
+<footer>
+    {{> include/footer}}
+</footer>
 </html>

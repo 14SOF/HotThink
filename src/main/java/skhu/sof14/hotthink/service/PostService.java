@@ -1,4 +1,15 @@
 package skhu.sof14.hotthink.service;
+
+import org.modelmapper.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
+import skhu.sof14.hotthink.model.dto.post.*;
+import skhu.sof14.hotthink.model.entity.Comment;
+import skhu.sof14.hotthink.model.entity.Like;
+import skhu.sof14.hotthink.model.entity.Post;
+import skhu.sof14.hotthink.model.entity.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +28,7 @@ import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.List;
 
+
 @Service
 public class PostService {
 
@@ -26,6 +38,80 @@ public class PostService {
     @Autowired
     ModelMapper mapper;
 
+    @Autowired
+    UserRepository userRepository;
+
+    public PostReadDto findPostById(Long id) {
+        //조회수 올림
+        postRepository.updatePostByHit(id);
+        //현재 게시판 엔티티
+        Post entity = postRepository.findPostById(id);
+        if (entity == null) return null;
+
+        PostReadDto dto = mapper.map(entity, PostReadDto.class);
+        //댓글
+        int nowUser = UserService.getIdFromAuth();
+        for (CommentReadDto comment : dto.getCommentList()) {
+            if (comment.getUser().getId() == nowUser)
+                comment.getUser().setWriter(true);
+        }
+
+        //좋아요 여부
+        List<Like> likeList = entity.getLikeList();
+        for (Like like : likeList) {
+            if (nowUser == like.getUser().getId()) {
+                dto.setUserLikeStatus(true);
+                break;
+            }
+        }
+
+        //댓글 좋아요 여부
+        for(int i=0; i<entity.getCommentList().size(); i++){
+            Comment comment = entity.getCommentList().get(i);
+            likeList = comment.getLikeList();
+            for (Like like : likeList) {
+                if (nowUser == like.getUser().getId()) {
+                    dto.getCommentList().get(i).setUserLikeStatus(true);
+                    break;
+                }
+            }
+        }
+
+        return dto;
+    }
+
+    public QnaReadDto findQnaById(Long id){
+        postRepository.updatePostByHit(id);
+        Post entity = postRepository.findPostById(id);
+        if(entity == null) return null;
+
+        QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
+        return dto;
+    }
+
+    public Long createFree(PostCreateDto dto) {
+        User writer = userRepository.findUserById(UserService.getIdFromAuth());
+        dto.setUser(writer);
+        dto.setType("프리");
+        Post entity = mapper.map(dto, Post.class);
+        return postRepository.save(entity).getId();
+    }
+
+    public List<PostListElementDto> findAllPage(Pagination page, String type) {
+        List<Post> postList = postRepository.findAllByType(type, page);
+        Type dtoListType = new TypeToken<List<PostListElementDto>>() {}.getType();
+        if (type.equals("리얼")) dtoListType = new TypeToken<List<RealListElementDto>>() {}.getType();
+        return mapper.map(postList, dtoListType);
+    }
+
+    @Transactional
+    public void createReal(Long id, PostUpdateDto dto) {
+        postRepository.createReal(id, dto.getTitle(), dto.getContent().toString(), LocalDateTime.now());
+    }
+
+    public void freeToHot(Long id){
+        postRepository.updatePostToHot(id);
+    }
 
     @Autowired
     UserService userService;
@@ -45,16 +131,6 @@ public class PostService {
         return mapper.map(qnaList,dtoListType);
     }
 
-    public QnaReadDto findPostById(Long id){
-        postRepository.updatePostByHit(id);
-        Post entity = postRepository.findPostById(id);
-        if(entity == null) return null;
-
-        QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
-        return dto;
-    }
-
-    // TODO: 2020-05-01  일단 nick을 비교해야함.
     public boolean checkOfdelete(Long id){
         String postNick =postRepository.findPostById(id).getUser().getNick();
         String curNick = userService.getNickFromAuth();

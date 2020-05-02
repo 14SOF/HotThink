@@ -1,16 +1,18 @@
 package skhu.sof14.hotthink.model.dto.post;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
+@ToString
 @RequiredArgsConstructor
 public class Pagination {
     @NonNull
     @Setter
     @Getter
     int page;
+
+    @Getter
+    @Setter
+    String title;
 
     @Setter
     @Getter

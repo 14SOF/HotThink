@@ -2,7 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/hotthink.css">
+    <link rel="stylesheet" type="text/css" href="/style/hotthink.css">
 
     <style>
         .jumbotron {
@@ -82,117 +82,89 @@
 
 <div class="container mt-5">
 
-    <div class="row" style="font-family: Noto Sans KR, sans-serif">
-        <div class="jumbotron shadow-lg text-center">
-            <div class="text-left" style="width: 100%"><i class="fas fa-quote-left ml-5" style="font-size: xx-large"></i></div>
-            <h2 class="display-4 font-weight-bold">
-                핫띵크를 제작하겠다</h2>
-            <div class="text-right" style="width: 100%"><i class="fas fa-quote-right mr-5" style="font-size: xx-large"></i></div>
-            <p class="lead mt-5">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
-            <hr class="my-4">
-            <a href="realthink" class="btn btn-warning btn-icon-split btn-lg shadow">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-search-dollar"></i>
-                    </span>
-                <span class="text">상세히 보기</span>
-            </a></div>
-    </div>
-
+    {{#list}}
     <div class="row mt-5" style="font-family: Noto Sans KR, sans-serif">
         <div class="jumbotron shadow-lg text-center">
             <div class="text-left" style="width: 100%"><i class="fas fa-quote-left ml-5" style="font-size: xx-large"></i></div>
             <h2 class="display-4 font-weight-bold">
-                핫띵크를 제작하겠다</h2>
+                {{title}}</h2>
             <div class="text-right" style="width: 100%"><i class="fas fa-quote-right mr-5" style="font-size: xx-large"></i></div>
-            <p class="lead mt-5">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
+            <p class="lead mt-5">{{content}}</p>
             <hr class="my-4">
-            <a href="#" class="btn btn-warning btn-icon-split btn-lg shadow">
+            <a href="/read/post/real?id={{id}}" class="btn btn-warning btn-icon-split btn-lg shadow">
                     <span class="icon text-white-50">
                         <i class="fas fa-search-dollar"></i>
                     </span>
                 <span class="text">상세히 보기</span>
             </a></div>
     </div>
-
-    <div class="row" style="font-family: Noto Sans KR, sans-serif">
-        <div class="jumbotron shadow-lg text-center">
-            <div class="text-left" style="width: 100%"><i class="fas fa-quote-left ml-5" style="font-size: xx-large"></i></div>
-            <h2 class="display-4 font-weight-bold">
-                핫띵크를 제작하겠다</h2>
-            <div class="text-right" style="width: 100%"><i class="fas fa-quote-right mr-5" style="font-size: xx-large"></i></div>
-            <p class="lead mt-5">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
-            <hr class="my-4">
-            <a href="#" class="btn btn-warning btn-icon-split btn-lg shadow">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-search-dollar"></i>
-                    </span>
-                <span class="text">상세히 보기</span>
-            </a></div>
-    </div>
-
-    <div class="row" style="font-family: Noto Sans KR, sans-serif">
-        <div class="jumbotron shadow-lg text-center">
-            <div class="text-left" style="width: 100%"><i class="fas fa-quote-left ml-5" style="font-size: xx-large"></i></div>
-            <h2 class="display-4 font-weight-bold">
-                핫띵크를 제작하겠다</h2>
-            <div class="text-right" style="width: 100%"><i class="fas fa-quote-right mr-5" style="font-size: xx-large"></i></div>
-            <p class="lead mt-5">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
-            <hr class="my-4">
-            <a href="#" class="btn btn-warning btn-icon-split btn-lg shadow">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-search-dollar"></i>
-                    </span>
-                <span class="text">상세히 보기</span>
-            </a></div>
-    </div>
-
-    <div class="row" style="font-family: Noto Sans KR, sans-serif">
-        <div class="jumbotron shadow-lg text-center">
-            <div class="text-left" style="width: 100%"><i class="fas fa-quote-left ml-5" style="font-size: xx-large"></i></div>
-            <h2 class="display-4 font-weight-bold">
-                핫띵크를 제작하겠다</h2>
-            <div class="text-right" style="width: 100%"><i class="fas fa-quote-right mr-5" style="font-size: xx-large"></i></div>
-            <p class="lead mt-5">This is a simple hero unit, a simple jumbotron-style component for calling extra
-                attention to featured content or information.</p>
-            <hr class="my-4">
-            <a href="#" class="btn btn-warning btn-icon-split btn-lg shadow">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-search-dollar"></i>
-                    </span>
-                <span class="text">상세히 보기</span>
-            </a></div>
-    </div>
+    {{/list}}
 
 </div>
 
 <div class="mt-3" style="height: 200px">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled"><a class="page-link">First</a></li>
-            <li class="page-item disabled">
-                <a class="page-link" aria-label="Previous">
+            <li class="page-item">
+                <button class="page-link" onclick=pagingFirst() id="first">First</button>
+            </li>
+            <li class="page-item">
+                <button id="pre" class="page-link" aria-label="Previous" onclick=pagingPre({{page}})>
                     <span aria-hidden="true">&laquo;</span>
                     <span class="sr-only">Previous</span>
-                </a>
+                </button>
             </li>
-            <li class="page-item active"><a class="page-link" href="">1</a></li>
-            <li class="page-item"><a class="page-link" href="">2</a></li>
-            <li class="page-item"><a class="page-link" href="">3</a></li>
+            <li class="page-item " id="page1">
+                <button class="page-link" href="" id="page1btn"></button>
+            </li>
+            <li class="page-item" id="page2">
+                <button class="page-link" href="?page=2" id="page2btn"></button>
+            </li>
+            <li class="page-item" id="page3">
+                <button class="page-link" href="" id="page3btn"></button>
+            </li>
             <li class="page-item">
-                <a class="page-link" aria-label="Next">
+                <button id="next" class="page-link" aria-label="Next" onclick=pagingNext({{page}})>
                     <span aria-hidden="true">&raquo;</span>
                     <span class="sr-only">Next</span>
-                </a>
+                </button>
             </li>
-            <li class="page-item"><a class="page-link">Last</a></li>
+            <li class="page-item" onclick=pagingLast({{size}})>
+                <button class="page-link" id="last">Last</button>
+            </li>
         </ul>
     </nav>
 </div>
+{{> include/think_pagination}}
 
+<script>
+    $('#searchBtn').click(function () {
+        window.location.href = "/read/post/real/list?page=1&title=" + $('#searchInput').val();
+    })
+
+
+    for (let i = 0; i < 3; i++) {
+        btn[i].click(function () {
+            window.location.href = "/read/post/real/list?page=" + btn[i].text()
+        })
+    }
+
+    function pagingFirst() {
+        window.location.href = "/read/post/real/list?page=" + 1;
+    }
+
+    function pagingLast(pageSize) {
+        window.location.href = "/read/post/real/list?page=" + pageSize;
+    }
+
+    function pagingNext(page) {
+        window.location.href = "/read/post/real/list?page=" + (page + 1);
+    }
+
+    function pagingPre(page) {
+        window.location.href = "/read/post/real/list?page=" + (page - 1);
+    }
+</script>
 
 </body>
 <footer>

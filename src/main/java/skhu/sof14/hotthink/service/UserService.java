@@ -1,24 +1,30 @@
 package skhu.sof14.hotthink.service;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.post.MyPostDto;
+import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserCreateDTO;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.model.vo.UserUpdateVo;
+import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
+import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
 @Service
 public class UserService {
-    @Autowired
-    UserDetailService userDetailsService;
 
     @Autowired
     UserRepository userRepository;
@@ -26,7 +32,21 @@ public class UserService {
     @Autowired
     ModelMapper mapper;
 
-    public String getNickFromAuth() { //현재 로그인된 닉네임 가져오기
+    @Autowired
+    PostRepository postRepository;
+
+    @Autowired
+    UserDetailService userDetailService;
+
+    //유저 작성 게시판들
+    public List<MyPostDto> findMyPost(Pagination pagination) {
+        User user = new User();
+        user.setId(getIdFromAuth());
+        Type dtoListType = new TypeToken<List<MyPostDto>>() {}.getType();
+        return mapper.map(postRepository.findAllByUser(user, pagination), dtoListType);
+    }
+
+    public String getNickFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
             int id = ((UserLoginDto) auth.getDetails()).getId();
@@ -34,8 +54,6 @@ public class UserService {
         }
         return "anonymousUser";
     }
-
-
 
     public static int getIdFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -50,7 +68,7 @@ public class UserService {
     }
 
     @Transactional
-    public void updateUser(UserUpdateVo vo) {
+    public void updateUser(UserUpdateDto vo) {
         int id = getIdFromAuth();
         String nick = vo.getNick();
         String pw = vo.getUserPassword().equals("") ? "" : EncryptionUtils.encryptMD5(vo.getUserPassword());
@@ -64,26 +82,19 @@ public class UserService {
         return entity.getNick();
     }
 
-//    public boolean deleteCkForNick(String nick){
-//        System.out.println(nick);
-//        String currentNick = getNickFromAuth(); //로그인 된 닉네임
-//        if(currentNick.equals(nick)) {
-//            return true;
-//        }
-//        return false;
-//
-//    }
-
-
     public boolean nickDuplicationCheck(String nick) {
         User entity = userRepository.findUserByNick(nick);
         return entity == null;
     }
 
-    public boolean pwCheck(String userPassword) { //회원탈퇴페이지 pw 일치 여부
+    public boolean idDuplicationCheck(String id) {
+        User entity = userRepository.findUserByUserId(id);
+        return entity == null;
+    }
 
+    public boolean pwCheck(String userPassword) { //회원탈퇴페이지 pw 일치 여부
         String userId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
+        UserLoginDto user = (UserLoginDto) userDetailService.loadUserByUsername(userId);
 //        System.out.println(user.getPassword());
         if (user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) {
             return true;
@@ -97,33 +108,20 @@ public class UserService {
     }
 
 
-    public User create(UserCreateDTO user) { //회원가입 , 회원 정보를 DB에 저장
-
-        User entity = new User();
-        entity.setUserId(user.getUserId());
-        entity.setName(user.getName());
-        entity.setNick(user.getNick());
-        entity.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
-        return userRepository.save(entity);
+    public UserDetailDto create(UserCreateDto user) { //회원가입 , 회원 정보를 DB에 저장
+        user.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
+        User entity = mapper.map(user, User.class);
+        entity.setStatus(true);
+        entity = userRepository.save(entity);
+        return mapper.map(entity, UserDetailDto.class);
     }
 
-    public String idCheck(String userId) {
-        System.out.println(userRepository.findUserByUserId(userId));
-
-        if (userRepository.findUserByUserId(userId) == null) {
-            return "YES";
-        } else {
-            return "NO";
-        }
-    }
-
-
-    public UserCreateDTO findUserByUserId(String userId) {
+    public UserCreateDto findUserByUserId(String userId) {
         User entity = userRepository.findUserByUserId(userId);
         if (entity == null) return null;
-        UserCreateDTO dto = mapper.map(entity, UserCreateDTO.class);
+        UserCreateDto dto = mapper.map(entity, UserCreateDto.class);
         System.out.println(dto);
-    return dto;
+        return dto;
     }
 
 

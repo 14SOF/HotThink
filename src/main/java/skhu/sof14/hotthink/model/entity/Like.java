@@ -1,5 +1,6 @@
 package skhu.sof14.hotthink.model.entity;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "`like`")
 @NoArgsConstructor
 @Setter
+@Getter
 public class Like {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,8 @@ public class Like {
     @ManyToOne
     @JoinColumn(name = "user_user_idx")
     @NonNull
-    User user;
+    @Getter
+    public User user;
 
     @ManyToOne
     @JoinColumn(name = "post_post_idx")

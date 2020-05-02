@@ -80,7 +80,7 @@ public class QnaController {
 
     @GetMapping("read/post/qna")
     public String readQna(@RequestParam Long id, Model model){
-        QnaReadDto dto = postService.findPostById(id);
+        QnaReadDto dto = postService.findQnaById(id);
         model.addAttribute("qna", dto);
         return "qna_contents";
     }

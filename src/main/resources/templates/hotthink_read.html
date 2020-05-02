@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
+</head>
+<body>
+{{> include/navBar}}
+
+{{#hot}}
+<div class="container mt-5 mb-5 shadow-lg" style="font-family: Noto Sans KR,sans-serif; width: 1000px">
+    <div style="padding: 20px">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4" style="font-weight: bolder">{{title}}</h1>
+            </div>
+            <div class="col-auto">
+                <div>2020/04/12</div>
+                <div class="text-gray-800" style="float: right"><i class="far fa-eye"></i>
+                    {{hit}}
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <h3 style="width: 100%; height: 350px">
+            {{content}}
+        </h3>
+        <div class="row justify-content-between">
+            <div class="col-auto align-self-end">
+                <button type="button" class="btn btn-danger">
+                    좋아요 <span class="badge badge-light ml-1">{{likeList}}</span>
+                </button>
+                <button type="button" class="btn btn-primary">신고하기</button>
+            </div>
+            {{#writer}}
+            <div class="col-auto">
+                <button type="button" class="btn" style="background: goldenrod; color: white" onclick="f({{id}})">리얼띵크 작성하기</button>
+            </div>
+            {{/writer}}
+            <div class="col-auto justify-content-end">
+                <a href="mypage" class="shadow border-left-secondary card small"
+                   style="height: 100px; padding: 10px; text-decoration: none">
+                    <div class="mx-auto mt-1 text-gray-500">
+                        작성자
+                    </div>
+                    {{#user}}
+                    <div class="mx-auto text-gray-900">
+                        <h2>{{nick}}</h2>
+                    </div>
+                    {{/user}}
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        {{#commentList}}
+        <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
+            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">{{user.nick}}</a>
+            <div class="col">{{content}}</div>
+            <div class="col-auto">
+                <div>
+                    <button class="btn btn-circle btn-light btn-sm">
+                        <i class="fas fa-heart" style="color: red"> </i>
+                    </button>
+                    <span class="badge badge-warning">{{likeList}}</span>
+                </div>
+            </div>
+            <a href="/404" style="float: right; font-size: 2px" role="button">
+                신고하기
+            </a>
+        </div>
+        {{/commentList}}
+    </div>
+</div>
+{{/hot}}
+</body>
+<script>
+    function f(data) {
+        window.location.href = "/create/post/real?id="+data
+    }
+</script>
+<footer>
+    {{> include/footer}}
+</footer>
+</html>
