@@ -3,10 +3,7 @@ package skhu.sof14.hotthink.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
@@ -94,6 +91,13 @@ public class QnaController {
         json.put("check", postService.checkOfdelete(id));
         return json;
     }
+
+    @GetMapping("delete/post/qna")
+    public String deleteQna(Long id){
+        postRepository.delete(postRepository.findPostById(id));
+        return "redirect:/read/post/qna/list?page=1";
+    }
+
 
 
 

@@ -37,7 +37,8 @@
                     <div class="article-util">
                         <ul class="article-util-list">
                             <li>
-                                <a class="link-delete-article" id="deleteCk"  href="/deleteCk?id={{id}}" >삭제</a>
+                                <button class="link-delete-article" id="deleteCk" onclick='checkClick("{{id}}")'>삭제</button>
+                                <!--                                <button type="button" class="link-delete-article" id="deleteCk"  onclick="f({{id}})" >삭제</button>-->
                             </li>
                             <li>
                                 <a class="link-modify-article" href="/read/post/qna/list?page=1">목록</a>
@@ -51,35 +52,58 @@
     {{/qna}}
 </div>
 <header class="qna-header"></header>
-<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
 <script>
 
     //todo : 게시글 삭제 권한 관리 수정.
 
-   // function f(postId) { //닉넴체크
-   //      $.ajax(
-   //      onsole.log("클릭딜리트씨케이")
-   //          $.ajax({
-   //          type: "GET",
-   //          url: "deleteCk?id=" + postId,
-   //          contentType: 'application/json;charset=UTF-8',
-   //          data: JSON.stringify({
-   //              "id": $('#deleteCk')
-   //          }),
-   //          success: function (data) {
-   //              if (data['check']) {
-   //                  alert("정말 삭제하실껴?")
-   //              } else {
-   //                  alert("본인꺼만 ㄱㄴ")
-   //              }
-   //          }
-   //      })
-   //  }
+    function checkClick(id) {
+        console.log(id);
+        $.ajax({
+            type: "GET",
+            url: "/deleteCk",
+            data: {
+                "id": id,
+            },
+            success: function (data) {
+
+                if (data['check']) {
+                    $("#basicExampleModal").modal('show');
+                } else {
+                    $("#delete_fail").modal('show');
+
+                }
+            }
+        })
+    }
 
 </script>
 
+
 </body>
+{{>include/delete_fail_modal}}
+
 <footer>
     {{> /include/footer}}
 </footer>
+
+<div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">정말 삭제하시겠습니까?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color: #ac2925">
+                답변이 완료되지 않은 Q&A 글을 삭제하시면 정상적으로 답변을 전달받으실 수 없습니다.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <a href="/delete/post/qna?id={{qna.id}}" class="btn btn-primary" id="deleteSuc">삭제하기</a>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
