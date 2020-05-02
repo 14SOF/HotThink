@@ -46,5 +46,4 @@ public class PostEntity{
         this.postType = postType;
         this.userIdx = userIdx;
     }
-
 }
