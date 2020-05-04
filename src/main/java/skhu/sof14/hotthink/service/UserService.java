@@ -10,12 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
-import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
+import skhu.sof14.hotthink.model.dto.user.*;
 import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
@@ -108,13 +104,16 @@ public class UserService {
     }
 
 
-    public UserDetailDto create(UserCreateDto user) { //회원가입 , 회원 정보를 DB에 저장
-        user.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
-        User entity = mapper.map(user, User.class);
+
+
+    public UserDetailDto create(UserCreateDto user){ //회원가입 : 회원정보를 DB에 저장
+        User entity =mapper.map(user, User.class);
+        entity.setUserPassword(EncryptionUtils.encryptMD5(user.getUserPassword()));
         entity.setStatus(true);
         entity = userRepository.save(entity);
-        return mapper.map(entity, UserDetailDto.class);
+        return mapper.map(entity , UserDetailDto.class);
     }
+
 
     public UserCreateDto findUserByUserId(String userId) {
         User entity = userRepository.findUserByUserId(userId);
