@@ -89,11 +89,11 @@ public class TempController {
 
 
     //자유게시판 맵핑
-    @GetMapping("freeboardlist")
-    public String freeboardlist() { return "freeboard_list"; }
-
-    @GetMapping("freeboardwrite")
-    public String freeboardwrite(){ return "freeboard_write"; }
+//    @GetMapping("freeboardlist")
+//    public String freeboardlist() { return "freeboard_list"; }
+//
+//    @GetMapping("freeboardwrite")
+//    public String freeboardwrite(){ return "freeboard_write"; }
 
 
 }

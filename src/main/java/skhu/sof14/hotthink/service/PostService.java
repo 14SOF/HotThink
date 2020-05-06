@@ -77,6 +77,14 @@ public class PostService {
         return postRepository.save(entity).getId();
     }
 
+    public Long createFreeBoard(PostCreateDto dto) {
+        User writer = userRepository.findUserById(UserService.getIdFromAuth());
+        dto.setUser(writer);
+        dto.setType("자게");
+        Post entity = mapper.map(dto, Post.class);
+        return postRepository.save(entity).getId();
+    }
+
     public List<PostListElementDto> findAllPage(Pagination page, String type) {
         List<Post> postList = postRepository.findAllByType(type, page);
         Type dtoListType = new TypeToken<List<PostListElementDto>>() {}.getType();
