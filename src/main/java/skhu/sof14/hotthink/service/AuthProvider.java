@@ -21,15 +21,16 @@ public class AuthProvider implements AuthenticationProvider {
     @Autowired
     UserDetailService userDetailsService;
 
+    //authenticate에서 유저가입력한 pw와 대조
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String userId = authentication.getName();
-        String userPassword = authentication.getCredentials().toString();
+        String userId = authentication.getName(); //login.html에서 받아온 userId와
+        String userPassword = authentication.getCredentials().toString(); //userPassword
 
-        UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
+        UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId); //userId가 있으면 loginDto정보 리턴받는 user
 
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
-        return new UserToken(userId, userPassword, null, user);
+        return new UserToken(userId, userPassword, null, user); //UserToken에 userId와 userPassword, user(loginDto , id,pw,status)
     }
 
     @Override
@@ -47,6 +48,8 @@ public class AuthProvider implements AuthenticationProvider {
         public UserToken(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities, UserLoginDto user) {
             super(principal, credentials, user.getAuthorities());
             this.user = user;
+            //principal : userId
+            //credentials : password
         }
 
         @Override

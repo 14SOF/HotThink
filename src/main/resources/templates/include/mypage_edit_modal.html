@@ -74,7 +74,7 @@
     $("#nickCheckBtn").click(function () {
         $.ajax({
                 type: "GET",
-                url: "check/user/nick",
+                url: "/check/user/nick",
                 data: {
                     "nick": $('#editNick').val()
                 },
@@ -103,7 +103,7 @@
             $.ajax(
                 {
                     type: "PUT",
-                    url: "update/user",
+                    url: "/update/user",
                     contentType: 'application/json;charset=UTF-8',
                     dataType: 'json',
                     data: JSON.stringify({
@@ -111,7 +111,7 @@
                         "userPassword": $("#InputPassword").val()
                     }),
                     success(data){
-                        window.location.href = "mypage"
+                        window.location.href = "/user/mypage/home"
                         // location.href="mypage"
                     }
                 })

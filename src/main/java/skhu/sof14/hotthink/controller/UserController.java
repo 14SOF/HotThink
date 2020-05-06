@@ -1,11 +1,13 @@
 package skhu.sof14.hotthink.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
+import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
@@ -35,7 +37,7 @@ public class UserController {
         return "mypage";
     }
 
-    @PutMapping("update/user")
+    @PutMapping("/update/user")
     public @ResponseBody Map<String, Boolean> updateUser(@RequestBody UserUpdateDto vo){
         userService.updateUser(vo);
         Map<String, Boolean> json = new HashMap<>();
@@ -46,6 +48,21 @@ public class UserController {
     @GetMapping("/user/mypage/message")
     public String message() {
         return "mypage_message";
+    }
+
+    @PostMapping("user/delete")
+    public String deleteUser(Model model){
+        userService.deleteUser();
+        model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        return "user_delete_success";
+
+    }
+
+    @PostMapping("create")
+    public String create(UserCreateDto user, Model model) {
+        userService.create(user);
+        model.addAttribute("users", userService.findUserByUserId(user.getUserId()));
+        return "signup_suc";
     }
 
     @GetMapping("/user/mypage/alarm")

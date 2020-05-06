@@ -7,34 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class TempController {
 
 
-    @GetMapping("404")
-    public String pageNotFound() {
-        return "404";
-    }
-
-
-
-
-    @GetMapping("freethink")
-    public String freeThink() {
-        return "freethink_read";
-    }
-
-    @GetMapping("hotthink")
-    public String hotThink() {
-        return "hotthink_list";
-    }
-
-    @GetMapping("realthink")
-    public String realThink() {
-        return "realthink_read";
-    }
-
-    @GetMapping("qna")
-    public String qna() {
-        return "qna_list";
-    }
-
     @GetMapping("form")
     public String form() {
         return "qna_form";
@@ -61,16 +33,7 @@ public class TempController {
     }
 
 
-    //    qna 글 내용 test  실제구현은 id값으로
-    @GetMapping("list/1")
-    public String qnaPage() {
-        return "qna_contents";
-    }
 
-    @GetMapping("list/1/update")
-    public String qnaUpdate() {
-        return "qna_updateForm";
-    }
 
     @GetMapping("producer")
     public String producer() {
@@ -87,13 +50,15 @@ public class TempController {
         return "thinkMake";
     }
 
+    @GetMapping("temptest")
+    public String temptest(){
+        return "temptest";
+    }
 
-    //자유게시판 맵핑
-//    @GetMapping("freeboardlist")
-//    public String freeboardlist() { return "freeboard_list"; }
-//
-//    @GetMapping("freeboardwrite")
-//    public String freeboardwrite(){ return "freeboard_write"; }
 
+//    @GetMapping("signup_success")
+//    public String signup_success() {
+//        return "signup_success";
+//    }
 
 }

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="style/user.css">
+    <link rel="stylesheet" type="text/css" href="style/select-css.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+</head>
+<style>
+
+    .em {
+        font-size: 0.8rem;
+        border-radius: 3rem;
+        padding: 0.8rem 3rem;
+    }
+    .deleteBtn {
+        box-shadow:inset 0px 1px 0px -5px #f5978e;
+        background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+        background-color:#f24537;
+        border-radius:60px;
+        border:1px solid #d02718;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Arial;
+        font-size:15px;
+        font-weight:bold;
+        padding:8px 140px;
+        text-decoration:none;
+        text-shadow:0px 0px 10px #810e05;
+    }
+    .deleteBtn:hover {
+        background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+        background-color:#c62d1f;
+    }
+    .deleteBtn:active {
+        position:relative;
+        top:1px;
+    }
+
+    .myButton {
+        box-shadow: inset -4px 2px 0px 0px #ffffff;
+        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color: #ffffff;
+        border-radius: 35px;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        cursor: pointer;
+        color: #666666;
+        font-size: 13px;
+        font-weight: bold;
+        padding: 11px 13px;
+        text-decoration: none;
+        text-shadow: 0px 0px 0px #ffffff;
+    }
+
+    .myButton:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
+
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }
+
+</style>
+<body>
+{{> include/navBar}}
+
+<div class="container signUp-container">
+    <div class="signUp-body align-items-center justify-content-center card border-0 shadow-lg ">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4 font-weight-bolder">핫띵크 회원탈퇴</h1>
+        </div>
+
+        <form class="user" id="user" name="user" method="post" action="/user/delete">
+<!--            {{#userId}}-->
+            <div class="form-group" style="font-weight: bold">
+<!--                <input type="email" class="form-control form-control-user" id="userId" name="userId" placeholder="이메일 형식의 ID를  입력하세요" value="여기아이디"/>-->
+                              [ {{userId}} ] 님의 계정 탈퇴됩니다.
+            </div>
+            <div class="form-group">
+                <input type="password" class="em"
+                       id="userPassword" name="userPassword" placeholder="비밀번호를 입력하세요."  required>
+                <input type="button" class="myButton" id="pwCk" value="확인">
+                <div class="text-center small mt-2" id="checkMsg" style="color: red"></div>
+
+            </div>
+<!--            {{/userId}}-->
+            <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
+
+
+            <div>
+                <select class="select-css">
+                    <center>r>
+                        <option value="">--탈퇴 사유를 선택하세요.--</option>
+                        <option value="dog">사이트 이용방법이 너무 어렵습니다.</option>
+                        <option value="cat">원하는 아이디어를 찾을 수 없습니다.</option>
+                        <option value="hamster">가격이 너무 비싸서 구매를 할 수가 없습니다.</option>
+                        <option value="parrot">사이트 사용 빈도가 낮아서 필요가 없습니다.</option>
+                        <option value="spider">사이트 장애가 많습니다.</option>
+                        <option value="goldfish">내 맘 입니다.</option>
+
+                </select>
+            </div>
+
+
+            <hr>
+            <button type="submit" class="deleteBtn" id="pwCheck"  >탈 퇴 하 기</button>
+            <hr>
+            <div style="font-family: 'Anton', sans-serif;">
+                HOTTHINK 탈퇴를 하시면 대화내용, 구매내역을<br/>
+                포함한 회원정보가 모두 초기화되며 복구하실 수 <br/>
+               없습니다. 정말로 탈퇴를 원하신다면 비밀번호 및<br/>
+                탈퇴사유를 선택하시고 [탈퇴하기]를 눌러주세요.
+
+            </div>
+            <hr>
+
+        </form>
+
+
+    </div>
+
+</div>
+{{>include/mypage_delete_modal}}
+<footer>
+    {{> include/footer}}
+</footer>
+
+<div id="final_delete" class="modal" >
+    <p>Thanks for clicking. That felt good.</p>
+    <a href="#" rel="modal:close">Close</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<script>
+
+    $('a[href="#final_delete"]').click(function(event) {
+        event.preventDefault();
+
+        $(this).modal({
+            fadeDuration: 250
+        });
+    });
+
+    document.getElementById("pwCheck").disabled = true;
+
+    $("#pwCk").click(function () {
+        $.ajax({
+                type: "POST",
+                url: "/check/user/pw",
+                data: {
+                    "userPassword": $('#userPassword').val()
+                },
+                success: function (data) {
+                    if (data['check']) {
+                            $('#checkMsg').html('<p style="color:blue">비밀번호가 일치합니다. </p>');
+                        document.getElementById("pwCheck").disabled = false;
+                    } else {
+                            $('#checkMsg').html('<p style="color:red">비밀번호가 일치하지 않습니다.</p>');
+                        document.getElementById("pwCheck").disabled = true;
+
+
+                    }
+                }
+            }
+        )
+    })
+
+
+</script>
+{{>include/delete_final_modal}}
+</body>
+
+</html>
