@@ -64,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/deleteCk").permitAll()
                 .antMatchers("/delete/**").permitAll()
                 .antMatchers("list/**").permitAll()
+                .antMatchers("/testCharge").permitAll()
                 //임시끝
                 .and()
                 .formLogin()

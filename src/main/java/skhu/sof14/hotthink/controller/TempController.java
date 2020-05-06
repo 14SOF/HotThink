@@ -32,6 +32,10 @@ public class TempController {
         return "footer_operation";
     }
 
+    @GetMapping("temptwo")
+    public String temptwo() {
+        return "temptwo";
+    }
 
 
 
@@ -60,5 +64,10 @@ public class TempController {
 //    public String signup_success() {
 //        return "signup_success";
 //    }
+
+    @GetMapping("testCharge")
+    public String testCharge(){
+        return "testone";
+    }
 
 }

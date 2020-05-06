@@ -74,6 +74,10 @@ public class UserController {
     public String follow() {
         return "mypage_follow";
     }
+    @GetMapping("/user/mypage/charge")
+    public String charge(){
+        return "mypage_charge";
+    }
 
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {
