@@ -32,10 +32,6 @@ public class TempController {
         return "footer_operation";
     }
 
-    @GetMapping("temptwo")
-    public String temptwo() {
-        return "temptwo";
-    }
 
 
 
