@@ -23,7 +23,6 @@ public class GuestController {
         return "index";
     }
 
-    // TODO: 2020-04-23 : 로그인한 유저가 url에 치고 들어오는거 막기
     @GetMapping("login")
     public String login() {
         return "login";
@@ -52,5 +51,4 @@ public class GuestController {
         model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "user_delete";
     }
-
 }

@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/resources/**")
                 .antMatchers(strings);
 
-        web.httpFirewall(defaultHttpFirewall());
+        web.httpFirewall(defaultHttpFirewall()); // 더블슬래쉬 허용
     }
 
     @Bean

@@ -39,6 +39,7 @@ public class QnaController {
     PostRepository postRepository;
 
 
+    //QNA 글 작성 form을 불러오는 url
     @GetMapping("create/post/qna")
     public String qnaForm() {
         return "qna_form";
@@ -50,16 +51,7 @@ public class QnaController {
 //    }
 
 
-    @GetMapping("list/1")
-    public String qnaPage() {
-        return "qna_contents";
-    }
-
-    @GetMapping("list/1/update")
-    public String qnaUpdate() {
-        return "qna_updateForm";
-    }
-
+    //QNA 글 작성 form에서 질문등록 버튼을 눌렀을때 요청되는 url로 form태그에 있는 내용인 title과 content를 파라메터로 받는다.
     @PostMapping("create/post/qna") //qna 글 등록 완료시 qna_list로 이동.
     public String qnaSubmit(String title, String content) {
         postService.createQna(new QnaCreateDto(title, content, LocalDateTime.now()));
