@@ -1,9 +1,11 @@
 package skhu.sof14.hotthink.config;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
@@ -38,8 +40,10 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     }
 
+    private final ModelMapper mapper = new ModelMapper();
     @Bean
     public ModelMapper modelMapper() {
+
         return new ModelMapper();
     }
 }

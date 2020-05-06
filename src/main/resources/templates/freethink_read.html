@@ -27,12 +27,17 @@
         </h3>
         <div class="row justify-content-between">
             <div class="col-auto align-self-end">
-                <button type="button" class="btn btn-danger">
-                    좋아요 취소<span class="badge badge-light ml-1">4</span>
+                {{#userLikeStatus}}
+                <button type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})">
+                    좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
-                <button type="button" class="btn btn-light" style="border:solid 1px red">
-                    좋아요<span class="badge badge-danger ml-1">{{like}}</span>
+                {{/userLikeStatus}}
+                {{^userLikeStatus}}
+                <button type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red">
+<!--                    좋아요-->
+                    좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
+                {{/userLikeStatus}}
                 <button type="button" class="btn btn-primary">신고하기</button>
             </div>
             <div class="col-auto justify-content-end">
@@ -61,16 +66,21 @@
                     <!--                <button class="btn btn-circle btn-danger btn-sm">-->
                     <!--                    <i class="fas fa-heart text-white"></i>-->
                     <!--                </button>-->
+                    {{#userLikeStatus}}
+                    <button class="btn btn-circle btn-light btn-sm" onclick="likeCancelComment({{id}})">
+                        <i class="fas fa-heart" style="color: red"> </i>
+                    </button>
+                    {{/userLikeStatus}}
+                    {{^userLikeStatus}}
+                    <button class="btn btn-circle btn-light btn-sm" onclick="likeComment({{id}})">
+                        <i class="far fa-heart" style="color: red"> </i>
+                    </button>
+                    {{/userLikeStatus}}
+                    <span class="badge badge-warning">{{likeList}}</span>
                     {{#user.writer}}
                     <button id="deleteReplyBtn" class="btn btn-circle btn-light btn-sm" onclick="deleteComment({{id}})">
                         <i class="fas fa-trash-alt black"></i>
                     </button>
-                    {{/user.writer}}
-                    {{^user.writer}}
-                    <button class="btn btn-circle btn-light btn-sm">
-                        <i class="fas fa-heart" style="color: red"> </i>
-                    </button>
-                    <span class="badge badge-warning">{{like}}</span>
                     {{/user.writer}}
                 </div>
             </div>
@@ -145,6 +155,55 @@
             }
         )
     }
+
+    function likePost(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelPost(postId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeComment(commentId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
 </script>
 {{/free}}
 <footer>

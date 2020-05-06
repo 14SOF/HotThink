@@ -22,7 +22,7 @@ public class FreeThinkController {
 
     @GetMapping("/read/post/free/list")
     public String freeThinkListView(Model model, Pagination page) {
-        List<PostListElementDto> list = postService.findAllFree(page);
+        List<PostListElementDto> list = postService.findAllPage(page,"프리");
         model.addAttribute("list", list);
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
         model.addAttribute("size", pageSize);

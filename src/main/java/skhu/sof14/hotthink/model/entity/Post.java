@@ -26,9 +26,6 @@ public class Post {
     @Column(name="post_hit")
     private int hit;
 
-    @Column(name="post_like")
-    private int like;
-
     @Column(name="post_date_time")
     private LocalDateTime createDate;
 
@@ -39,6 +36,10 @@ public class Post {
     @JoinColumn(name = "user_user_idx")
     private User user;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
+
+    @OneToMany(mappedBy = "post")
+    private List<Like> likeList;
+
 }

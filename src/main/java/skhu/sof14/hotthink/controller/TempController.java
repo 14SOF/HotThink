@@ -13,25 +13,7 @@ public class TempController {
     }
 
 
-    @GetMapping("message")
-    public String message() {
-        return "mypage_message";
-    }
 
-    @GetMapping("alarm")
-    public String alarm() {
-        return "mypage_alarm";
-    }
-
-    @GetMapping("follow")
-    public String follow() {
-        return "mypage_follow";
-    }
-
-    @GetMapping("myboards")
-    public String myBoards() {
-        return "mypage_myboards";
-    }
 
     @GetMapping("freethink")
     public String freeThink() {
