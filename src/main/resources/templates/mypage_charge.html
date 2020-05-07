@@ -104,6 +104,7 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <div class="container-fluid bg-gradient p-5">
+    <div style="margin-bottom: 30px; font-weight: bold; font-size: 20px; text-align: center"><div style="color: #ac2925">{{user.nick}}</div> 님의 충전페이지 입니다.</div>
     <div class="row m-auto text-center w-75">
 
         <div class="col-4 princing-item red">
@@ -120,6 +121,8 @@
 	c53.07-16.399,104.047,36.903,104.047,36.903l1.333,36.667l-372-2.954L-34.667,62.998z' fill='#FFFFFF'></path>
         </svg>
             </div>
+
+
             <div class="card-body bg-white mt-0 shadow">
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="5000"><span>5,000원</span></label>
                 <label class="box-radio-input"><input type="radio" name="cp_item" value="10000"><span>10,000원</span></label>
@@ -218,6 +221,7 @@
     </div>
 </div>
 
+<!--TODO : 페이코는 프로젝트 완성 1주전에 추가함 (테스트기간 2주 한정) / ajax로 충전금액 받아서 point 에 + 해주기.-->
 <script>
     $('#charge_kakao').click(function () {
         // getter
@@ -245,6 +249,13 @@
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
+                $.ajax({
+                    type: "GET",
+                    url: "/user/mypage/charge/point",
+                    data: {
+                        "amount" : money
+                    }
+                });
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

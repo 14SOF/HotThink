@@ -58,4 +58,6 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     @Modifying
     @Query("update Post p set p.hit= 0, p.type='핫', p.hit=0 where p.id = ?1")
     void updatePostToHot(Long id);
+
+
 }

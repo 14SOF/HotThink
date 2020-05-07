@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
+import skhu.sof14.hotthink.repository.PointRepository;
+import skhu.sof14.hotthink.service.PointService;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
@@ -23,6 +25,9 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    PointRepository pointRepository;
+
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
 
@@ -33,6 +38,7 @@ public class UserController {
         attr.put("userNick", dto.getNick());
         attr.put("userName", dto.getName());
         attr.put("userPhone", dto.getPhone());
+        model.addAttribute("point" , pointRepository.findAll());
         model.addAllAttributes(attr);
         return "mypage";
     }
@@ -74,10 +80,7 @@ public class UserController {
     public String follow() {
         return "mypage_follow";
     }
-    @GetMapping("/user/mypage/charge")
-    public String charge(){
-        return "mypage_charge";
-    }
+
 
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {

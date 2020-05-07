@@ -211,16 +211,21 @@
                                     <div class="carousel-item active">
                                         <table class="table table-borderless">
                                             <thead>
+
                                             <tr>
                                                 <th scope="col">날짜</th>
-                                                <th scope="col">사용내역</th>
+                                                <th scope="col">충전내역</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {{#point}}
                                             <tr>
-                                                <th scope="row">2020.04.04</th>
-                                                <td>+20000</td>
+<!--                                                <th scope="row">2020.04.04</th>-->
+<!--                                                <td>+20000</td>-->
+                                                <th scope="row">{{createDate}}</th>
+                                                <td>{{amount}}</td>
                                             </tr>
+                                            {{/point}}
                                             </tbody>
                                         </table>
                                     </div>

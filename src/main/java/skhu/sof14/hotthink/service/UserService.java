@@ -8,9 +8,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.Point.PointChargeDto;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.*;
+import skhu.sof14.hotthink.model.entity.Point;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -40,6 +42,7 @@ public class UserService {
         user.setId(getIdFromAuth());
         Type dtoListType = new TypeToken<List<MyPostDto>>() {}.getType();
         return mapper.map(postRepository.findAllByUser(user, pagination), dtoListType);
+
     }
 
     public String getNickFromAuth() {
@@ -122,6 +125,8 @@ public class UserService {
         System.out.println(dto);
         return dto;
     }
+
+
 
 
 }
