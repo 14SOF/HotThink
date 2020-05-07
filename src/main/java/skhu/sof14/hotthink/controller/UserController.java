@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
+import skhu.sof14.hotthink.model.entity.Point;
+import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PointRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.service.PointService;
 import skhu.sof14.hotthink.service.UserService;
 
@@ -28,17 +31,24 @@ public class UserController {
     @Autowired
     PointRepository pointRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
 
         UserDetailDto dto = userService.getUserDetailFromAuth();
+
+        User user=userRepository.findUserById(UserService.getIdFromAuth());
+
 
         Map<String, String> attr = new HashMap<>();
         attr.put("userId", dto.getUserId());
         attr.put("userNick", dto.getNick());
         attr.put("userName", dto.getName());
         attr.put("userPhone", dto.getPhone());
-        model.addAttribute("point" , pointRepository.findAll());
+        model.addAttribute("point", pointRepository.findAllByUser(user));
+        model.addAttribute("sum", pointRepository.amountSum(user));
         model.addAllAttributes(attr);
         return "mypage";
     }

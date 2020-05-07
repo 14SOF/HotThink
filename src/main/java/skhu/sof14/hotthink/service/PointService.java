@@ -25,8 +25,5 @@ public class PointService {
         User user = userRepository.findUserById(id);
         dto.setUser(user);
         return pointRepository.save(mapper.map(dto, Point.class));
-
     }
-
-
 }
