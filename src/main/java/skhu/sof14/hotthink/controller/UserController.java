@@ -28,27 +28,21 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    PointRepository pointRepository;
 
     @Autowired
-    UserRepository userRepository;
+    PointService pointService;
 
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
 
         UserDetailDto dto = userService.getUserDetailFromAuth();
-
-        User user=userRepository.findUserById(UserService.getIdFromAuth());
-
-
         Map<String, String> attr = new HashMap<>();
         attr.put("userId", dto.getUserId());
         attr.put("userNick", dto.getNick());
         attr.put("userName", dto.getName());
         attr.put("userPhone", dto.getPhone());
-        model.addAttribute("point", pointRepository.findAllByUser(user));
-        model.addAttribute("sum", pointRepository.amountSum(user));
+        model.addAttribute("point", pointService.ChargeList());
+        model.addAttribute("sum", pointService.amountSum());
         model.addAllAttributes(attr);
         return "mypage";
     }

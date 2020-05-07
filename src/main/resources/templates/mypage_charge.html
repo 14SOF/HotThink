@@ -255,13 +255,14 @@
                     url: "/user/mypage/charge/point",
                     data: {
                         "amount" : money
-                    }
+                    },
                 });
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
             }
             alert(msg);
+            document.location.href="/user/mypage/home";
         });
     });
 </script>

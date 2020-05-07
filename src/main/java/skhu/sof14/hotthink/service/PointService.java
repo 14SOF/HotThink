@@ -9,6 +9,8 @@ import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PointRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 
+import java.util.List;
+
 @Service
 public class PointService {
 
@@ -26,4 +28,15 @@ public class PointService {
         dto.setUser(user);
         return pointRepository.save(mapper.map(dto, Point.class));
     }
+
+    public List<Point> ChargeList(){
+        User user = userRepository.findUserById(UserService.getIdFromAuth());
+        return pointRepository.findAllByUser(user);
+    }
+
+    public Long amountSum(){
+        User user = userRepository.findUserById(UserService.getIdFromAuth());
+        return pointRepository.amountSum(user);
+    }
+
 }
