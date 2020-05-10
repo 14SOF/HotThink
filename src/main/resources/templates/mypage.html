@@ -54,7 +54,8 @@
                         </button>
                         {{/userPhone}}
                         {{^userPhone}}
-                        <button type="button" class="col btn btn-secondary btn-block ml-3 fa-xs align-self-center ">휴대폰
+                        <button type="button" class="col btn btn-secondary btn-block ml-3 fa-xs align-self-center" data-toggle="modal"
+                                data-target="#certifiedModal">휴대폰
                             인증하기
                         </button>
                         {{/userPhone}}
@@ -271,9 +272,81 @@
         </div>
     </div>
 </div>
-
+{{>include/Certified_modal}}
 {{>include/mypage_delete_modal}}
 {{>include/mypage_edit_modal}}
-{{> include/footer}}
+{{>include/footer}}
+
+
+
+
 </body>
+<!--휴대폰 인증 모달-->
+<div class="modal fade" id="certifiedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true"
+     style="font-family: Noto Sans KR, sans-serif"
+>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="align-items: center">
+                <h5 class="modal-title">HOTTHINK 인증센터</h5>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-center">휴대폰 인증</h5>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control form-control-user" type="text" id="inputPhoneNumber"
+                               placeholder="010-0000-0000">
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-secondary" id="sendPhoneNumber" >번호확인</a>
+                    </div>
+                </div>
+                <div class="text-center small mt-2" id="checkMsgNick" style="color: red"></div>
+
+                <hr>
+
+                <div class="row align-items-center">
+                    <a id="collapseBtn" class="col-auto btn btn-outline-dark mx-auto" data-toggle="collapse"
+                       href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        인증번호입력하기
+                    </a>
+                </div>
+                <div class="collapse mt-3" id="collapse">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user"
+                               id="inputCertifiedNumber" placeholder="인증번호입력">
+                    </div>
+
+                    <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
+                </div>
+                <!--                <h5 class="text-center"></h5>-->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="saveBtn" disabled>확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $('#sendPhoneNumber').click(function(){
+        let phoneNumber = $('#inputPhoneNumber').val();
+        $.ajax({
+            type: "GET",
+            url: "/check/sendSMS",
+            data: {
+                "phoneNumber" : phoneNumber
+            }
+        })
+   });
+</script>
+
+
+
 </html>
+
+

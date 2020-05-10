@@ -34,7 +34,7 @@ public class PointController {
 
     @GetMapping("/user/mypage/charge/point")
     public @ResponseBody void chargePoint(Long amount){
-        System.out.println(amount);
+//        System.out.println(amount);
         int id  = UserService.getIdFromAuth();
         pointService.chargePoint(new PointChargeDto(amount), id);
     }

@@ -37,4 +37,11 @@ public class CheckController {
         return json;
     }
 
+    @GetMapping("/check/sendSMS")
+    public @ResponseBody void sendSMS(String phoneNumber) {
+        System.out.println(phoneNumber);
+//        userService.certifiedPhoneNumber(phoneNumber);
+//        ↗ 이거 주석 해제하면 휴대폰인증누를때마다 내돈 20원씩나감 참고하세요^^
+    }
+
 }
