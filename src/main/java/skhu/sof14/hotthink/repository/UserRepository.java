@@ -31,4 +31,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("update User u set u.status =0 where u.id=  ?1")
     void updateStatus(int id);
+
+
+    @Transactional
+    @Modifying
+    @Query("update  User u set u.phone=?1 where u.id = ?2")
+    void updatePhone(String phoneNumber, int id);
+
+
 }
