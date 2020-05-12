@@ -11,3 +11,8 @@ spring:
     cache: false
   mustache:
     suffix: .html
+
+  kafka:
+    bootstrap-servers: localhost:9092
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration

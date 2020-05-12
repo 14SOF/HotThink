@@ -15,8 +15,6 @@ public class SpringMvcConfig implements WebMvcConfigurer {
     @Autowired
     CommonInterceptor interceptor;
 
-    private final ModelMapper modelMapper = new ModelMapper();
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(interceptor);
@@ -40,10 +38,8 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 
     }
 
-    private final ModelMapper mapper = new ModelMapper();
     @Bean
     public ModelMapper modelMapper() {
-
         return new ModelMapper();
     }
 }

@@ -72,8 +72,8 @@
                                 </div>
                                 <div class="type_msg">
                                     <div class="input_msg_write">
-                                        <input type="text" class="write_msg" placeholder="메세지 입력"/>
-                                        <button class="msg_send_btn" type="button" style="outline: none">
+                                        <input id="msgInput" type="text" class="write_msg" placeholder="메세지 입력"/>
+                                        <button id="msgSendBtn" class="msg_send_btn" type="button" style="outline: none">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -86,8 +86,28 @@
         </div>
     </div>
 </div>
-
 </body>
+<script>
+
+    $('#msgSendBtn').click(function () {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/send-message",
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "type":"Message",
+                    "id": 1,
+                    "content": $('#msgInput').val(),
+                }),
+                complete:function(data) {
+                    $('#msgInput').val('')
+                }
+            }
+        )
+    })
+</script>
 <footer>
     {{> include/footer}}
 </footer>

@@ -15,12 +15,14 @@ import skhu.sof14.hotthink.service.AuthProvider;
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     AuthProvider authenticationProvider;
 
     @Autowired
     AuthFailHandler failHandler;
+
+    @Autowired
+    LogoutHandler logoutHandler;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -59,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/create/**").hasRole("USER")
                 .antMatchers("/delete/**").hasRole("USER")
                 .antMatchers("/update/**").hasRole("USER")
+
                 //임시
                 .antMatchers("/user_delete").permitAll()
                 .antMatchers("/deleteCk").permitAll()
@@ -76,9 +79,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout_processing")
-                .logoutSuccessUrl("/home")
-                .invalidateHttpSession(true)
-                .and().authorizeRequests().anyRequest().authenticated();
+                .logoutSuccessHandler(logoutHandler)
+                .invalidateHttpSession(true);
+//                .and().authorizeRequests().anyRequest().authenticated();
 
         http.authenticationProvider(authenticationProvider);
     }

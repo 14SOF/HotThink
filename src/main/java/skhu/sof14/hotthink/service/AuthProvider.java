@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
+import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 
@@ -30,6 +31,8 @@ public class AuthProvider implements AuthenticationProvider {
         UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId); //userId가 있으면 loginDto정보 리턴받는 user
 
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
+
+        ConsumerConfiguration.startUserTopicConsumeContainer(user.getId());
         return new UserToken(userId, userPassword, null, user); //UserToken에 userId와 userPassword, user(loginDto , id,pw,status)
     }
 

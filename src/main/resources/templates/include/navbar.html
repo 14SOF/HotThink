@@ -65,9 +65,8 @@
     </div>
 
     {{#userNick}}
-    <i class="fas fa-bell mr-3" style="font-size: xx-large; color: gold"></i>
+    <i id="alarmBell" class="far fa-bell mr-3" style="font-size: large" onclick="alarmBellClick()"></i>
     <!--        <i class="far fa-bell"style="font-size: larger"></i>-->
-    <i class="fas fa-envelope mr-3 text-info" style="font-size: xx-large"></i>
     <!--        <i class="far fa-envelope" style="font-size: larger"></i>-->
 
     <div class="navbar-divider"></div>
@@ -83,7 +82,7 @@
                 <button type="button" class="dropdown-item btn" data-toggle="modal" data-target="#exampleModal">
                     로그아웃
                 </button>
-<!--                <a class="dropdown-item" href="#">로그아웃</a>-->
+                <!--                <a class="dropdown-item" href="#">로그아웃</a>-->
             </div>
         </li>
     </ul>
@@ -91,14 +90,17 @@
     <!--        <span class="mr-4" style="color: gray"><i class="fas fa-user-tie mr-1"></i>{{userNick}}</span>-->
     {{/userNick}}
     {{^userNick}}
-    <a href="/login"><button type="button" class="btn btn-outline-secondary mr-4">로그인</button></a>
+    <a href="/login">
+        <button type="button" class="btn btn-outline-secondary mr-4">로그인</button>
+    </a>
     {{/userNick}}
 </nav>
 
 <!--    여백추가-->
 <div style="height: 100px"></div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -112,8 +114,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-                <a type="button"  href="/logout_processing" class="btn btn-primary">확인</a>
+                <a type="button" id="logoutButton" href="/logout_processing" class="btn btn-primary">확인</a>
             </div>
         </div>
     </div>
 </div>
+<script>
+    let sse = new EventSource('http://localhost:8080/receive-message');
+
+    sse.onmessage = function (evt) {
+        $('#alarmBell').removeClass('far')
+        $('#alarmBell').css("fontSize", "xx-large")
+        $('#alarmBell').css("color", "gold")
+        $('#alarmBell').addClass('fas')
+    };
+
+    function alarmBellClick() {
+        window.location.href = "/user/mypage/alarm"
+    }
+
+    $('#logoutButton').click(function () {
+        sse.close()
+    })
+</script>
