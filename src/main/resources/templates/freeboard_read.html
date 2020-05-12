@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
     <style>
         body {
             font-family: "Noto Sans KR", sans-serif;
@@ -373,11 +373,11 @@
             color: #a6a6a6;
             line-height: 16px;
         }
-
-
     </style>
 </head>
 <body>
+{{> include/navBar}}
+{{#freeboard}}
 <div class="center">
     <div class="body_left">
         <div class="title">
@@ -386,8 +386,8 @@
         </div>
         <div class="boardView">
             <div class="bSubject">
-                <i class="freeBoardImage"></i>
-                <b class="ellipsis">[자유글] 게시글 제목</b>
+                <i class="freeBoardImage">[자유글]</i>
+                <b class="ellipsis">{{title}}</b>
             </div>
 
             <div class="userInfoBox">
@@ -411,13 +411,7 @@
             </div>
             <div>
                 <div>
-                    <P>
-                        ㅅㅂ플젝 개어렵다. html css jsp mybatis 뭔소린지모르겠다
-                    </P>
-                    <P>
-                        인므ㅏㄴ우한무하ㅜㅁㄴ히ㅏㅁ늬ㅏㅎㅁ늬'ㅎ늠히ㅡㅏㄴㅁ'ㄹㄴ뭉ㄻㄴㅇ
-                        ㅁㅁ나ㅜㄹ인마ㅜ히ㅏㄴㅇ무히ㅏ;ㄴ우히;ㅁㄴ이게 내용물
-                    </P>
+                    {{content}}
                 </div>
             </div>
         </div>
@@ -499,4 +493,100 @@
     </div>
 </div>
 </body>
+<!--<script>-->
+<!--    let reply = $('#InputReply');-->
+<!--    let replyBtn = $('#replyBtn');-->
+<!--    $(function () {-->
+<!--        reply.keyup(function () {-->
+<!--            if (reply.val() !== "") {-->
+<!--                replyBtn.removeAttr("disabled")-->
+<!--            } else {-->
+<!--                replyBtn.attr("disabled", "disabled")-->
+<!--            }-->
+<!--        })-->
+<!--    })-->
+
+<!--    function f(postId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "POST",-->
+<!--                url: "/create/comment?id=" + postId,-->
+<!--                contentType: 'application/json;charset=UTF-8',-->
+<!--                dataType: 'json',-->
+<!--                data: JSON.stringify({-->
+<!--                    "content": reply.val()-->
+<!--                }),-->
+<!--                complete:function() {-->
+<!--                    window.location.href = "/read/post/free?id=" + postId-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--    //todo:url로 지우는거 방어해야함-->
+<!--    function deleteComment(commentId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "DELETE",-->
+<!--                url: "/delete/comment?id=" + commentId,-->
+<!--                complete:function() {-->
+<!--                    window.location.href = "/read/post/free?id=" + {{id}}-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--    function likePost(postId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "POST",-->
+<!--                url: "/create/like/post?id="+postId,-->
+<!--                success : function (data) {-->
+<!--                    location.reload();-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--    function likeCancelPost(postId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "DELETE",-->
+<!--                url: "/delete/like/post?id="+postId,-->
+<!--                success : function (data) {-->
+<!--                    location.reload();-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--    function likeComment(commentId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "POST",-->
+<!--                url: "/create/like/comment?id="+commentId,-->
+<!--                success : function (data) {-->
+<!--                    location.reload();-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--    function likeCancelComment(commentId) {-->
+<!--        $.ajax(-->
+<!--            {-->
+<!--                type: "DELETE",-->
+<!--                url: "/delete/like/comment?id="+commentId,-->
+<!--                success : function (data) {-->
+<!--                    location.reload();-->
+<!--                }-->
+<!--            }-->
+<!--        )-->
+<!--    }-->
+
+<!--</script>-->
+{{/freeboard}}
+<footer>
+    {{> include/footer}}
+</footer>
 </html>

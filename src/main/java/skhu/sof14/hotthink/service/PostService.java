@@ -1,26 +1,17 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.*;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.post.*;
+import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
-import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
-import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
-import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
-import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 
@@ -97,7 +88,7 @@ public class PostService {
         return postRepository.save(entity).getId();
     }
 
-    public Long createFreeBoard(PostCreateDto dto) {
+    public Long createFreeboard(PostCreateDto dto) {
         User writer = userRepository.findUserById(UserService.getIdFromAuth());
         dto.setUser(writer);
         dto.setType("자게");

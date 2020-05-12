@@ -405,7 +405,7 @@
             <div class="wTitle">
                 <div class="rowBox">
                     <span><b>제목</b></span>
-                    <input type="text" class="content_text" title="글쓰기" placeholder="제목을 입력해 주세요">
+                    <input id="InputTitle" type="text" class="content_text" title="글쓰기" placeholder="제목을 입력해 주세요">
                 </div>
             </div>
             <!-- //Type select & Subject -->
@@ -415,7 +415,7 @@
                     <div class="edSelectStyleBar" id="selectBar" style="display: block;">
                         <div class="edWSec">
 <!--                            <iframe class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="display: block;"></iframe>-->
-                            <textarea class="editWindow" name="textWindow" id="textWindow" rows="9" cols="40" title="글쓰기"></textarea>
+                            <textarea class="editWindow" name="textWindow" id="InputContent" rows="9" cols="40" title="글쓰기"></textarea>
                         </div>
                     </div>
                 </div>
@@ -424,8 +424,8 @@
 
                 <!-- Buttons -->
                 <div class="boardButton">
-                    <a class="boardButton-cancel">취소</a>
-                    <a class="boardButton-apply">등록</a>
+                    <a id="cancelBtn"  class="boardButton-cancel">취소</a>
+                    <a id="createBtn" class="boardButton-apply">등록</a>
                     <!--                    <a href="#" onclick="history.back(-1);return false;" class="cancel">취소</a>-->
                     <!--                    <a id="apply" class="apply" href="javascript:__doPostBack('ctl00$Contents$btnWrite','')">등록</a>-->
                 </div>
@@ -437,6 +437,33 @@
     </div>
 </div>
 </body>
+
+<script>
+    // function f(obj) {
+    //     if (obj.value === "확인했습니다.") {
+    //         $("#createBtn").removeAttr("disabled");
+    //     } else {
+    //         $("#createBtn").attr("disabled", "disabled");
+    //     }
+    // }
+
+    $('#createBtn').click(function () {
+        $.ajax({
+            type: "POST",
+            url: "/create/post/freeboard",
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify({
+                "title": $('#InputTitle').val(),
+                "content": $('#InputContent').val()
+            }),
+            success: function (data) {
+                console.log(data['id']);
+                window.location.href = "/read/post/freeboard?id=" + data['id'];
+            },
+        })
+    })
+</script>
 
 <footer>
     {{> include/footer}}
