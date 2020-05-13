@@ -16,6 +16,7 @@
         * {
             margin: 0;
             padding: 0;
+            box-sizing: initial !important;
         }
         .center {
             padding: 0 40px;
@@ -65,8 +66,6 @@
             width: 24px;
             height: 24px;
             display: inline-block;
-            /*background-image: url("C:\Users\OHILKWON\GitLocalStorage\HotThink\src\main\resources\static\icons\freeBoardIcon.png");
-            */
             background-image: url("/icons/freeBoardIcon.png");
             font-size: 16px;
             vertical-align: middle;
@@ -89,7 +88,7 @@
             font-size: 15px;
             border-bottom: 1px solid #e7e8e9;
             content: "";
-            display: inline-block;
+            /*display: inline-block;*/
             vertical-align: middle;
         }
 
@@ -151,7 +150,6 @@
 
         .InfoRight {
             float: right;
-            margin-left: 1010px;
             color: #999999;
             font-size: 13px;
         }
@@ -162,8 +160,8 @@
         }
 
         .boardButton a:hover {
-            text-decoration: underline;
-            text-underline-color: white;
+            text-decoration: underline !important;
+            text-underline-color: white !important;
         }
 
         .button-write {
@@ -174,9 +172,9 @@
             height: 30px;
             padding: 10px 8px 0 8px;
             font-size: 14px;
-            color: white;
+            color: white !important;
             text-align: center;
-            text-decoration: none;
+            text-decoration: none !important;
             cursor: pointer;
         }
 
@@ -188,9 +186,9 @@
             height: 30px;
             padding: 10px 8px 0 8px;
             font-size: 14px;
-            color: white;
+            color: white !important;
             text-align: center;
-            text-decoration: none;
+            text-decoration: none !important;
             cursor: pointer;
         }
 
@@ -299,13 +297,24 @@
             position: relative;
             border: 1px solid #cfd2d4;
             height: 80px;
-            padding: 0 90px 0 78px;
+            padding: 0 90px 0 0px;
+        }
+
+        .cmtProfile {
+            width: 62px;
+            height: 62px;
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            background-image: url("/icons/userprofile60x60.png");
         }
 
         .editWindow {
             width: 100%;
-            height: 60px;
-            padding: 10px 0px;
+            height: 58px;
+            padding: 10px 5px 10px 5px;
+            font-size: 12px;
+            margin-left: 78px;
         }
 
         .commnetButton {
@@ -322,15 +331,15 @@
             display: inline-block;
             min-width: 68px;
             font-size: 14px;
-            color: white;
-            text-align: center;
-            text-decoration: none;
+            color: white !important;
+            text-align: center !important;
+            text-decoration: none !important;
             cursor: pointer;
         }
 
         .commnetButton a:hover {
-            text-decoration: underline;
-            text-underline-color: white;
+            text-decoration: underline !important;
+            text-underline-color: white !important;
         }
 
 
@@ -394,17 +403,17 @@
 
             <div class="userInfoBox">
                 <i class="profileImg"></i>
-                <a class="username">oilkwon</a>
+                <a class="username">{{user.nick}}</a>
                 <a class="followbtn">
                     <i class="followimg"></i>
                     <b>팔로우</b>
                 </a>
                 <div class="InfoRight">
                         <span>
-                            <b>작성일 : 2020-04-16</b>
+                            <b>작성일 : {{createDate.toLocalDate()}}</b>
                         </span>
                     <span>
-                            <b>조회 : 100</b>
+                            <b>조회 : {{hit}}</b>
                         </span>
                     <span>
                             <b>댓글 : 2</b>
@@ -412,15 +421,15 @@
                 </div>
             </div>
             <div>
-                <div>
+                <div style="margin: 20px">
                     {{content}}
                 </div>
             </div>
         </div>
 
         <div class="boardButton">
-            <a class="button-write">글쓰기</a>
-            <a class="button-list">목록</a>
+            <a class="button-write" href="/create/post/freeboard">글쓰기</a>
+            <a class="button-list" href="/read/post/freeboard/list?page=1">목록</a>
         </div>
         <ul class="listMove">
             <li>
@@ -446,37 +455,39 @@
                     </span>
             </div>
             <div class="commentArea" id="commnetArea">
+                <div class="cmtProfile">
+                </div>
                 <div style="width: 100%; height: 60px;">
-                    <div>
-                        <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="width: 100%; height: 60px; padding: 10px 0px; display: block">
-                        </iframe>
-                        <textarea class="editWindow" name="textWindow" id="textWindow" rows="3" col="40" style="display: none"></textarea>
-                    </div>
+<!--                        <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="width: 100%; height: 60px; padding: 10px 0px; display: block">-->
+<!--                        </iframe>-->
+                        <textarea class="editWindow" name="textWindow" id="InputReply" rows="3" col="40" style="resize: none"></textarea>
                 </div>
                 <div class="commnetButton">
-                    <a id="btnCommentCreate" class="buttonbrown">등록</a>
+                    <a id="replyBtn" class="buttonbrown" onclick="f({{id}})">등록</a>
                 </div>
             </div>
             <div>
                 <div>
+                    {{#commentList}}
                     <div class="comt">
                         <span class="img">
-                            <img src="../static/icons/userprofile60x60.png">
+                            <img src="/icons/userprofile60x60.png">
                         </span>
                         <div class="who">
                             <a class="nickname">
-                                <b>유저아이디</b>
+                                <b>{{user.nick}}</b>
                             </a>
                         </div>
                         <P class="message">
-                            "댓글 내용이 들어감1"
+                            "{{cotent}}"
                             <span class="gap">|</span>
-                            <span class="time">pm 04:29 </span>
+                            <span class="time">pm {{createDate}} </span>
                         </P>
                     </div>
+                    {{/commentList}}
                     <div class="comt">
                         <span class="img">
-                            <img src="../static/icons/userprofile60x60.png">
+                            <img src="/icons/userprofile60x60.png">
                         </span>
                         <div class="who">
                             <a class="nickname">
@@ -486,7 +497,7 @@
                         <P class="message">
                             "댓글 내용이 들어감2"
                             <span class="gap">|</span>
-                            <span class="time">pm 04:29 </span>
+                            <span class="time">pm {{createDate.toLocalTime}} </span>
                         </P>
                     </div>
                 </div>
@@ -495,98 +506,98 @@
     </div>
 </div>
 </body>
-<!--<script>-->
-<!--    let reply = $('#InputReply');-->
-<!--    let replyBtn = $('#replyBtn');-->
-<!--    $(function () {-->
-<!--        reply.keyup(function () {-->
-<!--            if (reply.val() !== "") {-->
-<!--                replyBtn.removeAttr("disabled")-->
-<!--            } else {-->
-<!--                replyBtn.attr("disabled", "disabled")-->
-<!--            }-->
-<!--        })-->
-<!--    })-->
+<script>
+    let reply = $('#InputReply');
+    let replyBtn = $('#replyBtn');
+    $(function () {
+        reply.keyup(function () {
+            if (reply.val() !== "") {
+                replyBtn.removeAttr("disabled")
+            } else {
+                replyBtn.attr("disabled", "disabled")
+            }
+        })
+    })
 
-<!--    function f(postId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "POST",-->
-<!--                url: "/create/comment?id=" + postId,-->
-<!--                contentType: 'application/json;charset=UTF-8',-->
-<!--                dataType: 'json',-->
-<!--                data: JSON.stringify({-->
-<!--                    "content": reply.val()-->
-<!--                }),-->
-<!--                complete:function() {-->
-<!--                    window.location.href = "/read/post/free?id=" + postId-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
+    function f(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/comment?id=" + postId,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "content": reply.val()
+                }),
+                complete:function() {
+                    window.location.href = "/read/post/freeboard?id=" + postId
+                }
+            }
+        )
+    }
 
-<!--    //todo:url로 지우는거 방어해야함-->
-<!--    function deleteComment(commentId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "DELETE",-->
-<!--                url: "/delete/comment?id=" + commentId,-->
-<!--                complete:function() {-->
-<!--                    window.location.href = "/read/post/free?id=" + {{id}}-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
+    //todo:url로 지우는거 방어해야함
+    function deleteComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/comment?id=" + commentId,
+                complete:function() {
+                    window.location.href = "/read/post/freeboard?id=" + {{id}}
+                }
+            }
+        )
+    }
 
-<!--    function likePost(postId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "POST",-->
-<!--                url: "/create/like/post?id="+postId,-->
-<!--                success : function (data) {-->
-<!--                    location.reload();-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
+    // function likePost(postId) {
+    //     $.ajax(
+    //         {
+    //             type: "POST",
+    //             url: "/create/like/post?id="+postId,
+    //             success : function (data) {
+    //                 location.reload();
+    //             }
+    //         }
+    //     )
+    // }
+    //
+    // function likeCancelPost(postId) {
+    //     $.ajax(
+    //         {
+    //             type: "DELETE",
+    //             url: "/delete/like/post?id="+postId,
+    //             success : function (data) {
+    //                 location.reload();
+    //             }
+    //         }
+    //     )
+    // }
+    //
+    // function likeComment(commentId) {
+    //     $.ajax(
+    //         {
+    //             type: "POST",
+    //             url: "/create/like/comment?id="+commentId,
+    //             success : function (data) {
+    //                 location.reload();
+    //             }
+    //         }
+    //     )
+    // }
+    //
+    // function likeCancelComment(commentId) {
+    //     $.ajax(
+    //         {
+    //             type: "DELETE",
+    //             url: "/delete/like/comment?id="+commentId,
+    //             success : function (data) {
+    //                 location.reload();
+    //             }
+    //         }
+    //     )
+    // }
 
-<!--    function likeCancelPost(postId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "DELETE",-->
-<!--                url: "/delete/like/post?id="+postId,-->
-<!--                success : function (data) {-->
-<!--                    location.reload();-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
-
-<!--    function likeComment(commentId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "POST",-->
-<!--                url: "/create/like/comment?id="+commentId,-->
-<!--                success : function (data) {-->
-<!--                    location.reload();-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
-
-<!--    function likeCancelComment(commentId) {-->
-<!--        $.ajax(-->
-<!--            {-->
-<!--                type: "DELETE",-->
-<!--                url: "/delete/like/comment?id="+commentId,-->
-<!--                success : function (data) {-->
-<!--                    location.reload();-->
-<!--                }-->
-<!--            }-->
-<!--        )-->
-<!--    }-->
-
-<!--</script>-->
+</script>
 {{/freeboard}}
 <footer>
     {{> include/footer}}
