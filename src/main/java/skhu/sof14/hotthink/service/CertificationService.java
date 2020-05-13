@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.util.HashMap;
+import java.util.Random;
 
 @Service
 public class CertificationService {
@@ -38,10 +39,19 @@ public class CertificationService {
 
     }
 
-    //여기서 컨트롤러가 폰넘버 넘겨주면, id값 구해야함.
     public void updatePhoneNumber(String phoneNumber){
         int id = UserService.getIdFromAuth();
         userRepository.updatePhone(phoneNumber,id);
+    }
+
+    public String createRandomNumber(){
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+        return numStr;
     }
 
 }

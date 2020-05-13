@@ -331,9 +331,6 @@
     </div>
 </div>
 <script>
-
-
-
         $('#sendPhoneNumber').click(function(){
             let phoneNumber = $('#inputPhoneNumber').val();
             Swal.fire('인증번호 발송 완료!')
@@ -361,8 +358,7 @@
                                     "phoneNumber" : $('#inputPhoneNumber').val()
                                 }
                             })
-
-                            // document.location.href="/user/mypage/home";
+                            document.location.href="/home";
                         }else{
                             Swal.fire({
                                 icon: 'error',
@@ -377,9 +373,6 @@
                 }
             })
         });
-
-
-
 </script>
 
 

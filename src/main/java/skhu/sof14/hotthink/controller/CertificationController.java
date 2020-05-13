@@ -18,16 +18,11 @@ public class CertificationController {
     @GetMapping("/check/sendSMS")
     public @ResponseBody
     String sendSMS(String phoneNumber) {
-        Random rand  = new Random();
-        String numStr = "";
-        for(int i=0; i<4; i++) {
-            String ran = Integer.toString(rand.nextInt(10));
-            numStr+=ran;
-        }
+
+        String numStr = certificationService.createRandomNumber();
         System.out.println("수신자 번호 : " + phoneNumber);
         System.out.println("인증번호 : " + numStr);
-        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
-        //↗ 이거 주석 해제하면 휴대폰인증누를때마다 내돈 20원씩나감 참고하세요^^
+//        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
 

@@ -38,7 +38,8 @@
                     좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
                 {{/userLikeStatus}}
-                <button type="button" class="btn btn-primary">신고하기</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#declarationModal">신고하기</button>
             </div>
             <div class="col-auto justify-content-end">
                 <a href="mypage" class="shadow border-left-secondary card small"
@@ -209,4 +210,31 @@
 <footer>
     {{> include/footer}}
 </footer>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="declarationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">게시글 신고</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+            신고내용
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 </html>
