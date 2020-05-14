@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import skhu.sof14.hotthink.service.CertificationService;
-import skhu.sof14.hotthink.service.UserService;
 
-import java.util.Random;
 
 @Controller
 public class CertificationController {
@@ -22,7 +20,7 @@ public class CertificationController {
         String numStr = certificationService.createRandomNumber();
         System.out.println("수신자 번호 : " + phoneNumber);
         System.out.println("인증번호 : " + numStr);
-//        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
+        certificationService.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
 
