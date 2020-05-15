@@ -398,19 +398,21 @@
         <div class="boardView">
             <div class="bSubject">
                 <i class="freeBoardImage"></i>
-                <b class="ellipsis">[자유게시글]{{title}}</b>
+                <b class="ellipsis">[자유게시글] {{title}}</b>
             </div>
 
             <div class="userInfoBox">
                 <i class="profileImg"></i>
-                <a class="username">{{user.nick}}</a>
+                {{#user}}
+                <a class="username">{{nick}}</a>
+                {{/user}}
                 <a class="followbtn">
                     <i class="followimg"></i>
                     <b>팔로우</b>
                 </a>
                 <div class="InfoRight">
                         <span>
-                            <b>작성일 : {{createDate.toLocalDate()}}</b>
+                            <b>작성일 : {{createDate.toLocalDate}}</b>
                         </span>
                     <span>
                             <b>조회 : {{hit}}</b>
@@ -458,8 +460,6 @@
                 <div class="cmtProfile">
                 </div>
                 <div style="width: 100%; height: 60px;">
-<!--                        <iframe frameborder="0" class="editWindow" name="editWindow" id="editWindow" title="텍스트" style="width: 100%; height: 60px; padding: 10px 0px; display: block">-->
-<!--                        </iframe>-->
                         <textarea class="editWindow" name="textWindow" id="InputReply" rows="3" col="40" style="resize: none"></textarea>
                 </div>
                 <div class="commnetButton">
@@ -479,27 +479,27 @@
                             </a>
                         </div>
                         <P class="message">
-                            "{{cotent}}"
-                            <span class="gap">|</span>
-                            <span class="time">pm {{createDate}} </span>
-                        </P>
-                    </div>
-                    {{/commentList}}
-                    <div class="comt">
-                        <span class="img">
-                            <img src="/icons/userprofile60x60.png">
-                        </span>
-                        <div class="who">
-                            <a class="nickname">
-                                <b>유저아이디</b>
-                            </a>
-                        </div>
-                        <P class="message">
-                            "댓글 내용이 들어감2"
+                            {{cotent}}
                             <span class="gap">|</span>
                             <span class="time">pm {{createDate.toLocalTime}} </span>
                         </P>
                     </div>
+                    {{/commentList}}
+<!--                    <div class="comt">-->
+<!--                        <span class="img">-->
+<!--                            <img src="/icons/userprofile60x60.png">-->
+<!--                        </span>-->
+<!--                        <div class="who">-->
+<!--                            <a class="nickname">-->
+<!--                                <b>유저아이디</b>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                        <P class="message">-->
+<!--                            "댓글 내용이 들어감2"-->
+<!--                            <span class="gap">|</span>-->
+<!--                            <span class="time">pm {{createDate.toLocalTime}} </span>-->
+<!--                        </P>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -536,18 +536,18 @@
         )
     }
 
-    //todo:url로 지우는거 방어해야함
-    function deleteComment(commentId) {
-        $.ajax(
-            {
-                type: "DELETE",
-                url: "/delete/comment?id=" + commentId,
-                complete:function() {
-                    window.location.href = "/read/post/freeboard?id=" + {{id}}
-                }
-            }
-        )
-    }
+    // //todo:url로 지우는거 방어해야함
+    // function deleteComment(commentId) {
+    //     $.ajax(
+    //         {
+    //             type: "DELETE",
+    //             url: "/delete/comment?id=" + commentId,
+    //             complete:function() {
+    //                 window.location.href = "/read/post/freeboard?id=" + {{id}}
+    //             }
+    //         }
+    //     )
+    // }
 
     // function likePost(postId) {
     //     $.ajax(
