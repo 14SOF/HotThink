@@ -7,6 +7,16 @@ import lombok.ToString;
 user_user_idx : 게시글(신고된 게시글) 올린 사람의 IDX
 report_report_idx : 신고한 사람의 IDX
 report_type_idx : 신고된 게시물의 게시글 IDX
+----------------------
+post(게시글) 신고시  - Report 컨트롤러 기준
+-> user_user_idx : id
+-> report_report_idx :  현재 로그인된 id  / reportId
+-> report_type_idx : postId
+----------------------
+comment(댓글) 신고시 - Report 컨트롤러 기준
+->user_user_idx : userId
+-> report_report_idx : 현재 로그인된 id / reportId
+->report_type_idx : commentId
  */
 import javax.persistence.*;
 import java.time.LocalDateTime;

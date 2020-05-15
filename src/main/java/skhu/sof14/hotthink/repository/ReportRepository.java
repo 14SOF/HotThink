@@ -14,6 +14,8 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findReportByTypeId(Long id);
 
+    List<Report> findReportByType(String type);
+
 //    @Query("select r from Report r where r.postId=?1 and r.reportId=?2 ")
 //    Report checkReport(Long postId, int reportId);
 

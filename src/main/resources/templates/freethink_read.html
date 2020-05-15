@@ -35,7 +35,7 @@
                 {{/userLikeStatus}}
                 {{^userLikeStatus}}
                 <button type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red">
-<!--                    좋아요-->
+                    <!--                    좋아요-->
                     좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
                 </button>
                 {{/userLikeStatus}}
@@ -86,8 +86,8 @@
                     {{/user.writer}}
                 </div>
             </div>
-            <a href="/404" style="float: right; font-size: 2px" role="button">
-                신고하기
+            <a href="#" style="float: right; font-size: 2px" role="button" onclick="commentReportCheck({{user.id}} , {{id}})">
+                신고
             </a>
         </div>
         {{/commentList}}
@@ -113,7 +113,7 @@
         </div>
     </div>
 </div>
-<!-- Modal -->
+<!--게시글 신고 Modal -->
 <div class="modal fade" id="declarationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -137,6 +137,10 @@
     </div>
 </div>
 </body>
+
+
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
     let reply = $('#InputReply');
     let replyBtn = $('#replyBtn');
@@ -232,7 +236,7 @@
         console.log(postId);
         $.ajax({
             type :"POST",
-            url: "/post/report",
+            url: "/report/post",
             data : {
                 "id" : userId,
                 "postId" : postId
@@ -253,6 +257,59 @@
         })
         $('#declarationModal').modal("hide");
     };
+
+    function commentReportCheck(userId,commentId) {
+        console.log(userId);
+        console.log(commentId);
+        $.ajax({
+            type:"POST",
+            url: "/check/comment/report",
+            data : {
+                "userId" : userId,
+                "commentId" : commentId
+            },
+            success: function (res) {
+                if(res['check']){
+                    swal({
+                        title: "Are you sure?",
+                        text: "이 댓글을 신고하시겠습니까?",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                    })
+                        .then((willDelete) => {
+                        if (willDelete) {
+                            $.ajax({
+                                type:"GET",
+                                url: "/report/comment",
+                                data : {
+                                    "userId" : userId,
+                                    "commentId" : commentId
+                                }
+
+                            })
+                            swal("신고가 정상적으로 완료되었습니다.", {
+                                icon: "success",
+                            });
+                        } else {
+                            swal("cancled.");
+                }
+                });
+
+                }else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '오류',
+                        text: '이미 신고한 댓글입니다.',
+                    })
+                }
+
+            }
+        });
+
+    }
+
+
 
 </script>
 {{/free}}
