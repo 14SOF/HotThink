@@ -7,13 +7,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.entity.User;
 
+import java.util.List;
+
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findUserById(int id);
     User findUserByUserId(String userId);
     User findUserByNick(String nick);
-
+    List<User> findAllByNickStartsWith(String nick);
 
     @Modifying
     @Query("update User u set u.nick = ?2 where u.id = ?1")

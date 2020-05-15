@@ -1,5 +1,6 @@
 package skhu.sof14.hotthink.model.entity;
 
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "message")
 @ToString
 @Setter
+@Getter
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

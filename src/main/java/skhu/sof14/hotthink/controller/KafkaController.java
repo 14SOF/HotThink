@@ -1,16 +1,13 @@
 package skhu.sof14.hotthink.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
+import skhu.sof14.hotthink.model.dto.message.AlertDto;
 import skhu.sof14.hotthink.model.dto.message.MessageDto;
-import skhu.sof14.hotthink.service.MessageService;
+import skhu.sof14.hotthink.service.KafkaService;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,15 +17,20 @@ import java.util.concurrent.Executors;
 
 @Slf4j
 @RestController
-public class MessageController {
+public class KafkaController {
 
     @Autowired
-    MessageService service;
+    KafkaService service;
 
     @PostMapping("send-message")
+    public @ResponseBody MessageDto sendMessage(@RequestBody MessageDto dto){
+        return service.sendMessage(dto);
+    }
+
+    @PostMapping("send-alert")
     public @ResponseBody
-    String sendMessage(@RequestBody MessageDto dto) {
-        service.sendMessage(dto);
+    String sendAlert(@RequestBody AlertDto dto) {
+//        service.sendMessage(dto);
         return "ok";
     }
 
@@ -42,9 +44,9 @@ public class MessageController {
         log.info("세션 오픈");
         emitter = new SseEmitter(-1L);
         if (ConsumerConfiguration.messgaeListener != null) {
-            List<MessageDto> messageDtos = ConsumerConfiguration.messgaeListener.getMessageDtoList();
-            for (int i = 0; i < messageDtos.size(); i++) {
-                sendMessageDto(messageDtos.get(i));
+            List<AlertDto> alertDtos = ConsumerConfiguration.messgaeListener.getAlertDtoList();
+            for (int i = 0; i < alertDtos.size(); i++) {
+                sendMessageDto(alertDtos.get(i));
             }
         }
         return emitter;
@@ -56,7 +58,7 @@ public class MessageController {
         return "done";
     }
 
-    private static void sendMessageDto(MessageDto dto) {
+    private static void sendMessageDto(AlertDto dto) {
         nonBlockingService.execute(() -> {
             try {
                 StringBuilder builder = new StringBuilder();
@@ -73,7 +75,7 @@ public class MessageController {
         });
     }
 
-    public static void sendEvents(MessageDto messageDto) {
-        sendMessageDto(messageDto);
+    public static void sendEvents(AlertDto alertDto) {
+        sendMessageDto(alertDto);
     }
 }

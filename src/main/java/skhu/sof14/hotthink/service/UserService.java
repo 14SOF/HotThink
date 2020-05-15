@@ -10,12 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
-import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
+import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
+import skhu.sof14.hotthink.model.dto.user.*;
 import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
@@ -124,5 +121,10 @@ public class UserService {
         return dto;
     }
 
+    public List<UserPostDto> findAllByNickStartsWith(String nick){
+        List<User> userList = userRepository.findAllByNickStartsWith(nick);
+        Type dtoListType = new TypeToken<List<UserPostDto>>() {}.getType();
+        return mapper.map(userList, dtoListType);
+    }
 
 }

@@ -18,62 +18,44 @@
                                 <div class="headind_srch">
                                     <div class="srch_bar">
                                         <div class="row">
-                                            <input type="text" class="search-bar col text-gray-300 fa-xs"
+                                            <input id="searchInput" type="text"
+                                                   class="search-bar col text-gray-500 fa-xs"
                                                    placeholder="찾기">
                                             <span class="input-group-addon col-auto">
-                                        <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                        <button id="searchButton" type="button" onclick="search()">
+                                            <i class="fa fa-search" aria-hidden="true"></i> </button>
                                             </span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="inbox_chat">
-                                    <div class="chat_list active_chat">
-                                        <div class="chat_people">
-                                            <div class="chat_ib">
-                                                <h5>정기혁 <span class="chat_date">4월 5일</span></h5>
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                            </div>
+                                        <div id="searchContainer" class="row" style="display: none">
+                                            <div id="searchlistNone" style='width: 100%; text-align: center'>없음</div>
+                                            <button onclick="searchDisplayNone()" type="button"
+                                                    class="btn btn-sm btn-block btn-danger">닫기
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="chat_list active_chat">
 
-                                        <div class="chat_people">
-                                            <div class="chat_ib">
-                                                <h5>김영곤 <span class="chat_date">4월 5일</span></h5>
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div id="chat_list" class="inbox_chat">
+                                    <!--                                    <div class="chat_list active_chat">-->
+
+                                    <!--                                        <div class="chat_people">-->
+                                    <!--                                            <div class="chat_ib">-->
+                                    <!--                                                <h5>김영곤 <span class="chat_date">4월 5일</span></h5>-->
+                                    <!--                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
                             </div>
+                            <div id="target" class="mt-2" style="width: 100%; text-align: center"></div>
                             <div class="mesgs">
                                 <div class="msg_history">
-                                    <div class="incoming_msg">
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                                <span class="time_date"> 00:00 AM    |    4월 5일</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="outgoing_msg">
-                                        <div class="sent_msg">
-                                            <p>Test which is a new approach to have all
-                                                solutions</p>
-                                            <span class="time_date"> 11:01 AM    |    June 9</span></div>
-                                    </div>
-                                    <div class="incoming_msg">
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p>Test, which is a new approach to have</p>
-                                                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="type_msg">
                                     <div class="input_msg_write">
                                         <input id="msgInput" type="text" class="write_msg" placeholder="메세지 입력"/>
-                                        <button id="msgSendBtn" class="msg_send_btn" type="button" style="outline: none">
+                                        <button id="msgSendBtn" class="msg_send_btn" type="button"
+                                                style="outline: none">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -88,24 +70,178 @@
 </div>
 </body>
 <script>
+    let me
+    let nowTarget
+    let targetList = []
+    let messageList = []
+    let options = {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric',
+        hour12: true,
+        // timeZone: 'America/Los_Angeles'
+    }
 
-    $('#msgSendBtn').click(function () {
-        $.ajax(
-            {
-                type: "POST",
-                url: "/send-message",
-                contentType: 'application/json;charset=UTF-8',
-                dataType: 'json',
-                data: JSON.stringify({
-                    "type":"Message",
-                    "id": 1,
-                    "content": $('#msgInput').val(),
-                }),
-                complete:function(data) {
-                    $('#msgInput').val('')
+    $.ajax({
+        type:"GET",
+        url:"/user/mypage/message/list",
+        success:function (data) {
+            me = data['me']
+            messageList = data['list']
+            for(let i=0; i<data['list'].length; i++){
+                let element = data['list'][i]
+                if(me === element['sender']['id']){
+                    element = element['receiver']
+                }else{
+                    element = element['sender']
+                }
+
+                let check = true
+                for(let j=0; j<targetList.length; j++){
+                    if(targetList[j]['id'] === element['id']){
+                        check = false
+                        break
+                    }
+                }
+                if (check){
+                    targetList.push(element)
                 }
             }
-        )
+
+            for(let i=0; i<targetList.length; i++){
+                $('#chat_list').append("<div class=\"chat_list active_chat\" onclick='addAndClick(" + JSON.stringify(targetList[i]) + ")'>\n" +
+                    "<div class=\"chat_people\">\n" +
+                    "<div class=\"chat_ib\">\n" +
+                    " <h5>" + targetList[i]['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                    "<p></p></div></div></div>")
+            }
+        }
+    })
+
+    function search() {
+        let input = $('#searchInput').val()
+        if (input !== '') {
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "/user/mypage/message/search?nick=" + input,
+                    success: function (data) {
+                        let list = data['list']
+                        $('.search_element').remove()
+
+                        if (list.length === 0) {
+                            $('#searchlistNone').css('display', '')
+                        } else {
+                            $('#searchlistNone').css('display', 'none')
+                            for (let i = list.length - 1; i >= 0; i--) {
+                                $('#searchContainer').prepend("<button type='button' class='btn btn-sm btn-block search_element' " +
+                                    "onclick='searchAndAdd(" + JSON.stringify(list[i]) + ")'>" + list[i]['nick'] + "</button>")
+                            }
+                        }
+                        $('#searchContainer').css('display', '');
+                    }
+                }
+            )
+        }
+    }
+
+    function searchDisplayNone() {
+        $('#searchContainer').css("display", "none");
+    }
+
+    function searchAndAdd(data) {
+        let check = true
+        for(let i=0; i<targetList.length; i++){
+            if(data['id'] === targetList[i]['id']){
+                check = false
+            }
+        }
+        if(me===data['id']) check = false
+        if(check){
+            $('#chat_list').append(" <div class=\"chat_list active_chat\" onclick='addAndClick(" + JSON.stringify(data) + ")'>\n" +
+                "                                        <div class=\"chat_people\">\n" +
+                "                                            <div class=\"chat_ib\">\n" +
+                "                                                <h5>" + data['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                "                                                <p></p>\n" +
+                "                                            </div>\n" +
+                "                                        </div>\n" +
+                "                                    </div>")
+        }
+    }
+
+    function addAndClick(data) {
+        nowTarget = data
+        $('.msg_history').remove()
+        $('.mesgs').prepend("<div class='msg_history'></div>")
+        $('#target').text(data['nick'])
+        clickAndDraw()
+    }
+
+    function clickAndDraw(){
+        for(let i=0; i<messageList.length; i++){
+            let message = messageList[i]
+            if(message['sender']['id']===me){
+                if(message['receiver']['id']===nowTarget['id']){
+                    let date = new Date(message['dateTime'][0],
+                        message['dateTime'][1]-1,
+                        message['dateTime'][2],
+                        message['dateTime'][3],
+                        message['dateTime'][4],)
+                    date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                    $('.msg_history').append("<div class=\"outgoing_msg\">\n" +
+                        "<div class=\"sent_msg\">\n" +
+                        "<p>" + message['content'] + "</p>\n" +
+                        "<span class=\"time_date\">" +
+                        "" + date + " </span></div>\n" +
+                        "</div>")
+                }
+            }else{
+                if(message['sender']['id']===nowTarget['id']){
+                    let date = new Date(message['dateTime'][0],
+                        message['dateTime'][1]-1,
+                        message['dateTime'][2],
+                        message['dateTime'][3],
+                        message['dateTime'][4],)
+                    date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                    $('.msg_history').append("<div class=\"incoming_msg\">\n" +
+                        "<div class=\"received_msg\">\n" +
+                        "<div class=\"received_withd_msg\">\n" +
+                        "<p>"+message['content']+"</p>\n" +
+                        "<span class=\"time_date\"> "+date+"</span></div></div></div>")
+                }
+            }
+        }
+    }
+
+    $('#msgSendBtn').click(function () {
+        if ($('#msgInput').val() !== null) {
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/send-message",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "content": $('#msgInput').val(),
+                        "receiver": {
+                            "id": nowTarget['id']
+                        }
+                    }),
+                    success: function (data) {
+                        let date = new Date(Date.now())
+                        date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                        $('.msg_history').append("<div class=\"outgoing_msg\">\n" +
+                            "<div class=\"sent_msg\">\n" +
+                            "<p>" + data['content'] + "</p>\n" +
+                            "<span class=\"time_date\">" +
+                            "" + date + " </span></div>\n" +
+                            "</div>")
+                        $('#msgInput').val('')
+                        messageList.push(data)
+                    }
+                }
+            )
+        }
+
     })
 </script>
 <footer>

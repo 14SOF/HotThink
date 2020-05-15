@@ -5,9 +5,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import skhu.sof14.hotthink.model.dto.message.MessageDto;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
+import skhu.sof14.hotthink.model.dto.user.UserPostDto;
+import skhu.sof14.hotthink.service.KafkaService;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
@@ -22,6 +25,9 @@ public class UserController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    KafkaService kafkaService;
 
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
@@ -48,6 +54,22 @@ public class UserController {
     @GetMapping("/user/mypage/message")
     public String message() {
         return "mypage_message";
+    }
+
+    @GetMapping("/user/mypage/message/list")
+    public @ResponseBody Map<String, Object> messageList(){
+        Map<String, Object> json = new HashMap<>();
+        json.put("me", UserService.getIdFromAuth());
+        json.put("list", kafkaService.findAllByUser());
+        return json;
+    }
+
+    @GetMapping("/user/mypage/message/search")
+    public @ResponseBody Map<String, List<UserPostDto>> searchUserNick(@RequestParam String nick){
+        List<UserPostDto> userPostDtoList = userService.findAllByNickStartsWith(nick);
+        Map<String, List<UserPostDto>> json = new HashMap<>();
+        json.put("list", userPostDtoList);
+        return json;
     }
 
     @PostMapping("user/delete")

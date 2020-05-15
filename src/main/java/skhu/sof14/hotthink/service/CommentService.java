@@ -4,11 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.comment.CommentCreateDto;
-import skhu.sof14.hotthink.model.dto.message.MessageDto;
+import skhu.sof14.hotthink.model.dto.message.AlertDto;
 import skhu.sof14.hotthink.model.dto.post.PostBase;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.Comment;
-import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.CommentRepository;
 
 import java.time.LocalDateTime;
@@ -20,14 +19,14 @@ public class CommentService {
     @Autowired
     ModelMapper mapper;
     @Autowired
-    MessageService messageService;
+    KafkaService kafkaService;
 
     //생성
     public void create(Long postId, CommentCreateDto dto){
-        MessageDto messageDto = new MessageDto();
-        messageDto.setId(Math.toIntExact(postId));//Long 형이라서
-        messageDto.setType(MessageDto.Type.Comment);
-        messageService.sendMessage(messageDto);
+        AlertDto alertDto = new AlertDto();
+        alertDto.setId(Math.toIntExact(postId));//Long 형이라서
+        alertDto.setType(AlertDto.Type.Comment);
+        kafkaService.sendAlert(alertDto);
 
         dto.setDateTime(LocalDateTime.now());
         //로그인한 유저 셋
