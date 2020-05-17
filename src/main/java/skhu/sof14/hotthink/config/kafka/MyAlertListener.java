@@ -15,7 +15,7 @@ import java.util.TimeZone;
 
 
 @Slf4j
-public class MyMessgaeListener implements AcknowledgingMessageListener<String, AlertDto> {
+public class MyAlertListener implements AcknowledgingMessageListener<String, AlertDto> {
 
     public List<AlertDto> getAlertDtoList() {
         return alertDtoList;
@@ -39,7 +39,7 @@ public class MyMessgaeListener implements AcknowledgingMessageListener<String, A
         data.value().setDateTime(datetime);
         acknowledgments.add(acknowledgment);
         alertDtoList.add(data.value());
-        KafkaController.sendEvents(data.value());
+//        KafkaController.sendEvents(data.value());
 
     }
 }

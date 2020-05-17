@@ -67,7 +67,7 @@
     {{#userNick}}
     <i id="alarmBell" class="far fa-bell mr-3" style="font-size: large" onclick="alarmBellClick()"></i>
     <!--        <i class="far fa-bell"style="font-size: larger"></i>-->
-    <!--        <i class="far fa-envelope" style="font-size: larger"></i>-->
+    <i id="messageBell" class="far fa-envelope" style="font-size: larger" onclick="messageClick()"></i>
 
     <div class="navbar-divider"></div>
     <ul class="navbar-nav mr-auto">
@@ -120,17 +120,34 @@
     </div>
 </div>
 <script>
-    let sse = new EventSource('http://localhost:8080/receive-message');
+    let sse = new EventSource('http://localhost:8080/sse');
 
     sse.onmessage = function (evt) {
-        $('#alarmBell').removeClass('far')
-        $('#alarmBell').css("fontSize", "xx-large")
-        $('#alarmBell').css("color", "gold")
-        $('#alarmBell').addClass('fas')
+        if(evt.data.split("/")[0]==="Message"){
+            $('#messageBell').removeClass('far')
+            $('#messageBell').css("fontSize", "xx-large")
+            $('#messageBell').css("color", "#36b9cc")
+            $('#messageBell').addClass('fas')
+        }else{
+
+        }
+        // $('#alarmBell').removeClass('far')
+        // $('#alarmBell').css("fontSize", "xx-large")
+        // $('#alarmBell').css("color", "gold")
+        // $('#alarmBell').addClass('fas')
+
     };
 
     function alarmBellClick() {
         window.location.href = "/user/mypage/alarm"
+    }
+
+    function messageClick() {
+        $.ajax({
+            type:"GET",
+            url:"/commit-message"
+        })
+        window.location.href = "/user/mypage/message"
     }
 
     $('#logoutButton').click(function () {

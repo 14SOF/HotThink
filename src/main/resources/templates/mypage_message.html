@@ -10,7 +10,7 @@
     {{> include/mypage_sticker}}
     <div class="shadow-lg myPage-component">
         <div class="mypage-inner-component">
-            <div class="card mb-4 py-3 border-left-info" style="height: 100%">
+            <div class="card mb-4 py-3 border-left-in#36b9ccfo" style="height: 100%">
                 <div class="card-body">
                     <div class="messaging">
                         <div class="inbox_msg">
@@ -71,8 +71,9 @@
 </body>
 <script>
     let me
-    let nowTarget
+    let nowTarget = null
     let targetList = []
+    let targetElements = []
     let messageList = []
     let options = {
         year: 'numeric', month: 'numeric', day: 'numeric',
@@ -108,11 +109,23 @@
             }
 
             for(let i=0; i<targetList.length; i++){
-                $('#chat_list').append("<div class=\"chat_list active_chat\" onclick='addAndClick(" + JSON.stringify(targetList[i]) + ")'>\n" +
+                let e = $("<div class=\"chat_list\" onclick='addAndClick(" + JSON.stringify(targetList[i]) + ")'>\n" +
                     "<div class=\"chat_people\">\n" +
                     "<div class=\"chat_ib\">\n" +
                     " <h5>" + targetList[i]['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
                     "<p></p></div></div></div>")
+                $('#chat_list').append(e)
+                targetElements.push(e)
+            }
+
+            for(let i=0; i<data['new'].length; i++){
+                for(let j=0; j<targetList.length; j++){
+                    if(targetList[j]['id']===data['new'][i]){
+                        targetElements[j].css("background-color", "#36b9cc");
+                        break
+                    }
+                }
+
             }
         }
     })
@@ -169,6 +182,13 @@
     }
 
     function addAndClick(data) {
+        for(let i=0; i<targetList.length; i++){
+            if(data['id']===targetList[i]['id']){
+                targetElements[i].css('background-color', '')
+                targetElements[i].addClass('active_chat')
+                break
+            }
+        }
         nowTarget = data
         $('.msg_history').remove()
         $('.mesgs').prepend("<div class='msg_history'></div>")
@@ -213,7 +233,10 @@
     }
 
     $('#msgSendBtn').click(function () {
-        if ($('#msgInput').val() !== null) {
+        if( nowTarget === null){
+            console.log("보낼 사람 음슴")
+        }
+        else if ($('#msgInput').val() !== null) {
             $.ajax(
                 {
                     type: "POST",

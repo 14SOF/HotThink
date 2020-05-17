@@ -60,6 +60,7 @@ public class UserController {
     public @ResponseBody Map<String, Object> messageList(){
         Map<String, Object> json = new HashMap<>();
         json.put("me", UserService.getIdFromAuth());
+        json.put("new", kafkaService.getNewMessages());
         json.put("list", kafkaService.findAllByUser());
         return json;
     }
