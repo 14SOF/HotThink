@@ -83,32 +83,36 @@
     }
 
     $.ajax({
-        type:"GET",
-        url:"/user/mypage/message/list",
-        success:function (data) {
+        type: "GET",
+        url: "/user/mypage/message/list",
+        success: function (data) {
+            $('#messageBell').removeClass('fas')
+            $('#messageBell').css("fontSize", "larger")
+            $('#messageBell').css("color", "")
+            $('#messageBell').addClass('far')
             me = data['me']
             messageList = data['list']
-            for(let i=0; i<data['list'].length; i++){
+            for (let i = 0; i < data['list'].length; i++) {
                 let element = data['list'][i]
-                if(me === element['sender']['id']){
+                if (me === element['sender']['id']) {
                     element = element['receiver']
-                }else{
+                } else {
                     element = element['sender']
                 }
 
                 let check = true
-                for(let j=0; j<targetList.length; j++){
-                    if(targetList[j]['id'] === element['id']){
+                for (let j = 0; j < targetList.length; j++) {
+                    if (targetList[j]['id'] === element['id']) {
                         check = false
                         break
                     }
                 }
-                if (check){
+                if (check) {
                     targetList.push(element)
                 }
             }
 
-            for(let i=0; i<targetList.length; i++){
+            for (let i = 0; i < targetList.length; i++) {
                 let e = $("<div class=\"chat_list\" onclick='addAndClick(" + JSON.stringify(targetList[i]) + ")'>\n" +
                     "<div class=\"chat_people\">\n" +
                     "<div class=\"chat_ib\">\n" +
@@ -118,9 +122,9 @@
                 targetElements.push(e)
             }
 
-            for(let i=0; i<data['new'].length; i++){
-                for(let j=0; j<targetList.length; j++){
-                    if(targetList[j]['id']===data['new'][i]){
+            for (let i = 0; i < data['new'].length; i++) {
+                for (let j = 0; j < targetList.length; j++) {
+                    if (targetList[j]['id'] === data['new'][i]) {
                         targetElements[j].css("background-color", "#36b9cc");
                         break
                     }
@@ -163,13 +167,13 @@
 
     function searchAndAdd(data) {
         let check = true
-        for(let i=0; i<targetList.length; i++){
-            if(data['id'] === targetList[i]['id']){
+        for (let i = 0; i < targetList.length; i++) {
+            if (data['id'] === targetList[i]['id']) {
                 check = false
             }
         }
-        if(me===data['id']) check = false
-        if(check){
+        if (me === data['id']) check = false
+        if (check) {
             $('#chat_list').append(" <div class=\"chat_list active_chat\" onclick='addAndClick(" + JSON.stringify(data) + ")'>\n" +
                 "                                        <div class=\"chat_people\">\n" +
                 "                                            <div class=\"chat_ib\">\n" +
@@ -182,11 +186,11 @@
     }
 
     function addAndClick(data) {
-        for(let i=0; i<targetList.length; i++){
-            if(data['id']===targetList[i]['id']){
+        for (let i = 0; i < targetList.length; i++) {
+            targetElements[i].removeClass('active_chat')
+            if (data['id'] === targetList[i]['id']) {
                 targetElements[i].css('background-color', '')
                 targetElements[i].addClass('active_chat')
-                break
             }
         }
         nowTarget = data
@@ -196,13 +200,13 @@
         clickAndDraw()
     }
 
-    function clickAndDraw(){
-        for(let i=0; i<messageList.length; i++){
+    function clickAndDraw() {
+        for (let i = 0; i < messageList.length; i++) {
             let message = messageList[i]
-            if(message['sender']['id']===me){
-                if(message['receiver']['id']===nowTarget['id']){
+            if (message['sender']['id'] === me) {
+                if (message['receiver']['id'] === nowTarget['id']) {
                     let date = new Date(message['dateTime'][0],
-                        message['dateTime'][1]-1,
+                        message['dateTime'][1] - 1,
                         message['dateTime'][2],
                         message['dateTime'][3],
                         message['dateTime'][4],)
@@ -214,10 +218,10 @@
                         "" + date + " </span></div>\n" +
                         "</div>")
                 }
-            }else{
-                if(message['sender']['id']===nowTarget['id']){
+            } else {
+                if (message['sender']['id'] === nowTarget['id']) {
                     let date = new Date(message['dateTime'][0],
-                        message['dateTime'][1]-1,
+                        message['dateTime'][1] - 1,
                         message['dateTime'][2],
                         message['dateTime'][3],
                         message['dateTime'][4],)
@@ -225,18 +229,17 @@
                     $('.msg_history').append("<div class=\"incoming_msg\">\n" +
                         "<div class=\"received_msg\">\n" +
                         "<div class=\"received_withd_msg\">\n" +
-                        "<p>"+message['content']+"</p>\n" +
-                        "<span class=\"time_date\"> "+date+"</span></div></div></div>")
+                        "<p>" + message['content'] + "</p>\n" +
+                        "<span class=\"time_date\"> " + date + "</span></div></div></div>")
                 }
             }
         }
     }
 
     $('#msgSendBtn').click(function () {
-        if( nowTarget === null){
+        if (nowTarget === null) {
             console.log("보낼 사람 음슴")
-        }
-        else if ($('#msgInput').val() !== null) {
+        } else if ($('#msgInput').val() !== null) {
             $.ajax(
                 {
                     type: "POST",
@@ -264,8 +267,53 @@
                 }
             )
         }
-
     })
+
+    sse.onmessage = function (evt) {
+        let data = JSON.parse(evt.data)
+        if (data['id']===undefined) {
+            console.log(data)
+            let sender = data['sender']
+            //현재 채팅중이면
+            let date = new Date(Date.now())
+            date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+            if (nowTarget !== null && nowTarget['id'] === sender['id']) {
+                $('.msg_history').append("<div class=\"incoming_msg\">\n" +
+                    "<div class=\"received_msg\">\n" +
+                    "<div class=\"received_withd_msg\">\n" +
+                    "<p>" + data['content'] + "</p>\n" +
+                    "<span class=\"time_date\"> " + date + "</span></div></div></div>")
+            } else {
+                let check = true
+                for (let i = 0; i < targetList.length; i++) {
+                    if (targetList[i]['id'] === sender['id']) {
+                        targetElements[i].css("background-color", "#36b9cc");
+                        messageList.push(data)
+                        check = false
+                        break
+                    }
+                }
+                //채팅 리스트에 없으면
+                if (check) {
+                    let e = $("<div class=\"chat_list\" onclick='addAndClick(" + JSON.stringify(sender) + ")'>\n" +
+                        "<div class=\"chat_people\">\n" +
+                        "<div class=\"chat_ib\">\n" +
+                        " <h5>" + sender['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                        "<p></p></div></div></div>")
+                    $('#chat_list').append(e)
+                    e.css("background-color", "#36b9cc");
+                    targetList.push(sender)
+                    targetElements.push(e)
+                    messageList.push(data)
+                }
+            }
+        } else {
+            $('#alarmBell').removeClass('far')
+            $('#alarmBell').css("fontSize", "xx-large")
+            $('#alarmBell').css("color", "gold")
+            $('#alarmBell').addClass('fas')
+        }
+    }
 </script>
 <footer>
     {{> include/footer}}

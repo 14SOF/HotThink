@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
@@ -15,7 +16,6 @@ import skhu.sof14.hotthink.model.dto.message.MessageDto;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 @Configuration
 @EnableKafka
@@ -38,12 +38,12 @@ public class ConsumerConfiguration {
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServerAddress);
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, false);
-        props.put(ConsumerConfig.CLIENT_ID_CONFIG, Integer.toString(id));
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, id+"_message");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, Integer.toString(id));
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 
         String messageTopic = id + "_message";
-        String alertTopic = Integer.toString(id) + "_alert";
+        String alertTopic = id + "_alert";
 
         ContainerProperties containerProps = new ContainerProperties(messageTopic);
         containerProps.setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
@@ -58,16 +58,22 @@ public class ConsumerConfiguration {
         messageListenerContainer = new KafkaMessageListenerContainer<>(messageFactory, containerProps);
         messageListenerContainer.start();
         log.info("메시지 리스너 시작");
-//        JsonDeserializer<AlertDto> deserializer = new JsonDeserializer<>(AlertDto.class, false);
-//        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, deserializer);
 
-//        alertListener = new MyAlertListener();
-//            containerProps.setMessageListener(messgaeListener);
-//        DefaultKafkaConsumerFactory<String, AlertDto> factory = new DefaultKafkaConsumerFactory<>(props, null, deserializer);
+        props.remove(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG);
+        props.remove(ConsumerConfig.CLIENT_ID_CONFIG);
+        JsonDeserializer<AlertDto> alertDeserializer = new JsonDeserializer<>(AlertDto.class, false);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, alertDeserializer);
+        props.put(ConsumerConfig.CLIENT_ID_CONFIG, id+"_alert");
 
-//        alertListener = new KafkaMessageListenerContainer<>(factory, containerProps);
-//        log.info("리스너 시작");
-//        alertListener.start();
+        alertListener = new MyAlertListener();
+        DefaultKafkaConsumerFactory<String, AlertDto> alertFactory = new DefaultKafkaConsumerFactory<>(props, null, alertDeserializer);
+
+        containerProps = new ContainerProperties(alertTopic);
+        containerProps.setMessageListener(alertListener);
+        containerProps.setAckMode(ContainerProperties.AckMode.MANUAL_IMMEDIATE);
+        alertListenerContainer = new KafkaMessageListenerContainer<>(alertFactory, containerProps);
+        log.info("알림 리스너 시작");
+        alertListenerContainer.start();
     }
 
     private static KafkaMessageListenerContainer<String, AlertDto> alertListenerContainer;
@@ -75,6 +81,9 @@ public class ConsumerConfiguration {
 
     public static void stopUserTopicConsumeContainer() {
         messageListenerContainer.stop();
-        log.info("메시지 리스너 종료");
+        alertListenerContainer.stop();
+        messageListener = null;
+        alertListener = null;
+        log.info("메시지 리스너, 알림 리스너 종료");
     }
 }

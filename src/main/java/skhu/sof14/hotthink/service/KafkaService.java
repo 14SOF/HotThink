@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
 import skhu.sof14.hotthink.config.kafka.MyMessageListener;
+import skhu.sof14.hotthink.controller.KafkaController;
 import skhu.sof14.hotthink.model.dto.message.AlertDto;
 import skhu.sof14.hotthink.model.dto.message.MessageDto;
 import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
@@ -66,6 +67,7 @@ public class KafkaService {
         dto.setDateTime(LocalDateTime.now());
         UserPostDto sender = new UserPostDto();
         sender.setId(UserService.getIdFromAuth());
+        sender.setNick(userService.getNickFromAuth());
         dto.setSender(sender);
         Message entity = mapper.map(dto, Message.class);
         entity = messageRepository.save(entity);
@@ -95,6 +97,7 @@ public class KafkaService {
             if(newMessagelist.contains(dto.getSender().getId())) continue;
             newMessagelist.add(dto.getSender().getId());
         }
+        MyMessageListener.messageCommit();
         return newMessagelist;
     }
 
@@ -123,7 +126,8 @@ public class KafkaService {
             topic = post.getUser().getId();
         }
 
-        alertTemplate.send(Integer.toString(topic), dto).addCallback(new ListenableFutureCallback<SendResult<String, AlertDto>>() {
+        if(topic == UserService.getIdFromAuth()) return;
+        alertTemplate.send(topic+"_alert", dto).addCallback(new ListenableFutureCallback<SendResult<String, AlertDto>>() {
             @Override
             public void onFailure(Throwable ex) {
                 log.info("message send fail : " + ex.getMessage());

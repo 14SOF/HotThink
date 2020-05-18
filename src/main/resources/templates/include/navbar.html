@@ -121,21 +121,19 @@
 </div>
 <script>
     let sse = new EventSource('http://localhost:8080/sse');
-
     sse.onmessage = function (evt) {
-        if(evt.data.split("/")[0]==="Message"){
+        let data = JSON.parse(evt.data)
+        if (data['id'] === undefined) {
             $('#messageBell').removeClass('far')
             $('#messageBell').css("fontSize", "xx-large")
             $('#messageBell').css("color", "#36b9cc")
             $('#messageBell').addClass('fas')
-        }else{
-
+        } else {
+            $('#alarmBell').removeClass('far')
+            $('#alarmBell').css("fontSize", "xx-large")
+            $('#alarmBell').css("color", "gold")
+            $('#alarmBell').addClass('fas')
         }
-        // $('#alarmBell').removeClass('far')
-        // $('#alarmBell').css("fontSize", "xx-large")
-        // $('#alarmBell').css("color", "gold")
-        // $('#alarmBell').addClass('fas')
-
     };
 
     function alarmBellClick() {
@@ -143,14 +141,11 @@
     }
 
     function messageClick() {
-        $.ajax({
-            type:"GET",
-            url:"/commit-message"
-        })
         window.location.href = "/user/mypage/message"
     }
 
-    $('#logoutButton').click(function () {
-        sse.close()
-    })
+    // $('#logoutButton').click(function () {
+    //     sse.close()
+    // })
+
 </script>

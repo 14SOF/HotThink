@@ -1,15 +1,17 @@
 package skhu.sof14.hotthink.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
+import skhu.sof14.hotthink.config.kafka.MyAlertListener;
 import skhu.sof14.hotthink.config.kafka.MyMessageListener;
 import skhu.sof14.hotthink.model.dto.message.AlertDto;
 import skhu.sof14.hotthink.model.dto.message.MessageDto;
 import skhu.sof14.hotthink.service.KafkaService;
-import skhu.sof14.hotthink.utils.SseUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -36,36 +38,37 @@ public class KafkaController {
 
     @GetMapping("/sse")
     public SseEmitter handleSse() {
-        log.info("세션 오픈");
         emitter = new SseEmitter(-1L);
+        log.info("세션 오픈 ="+emitter.toString());
         if (ConsumerConfiguration.messageListener != null ) {
-            if(MyMessageListener.check){
-                sendEvents("Message");
+            if(ConsumerConfiguration.messageListener.getMessageList().size()>0){
+                sendEvents("{\"sender\":\"씨발\"}");
             }
-//            for(MessageDto message : ConsumerConfiguration.messageListener.getMessageList()){
-//                sendEvents(message);
-//            }
-//            List<AlertDto> alertDtos = ConsumerConfiguration.messgaeListener.getAlertDtoList();
-//            for (int i = 0; i < alertDtos.size(); i++) {
-//                sendMessageDto(alertDtos.get(i));
-//            }
+        }
+        if(ConsumerConfiguration.alertListener != null){
+            List<AlertDto> alertDtoList = ConsumerConfiguration.alertListener.getAlertDtoList();
+            if(alertDtoList.size()>0){
+                for(AlertDto dto : alertDtoList){
+                    sendEvents(dto);
+                }
+            }
         }
         return emitter;
     }
 
 
 
-    @PostMapping("send-alert")
-    public @ResponseBody
-    String sendAlert(@RequestBody AlertDto dto) {
-//        service.sendMessage(dto);
-        return "ok";
-    }
+//    @PostMapping("send-alert")
+//    public @ResponseBody
+//    String sendAlert(@RequestBody AlertDto dto) {
+//        service.sendAlert(dto);
+//        return "ok";
+//    }
 
-    public static void sendEvents(String alarm){
+    public static void sendEvents(String event){
         nonBlockingService.execute(()->{
             try {
-                emitter.send(alarm);
+                emitter.send(event);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -75,39 +78,30 @@ public class KafkaController {
     public static void sendEvents(MessageDto messageDto){
         nonBlockingService.execute(()->{
             try {
-                emitter.send(SseUtil.messageDtoToString(messageDto));
+                emitter.send(messageDto);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
 
-
-
-//    private static void sendMessageDto(AlertDto dto) {
-//        nonBlockingService.execute(() -> {
-//            try {
-//                StringBuilder builder = new StringBuilder();
-//                builder.append(dto.getDateTime().getYear());
-//                builder.append("년 ");
-//                builder.append(dto.getDateTime().getMonth().getValue());
-//                builder.append("월 ");
-//                builder.append(dto.getDateTime().getDayOfMonth());
-//                builder.append("일");
-//                emitter.send(dto.getId()+"/"+dto.getType() + "/" + dto.getContent() + "/" + builder.toString());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        });
-//    }
-
-//    public static void sendEvents(AlertDto alertDto) {
-//        sendMessageDto(alertDto);
-//    }
+    public static void sendEvents(AlertDto alertDto){
+        nonBlockingService.execute(()->{
+            try {
+                emitter.send(alertDto);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
 
     //메시지 커밋
-    @GetMapping("/commit-message")
+    @GetMapping("/commit-alert")
     public void commitMessage() {
-        MyMessageListener.messageCommit();
+        MyAlertListener.commit();
+    }
+
+    public static void sseClose(){
+        emitter.complete();
     }
 }

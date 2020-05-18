@@ -94,62 +94,82 @@
 </body>
 <script>
     sse.onmessage = function (evt) {
-        let data = evt.data.split('/')
-        let id = data[0]
-        let type = data[1]
-        let content = data[2]
-        let time = data[3]
-        $('#alarmBell').removeClass('far')
-        $('#alarmBell').css("fontSize", "xx-large")
-        $('#alarmBell').css("color", "gold")
-        $('#alarmBell').addClass('fas')
+        let data = JSON.parse(evt.data)
+        console.log(data)
+        if(data['id']!==undefined) {
+            let id = data['id']
+            let type = data['type']
+            let content = data['content']
+            $('#alarmBell').removeClass('far')
+            $('#alarmBell').css("fontSize", "xx-large")
+            $('#alarmBell').css("color", "gold")
+            $('#alarmBell').addClass('fas')
 
-        let icon;
-        let color;
-        if (type === "LikeComment" || type === "LikePost") {
-            icon = "fas fa-thumbs-up"
-            color = "bg-danger"
-        } else if (type === "Comment") {
-            content = "댓글이 달렸습니다"
-            color = "bg-secondary"
-            icon = "fas fa-comment-dots"
+            let icon;
+            let color;
+            if (type === "LikeComment" || type === "LikePost") {
+                icon = "fas fa-thumbs-up"
+                color = "bg-danger"
+            } else if (type === "Comment") {
+                content = "댓글이 달렸습니다"
+                color = "bg-secondary"
+                icon = "fas fa-comment-dots"
+            } else {
+                icon = "fa fa-paper-plane"
+                content = "메시지가 도착했습니다"
+                color = "bg-info"
+            }
+
+            let options = {
+                year: 'numeric', month: 'numeric', day: 'numeric',
+                hour: 'numeric', minute: 'numeric',
+                hour12: true,
+                // timeZone: 'America/Los_Angeles'
+            }
+            let time = new Date(data['dateTime'][0],
+                data['dateTime'][1] - 1,
+                data['dateTime'][2],
+                data['dateTime'][3],
+                data['dateTime'][4],)
+            time = new Intl.DateTimeFormat('kr-KR', options).format(time)
+
+            $('#listComponent').append("<li class=\"list-group-item\" onclick='alarmClick(" +JSON.stringify(data)+ ")'>\n" +
+                "                            <div class=\"container\">\n" +
+                "                                <div class=\"row\">\n" +
+                "                                    <div class=\"col-auto align-self-center\">\n" +
+                "                                        <div class=\"btn-lg icon-circle " + color + "\">\n" +
+                "                                            <i class=\"" + icon + " text-white\"></i>\n" +
+                "                                        </div>\n" +
+                "                                    </div>\n" +
+                "                                    <div class=\"col align-self-center btn\">\n" +
+                "                                        <div class=\"row\">\n" +
+                "                                            <div class=\"small col-2 text-gray-500 align-self-center\">" + time + "</div>\n" +
+                "                                            <div class=\"col align-self-center\" style=\"font-size: large\">" + content + "\n" +
+                "                                            </div>\n" +
+                // "                                            <div class=\"col-auto\">\n" +
+                // "                                                <button type=\"button\" class=\"btn btn-light\">\n" +
+                // "                                                    <i class=\"fas fa-times\"></i>\n" +
+                // "                                                </button>\n" +
+                // "                                            </div>\n" +
+                "                                        </div>\n" +
+                "                                    </div>\n" +
+                "                                </div>\n" +
+                "                            </div>\n" +
+                "                        </li>");
         }else{
-            icon = "fa fa-paper-plane"
-            content = "메시지가 도착했습니다"
-            color = "bg-info"
+            $('#messageBell').removeClass('far')
+            $('#messageBell').css("fontSize", "xx-large")
+            $('#messageBell').css("color", "#36b9cc")
+            $('#messageBell').addClass('fas')
         }
 
-        type = "\""+type+"\""
-        $('#listComponent').append("<li class=\"list-group-item\" onclick='alarmClick("+id+", "+type+")'>\n" +
-            "                            <div class=\"container\">\n" +
-            "                                <div class=\"row\">\n" +
-            "                                    <div class=\"col-auto align-self-center\">\n" +
-            "                                        <div class=\"btn-lg icon-circle " + color + "\">\n" +
-            "                                            <i class=\"" + icon + " text-white\"></i>\n" +
-            "                                        </div>\n" +
-            "                                    </div>\n" +
-            "                                    <div class=\"col align-self-center btn\">\n" +
-            "                                        <div class=\"row\">\n" +
-            "                                            <div class=\"small col-2 text-gray-500 align-self-center\">" + time + "</div>\n" +
-            "                                            <div class=\"col align-self-center\" style=\"font-size: large\">" + content + "\n" +
-            "                                            </div>\n" +
-            // "                                            <div class=\"col-auto\">\n" +
-            // "                                                <button type=\"button\" class=\"btn btn-light\">\n" +
-            // "                                                    <i class=\"fas fa-times\"></i>\n" +
-            // "                                                </button>\n" +
-            // "                                            </div>\n" +
-            "                                        </div>\n" +
-            "                                    </div>\n" +
-            "                                </div>\n" +
-            "                            </div>\n" +
-            "                        </li>");
     };
 
     function commit() {
         $.ajax(
             {
                 type: "GET",
-                url: "/commit-message",
+                url: "/commit-alert",
                 complete: function () {
                     window.location.href = "/user/mypage/alarm";
                 }
@@ -157,13 +177,8 @@
         )
     }
 
-    function alarmClick(id, type) {
-        if(type==="Message"){
-            window.location.href="/user/mypage/message"
-        }else{
-            window.location.href="/read/post/free?id="+id
-        }
-        console.log(id, type)
+    function alarmClick(data) {
+        window.location.href="/read/post/free?id="+data['id']
     }
 
 </script>
