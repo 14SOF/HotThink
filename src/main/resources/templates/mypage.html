@@ -345,12 +345,6 @@
                 success: function(res){
                     $('#checkBtn').click(function(){
                         if($.trim(res) ==$('#inputCertifiedNumber').val()){
-                            Swal.fire(
-                                '인증성공!',
-                                '휴대폰 인증이 정상적으로 완료되었습니다.',
-                                'success'
-                            )
-
                             $.ajax({
                                 type: "GET",
                                 url: "/update/phone",
@@ -358,7 +352,13 @@
                                     "phoneNumber" : $('#inputPhoneNumber').val()
                                 }
                             })
-                            document.location.href="/home";
+
+                            Swal.fire(
+                                '인증성공!',
+                                '휴대폰 인증이 정상적으로 완료되었습니다.',
+                                'success'
+                            )
+
                         }else{
                             Swal.fire({
                                 icon: 'error',

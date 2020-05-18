@@ -9,4 +9,6 @@ import java.util.List;
 @Repository
 public interface OverlapRepository extends JpaRepository<Overlap, Long> {
     List<Overlap> findOverlapByPostId(Long postId);
+    Overlap findOverlapById(Long id);
+
 }

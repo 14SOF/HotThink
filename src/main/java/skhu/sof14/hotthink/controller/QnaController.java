@@ -65,7 +65,7 @@ public class QnaController {
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
-        model.addAttribute("hasNext", page.getPage() <pageSize); //현재페이지보다, 총페이지의 수가 크다면 다음으로 갈수있음
+        model.addAttribute("hasNext", page.getPage() < pageSize); //현재페이지보다, 총페이지의 수가 크다면 다음으로 갈수있음
         model.addAttribute("hasPre", 1<page.getPage()); //1보다 크다면,
         return "qna_list";
     }

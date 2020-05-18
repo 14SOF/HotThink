@@ -10,6 +10,7 @@ import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.LikeRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class LikeService {
     PostService postService;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     ModelMapper mapper;
 
     //좋아요 생성
@@ -30,7 +34,7 @@ public class LikeService {
         Like entity = new Like();
 
         User user = new User();
-        user.setId(UserService.getIdFromAuth());
+        user=userRepository.findUserById(UserService.getIdFromAuth());
         entity.setUser(user);
         List<Like> likeList;
         //true면 게시판
