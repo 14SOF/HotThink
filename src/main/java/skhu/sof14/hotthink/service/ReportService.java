@@ -3,10 +3,13 @@ package skhu.sof14.hotthink.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import skhu.sof14.hotthink.model.dto.overlap.OverlapDto;
 import skhu.sof14.hotthink.model.dto.report.CommentReportDto;
 import skhu.sof14.hotthink.model.dto.report.PostReportDto;
+import skhu.sof14.hotthink.model.entity.Overlap;
 import skhu.sof14.hotthink.model.entity.Report;
 import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.repository.OverlapRepository;
 import skhu.sof14.hotthink.repository.ReportRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 
@@ -23,6 +26,10 @@ public class ReportService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    OverlapRepository overlapRepository;
+
 
     public Report postReport(int id, Long postId) {
 
@@ -88,6 +95,8 @@ public class ReportService {
         }
         return true;
     }
+
+
 
 
 }
