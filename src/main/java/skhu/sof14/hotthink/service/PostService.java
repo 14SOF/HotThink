@@ -2,24 +2,20 @@ package skhu.sof14.hotthink.service;
 
 import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.post.*;
-import skhu.sof14.hotthink.model.entity.Comment;
-import skhu.sof14.hotthink.model.entity.Like;
-import skhu.sof14.hotthink.model.entity.Post;
-import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.model.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
 import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -66,7 +62,7 @@ public class PostService {
         }
 
         //댓글 좋아요 여부
-        for(int i=0; i<entity.getCommentList().size(); i++){
+        for (int i = 0; i < entity.getCommentList().size(); i++) {
             Comment comment = entity.getCommentList().get(i);
             likeList = comment.getLikeList();
             for (Like like : likeList) {
@@ -80,10 +76,10 @@ public class PostService {
         return dto;
     }
 
-    public QnaReadDto findQnaById(Long id){
+    public QnaReadDto findQnaById(Long id) {
         postRepository.updatePostByHit(id);
         Post entity = postRepository.findPostById(id);
-        if(entity == null) return null;
+        if (entity == null) return null;
 
         QnaReadDto dto = mapper.map(entity, QnaReadDto.class);
         return dto;
@@ -99,8 +95,10 @@ public class PostService {
 
     public List<PostListElementDto> findAllPage(Pagination page, String type) {
         List<Post> postList = postRepository.findAllByType(type, page);
-        Type dtoListType = new TypeToken<List<PostListElementDto>>() {}.getType();
-        if (type.equals("리얼")) dtoListType = new TypeToken<List<RealListElementDto>>() {}.getType();
+        Type dtoListType = new TypeToken<List<PostListElementDto>>() {
+        }.getType();
+        if (type.equals("리얼")) dtoListType = new TypeToken<List<RealListElementDto>>() {
+        }.getType();
         return mapper.map(postList, dtoListType);
     }
 
@@ -109,7 +107,7 @@ public class PostService {
         postRepository.createReal(id, dto.getTitle(), dto.getContent().toString(), LocalDateTime.now());
     }
 
-    public void freeToHot(Long id){
+    public void freeToHot(Long id) {
         postRepository.updatePostToHot(id);
     }
 
@@ -125,22 +123,22 @@ public class PostService {
         return postRepository.save(mapper.map(dto, Post.class));
     }
 
-    public List<QnaListElementDto> findAllQna(Pagination page){
-        List<Post> qnaList = postRepository.findAllByType("QNA",page);
-        Type dtoListType = new TypeToken<List<QnaListElementDto>>(){}.getType();
-        return mapper.map(qnaList,dtoListType);
+    public List<QnaListElementDto> findAllQna(Pagination page) {
+        List<Post> qnaList = postRepository.findAllByType("QNA", page);
+        Type dtoListType = new TypeToken<List<QnaListElementDto>>() {
+        }.getType();
+        return mapper.map(qnaList, dtoListType);
     }
 
-    public boolean checkOfdelete(Long id){
-        String postNick =postRepository.findPostById(id).getUser().getNick();
+    public boolean checkOfdelete(Long id) {
+        String postNick = postRepository.findPostById(id).getUser().getNick();
         String curNick = userService.getNickFromAuth();
 
-        if(postNick.equals(curNick)) {
-            return  true;
-        }else{
-            return  false;
+        if (postNick.equals(curNick)) {
+            return true;
+        } else {
+            return false;
         }
-
     }
 
 

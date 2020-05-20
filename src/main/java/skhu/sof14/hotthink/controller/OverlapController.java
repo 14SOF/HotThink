@@ -22,7 +22,6 @@ import java.util.Map;
 
 @Controller
 public class OverlapController {
-    //    표절신고는 중복신고(여러번 신고) 가능하도록 구현함.
     @Autowired
     OverlapService overlapService;
     @Autowired

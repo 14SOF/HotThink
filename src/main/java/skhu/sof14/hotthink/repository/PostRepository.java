@@ -27,7 +27,7 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
         int size = 10;
         if(type.equals("핫")) size = 6;
         else if(type.equals("리얼")) size = 5;
-        Pageable pageable = PageRequest.of(pagination.getPage() - 1, size);
+        Pageable pageable = PageRequest.of(pagination.getPage()-1, size);
         Page<Post> page;
         if(pagination.getTitle() == null) page = findAllByType(type, pageable);
         else page = findAllByTitleContainingAndType(pagination.getTitle(), type, pageable);

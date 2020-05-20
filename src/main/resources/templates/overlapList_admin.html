@@ -80,16 +80,16 @@
 
     for(let i=0; i<3; i++){
         btn[i].click(function () {
-            window.location.href = "/read/post/qna/list?page=" + btn[i].text()
+            window.location.href = "/report/overlap/list/admin?page=" + btn[i].text()
         })
     }
 
     function pagingNext(page) {
-        window.location.href = "/read/post/qna/list?page=" + (page+1);
+        window.location.href = "/report/overlap/list/admin?page=" + (page+1);
     }
 
     function pagingPre(page) {
-        window.location.href = "/read/post/qna/list?page=" + (page-1);
+        window.location.href = "/report/overlap/list/admin?page=" + (page-1);
     }
 
 </script>

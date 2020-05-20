@@ -22,6 +22,7 @@ public class FreeThinkController {
 
     @GetMapping("/read/post/free/list")
     public String freeThinkListView(Model model, Pagination page) {
+        System.out.println(page);
         List<PostListElementDto> list = postService.findAllPage(page,"프리");
         model.addAttribute("list", list);
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
@@ -44,7 +45,6 @@ public class FreeThinkController {
         return "freethink_read";
     }
 
-
     @PostMapping("/create/post/free")
     public @ResponseBody
     Map<String, Long> createFreeThink(@RequestBody PostCreateDto dto) {
@@ -53,5 +53,4 @@ public class FreeThinkController {
         json.put("id", id);
         return json;
     }
-
 }

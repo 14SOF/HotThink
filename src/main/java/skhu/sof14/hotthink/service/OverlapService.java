@@ -58,7 +58,7 @@ public class OverlapService {
     }
 
     public List<OverlapElementDto> findAllOverlap(Pagination page){
-        List<Overlap> overlapList = overlapRepository.findAll();
+        List<Overlap> overlapList = overlapRepository.findAll(page);
         Type dtoListType = new TypeToken<List<OverlapElementDto>>(){}.getType();
         return mapper.map(overlapList,dtoListType);
     }

@@ -26,7 +26,7 @@ public class CertificationController {
 
     @GetMapping("/update/phone")
     public @ResponseBody void updatePhone(String phoneNumber){
-        System.out.println("넘어오나 " + phoneNumber);
+//        System.out.println("넘어오나 " + phoneNumber);
         certificationService.updatePhoneNumber(phoneNumber);
     }
 }
