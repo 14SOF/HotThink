@@ -95,9 +95,14 @@ public class KafkaController {
         });
     }
 
+    @GetMapping("/commit-message")
+    public void commitMessage(){
+        MyMessageListener.messageCommit();
+    }
+
     //메시지 커밋
     @GetMapping("/commit-alert")
-    public void commitMessage() {
+    public void commitAlert() {
         MyAlertListener.commit();
     }
 

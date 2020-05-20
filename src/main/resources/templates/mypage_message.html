@@ -271,10 +271,13 @@
 
     sse.onmessage = function (evt) {
         let data = JSON.parse(evt.data)
+        console.log(data)
+
         if (data['id']===undefined) {
-            console.log(data)
+            if(data['content']===undefined){
+                return;
+            }
             let sender = data['sender']
-            //현재 채팅중이면
             let date = new Date(Date.now())
             date = new Intl.DateTimeFormat('kr-KR', options).format(date)
             if (nowTarget !== null && nowTarget['id'] === sender['id']) {
@@ -314,6 +317,14 @@
             $('#alarmBell').addClass('fas')
         }
     }
+
+    $(window).on("beforeunload", function() {
+        $.ajax({
+            type: "GET",
+            url: "/commit-message"
+        })
+    });
+
 </script>
 <footer>
     {{> include/footer}}

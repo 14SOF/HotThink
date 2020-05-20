@@ -13,6 +13,6 @@ spring:
     suffix: .html
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 13.209.73.144:9092
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
