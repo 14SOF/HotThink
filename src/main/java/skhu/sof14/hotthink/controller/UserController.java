@@ -8,15 +8,16 @@ import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.message.MessageDto;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
+import skhu.sof14.hotthink.model.dto.post.PostUpdateDto;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
-import skhu.sof14.hotthink.service.KafkaService;
+import skhu.sof14.hotthink.model.entity.Follow;
+import skhu.sof14.hotthink.model.entity.Post;
+import skhu.sof14.hotthink.service.*;
 import skhu.sof14.hotthink.model.entity.Point;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PointRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
-import skhu.sof14.hotthink.service.PointService;
-import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
@@ -37,6 +38,13 @@ public class UserController {
 
     @Autowired
     PointService pointService;
+
+    @Autowired
+    FollowService followService;
+
+    @Autowired
+    PostService postService;
+
 
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
@@ -121,6 +129,19 @@ public class UserController {
         model.addAttribute("pageSize", pageSize);
 
         return "mypage_myboards";
+    }
+
+    @GetMapping("/user")
+    public String userPage(@RequestParam int id, Model model){
+        Map<String, Object> followList = followService.followList(id);
+        List<PostUpdateDto> postEntity =   postService.findAllByUserId(id);
+        model.addAttribute("id", id);
+        model.addAttribute("nick", userService.findNickById(id));
+        model.addAttribute("followerList", followList.get("followerList"));
+        model.addAttribute("followingList", followList.get("followingList"));
+        model.addAttribute("check", followList.get("check"));
+        model.addAttribute("boardList", postEntity);
+        return "user_page";
     }
 
 }

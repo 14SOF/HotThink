@@ -25,8 +25,7 @@ public class LikeService {
     @Autowired
     KafkaService kafkaService;
 
-    @Autowired
-    ModelMapper mapper;
+
 
     //좋아요 생성
     public int createLike(Long id, boolean check) {

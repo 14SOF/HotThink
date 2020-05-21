@@ -141,5 +141,14 @@ public class PostService {
         }
     }
 
+    public List<PostUpdateDto> findAllByUserId(int id){
+        User user = new User();
+        user.setId(id);
+        List<Post> posts = postRepository.findAllByUser(user);
+        Type dtoListType = new TypeToken<List<PostUpdateDto>>(){}.getType();
+
+        return mapper.map(posts, dtoListType);
+    }
+
 
 }
