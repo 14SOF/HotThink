@@ -15,7 +15,7 @@ import java.io.IOException;
 public class LogoutHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        ConsumerConfiguration.stopUserTopicConsumeContainer();
+//        ConsumerConfiguration.stopUserTopicConsumeContainer();
 //        KafkaController.sseClose();
         response.sendRedirect("/login");
     }

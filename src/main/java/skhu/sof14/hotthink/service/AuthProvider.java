@@ -28,7 +28,7 @@ public class AuthProvider implements AuthenticationProvider {
         UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 
-        ConsumerConfiguration.startUserTopicConsumeContainer(user.getId());
+//        ConsumerConfiguration.startUserTopicConsumeContainer(user.getId());
         return new UserToken(userId, userPassword, null, user); //UserToken에 userId와 userPassword, user(loginDto , id,pw,status)
     }
 

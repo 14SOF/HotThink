@@ -1,9 +1,6 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
@@ -141,12 +138,11 @@ public class PostService {
         }
     }
 
-    public List<PostUpdateDto> findAllByUserId(int id){
+    public List<PostTitleAndTypeDto> findAllByUserId(int id){
         User user = new User();
         user.setId(id);
         List<Post> posts = postRepository.findAllByUser(user);
-        Type dtoListType = new TypeToken<List<PostUpdateDto>>(){}.getType();
-
+        Type dtoListType = new TypeToken<List<PostTitleAndTypeDto>>(){}.getType();
         return mapper.map(posts, dtoListType);
     }
 

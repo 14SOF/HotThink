@@ -51,7 +51,6 @@ public class FollowService {
 
         List<Follow> entity = followRepository.findAllByUserFollowerOrUserFollowing(pageUser, pageUser);
 
-        System.out.println(entity);
         List<Follow> followerList = new ArrayList<>();
         List<Follow> followingList = new ArrayList<>();
 

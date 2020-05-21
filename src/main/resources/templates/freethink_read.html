@@ -3,6 +3,7 @@
 <head>
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="/style/user.css">
+    <script src="/js/user_click_func.js"></script>
 </head>
 
 <body>
@@ -42,26 +43,26 @@
                 <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#declarationModal">신고하기</button>
             </div>
+            {{#user}}
             <div class="col-auto justify-content-end">
-                <a href="mypage" class="shadow border-left-secondary card small"
+                <a href="/user?id={{id}}" class="shadow border-left-secondary card small"
                    style="height: 100px; padding: 10px; text-decoration: none">
                     <div class="mx-auto mt-1 text-gray-500">
                         작성자
                     </div>
-                    {{#user}}
                     <div class="mx-auto text-gray-900">
                         <h2>{{nick}}</h2>
                     </div>
-                    {{/user}}
                 </a>
             </div>
+            {{/user}}
         </div>
 
         <div class="dropdown-divider"></div>
 
         {{#commentList}}
         <div class="row mt-1 align-items-center text-gray-700" style="border: solid 1px lightgray; padding: 5px">
-            <a class="col-auto btn btn-light text-gray-700 small" href="mypage" role="button">{{user.nick}}</a>
+            <a class="col-auto btn btn-light text-gray-700 small" href="/user?id={{user.id}}" role="button">{{user.nick}}</a>
             <div class="col">{{content}}</div>
             <div class="col-auto">
                 <div>
