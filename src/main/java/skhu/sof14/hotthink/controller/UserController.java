@@ -11,6 +11,11 @@ import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 import skhu.sof14.hotthink.service.KafkaService;
+import skhu.sof14.hotthink.model.entity.Point;
+import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.repository.PointRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
+import skhu.sof14.hotthink.service.PointService;
 import skhu.sof14.hotthink.service.UserService;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
@@ -29,16 +34,21 @@ public class UserController {
     @Autowired
     KafkaService kafkaService;
 
+
+    @Autowired
+    PointService pointService;
+
     @GetMapping("/user/mypage/home")
     public String myPage(Model model){
 
         UserDetailDto dto = userService.getUserDetailFromAuth();
-
         Map<String, String> attr = new HashMap<>();
         attr.put("userId", dto.getUserId());
         attr.put("userNick", dto.getNick());
         attr.put("userName", dto.getName());
         attr.put("userPhone", dto.getPhone());
+        model.addAttribute("point", pointService.ChargeList());
+        model.addAttribute("sum", pointService.amountSum());
         model.addAllAttributes(attr);
         return "mypage";
     }
@@ -97,6 +107,7 @@ public class UserController {
     public String follow() {
         return "mypage_follow";
     }
+
 
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {

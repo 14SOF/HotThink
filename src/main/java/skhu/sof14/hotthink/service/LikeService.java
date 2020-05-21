@@ -9,6 +9,7 @@ import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.LikeRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.util.List;
 

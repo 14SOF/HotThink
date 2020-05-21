@@ -61,4 +61,9 @@ public class TempController {
 //        return "signup_success";
 //    }
 
+    @GetMapping("testCharge")
+    public String testCharge(){
+        return "testone";
+    }
+
 }

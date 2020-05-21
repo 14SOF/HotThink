@@ -40,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/resources/**")
                 .antMatchers(strings);
 
-        web.httpFirewall(defaultHttpFirewall());
+        web.httpFirewall(defaultHttpFirewall()); // 더블슬래쉬 허용
     }
 
     @Bean
@@ -67,6 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/deleteCk").permitAll()
                 .antMatchers("/delete/**").permitAll()
                 .antMatchers("list/**").permitAll()
+                .antMatchers("/testCharge").permitAll()
                 //임시끝
                 .and()
                 .formLogin()

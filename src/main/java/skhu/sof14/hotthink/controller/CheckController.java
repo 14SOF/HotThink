@@ -7,6 +7,7 @@ import skhu.sof14.hotthink.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 @Controller
 public class CheckController {
@@ -36,5 +37,7 @@ public class CheckController {
         json.put("check", userService.pwCheck(userPassword));
         return json;
     }
+
+
 
 }

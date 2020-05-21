@@ -4,6 +4,34 @@
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
+<style>
+
+    .myButton {
+        box-shadow:inset -9px 0px 10px -50px #f5978e;
+        background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+        background-color:#f24537;
+        border-radius:9px;
+        border:1px solid #d02718;
+        display:inline-block;
+        cursor:pointer;
+        color:#ffffff;
+        font-family:Trebuchet MS;
+        font-size:16px;
+        font-weight:bold;
+        padding:8px 11px;
+        text-decoration:none;
+        text-shadow:-2px 0px 2px #810e05;
+    }
+    .myButton:hover {
+        background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+        background-color:#c62d1f;
+    }
+    .myButton:active {
+        position:relative;
+        top:1px;
+    }
+
+</style>
 <body>
 {{> include/navBar}}
 
@@ -30,7 +58,7 @@
                 <button type="button" class="btn btn-danger">
                     좋아요 <span class="badge badge-light ml-1">{{likeList}}</span>
                 </button>
-                <button type="button" class="btn btn-primary">신고하기</button>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#declarationModal">신고하기</button>
             </div>
             {{#writer}}
             <div class="col-auto">
@@ -73,13 +101,67 @@
         {{/commentList}}
     </div>
 </div>
-{{/hot}}
+
+<!-- Modal -->
+<div class="modal fade" id="declarationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">게시글 신고</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p style="font-weight: bold">[신고] 버튼 클릭시, 정상적으로 신고가 접수되며 신고횟수 누적 시 운영진의 확인 후 삭제 및 경고 조치 될 수 있습니다.</p>
+                <p style="font-weight: bold; color: red">단, 아이디어 표절(중복된 아이디어) <br/>신고시 하단의 [표절신고] 를 이용해주세요.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="/report/overlap?postId={{hot.id}}" class="myButton"  style="margin-right: 240px">표절신고</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="report({{user.id}} , {{hot.id}})">신고</button>
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script>
     function f(data) {
         window.location.href = "/create/post/real?id="+data
     }
+
+
+    function report(userId,postId) {
+        console.log(userId);
+        console.log(postId);
+        $.ajax({
+            type :"POST",
+            url: "/report/post",
+            data : {
+                "id" : userId,
+                "postId" : postId
+            },
+            success: function (res) {
+                if(res['check']) {
+                    swal("신고 완료", "신고가 정상적으로 접수되었습니다.", "success");
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '오류',
+                        text: '이미 신고한 게시글입니다.',
+                    })
+                }
+
+            }
+        })
+        $('#declarationModal').modal("hide");
+    };
+
 </script>
+{{/hot}}
 <footer>
     {{> include/footer}}
 </footer>
