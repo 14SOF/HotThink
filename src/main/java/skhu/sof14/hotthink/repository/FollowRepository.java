@@ -11,13 +11,13 @@ import skhu.sof14.hotthink.model.entity.User;
 import java.util.List;
 
 @Repository
-public interface FollowRepository extends JpaRepository <Follow, Long> {
+public interface FollowRepository extends JpaRepository<Follow, Long> {
 
     List<Follow> findAllByUserFollowerOrUserFollowing(User userFollow, User userFollowing);
 
-    @Modifying
     @Transactional
-   @Query("delete from Follow where user_follower = ?1 and user_following =?2")
+    @Modifying
+    @Query("delete from Follow f where f.userFollower = ?1 and f.userFollowing =?2")
     void deleteFollowByUserFollowerAndUserFollwing(User follower, User following);
 
 }

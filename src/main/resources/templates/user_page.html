@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
+</head>
+<body>
+{{> include/navbar}}
+<div class="container myPage-container mt-5">
+    <div class="shadow-lg myPage-component">
+        <div class="mypage-inner-component">
+            <div class="row">
+                <div class="col">
+                    <div class="row border-left-primary shadow card">
+                        <div class="card-body row">
+                            <i class="col-auto fas fa-id-card text-gray-400 fa-3x align-self-center"></i>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col font-weight-bolder mt-2"
+                                         style="font-size: large; text-align: center">
+                                        {{nick}}
+                                    </div>
+                                    {{#check}}
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-danger" onclick="followCancle()">팔로우끊기
+                                        </button>
+                                    </div>
+                                    {{/check}}
+                                    {{^check}}
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-primary" onclick="follow()">팔로우하기</button>
+                                    </div>
+                                    {{/check}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-left-warning shadow card mt-3">
+                        <div class="row card-body">
+                            <i class="col-auto fas fa-id-card-alt text-gray-400 fa-3x align-self-center"></i>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="col-auto align-self-center mx-auto">
+                                        <div class="row fa-xs text-gray-500 justify-content-center">구매자들의 평가</div>
+                                        <div class="row justify-content-center">
+                                            <h1 style="font-size: 48px">0.0</h1>
+                                        </div>
+                                        <div class="row justify-content-center">
+                                            <i class="fas fa-star" style="color:gold"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-left-secondary shadow card mt-3" style="height: 500px">
+                        <div class="card-body">
+                            <div class="row">
+                                <i class="fas fa-pen-square col-auto text-gray-400 fa-3x"></i>
+                                <div class="col mt-2 fa-xs text-gray-500" style="text-align: center">쓴 글</div>
+                            </div>
+                            <ul class="mt-3" style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
+                                <li>
+                                    {{#boardList}}
+                                    <div class="row">
+                                        <!--                                        <div class="col-auto">-->
+                                        <!--                                            <button type="button" id="item4" class="btn btn-sm btn-primary" disabled>프리띵크</button>-->
+                                        <!--                                        </div>-->
+                                        <div class="col mt-1">{{title}}</div>
+                                    </div>
+                                    {{/boardList}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="vertical-divider"></div>
+                <div class="col">
+                    <div class="row" style="height: 100%">
+                        <div class="col card">
+                            <div class="card-body">
+                                <div class="mt-2 fa-xs text-gray-500" style="text-align: center">팔로워</div>
+                                <ul class="mt-3"
+                                    style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
+                                    <li style="text-align: center">
+                                        {{#followerList}}
+                                        <button type="button" class="btn" onclick="userClick({{userFollower.id}})">{{userFollower.nick}}</button>
+                                        {{/followerList}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col card">
+                            <div class="card-body">
+                                <div class="mt-2 fa-xs text-gray-500" style="text-align: center">팔로잉</div>
+                                <ul class="mt-3"
+                                    style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
+                                    <li style="text-align: center">
+                                        {{#followingList}}
+                                        <button type="button" class="btn" onclick="userClick({{userFollowing.id}})">{{userFollowing.nick}}</button>
+                                        {{/followingList}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<footer>
+    {{> include/footer}}
+</footer>
+<script>
+    let id = {{id}};
+    console.log(id)
+
+    function follow() {
+        $.ajax({
+            type: "POST",
+            url: "/create/follow",
+            data: {"id": id},
+            complete: function () {
+                window.location.href = "/user?id="+id
+            }
+        })
+    }
+
+    function followCancle() {
+        console.log(id)
+        $.ajax({
+            type: "GET",
+            url: "/delete/follow",
+            data: {"id": id},
+            complete: function () {
+                window.location.href = "/user?id="+id
+            }
+        })
+    }
+
+    function boardClick(post) {
+        window.location.href = "/read/post/" + post['type'] + "?id=" + post['id']
+    }
+
+    function userClick(id) {
+        window.location.href = "/user?id=" + id
+    }
+</script>
+</html>

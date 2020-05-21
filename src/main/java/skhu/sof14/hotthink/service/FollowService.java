@@ -45,13 +45,13 @@ public class FollowService {
         followRepository.deleteFollowByUserFollowerAndUserFollwing(nowUser, pageUser);
     }
 
-
     public Map<String, Object> followList(int userId){
         User pageUser = new User(); // 페이지 주인의 유저IDX
         pageUser.setId(userId);
 
         List<Follow> entity = followRepository.findAllByUserFollowerOrUserFollowing(pageUser, pageUser);
 
+        System.out.println(entity);
         List<Follow> followerList = new ArrayList<>();
         List<Follow> followingList = new ArrayList<>();
 
@@ -60,7 +60,7 @@ public class FollowService {
 
         for(Follow follow:entity){
             if(nowUser == follow.getUserFollower().getId()) check = true;
-            if(userId == follow.getUserFollower().getId()) followerList.add(follow);
+            if(userId == follow.getUserFollowing().getId()) followerList.add(follow);
             else followingList.add(follow);
         }
 
