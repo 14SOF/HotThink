@@ -384,6 +384,16 @@
             color: #a6a6a6;
             line-height: 16px;
         }
+
+        .btn-circle.btn-sm, .btn-group-sm > .btn-circle.btn {
+            height: 1.8rem;
+            width: 1.8rem;
+            font-size: 0.75rem;
+        }
+
+        .comtContainer {
+            float: right;
+        }
     </style>
 </head>
 <body>
@@ -482,24 +492,30 @@
                             {{content}}
                             <span class="gap">|</span>
                             <span class="time">pm {{createDate.toLocalTime}} </span>
+                            <span class="comtContainer">
+                                <!--                <button class="btn btn-circle btn-danger btn-sm">-->
+                                <!--                    <i class="fas fa-heart text-white"></i>-->
+                                <!--                </button>-->
+                                {{#userLikeStatus}}
+                                <button class="btn btn-circle btn-light btn-sm" onclick="likeCancelComment({{id}})">
+                                    <i class="fas fa-heart" style="color: red"> </i>
+                                </button>
+                                {{/userLikeStatus}}
+                                {{^userLikeStatus}}
+                                <button class="btn btn-circle btn-light btn-sm" onclick="likeComment({{id}})">
+                                    <i class="far fa-heart" style="color: red"> </i>
+                                </button>
+                                {{/userLikeStatus}}
+                                <span class="badge badge-warning">{{likeList}}</span>
+                                {{#user.writer}}
+                                <button id="deleteReplyBtn" class="btn btn-circle btn-light btn-sm" onclick="deleteComment({{id}})">
+                                    <i class="fas fa-trash-alt black"></i>
+                                </button>
+                                {{/user.writer}}
+                            </span>
                         </P>
                     </div>
                     {{/commentList}}
-<!--                    <div class="comt">-->
-<!--                        <span class="img">-->
-<!--                            <img src="/icons/userprofile60x60.png">-->
-<!--                        </span>-->
-<!--                        <div class="who">-->
-<!--                            <a class="nickname">-->
-<!--                                <b>유저아이디</b>-->
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                        <P class="message">-->
-<!--                            "댓글 내용이 들어감2"-->
-<!--                            <span class="gap">|</span>-->
-<!--                            <span class="time">pm {{createDate.toLocalTime}} </span>-->
-<!--                        </P>-->
-<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -536,18 +552,42 @@
         )
     }
 
-    // //todo:url로 지우는거 방어해야함
-    // function deleteComment(commentId) {
-    //     $.ajax(
-    //         {
-    //             type: "DELETE",
-    //             url: "/delete/comment?id=" + commentId,
-    //             complete:function() {
-    //                 window.location.href = "/read/post/freeboard?id=" + {{id}}
-    //             }
-    //         }
-    //     )
-    // }
+    //todo:url로 지우는거 방어해야함
+    function deleteComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/comment?id=" + commentId,
+                complete:function() {
+                    window.location.href = "/read/post/freeboard?id=" + {{id}}
+                }
+            }
+        )
+    }
+
+    function likeComment(commentId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
 
     // function likePost(postId) {
     //     $.ajax(
@@ -566,30 +606,6 @@
     //         {
     //             type: "DELETE",
     //             url: "/delete/like/post?id="+postId,
-    //             success : function (data) {
-    //                 location.reload();
-    //             }
-    //         }
-    //     )
-    // }
-    //
-    // function likeComment(commentId) {
-    //     $.ajax(
-    //         {
-    //             type: "POST",
-    //             url: "/create/like/comment?id="+commentId,
-    //             success : function (data) {
-    //                 location.reload();
-    //             }
-    //         }
-    //     )
-    // }
-    //
-    // function likeCancelComment(commentId) {
-    //     $.ajax(
-    //         {
-    //             type: "DELETE",
-    //             url: "/delete/like/comment?id="+commentId,
     //             success : function (data) {
     //                 location.reload();
     //             }
