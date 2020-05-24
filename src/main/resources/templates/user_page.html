@@ -3,6 +3,7 @@
 <head>
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="/style/user.css">
+    <script src="/js/user_click_func.js"></script>
 </head>
 <body>
 {{> include/navbar}}
@@ -66,10 +67,12 @@
                             <ul class="mt-3" style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
                                 <li>
                                     {{#boardList}}
-                                    <div class="row">
-                                        <!--                                        <div class="col-auto">-->
-                                        <!--                                            <button type="button" id="item4" class="btn btn-sm btn-primary" disabled>프리띵크</button>-->
-                                        <!--                                        </div>-->
+                                    <div class="row mt-2" onclick="boardClick({{id}},'{{type}}')">
+                                        <div class="col-auto">
+                                            <button type="button" class="btn btn-sm" disabled>
+                                                {{type}}
+                                            </button>
+                                        </div>
                                         <div class="col mt-1">{{title}}</div>
                                     </div>
                                     {{/boardList}}
@@ -118,8 +121,9 @@
     {{> include/footer}}
 </footer>
 <script>
+
+
     let id = {{id}};
-    console.log(id)
 
     function follow() {
         $.ajax({
@@ -133,7 +137,6 @@
     }
 
     function followCancle() {
-        console.log(id)
         $.ajax({
             type: "GET",
             url: "/delete/follow",
@@ -144,12 +147,17 @@
         })
     }
 
-    function boardClick(post) {
-        window.location.href = "/read/post/" + post['type'] + "?id=" + post['id']
-    }
-
-    function userClick(id) {
-        window.location.href = "/user?id=" + id
+    function boardClick(id, type) {
+        if(type === "QNA"){
+            type = 'qna'
+        }else if(type === "프리띵크"){
+            type = "free"
+        }else if(type==="핫띵크"){
+            type = "hot"
+        }else{
+            type = "real"
+        }
+        window.location.href = "/read/post/" + type + "?id=" + id
     }
 </script>
 </html>

@@ -1,9 +1,12 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import lombok.*;
+import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,7 +20,13 @@ public class QnaReadDto extends PostBase {
 
     @Getter
     String type;
+    @Getter
     UserPostDto user;
+
+    @Getter
+    List<CommentReadDto> commentList;
+
+
 
 }
 

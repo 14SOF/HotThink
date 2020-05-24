@@ -40,6 +40,7 @@
             <tr class="text-center">
                 <th>번호</th>
                 <th>제목</th>
+                <th>상태</th>
                 <th>작성자</th>
                 <th>등록일</th>
                 <th>조회</th>
@@ -47,7 +48,15 @@
             {{#list}}
             <tr>
                 <td>{{id}}</td>
-                <td><a href="/read/post/qna?id={{id}}" >{{title}}</a></td>
+                <td><a href="/read/post/qna?id={{id}}" >{{title}} </a></td>
+                {{#check}}
+                <td style="font-weight: bold; color: #ac2925">답변완료</td>
+                {{/check}}
+
+                {{^check}}
+                <td style="font-weight: bold; color: #3a3b45">답변대기</td>
+                {{/check}}
+
                 <td>{{user.nick}}</td>
                 <td>{{createDate}}</td>
                 <td class="col-sm-1">{{hit}}</td>

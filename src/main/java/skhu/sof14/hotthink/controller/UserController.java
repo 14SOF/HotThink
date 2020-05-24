@@ -5,19 +5,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import skhu.sof14.hotthink.model.dto.message.MessageDto;
+import org.springframework.web.servlet.ModelAndView;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.PostUpdateDto;
+import skhu.sof14.hotthink.model.dto.post.PostTitleAndTypeDto;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserPostDto;
-import skhu.sof14.hotthink.model.entity.Follow;
-import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.service.*;
-import skhu.sof14.hotthink.model.entity.Point;
-import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.repository.PointRepository;
-import skhu.sof14.hotthink.repository.UserRepository;
 
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
@@ -47,18 +41,19 @@ public class UserController {
 
 
     @GetMapping("/user/mypage/home")
-    public String myPage(Model model){
-
+    public ModelAndView myPage(){
+        ModelAndView modelAndView = new ModelAndView();
         UserDetailDto dto = userService.getUserDetailFromAuth();
         Map<String, String> attr = new HashMap<>();
         attr.put("userId", dto.getUserId());
         attr.put("userNick", dto.getNick());
         attr.put("userName", dto.getName());
         attr.put("userPhone", dto.getPhone());
-        model.addAttribute("point", pointService.ChargeList());
-        model.addAttribute("sum", pointService.amountSum());
-        model.addAllAttributes(attr);
-        return "mypage";
+        modelAndView.addObject("point", pointService.ChargeList());
+        modelAndView.addObject("sum", pointService.amountSum());
+        modelAndView.addAllObjects(attr);
+        modelAndView.setViewName("mypage");
+        return modelAndView;
     }
 
     @PutMapping("/update/user")
@@ -111,11 +106,6 @@ public class UserController {
         return "mypage_alarm";
     }
 
-    @GetMapping("/user/mypage/follow")
-    public String follow() {
-        return "mypage_follow";
-    }
-
 
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {
@@ -132,16 +122,27 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public String userPage(@RequestParam int id, Model model){
+    public ModelAndView userPage(@RequestParam int id){
+        if (id == UserService.getIdFromAuth()) return myPage();
+        ModelAndView modelAndView = new ModelAndView();
         Map<String, Object> followList = followService.followList(id);
-        List<PostUpdateDto> postEntity =   postService.findAllByUserId(id);
-        model.addAttribute("id", id);
-        model.addAttribute("nick", userService.findNickById(id));
-        model.addAttribute("followerList", followList.get("followerList"));
-        model.addAttribute("followingList", followList.get("followingList"));
-        model.addAttribute("check", followList.get("check"));
-        model.addAttribute("boardList", postEntity);
-        return "user_page";
+        List<PostTitleAndTypeDto> postDtoList =   postService.findAllByUserId(id);
+        modelAndView.addObject("id", id);
+        modelAndView.addObject("nick", userService.findNickById(id));
+        modelAndView.addObject("followerList", followList.get("followerList"));
+        modelAndView.addObject("followingList", followList.get("followingList"));
+        modelAndView.addObject("check", followList.get("check"));
+        modelAndView.addObject("boardList", postDtoList);
+        modelAndView.setViewName("user_page");
+        return modelAndView;
+    }
+
+    @GetMapping("/user/mypage/follow")
+    public String follow(Model model) {
+        Map<String,Object> follow = followService.followList(UserService.getIdFromAuth());
+        model.addAttribute("followerList", follow.get("followerList"));
+        model.addAttribute("followingList", follow.get("followingList"));
+        return "mypage_follow";
     }
 
 }
