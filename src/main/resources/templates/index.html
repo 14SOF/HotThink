@@ -35,7 +35,7 @@
 </div>
 <!--slide end-->
 <div id="searchContainer">
-    <input id="searchInput" type="text" placeholder="검색어입력">
+    <input id="searchBar" type="text" placeholder="검색어입력">
     <button id="searchButton">
         <i class="fas fa-search fa-lg"></i>
         &nbsp;&nbsp;검색
@@ -170,7 +170,7 @@
 
 <script>
     $('#searchButton').click(function () {
-        window.location.href = "/read/post/search/list?page=1&title=" + $('#searchInput').val();
+        window.location.href = "/read/post/search/list?page=1&title=" + $('#searchBar').val();
     })
 
 </script>

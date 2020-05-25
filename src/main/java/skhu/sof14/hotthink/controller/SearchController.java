@@ -27,7 +27,7 @@ public class SearchController {
         model.addAttribute("page", page.getPage());
         model.addAttribute("hasNext", page.getPage()<pageSize);
         model.addAttribute("hasPre", 1<page.getPage());
-        return "search_All";
+        return "searchAll";
 
     }
 
