@@ -33,12 +33,12 @@ public class FreeBoardController {
     }
 
     @GetMapping("/create/post/freeboard")
-    public String createFreeThinkView() {
+    public String createFreeBoardView() {
         return "freeboard_write";
     }
 
     @GetMapping("/read/post/freeboard")
-    public String readFreeThink(@RequestParam Long id, Model model){
+    public String readFreeBoard(@RequestParam Long id, Model model){
         PostReadDto dto = postService.findPostById(id);
         model.addAttribute("freeboard", dto);
         return "freeboard_read";
@@ -47,7 +47,7 @@ public class FreeBoardController {
 
     @PostMapping("/create/post/freeboard")
     public @ResponseBody
-    Map<String, Long> createFreeThink(@RequestBody PostCreateDto dto) {
+    Map<String, Long> createFreeBoard(@RequestBody PostCreateDto dto) {
         Long id = postService.createFreeboard(dto);
         Map<String, Long> json = new HashMap<>();
         json.put("id", id);
