@@ -25,6 +25,18 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     Page<Post> findAllByType(String type, Pageable pageable);
 
+    Page<Post> findAllByTitleContains(String title, Pageable pageable); //통합검색용
+
+    default  List<Post> findAllByTitleContains(Pagination pagination){ //통합검색용
+        int size =10;
+        Pageable pageable = PageRequest.of(pagination.getPage()-1, size);
+        Page<Post> page;
+        page = findAllByTitleContains(pagination.getTitle(), pageable);
+        pagination.setRecordCount((int) page.getTotalElements());
+        return page.getContent();
+
+    }
+
     default List<Post> findAllByType(String type, Pagination pagination) {
         int size = 10;
         if(type.equals("핫")) size = 6;

@@ -86,7 +86,7 @@ public class UserController {
         return json;
     }
 
-    @PostMapping("user/delete")
+    @PostMapping("/user/delete")
     public String deleteUser(Model model){
         userService.deleteUser();
         model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
@@ -144,5 +144,6 @@ public class UserController {
         model.addAttribute("followingList", follow.get("followingList"));
         return "mypage_follow";
     }
+
 
 }

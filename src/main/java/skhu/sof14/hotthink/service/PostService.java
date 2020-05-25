@@ -102,6 +102,14 @@ public class PostService {
         return mapper.map(postList, dtoListType);
     }
 
+    public List<SearchAllElementDto> findAllSearch(Pagination page) {
+        List<Post> postList = postRepository.findAllByTitleContains(page);
+        Type dtoListType = new TypeToken<List<SearchAllElementDto>>(){
+        }.getType();
+        return mapper.map(postList,dtoListType);
+    }
+
+
     @Transactional
     public void createReal(Long id, PostUpdateDto dto) {
         postRepository.createReal(id, dto.getTitle(), dto.getContent().toString(), LocalDateTime.now());
