@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
+    <meta name="google-signin-client_id" content="562220018314-si7o0lncmu4kd74lpodu82ne0q7936ee.apps.googleusercontent.com">
+
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="style/user.css">
 </head>
@@ -57,9 +59,8 @@
                                         로그인
                                     </button>
                                     <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> 구글 아이디로 로그인
-                                    </a>
+                                    <div id="my-signin2"></div>
+                                    <hr>
                                     <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                         <i class="fab fa-facebook-f fa-fw"></i> 페이스북 아이디로 로그인
                                     </a>
@@ -79,6 +80,32 @@
         </div>
     </div>
 </div>
+
+<script>
+    function onSuccess(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
+    function onFailure(error) {
+        console.log(error);
+    }
+    function renderButton() {
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 340,
+            'height': 50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
 <footer>
     {{> include/footer}}

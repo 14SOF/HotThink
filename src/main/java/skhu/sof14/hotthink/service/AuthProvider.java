@@ -24,7 +24,6 @@ public class AuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userId = authentication.getName();
         String userPassword = authentication.getCredentials().toString(); //userPassword
-
         UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 
