@@ -27,6 +27,10 @@ public class HotThinkController {
         }
 
         int pageSize = page.getRecordCount()%6 > 0? page.getRecordCount()/6+1 : page.getRecordCount()/6;
+        if(page.getTitle() !=null){
+            model.addAttribute("pageTitle", page.getTitle());
+        }
+
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
         model.addAttribute("hasNext", page.getPage()<pageSize);
@@ -41,4 +45,10 @@ public class HotThinkController {
         model.addAttribute("hot", dto);
         return "hotthink_read";
     }
+
+
+
+
+
+
 }

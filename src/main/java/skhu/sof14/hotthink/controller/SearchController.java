@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
 import skhu.sof14.hotthink.model.dto.post.SearchAllElementDto;
 import skhu.sof14.hotthink.service.PostService;
 

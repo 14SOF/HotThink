@@ -26,6 +26,10 @@ public class FreeThinkController {
         List<PostListElementDto> list = postService.findAllPage(page,"프리");
         model.addAttribute("list", list);
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
+
+        if(page.getTitle() !=null){
+            model.addAttribute("pageTitle", page.getTitle());
+        }
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
         model.addAttribute("hasNext", page.getPage()<pageSize);

@@ -26,6 +26,9 @@ public class RealThinkController {
         List<PostListElementDto> list = postService.findAllPage(page,"리얼");
         model.addAttribute("list", list);
         int pageSize = page.getRecordCount()%5 > 0? page.getRecordCount()/5+1 : page.getRecordCount()/5;
+        if(page.getTitle()!=null){
+            model.addAttribute("pageTitle", page.getTitle());
+        }
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
         model.addAttribute("hasNext", page.getPage()<pageSize);
