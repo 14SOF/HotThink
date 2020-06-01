@@ -11,7 +11,8 @@ spring:
     cache: false
   mustache:
     suffix: .html
-
+  profiles:
+    include: oauth
   kafka:
     bootstrap-servers: 13.209.73.144:9092
   autoconfigure:

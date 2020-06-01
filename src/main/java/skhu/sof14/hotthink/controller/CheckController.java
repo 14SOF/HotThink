@@ -23,6 +23,14 @@ public class CheckController {
         return json;
     }
 
+    @GetMapping("/login/google")
+    public @ResponseBody
+    Map<String, Boolean> checkSNS(String id) {
+        Map<String, Boolean> json = new HashMap<>();
+        json.put("check", userService.idDuplicationCheck(id));
+        return json;
+    }
+
     @GetMapping("/check/user/nick")
     public @ResponseBody
     Map<String, Boolean> checkUserNick(String nick) {
@@ -37,6 +45,9 @@ public class CheckController {
         json.put("check", userService.pwCheck(userPassword));
         return json;
     }
+
+    
+
 
 
 

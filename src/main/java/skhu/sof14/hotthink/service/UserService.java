@@ -51,6 +51,7 @@ public class UserService {
 
     }
 
+    //로그인되어있는 USER의 NICK을 얻는 메소드
     public String getNickFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
@@ -60,12 +61,15 @@ public class UserService {
         return "anonymousUser";
     }
 
+
+    //로그인되어있는 USER의 IDX값을 얻는 메소드
     public static int getIdFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int id = ((UserBase) auth.getDetails()).getId();
         return id;
     }
 
+    // 이 dto에는 userId, Nick, name, phoneNumber 포함되어있음 (IDX는 기본!)
     public UserDetailDto getUserDetailFromAuth() {
         User entity = userRepository.findUserById(getIdFromAuth());
         UserDetailDto dto = mapper.map(entity, UserDetailDto.class);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.service.UserService;
@@ -38,6 +39,7 @@ public class GuestController {
     public String signUp() {
         return "signup";
     }
+
 
     @PostMapping("create/user")
     public String create(UserCreateDto user, Model model) {
