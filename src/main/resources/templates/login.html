@@ -66,7 +66,7 @@
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="/">비밀번호가 기억 안나세요?</a>
+                                    <a class="small"  data-toggle="modal" data-target="#myModal">비밀번호가 기억 안나세요?</a>
                                 </div>
                                 <div class="text-center mt-1">
                                     <a class="small" href="/create/user">핫띵크 회원가입하기!</a>
@@ -79,13 +79,9 @@
         </div>
     </div>
 </div>
-
-<script>
-
-
-</script>
+{{>include/pw_modal}}
 </body>
 <footer>
-    {{> include/footer}}
+{{> include/footer}}
 </footer>
 </html>

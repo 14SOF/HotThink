@@ -1,8 +1,6 @@
 package skhu.sof14.hotthink.service;
 
-import net.nurigo.java_sdk.api.Message;
-import net.nurigo.java_sdk.exceptions.CoolsmsException;
-import org.json.simple.JSONObject;
+import lombok.ToString;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 
 @Service
+@ToString
 public class UserService {
 
     @Autowired
@@ -46,7 +45,8 @@ public class UserService {
     public List<MyPostDto> findMyPost(Pagination pagination) {
         User user = new User();
         user.setId(getIdFromAuth());
-        Type dtoListType = new TypeToken<List<MyPostDto>>() {}.getType();
+        Type dtoListType = new TypeToken<List<MyPostDto>>() {
+        }.getType();
         return mapper.map(postRepository.findAllByUser(user, pagination), dtoListType);
 
     }
@@ -134,10 +134,23 @@ public class UserService {
         return dto;
     }
 
-    public List<UserPostDto> findAllByNickStartsWith(String nick){
+    public List<UserPostDto> findAllByNickStartsWith(String nick) {
         List<User> userList = userRepository.findAllByNickStartsWith(nick);
-        Type dtoListType = new TypeToken<List<UserPostDto>>() {}.getType();
+        Type dtoListType = new TypeToken<List<UserPostDto>>() {
+        }.getType();
         return mapper.map(userList, dtoListType);
     }
 
+    public boolean userEmailCheck(String userEmail, String userName) {
+
+        User user = userRepository.findUserByUserId(userEmail);
+        if(user!=null && user.getName().equals(userName)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+
+
+    }
 }
