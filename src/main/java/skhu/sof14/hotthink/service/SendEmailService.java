@@ -10,7 +10,6 @@ import skhu.sof14.hotthink.model.dto.user.MailDto;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
-
 @Service
 @AllArgsConstructor
 public class SendEmailService{
@@ -30,12 +29,7 @@ public class SendEmailService{
         dto.setTitle(userName+"님의 HOTTHINK 임시비밀번호 안내 이메일 입니다.");
         dto.setMessage("안녕하세요. HOTTHINK 임시비밀번호 안내 관련 이메일 입니다." + "[" + userName + "]" +"님의 임시 비밀번호는 "
         + str + " 입니다.");
-
         updatePassword(str,userEmail);
-//        String pw = EncryptionUtils.encryptMD5(str);
-//        User user = userRepository.findUserByUserId(userEmail);
-//        int id = user.getId();
-//        userRepository.updateUserPassword(id,pw);
         return dto;
     }
 

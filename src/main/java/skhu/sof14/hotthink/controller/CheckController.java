@@ -45,9 +45,6 @@ public class CheckController {
 
     @GetMapping("/check/findPw")
     public @ResponseBody Map<String, Boolean> pw_find(String userEmail, String userName){
-
-//        System.out.println(userEmail);
-//        System.out.println(userName);
         Map<String,Boolean> json = new HashMap<>();
         boolean pwFindCheck = userService.userEmailCheck(userEmail,userName);
 

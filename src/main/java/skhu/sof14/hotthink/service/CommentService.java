@@ -22,10 +22,10 @@ public class CommentService {
     KafkaService kafkaService;
 
     public void create(Long postId, CommentCreateDto dto){
-//        AlertDto alertDto = new AlertDto();
-//        alertDto.setId(Math.toIntExact(postId));//Long 형이라서
-//        alertDto.setType(AlertDto.Type.Comment);
-//        kafkaService.sendAlert(alertDto);
+        AlertDto alertDto = new AlertDto();
+        alertDto.setId(Math.toIntExact(postId));//Long 형이라서
+        alertDto.setType(AlertDto.Type.Comment);
+        kafkaService.sendAlert(alertDto);
 
         //날짜 셋
         dto.setDateTime(LocalDateTime.now());
