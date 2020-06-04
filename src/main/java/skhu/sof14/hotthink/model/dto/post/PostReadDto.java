@@ -1,7 +1,6 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
@@ -18,6 +17,7 @@ public class PostReadDto extends PostBase {
     @Getter
     String content;
     int hit;
+    @Getter
     LocalDateTime createDate;
 
     @Getter
