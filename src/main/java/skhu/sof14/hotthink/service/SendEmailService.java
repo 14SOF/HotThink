@@ -28,7 +28,7 @@ public class SendEmailService{
         dto.setAddress(userEmail);
         dto.setTitle(userName+"님의 HOTTHINK 임시비밀번호 안내 이메일 입니다.");
         dto.setMessage("안녕하세요. HOTTHINK 임시비밀번호 안내 관련 이메일 입니다." + "[" + userName + "]" +"님의 임시 비밀번호는 "
-        + str + " 입니다.");
+                + str + " 입니다.");
         updatePassword(str,userEmail);
         return dto;
     }
