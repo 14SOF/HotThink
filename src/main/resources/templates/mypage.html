@@ -357,7 +357,11 @@
                                 '인증성공!',
                                 '휴대폰 인증이 정상적으로 완료되었습니다.',
                                 'success'
-                            )
+                            ).then((OK)=> {
+                                if(OK){
+                                    window.location.href= "/user/mypage/home";
+                                }
+                            })
 
                         }else{
                             Swal.fire({

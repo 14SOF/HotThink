@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
+    <meta name="google-signin-client_id" content="562220018314-si7o0lncmu4kd74lpodu82ne0q7936ee.apps.googleusercontent.com">
+
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="style/user.css">
 </head>
@@ -57,16 +59,14 @@
                                         로그인
                                     </button>
                                     <hr>
-                                    <a href="index.html" class="btn btn-google btn-user btn-block">
-                                        <i class="fab fa-google fa-fw"></i> 구글 아이디로 로그인
-                                    </a>
+                                    <hr>
                                     <a href="index.html" class="btn btn-facebook btn-user btn-block">
                                         <i class="fab fa-facebook-f fa-fw"></i> 페이스북 아이디로 로그인
                                     </a>
                                 </form>
                                 <hr>
                                 <div class="text-center">
-                                    <a class="small" href="/">비밀번호가 기억 안나세요?</a>
+                                    <a class="small"  data-toggle="modal" data-target="#myModal">비밀번호가 기억 안나세요?</a>
                                 </div>
                                 <div class="text-center mt-1">
                                     <a class="small" href="/create/user">핫띵크 회원가입하기!</a>
@@ -79,8 +79,9 @@
         </div>
     </div>
 </div>
+{{>include/pw_modal}}
 </body>
 <footer>
-    {{> include/footer}}
+{{> include/footer}}
 </footer>
 </html>

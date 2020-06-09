@@ -85,7 +85,7 @@ public class UserController {
         return json;
     }
 
-    @PostMapping("user/delete")
+    @PostMapping("/user/delete")
     public String deleteUser(Model model){
         userService.deleteUser();
         model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());

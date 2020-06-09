@@ -1,6 +1,9 @@
 package skhu.sof14.hotthink.service;
 
+import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
@@ -8,11 +11,14 @@ import skhu.sof14.hotthink.model.dto.post.*;
 import skhu.sof14.hotthink.model.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
 import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -90,6 +96,14 @@ public class PostService {
         return postRepository.save(entity).getId();
     }
 
+    public Long createFreeboard(PostCreateDto dto) {
+        User writer = userRepository.findUserById(UserService.getIdFromAuth());
+        dto.setUser(writer);
+        dto.setType("자게");
+        Post entity = mapper.map(dto, Post.class);
+        return postRepository.save(entity).getId();
+    }
+
     public List<PostListElementDto> findAllPage(Pagination page, String type) {
         List<Post> postList = postRepository.findAllByType(type, page);
         Type dtoListType = new TypeToken<List<PostListElementDto>>() {
@@ -98,6 +112,14 @@ public class PostService {
         }.getType();
         return mapper.map(postList, dtoListType);
     }
+
+    public List<SearchAllElementDto> findAllSearch(Pagination page) {
+        List<Post> postList = postRepository.findAllByTitleContains(page);
+        Type dtoListType = new TypeToken<List<SearchAllElementDto>>(){
+        }.getType();
+        return mapper.map(postList,dtoListType);
+    }
+
 
     @Transactional
     public void createReal(Long id, PostUpdateDto dto) {

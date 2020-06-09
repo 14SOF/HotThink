@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="kr">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean"
-          rel="stylesheet">
-    {{> include/header}}
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700;900&display=swap&subset=korean" rel="stylesheet">    {{> include/header}}
     <style>
         .btn-icon-split {
             padding: 0;
@@ -274,45 +272,39 @@
 <body>
 {{> include/navbar}}
 
-
-<div class="container">
-    <div class="container h-100">
-        <div class="d-flex justify-content-center h-100">
-            <div class="searchbar bg-light shadow-lg">
-                <input id="searchInput" class="search_input" type="text" name="" placeholder="검색">
-                <button type="button" class="btn search_icon" id="searchBtn"><i class="fas fa-search"></i></button>
-            </div>
+<div class="container h-100">
+    <div class="d-flex justify-content-center h-100">
+        <div class="searchbar bg-light shadow-lg">
+            <input id="searchInput2" class="search_input" type="text" name="" placeholder="검색">
+            <button type="button" class="btn search_icon" id="searchBtn2"><i class="fas fa-search"></i></button>
         </div>
     </div>
+</div>
 
+
+<div class="container">
     <div class="row justify-content-end mr-1">
         <a href="/create/post/free" class="col-auto btn btn-primary btn-icon-split shadow">
                     <span class="icon text-white-50">
                         <i class="fas fa-pen"></i>
                     </span>
-            <span class="text">프리띵크 작성하기</span>
         </a>
     </div>
     {{#list}}
     <div class="row mt-3">
         <!--        todo : 클릭시 버튼 테두리 왜 안없어지냐 -->
-        <button type="button" class="col btn" onclick=f({{id}})>
+        <button type="button" class="col btn" onclick="f({{id}},'{{type}}')">
             <ul class="event-list">
                 <li>
                     <!--todo : 월별로 time 클래스 바꾸기 -->
-                    <time class="jan" datetime="{{createDate}}">
-                        <span class="day">{{createDate.getDayOfMonth}}</span>
-                        <span class="month" id="month">{{createDate.getMonthValue}}</span>
-                        <!--                        <span class="year">2014</span>-->
-                        <!--                        <span class="time">12:00 AM</span>-->
-                    </time>
+                    <div class="jan">{{type}}</div>
                     <div class="info">
                         <h2 class="title">{{title}}</h2>
                         <p class="desc">{{user.nick}}</p>
                         <ul>
-                            <li style="width: 33%"><span class="far fa-heart"></span> {{like}}</li>
-                            <li style="width: 33%"><span class="far fa-comments"></span> {{commentList}}</li>
-                            <li style="width: 33%"><span class="far fa-eye"></span> {{hit}}</li>
+                            <li style="width: 33%"><span class="far fa-heart"></span> </li>
+                            <li style="width: 33%"><span class="far fa-comments"></span> </li>
+                            <li style="width: 33%"><span class="far fa-eye"></span> </li>
                         </ul>
                     </div>
                 </li>
@@ -321,92 +313,98 @@
     </div>
     {{/list}}
 </div>
-<!--페이지네이션-->
-{{#pageTitle}}
-{{> include/pagination_title}}
-{{/pageTitle}}
-{{^pageTitle}}
-{{> include/pagination_unTitle}}
-{{/pageTitle}}
+<div class="mt-5" style="height: 200px">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button class="page-link" onclick=pagingFirst() id="first">First</button>
+            </li>
+            <li class="page-item">
+                <button id="pre" class="page-link" aria-label="Previous" onclick=pagingPre({{page}})>
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </button>
+            </li>
+            <li class="page-item " id="page1" >
+                <button class="page-link" href="" id="page1btn"></button>
+            </li>
+            <li class="page-item" id="page2" >
+                <button class="page-link" href="?page=2" id="page2btn"></button>
+            </li>
+            <li class="page-item" id="page3" >
+                <button class="page-link" href="" id="page3btn"></button>
+            </li>
+            <li class="page-item">
+                <button id="next" class="page-link" aria-label="Next" onclick=pagingNext({{page}})>
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </li>
+            <li class="page-item" onclick=pagingLast({{size}}) >
+                <button class="page-link" id="last">Last</button>
+            </li>
+        </ul>
+    </nav>
+</div>
+
 {{> include/think_pagination}}
 
 <script>
 
-    $('#searchBtn').click(function () {
-        window.location.href = "/read/post/free/list?page=1&title=" + $('#searchInput').val();
+    let pageTitle = '{{pageTitle}}';
+
+    $('#searchBtn2').click(function () {
+        pageTitle = $('#searchInput2').val();
+        window.location.href = "/read/post/search/list?page=1&title=" + $('#searchInput2').val();
     })
 
 
 
 
-    for (let i = 0; i < 3; i++) {
+    // TODO: 2020-05-01 로직 클린하게
+    for(let i=0; i<3; i++){
         btn[i].click(function () {
-            window.location.href = "/read/post/free/list?page=" + btn[i].text()
+            window.location.href = "/read/post/search/list?page=" + btn[i].text() + "&title=" + pageTitle;
         })
     }
-    $('.month').text(function (i, oldText) {
-        let months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        return months[parseInt(oldText) - 1];
-    })
 
-    $('#item').click(function (event) {
-        console.log(event.getAttr("id"))
-    })
+    function  f(id,type) {
+        if(type === "QNA"){
+            type = 'qna'
+        }else if(type === "프리띵크"){
+            type = "free"
+        }else if(type==="핫띵크"){
+            type = "hot"
+        }else{
+            type = "real"
+        }
+        window.location.href = "/read/post/" + type + "?id=" + id
 
-    function f(data) {
-        window.location.href = "/read/post/free?id=" + data
+
     }
 
     function pagingFirst() {
-        window.location.href = "/read/post/free/list?page=" + 1;
+        window.location.href = "/read/post/search/list?page=" + 1 + "&title=" + pageTitle;
     }
 
     function pagingLast(pageSize) {
-        window.location.href = "/read/post/free/list?page=" + pageSize;
+        window.location.href = "/read/post/search/list?page=" + pageSize +  "&title=" + pageTitle;
     }
 
     function pagingNext(page) {
-        window.location.href = "/read/post/free/list?page=" + (page + 1);
+        window.location.href = "/read/post/search/list?page=" + (page+1) + "&title=" + pageTitle;
+
     }
 
     function pagingPre(page) {
-        window.location.href = "/read/post/free/list?page=" + (page - 1);
+        window.location.href = "/read/post/free/list?page=" + (page-1)  + "&title=" + pageTitle;
     }
-
-
-// 여기서부터 타이틀(검색값) 있을 때 페이지네이션
-
-    function pageBtn(pageTitle){
-        for (let i = 0; i < 3; i++) {
-            btn[i].click(function () {
-                window.location.href = "/read/post/free/list?page=" + btn[i].text() + "&title=" +pageTitle
-            })
-        }
-    }
-
-    function pagingFirst(pageTitle) {
-        window.location.href = "/read/post/free/list?page=" + 1 + "&title=" + pageTitle;
-    }
-
-    function pagingLast(pageSize,pageTitle) {
-        window.location.href = "/read/post/free/list?page=" + pageSize + "&title=" + pageTitle;
-    }
-
-    function pagingNext(page,pageTitle) {
-        window.location.href = "/read/post/free/list?page=" + (page + 1)+ "&title=" + pageTitle;
-    }
-
-    function pagingPre(page,pageTitle) {
-        window.location.href = "/read/post/free/list?page=" + (page - 1)+ "&title=" + pageTitle;
-    }
-
-
-
 </script>
 <footer>
     {{> include/footer}}
 </footer>
 </body>
+
 
 
 </html>

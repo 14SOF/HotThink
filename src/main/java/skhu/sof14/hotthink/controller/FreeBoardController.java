@@ -15,46 +15,43 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-public class FreeThinkController {
+public class FreeBoardController {
 
     @Autowired
     PostService postService;
 
-    @GetMapping("/read/post/free/list")
-    public String freeThinkListView(Model model, Pagination page) {
-        System.out.println(page);
-        List<PostListElementDto> list = postService.findAllPage(page,"프리");
+    @GetMapping("/read/post/freeboard/list")
+    public String freeBoardListView(Model model, Pagination page) {
+        List<PostListElementDto> list = postService.findAllPage(page,"자게");
         model.addAttribute("list", list);
         int pageSize = page.getRecordCount()%10 > 0? page.getRecordCount()/10+1 : page.getRecordCount()/10;
-
-        if(page.getTitle() !=null){
-            model.addAttribute("pageTitle", page.getTitle());
-        }
         model.addAttribute("size", pageSize);
         model.addAttribute("page", page.getPage());
         model.addAttribute("hasNext", page.getPage()<pageSize);
         model.addAttribute("hasPre", 1<page.getPage());
-        return "freethink_list";
+        return "freeboard_list";
     }
 
-    @GetMapping("/create/post/free")
-    public String createFreeThinkView() {
-        return "freethink_write";
+    @GetMapping("/create/post/freeboard")
+    public String createFreeBoardView() {
+        return "freeboard_write";
     }
 
-    @GetMapping("/read/post/free")
-    public String readFreeThink(@RequestParam Long id, Model model){
+    @GetMapping("/read/post/freeboard")
+    public String readFreeBoard(@RequestParam Long id, Model model){
         PostReadDto dto = postService.findPostById(id);
-        model.addAttribute("free", dto);
-        return "freethink_read";
+        model.addAttribute("freeboard", dto);
+        return "freeboard_read";
     }
 
-    @PostMapping("/create/post/free")
+
+    @PostMapping("/create/post/freeboard")
     public @ResponseBody
-    Map<String, Long> createFreeThink(@RequestBody PostCreateDto dto) {
-        Long id = postService.createFree(dto);
+    Map<String, Long> createFreeBoard(@RequestBody PostCreateDto dto) {
+        Long id = postService.createFreeboard(dto);
         Map<String, Long> json = new HashMap<>();
         json.put("id", id);
         return json;
     }
+
 }

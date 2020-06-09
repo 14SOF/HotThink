@@ -1,6 +1,4 @@
 package skhu.sof14.hotthink.service;
-
-
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +14,8 @@ import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 import java.util.Collection;
 
+// 이 클래스가  AuthenticationProvider 를 구현한 클래스이다.
+//AuthenticationManager 는 Authentication authenticate(Authentication authentication) throws AuthenticationException 를 가지고있음.
 @Component
 public class AuthProvider implements AuthenticationProvider {
     @Autowired
@@ -24,7 +24,6 @@ public class AuthProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userId = authentication.getName();
         String userPassword = authentication.getCredentials().toString(); //userPassword
-
         UserLoginDto user = (UserLoginDto) userDetailsService.loadUserByUsername(userId);
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 
@@ -36,6 +35,8 @@ public class AuthProvider implements AuthenticationProvider {
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
+
+
     public class UserToken extends UsernamePasswordAuthenticationToken {
         private static final long serialVersionUID = 1L;
 

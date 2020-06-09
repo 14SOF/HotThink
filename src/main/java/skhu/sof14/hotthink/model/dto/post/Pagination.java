@@ -1,6 +1,7 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import lombok.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @ToString
 @RequiredArgsConstructor
@@ -13,6 +14,7 @@ public class Pagination {
     @Getter
     @Setter
     String title;
+
 
     @Setter
     @Getter

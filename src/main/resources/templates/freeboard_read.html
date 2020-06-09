@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
+    <style>
+        body {
+            font-family: "Noto Sans KR", sans-serif;
+            width: 100%;
+            height: 100%;
+            display: block;
+            word-break: break-all;
+            color: black;
+            position: relative;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: initial !important;
+        }
+        .center {
+            padding: 0 40px;
+            margin: 0 auto;
+        }
+
+        .title {
+            position: relative;
+            height: 30px;
+            margin: 50px 0 50px 0;
+            font-size: 16px;
+        }
+
+        .h1 {
+            display: inline-block;
+            font-size: 42px;
+            font-weight: normal;
+            line-height: 28px;
+            letter-spacing: -5px;
+            margin-block-start: 0.67em;
+            margin-block-end: 0.67em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .sentence {
+            vertical-align: -4px;
+            color: #777777;
+            padding-left: 30px;
+            font-size: 15px;
+        }
+
+        .boardView {
+            border-top: 2px solid #141313;
+        }
+
+        .bSubject {
+            height: 60px;
+            padding: 0 20px;
+            font-size: 35px;
+            color: black;
+            border-bottom: 1px solid #e7e8e9;
+            background-color: #f0f0f0;
+        }
+
+        .freeBoardImage {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            background-image: url("/icons/freeBoardIcon.png");
+            font-size: 16px;
+            vertical-align: middle;
+        }
+
+        .ellipsis {
+            display: inline-block;
+            max-width: 730px;
+            padding-right: 1px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .userInfoBox {
+            height: 40px;
+            font-size: 15px;
+            border-bottom: 1px solid #e7e8e9;
+            content: "";
+            /*display: inline-block;*/
+            vertical-align: middle;
+        }
+
+        .profileImg {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            font-size: 16px;
+            vertical-align: middle;
+            background-image: url("/icons/userprofile.png");
+            margin-top: 5px;
+            margin-left: 20px;
+        }
+
+        .username {
+            font-size: 14px;
+            vertical-align: -10px;
+            display: inline-block;
+            padding-right: 1px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .username:hover {
+            text-decoration: underline;
+            text-decoration-color: black;
+        }
+
+        .followbtn {
+            vertical-align: -5px;
+            display: inline-block;
+            height: 18px;
+            padding: 5px 8px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #24272c;
+            text-align: center;
+            border: 1px solid #d4d1d1;
+            cursor: pointer;
+        }
+
+
+        .followimg {
+            margin: 0 6px 0 0;
+            width: 16px;
+            height: 16px;
+            background-image: url("/icons/follow.png");
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .InfoRight {
+            float: right;
+            color: #999999;
+            font-size: 13px;
+        }
+
+        .boardButton {
+            height: 40px;
+            text-align: right;
+        }
+
+        .boardButton a:hover {
+            text-decoration: underline !important;
+            text-underline-color: white !important;
+        }
+
+        .button-write {
+            argin: 0 0 0 -3px;
+            background-color: #554843;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white !important;
+            text-align: center;
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        .button-list {
+            margin: 0 0 0 -3px;
+            background-color: #554843;
+            display: inline-block;
+            min-width: 68px;
+            height: 30px;
+            padding: 10px 8px 0 8px;
+            font-size: 14px;
+            color: white !important;
+            text-align: center;
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        .listMove {
+            margin-top: 50px;
+            border-top: 1px solid #e7e8e9;
+            list-style: none;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+        }
+
+        .up {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            margin: 0 20px 0 0;
+            font-size: 12px;
+            color: black;
+            list-style: none;
+            word-break: break-all;
+        }
+
+        .listMove .up:before {
+            position: relative;
+            top: -10px;
+            content: "";
+            width: 0;
+            height: 0;
+            margin: 0 15px 0 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 8px solid #554843;
+        }
+
+        .listMove .up:after {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            content: '';
+            display: block;
+            width: 1px;
+            height: 11px;
+            background-color: #c7cacc;
+        }
+
+        .down {
+            position: relative;
+            display: inline-block;
+            width: 90px;
+            margin: 0 20px 0 0;
+            font-size: 12px;
+            color: black;
+            list-style: none;
+            word-break: break-all;
+        }
+
+        .listMove .down:before {
+            position: relative;
+            top: 14px;
+            content: "";
+            width: 0;
+            height: 0;
+            margin: 0 15px 0 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid #554843;
+        }
+
+        .listMove .down:after {
+            position: absolute;
+            top: 4px;
+            right: 0;
+            content: '';
+            display: block;
+            width: 1px;
+            height: 11px;
+            background-color: #c7cacc;
+        }
+
+        .comment {
+            margin-bottom: 25px;
+            padding-top: 30px;
+        }
+
+        .text {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .gap {
+            margin: 0 5px;
+            font-size: 15px;
+            font-weight: normal;
+        }
+
+        .cmt_cnt {
+            font-size: 14px;
+            color: #f46c3b;
+            font-weight: bold;
+        }
+
+        .commentArea {
+            position: relative;
+            border: 1px solid #cfd2d4;
+            height: 80px;
+            padding: 0 90px 0 0px;
+        }
+
+        .cmtProfile {
+            width: 62px;
+            height: 62px;
+            position: absolute;
+            margin-left: 10px;
+            margin-top: 10px;
+            background-image: url("/icons/userprofile60x60.png");
+        }
+
+        .editWindow {
+            width: 100%;
+            height: 58px;
+            padding: 10px 5px 10px 5px;
+            font-size: 12px;
+            margin-left: 78px;
+        }
+
+        .commnetButton {
+            position: absolute;
+            top: -1px;
+            right: -1px;
+        }
+
+        .buttonbrown {
+            width: 90px;
+            height: 52px;
+            padding: 30px 0 0 0;
+            background-color: #554843;
+            display: inline-block;
+            min-width: 68px;
+            font-size: 14px;
+            color: white !important;
+            text-align: center !important;
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        .commnetButton a:hover {
+            text-decoration: underline !important;
+            text-underline-color: white !important;
+        }
+
+
+        .comt {
+            position: relative;
+            min-height: 50px;
+            padding: 15px 0 15px 78px;
+            border-top: 1px solid #fefefe;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .img {
+            position: absolute;
+            top: 20px;
+            left: 0;
+        }
+
+        .who {
+            font-size: 14px;
+            margin: 10px 0 8px;
+        }
+
+        .nickname {
+            font-size: 14px;
+            color: #f46c3b;
+            text-decoration: none;
+        }
+
+        .message {
+            font-size: 13px;
+            color: #686868;
+            line-height: 16px;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .time {
+            font-size: 11px;
+            font-weight: normal;
+            color: #a6a6a6;
+            line-height: 16px;
+        }
+
+        .btn-circle.btn-sm, .btn-group-sm > .btn-circle.btn {
+            height: 1.8rem;
+            width: 1.8rem;
+            font-size: 0.75rem;
+        }
+
+        .comtContainer {
+            float: right;
+        }
+    </style>
+</head>
+<body>
+{{> include/navBar}}
+{{#freeboard}}
+<div class="center">
+    <div class="body_left">
+        <div class="title">
+            <h1 class="h1">자유게시판</h1>
+            <span class="sentence">핫띵크 : 핫한 당신의 생각</span>
+        </div>
+        <div class="boardView">
+            <div class="bSubject">
+                <i class="freeBoardImage"></i>
+                <b class="ellipsis">[자유게시글] {{title}}</b>
+            </div>
+
+            <div class="userInfoBox">
+                <i class="profileImg"></i>
+                {{#user}}
+                <a class="username">{{nick}}</a>
+                {{/user}}
+                <a class="followbtn">
+                    <i class="followimg"></i>
+                    <b>팔로우</b>
+                </a>
+                <div class="InfoRight">
+                        <span>
+                            <b>작성일 : {{createDate.toLocalDate}}</b>
+                        </span>
+                        <span>
+                            <b>조회 : {{hit}}</b>
+                        </span>
+<!--                        <span>-->
+<!--                            <b>댓글 : 2</b>-->
+<!--                        </span>-->
+                </div>
+            </div>
+            <div>
+                <div style="margin: 20px">
+                    {{content}}
+                </div>
+            </div>
+        </div>
+
+        <div class="boardButton">
+            {{#userLikeStatus}}
+            <a type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})" style="float: left">
+                좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
+            </a>
+            {{/userLikeStatus}}
+            {{^userLikeStatus}}
+            <a type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red; float: left">
+                <!--                    좋아요-->
+                좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
+            </a>
+            {{/userLikeStatus}}
+            <button type="button" class="btn btn-primary" style="float:left">신고하기</button>
+            <a class="button-write" href="/create/post/freeboard">글쓰기</a>
+            <a class="button-list" href="/read/post/freeboard/list?page=1">목록</a>
+        </div>
+        <ul class="listMove">
+            <li>
+                    <span class="up">
+                        윗글
+                    </span>
+                <a>윗글 게시글의 제목이들어감</a>
+            </li>
+            <li>
+                    <span class="down">
+                        아랫글
+                    </span>
+                <a>아랫글 게시글의 제목이 들어감</a>
+            </li>
+        </ul>
+        <div class="comment">
+            <div class="text">
+<!--                    <span>-->
+<!--                        전체댓글-->
+<!--                        <sapn class="gap">|</sapn>-->
+<!--                        <span class="cmt_cnt">2</span>건-->
+<!--                    </span>-->
+            </div>
+            <div class="commentArea" id="commnetArea">
+                <div class="cmtProfile">
+                </div>
+                <div style="width: 100%; height: 60px;">
+                    <textarea class="editWindow" name="textWindow" id="InputReply" rows="3" col="40" style="resize: none"></textarea>
+                </div>
+                <div class="commnetButton">
+                    <a id="replyBtn" class="buttonbrown" onclick="f({{id}})">등록</a>
+                </div>
+            </div>
+            <div>
+                <div>
+                    {{#commentList}}
+                    <div class="comt">
+                        <span class="img">
+                            <img src="/icons/userprofile60x60.png">
+                        </span>
+                        <div class="who">
+                            <a class="nickname">
+                                <b>{{user.nick}}</b>
+                            </a>
+                        </div>
+                        <P class="message">
+                            {{content}}
+                            <span class="gap">|</span>
+                            <span class="time">{{dateTime.toLocalTime}} </span>
+                            <span class="comtContainer">
+                                <!--                <button class="btn btn-circle btn-danger btn-sm">-->
+                                <!--                    <i class="fas fa-heart text-white"></i>-->
+                                <!--                </button>-->
+                                {{#userLikeStatus}}
+                                <button class="btn btn-circle btn-light btn-sm" onclick="likeCancelComment({{id}})">
+                                    <i class="fas fa-heart" style="color: red"> </i>
+                                </button>
+                                {{/userLikeStatus}}
+                                {{^userLikeStatus}}
+                                <button class="btn btn-circle btn-light btn-sm" onclick="likeComment({{id}})">
+                                    <i class="far fa-heart" style="color: red"> </i>
+                                </button>
+                                {{/userLikeStatus}}
+                                <span class="badge badge-warning">{{likeList}}</span>
+                                {{#user.writer}}
+                                <button id="deleteReplyBtn" class="btn btn-circle btn-light btn-sm" onclick="deleteComment({{id}})">
+                                    <i class="fas fa-trash-alt black"></i>
+                                </button>
+                                {{/user.writer}}
+                            </span>
+                        </P>
+                    </div>
+                    {{/commentList}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+    let reply = $('#InputReply');
+    let replyBtn = $('#replyBtn');
+    $(function () {
+        reply.keyup(function () {
+            if (reply.val() !== "") {
+                replyBtn.removeAttr("disabled")
+            } else {
+                replyBtn.attr("disabled", "disabled")
+            }
+        })
+    })
+
+    function f(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/comment?id=" + postId,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "content": reply.val()
+                }),
+                complete:function() {
+                    window.location.href = "/read/post/freeboard?id=" + postId
+                }
+            }
+        )
+    }
+
+    //todo:url로 지우는거 방어해야함
+    function deleteComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/comment?id=" + commentId,
+                complete:function() {
+                    window.location.href = "/read/post/freeboard?id=" + {{id}}
+                }
+            }
+        )
+    }
+
+    function likeComment(commentId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelComment(commentId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/comment?id="+commentId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likePost(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+    function likeCancelPost(postId) {
+        $.ajax(
+            {
+                type: "DELETE",
+                url: "/delete/like/post?id="+postId,
+                success : function (data) {
+                    location.reload();
+                }
+            }
+        )
+    }
+
+</script>
+{{/freeboard}}
+<footer>
+    {{> include/footer}}
+</footer>
+</html>

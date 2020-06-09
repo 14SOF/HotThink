@@ -7,6 +7,7 @@ import lombok.*;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
 import skhu.sof14.hotthink.model.entity.User;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -32,7 +33,7 @@ public class QnaCreateDto extends PostBase {
     public QnaCreateDto(String title, String content, LocalDateTime createDate){
         this.title = title;
         this.content= content;
-        this.createDate= createDate;
+        this.createDate = LocalDateTime.now();
     }
 
 
