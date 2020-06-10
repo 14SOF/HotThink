@@ -50,6 +50,8 @@ public class PostService {
         PostReadDto dto = mapper.map(entity, PostReadDto.class);
         //댓글
         int nowUser = UserService.getIdFromAuth();
+        if(dto.getUser().getId()==nowUser) dto.getUser().setWriter(true);
+
         for (CommentReadDto comment : dto.getCommentList()) {
             if (comment.getUser().getId() == nowUser)
                 comment.getUser().setWriter(true);
