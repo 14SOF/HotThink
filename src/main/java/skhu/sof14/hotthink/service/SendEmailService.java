@@ -1,17 +1,13 @@
 package skhu.sof14.hotthink.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.user.MailDto;
-import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 @Service
-@AllArgsConstructor
 public class SendEmailService{
 
     @Autowired
