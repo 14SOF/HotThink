@@ -1,5 +1,6 @@
 package skhu.sof14.hotthink.service;
 
+import lombok.ToString;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,22 +9,24 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.Point.PointChargeDto;
 import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
-import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
+import skhu.sof14.hotthink.model.dto.post.PostListElementDto;
+import skhu.sof14.hotthink.model.dto.user.*;
+import skhu.sof14.hotthink.model.dto.user.*;
+import skhu.sof14.hotthink.model.entity.Point;
 import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
+@ToString
 public class UserService {
 
     @Autowired
@@ -42,10 +45,13 @@ public class UserService {
     public List<MyPostDto> findMyPost(Pagination pagination) {
         User user = new User();
         user.setId(getIdFromAuth());
-        Type dtoListType = new TypeToken<List<MyPostDto>>() {}.getType();
+        Type dtoListType = new TypeToken<List<MyPostDto>>() {
+        }.getType();
         return mapper.map(postRepository.findAllByUser(user, pagination), dtoListType);
+
     }
 
+    //로그인되어있는 USER의 NICK을 얻는 메소드
     public String getNickFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && !auth.getPrincipal().equals("anonymousUser")) {
@@ -55,12 +61,15 @@ public class UserService {
         return "anonymousUser";
     }
 
+
+    //로그인되어있는 USER의 IDX값을 얻는 메소드
     public static int getIdFromAuth() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int id = ((UserBase) auth.getDetails()).getId();
         return id;
     }
 
+    // 이 dto에는 userId, Nick, name, phoneNumber 포함되어있음 (IDX는 기본!)
     public UserDetailDto getUserDetailFromAuth() {
         User entity = userRepository.findUserById(getIdFromAuth());
         UserDetailDto dto = mapper.map(entity, UserDetailDto.class);
@@ -102,7 +111,7 @@ public class UserService {
         return false;
     }
 
-    public void deleteUser(){  //회원탈퇴버튼 누르면 요청되는 service , user의 status를 0으로 변경한다.
+    public void deleteUser() {  //회원탈퇴버튼 누르면 요청되는 service , user의 status를 0으로 변경한다.
         int id = getIdFromAuth();
         userRepository.updateStatus(id);
     }
@@ -116,6 +125,7 @@ public class UserService {
         return mapper.map(entity, UserDetailDto.class);
     }
 
+
     public UserCreateDto findUserByUserId(String userId) {
         User entity = userRepository.findUserByUserId(userId);
         if (entity == null) return null;
@@ -124,5 +134,21 @@ public class UserService {
         return dto;
     }
 
+    public List<UserPostDto> findAllByNickStartsWith(String nick) {
+        List<User> userList = userRepository.findAllByNickStartsWith(nick);
+        Type dtoListType = new TypeToken<List<UserPostDto>>() {
+        }.getType();
+        return mapper.map(userList, dtoListType);
+    }
 
+    public boolean userEmailCheck(String userEmail, String userName) {
+
+        User user = userRepository.findUserByUserId(userEmail);
+        if(user!=null && user.getName().equals(userName)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

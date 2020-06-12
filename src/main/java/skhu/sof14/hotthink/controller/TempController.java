@@ -32,9 +32,6 @@ public class TempController {
         return "footer_operation";
     }
 
-
-
-
     @GetMapping("producer")
     public String producer() {
         return "footer_producer";
@@ -60,5 +57,10 @@ public class TempController {
 //    public String signup_success() {
 //        return "signup_success";
 //    }
+
+    @GetMapping("testCharge")
+    public String testCharge(){
+        return "testone";
+    }
 
 }

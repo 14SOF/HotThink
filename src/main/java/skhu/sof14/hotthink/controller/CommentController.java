@@ -14,11 +14,12 @@ import skhu.sof14.hotthink.service.CommentService;
 public class CommentController {
     @Autowired
     CommentService service;
-
     @PostMapping("/create/comment")
     public ResponseEntity<String> createComment(@RequestParam Long id, @RequestBody CommentCreateDto dto){
+        System.out.println(dto);
         service.create(id, dto);
         return ResponseEntity.ok().build();
+
     }
 
     @DeleteMapping("/delete/comment")

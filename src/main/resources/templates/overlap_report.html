@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
+</head>
+<body>
+{{> include/navBar}}
+
+<div class="container shadow-lg writeForm mt-5 mb-5">
+    <div style="padding: 20px">
+        <form class="user" onsubmit="return false">
+            <div class="form-group">
+                <h4 style=" font-weight: bold">
+                    <center>아이디어 신고(표절/중복) <p id="postId">신고 접수 게시글 번호 : {{postId}}</p>
+                        <center/>
+                </h4>
+                <input class="form-control form-control-user" name="title"
+                       id="InputTitle" placeholder="제목을 입력하세요.">
+            </div>
+            <div class="form-group">
+                <textarea class="form-control" id="InputContent" rows="10" name="content"
+                          style="border-radius: 1rem;" placeholder="내용을 입력하세요."
+                ></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="InputEvidence" style="font-weight: lighter; color: red">유사한(표절/중복) 아이디어로 의심되는 게시글의 링크를
+                    입력하세요.</label>
+                <input class="form-control form-control-user" type="text"
+                       id="InputEvidence" placeholder="링크를 입력하세요.">
+            </div>
+
+            <div class="form-group" style="float: right">
+                <button type="button" class="btn btn-primary btn-user"  onclick="reportBtn({{postId}})">
+                    신고접수
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script>
+
+
+    function reportBtn(postId) {
+
+        if ($('#InputTitle').val() === "" || $('#InputContent').val() === "" || $('#InputEvidence').val() === "") {
+            Swal.fire({
+                icon: 'error',
+                title: '오류',
+                text: '제목,내용,링크를 모두 입력하세요.',
+            })
+        } else {
+
+            $.ajax({
+                type: "POST",
+                url: "/check/overlap/report",
+                data: {
+                    "postId": postId
+                },
+                success: function (res) {
+                    if (res['check']) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/report/overlap",
+                            data: {
+                                "title": $('#InputTitle').val(),
+                                "content": $('#InputContent').val(),
+                                "evidence": $('#InputEvidence').val(),
+                                "postId": postId
+                            },
+                        })
+                        swal("신고 완료", "표절 신고가 정상적으로 접수되었습니다.", "success").then((OK)=>{
+                            if(OK){
+                                window.location.href = "/read/post/free?id="+postId;
+                            }
+                        })
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: '오류',
+                            text: '이미 표절 신고 접수된 게시글입니다. [OK]버튼을 누르시면 이전화면으로 이동합니다.',
+                        }).then((OK)=>{
+                            if(OK){
+                                window.location.href = "/read/post/free?id="+postId;
+                            }
+                        })
+
+                    }
+
+                }
+            })
+        }
+    }
+</script>
+<footer>
+    {{> include/footer}}
+</footer>
+</html>
+

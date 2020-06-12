@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
 import skhu.sof14.hotthink.service.UserService;
@@ -23,7 +24,6 @@ public class GuestController {
         return "index";
     }
 
-    // TODO: 2020-04-23 : 로그인한 유저가 url에 치고 들어오는거 막기
     @GetMapping("login")
     public String login() {
         return "login";
@@ -40,6 +40,7 @@ public class GuestController {
         return "signup";
     }
 
+
     @PostMapping("create/user")
     public String create(UserCreateDto user, Model model) {
         UserDetailDto dto = userService.create(user);
@@ -52,5 +53,4 @@ public class GuestController {
         model.addAttribute("userId", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "user_delete";
     }
-
 }

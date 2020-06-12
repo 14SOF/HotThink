@@ -4,8 +4,37 @@
     <link rel="stylesheet" type="text/css" href="/style/qnaList.css">
     {{> /include/header}}
 </head>
+<style>
+    .comment-submit {
+        box-shadow: inset 0px 4px 0px 0px #ffffff;
+        background: linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
+        background-color: #ffffff;
+        border-radius: 10px;
+        border: 1px solid #dcdcdc;
+        display: inline-block;
+        cursor: pointer;
+        color: #666666;
+        font-family: Impact;
+        font-size: 15px;
+        font-weight: bold;
+        padding: 11px 16px;
+        text-decoration: none;
+        text-shadow: 0px 1px 0px #ffffff;
+    }
+
+    .comment-submit:hover {
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+        background-color: #f6f6f6;
+    }
+
+    .comment-submit:active {
+        position: relative;
+        top: 1px;
+    }
+</style>
 <body>
 {{> /include/navBar}}
+
 <div class="container" style="margin-top: -110px" id="main">
     {{#qna}}
     <div class="col-md-12 col-sm-12 col-lg-12">
@@ -37,7 +66,8 @@
                     <div class="article-util">
                         <ul class="article-util-list">
                             <li>
-                                <button class="link-delete-article" id="deleteCk" onclick='checkClick("{{id}}")'>삭제</button>
+                                <button class="link-delete-article" id="deleteCk" onclick='checkClick("{{id}}")'>삭제
+                                </button>
                                 <!--                                <button type="button" class="link-delete-article" id="deleteCk"  onclick="f({{id}})" >삭제</button>-->
                             </li>
                             <li>
@@ -47,14 +77,75 @@
                     </div>
                 </article>
             </div>
+
+
+            <div class="qna-comment">
+                <div class="qna-comment-slipp">
+                    <p class="qna-comment-count">
+                        <strong style="color: #ac2925">답변</strong>
+                    </p>
+
+                    <div class="qna-comment-slipp-articles">
+                        {{#commentList}}
+                        <article class="article" id="answer-1405">
+                            <div class="article-header">
+                                <div class="article-header-thumb">
+                                    <img src="https://graph.facebook.com/v2.3/1324855987/picture"
+                                         class="article-author-thumb" alt="">
+                                </div>
+                                <div class="article-header-text">
+                                    <a class="article-author-name">{{user.nick}}</a>
+                                </div>
+                            </div>
+                            <div class="article-doc comment-doc">
+                                <p>{{content}}</p>
+                            </div>
+                        </article>
+                        {{/commentList}}
+                        <form class="answer-write" onsubmit="return false" style="padding-bottom: 40px "
+                        >
+                            <div class="form-group" style="padding: 14px;">
+										<textarea class="form-control" placeholder="내용을 입력하세요." id="InputReply"
+                                                  name="contents"></textarea>
+                            </div>
+
+                            <input type="submit" class="comment-submit" value="답변하기" onclick="f({{id}})"
+                                   style="margin-left: 970px; margin-top: -30px">
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
     </div>
     {{/qna}}
 </div>
 <header class="qna-header"></header>
-<script>
 
-    //todo : 게시글 삭제 권한 관리 수정.
+<script>
+    let reply = $('#InputReply');
+    function f(postId) {
+        $.ajax(
+            {
+                type: "POST",
+                url: "/create/comment?id=" + postId,
+                contentType: 'application/json;charset=UTF-8',
+                dataType: 'json',
+                data: JSON.stringify({
+                    "content": reply.val()
+                }),
+                complete:function() {
+                    window.location.href = "/read/post/qna?id=" + postId
+                }
+            }
+        )
+    }
+
 
     function checkClick(id) {
         console.log(id);

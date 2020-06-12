@@ -15,23 +15,27 @@ public class LikeController {
     LikeService service;
 
     @PostMapping("create/like/post")
-    public @ResponseBody int createPostLike(@RequestParam Long id){
+    public @ResponseBody
+    int createPostLike(@RequestParam Long id) {
         return service.createLike(id, true);
     }
 
     @DeleteMapping("delete/like/post")
-    public @ResponseBody int deletePostLike(@RequestParam Long id){
+    public @ResponseBody
+    int deletePostLike(@RequestParam Long id) {
         return service.deleteLike(id, true);
     }
 
     @PostMapping("create/like/comment")
-    public @ResponseBody int createCommentLike(@RequestParam Long id){
+    public @ResponseBody
+    int createCommentLike(@RequestParam Long id) {
         return service.createLike(id, false);
     }
 
 
     @DeleteMapping("delete/like/comment")
-    public @ResponseBody int deleteCommentLike(@RequestParam Long id){
+    public @ResponseBody
+    int deleteCommentLike(@RequestParam Long id) {
         return service.deleteLike(id, false);
     }
 }

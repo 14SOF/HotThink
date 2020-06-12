@@ -40,6 +40,7 @@
             <tr class="text-center">
                 <th>번호</th>
                 <th>제목</th>
+                <th>상태</th>
                 <th>작성자</th>
                 <th>등록일</th>
                 <th>조회</th>
@@ -47,7 +48,15 @@
             {{#list}}
             <tr>
                 <td>{{id}}</td>
-                <td><a href="/read/post/qna?id={{id}}" >{{title}}</a></td>
+                <td><a href="/read/post/qna?id={{id}}" >{{title}} </a></td>
+                {{#check}}
+                <td style="font-weight: bold; color: #ac2925">답변완료</td>
+                {{/check}}
+
+                {{^check}}
+                <td style="font-weight: bold; color: #3a3b45">답변대기</td>
+                {{/check}}
+
                 <td>{{user.nick}}</td>
                 <td>{{createDate}}</td>
                 <td class="col-sm-1">{{hit}}</td>
@@ -71,11 +80,9 @@
     </div>
 </div>
 
-<!--TODO: 조회수 구현 / 페이지네이션 확인(왜 1번이 안눌리지 씨8)-->
+{{> include/think_pagination}}
 
 <script>
-    var nowPage = {{page}}
-    var pageSize = {{size}}
 
 
     if(nowPage == pageSize) {
@@ -88,52 +95,6 @@
         $("#pre").css({ 'pointer-events': 'none' });
     }
 
-    // if({{hasPre}}) { //hasPre가 true이면 , 즉 현재 페이지가 1보다 크다면?
-    //     //
-    // }else{
-    // }
-    //
-    // if({{hasNext}}){
-    //     $('#next').removeAttr("disabled");
-    // }else {
-    //     $('next').attr("disabled","disabled");
-    // }
-
-
-    var page = [$("#page1"), $("#page2") , $("#page3")];
-    var btn = [$("#page1btn"), $("#page2btn"), $("#page3btn")];
-
-    if(nowPage===1) {
-        page[0].addClass("active");
-        page[1].removeClass("active");
-        page[2].removeClass("active");
-        btn[0].text(1);
-        btn[1].text(2);
-        btn[2].text(3);
-    }else if(nowPage===pageSize){
-        page[1].addClass("active");
-        page[0].removeClass("active");
-        page[2].removeClass("active");
-        btn[0].text(nowPage-1);
-        btn[1].text(nowPage);
-        btn[2].text(nowPage+1);
-    }else{
-        page[2].addClass("active");
-        page[1].removeClass("active");
-        page[0].removeClass("active");
-        btn[0].text(nowPage-2);
-        btn[1].text(nowPage-1);
-        btn[2].text(nowPage);
-    }
-
-    if(pageSize===1){
-        page[1].remove();
-        page[2].remove();
-    }else if(pageSize===2){
-        page[2].remove();
-    }else if(pageSize===0){
-        $('.pagination').remove()
-    }
 
     for(let i=0; i<3; i++){
         btn[i].click(function () {
@@ -141,18 +102,12 @@
         })
     }
 
-
-
     function pagingNext(page) {
         window.location.href = "/read/post/qna/list?page=" + (page+1);
     }
 
     function pagingPre(page) {
         window.location.href = "/read/post/qna/list?page=" + (page-1);
-    }
-
-    function f(data) {
-        window.location.href = "/read/post/qna?id=" + data
     }
 
 </script>

@@ -54,7 +54,8 @@
                         </button>
                         {{/userPhone}}
                         {{^userPhone}}
-                        <button type="button" class="col btn btn-secondary btn-block ml-3 fa-xs align-self-center ">휴대폰
+                        <button type="button" class="col btn btn-secondary btn-block ml-3 fa-xs align-self-center" data-toggle="modal"
+                                data-target="#certifiedModal">휴대폰
                             인증하기
                         </button>
                         {{/userPhone}}
@@ -183,15 +184,16 @@
                             <div class="row justify-content-center">
                                 <div class="fa-xs text-gray-500">보유포인트</div>
                             </div>
+                            {{#sum}}
                             <div class="row">
-                                <h2 class="col text-center">9999999</h2>
+                                <h2 class="col text-center">{{sum}}</h2>
                             </div>
+                            {{/sum}}
                             <div class="dropdown-divider"></div>
                             <div class="row justify-content-center">
-                                <a href="#" class="btn btn-primary btn-icon-split">
+                                <a href="charge" class="btn btn-primary btn-icon-split">
                                     <span class="icon text-white-50">
                                         <i class="fas fa-battery-three-quarters"></i>
-
                                     </span>
                                     <span class="text">충전하기</span>
                                 </a>
@@ -211,16 +213,19 @@
                                     <div class="carousel-item active">
                                         <table class="table table-borderless">
                                             <thead>
+
                                             <tr>
                                                 <th scope="col">날짜</th>
-                                                <th scope="col">사용내역</th>
+                                                <th scope="col">충전내역</th>
                                             </tr>
                                             </thead>
                                             <tbody>
+                                            {{#point}}
                                             <tr>
-                                                <th scope="row">2020.04.04</th>
-                                                <td>+20000</td>
+                                                <th scope="row">{{createDate}}</th>
+                                                <td>{{amount}}</td>
                                             </tr>
+                                            {{/point}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -233,29 +238,6 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">7</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">8</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">9</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
                                             <tr>
                                                 <th scope="row">3</th>
                                                 <td colspan="2">Larry the Bird</td>
@@ -290,9 +272,114 @@
         </div>
     </div>
 </div>
-
+{{>include/Certified_modal}}
 {{>include/mypage_delete_modal}}
 {{>include/mypage_edit_modal}}
-{{> include/footer}}
+{{>include/footer}}
+
+
+
+
 </body>
+<!--휴대폰 인증 모달-->
+<div class="modal fade" id="certifiedModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true"
+     style="font-family: Noto Sans KR, sans-serif"
+>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="align-items: center">
+                <h5 class="modal-title">HOTTHINK 인증센터</h5>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-center">휴대폰 인증</h5>
+                <div class="row">
+                    <div class="col">
+                        <input class="form-control form-control-user" type="text" id="inputPhoneNumber"
+                               placeholder="01012345678">
+                    </div>
+                    <div class="col-auto">
+                        <a class="btn btn-secondary" id="sendPhoneNumber" >번호확인</a>
+                    </div>
+                </div>
+                <div class="text-center small mt-2" id="checkMsgNick" style="color: red"></div>
+
+                <hr>
+
+                <div class="row align-items-center">
+                    <a id="collapseBtn" class="col-auto btn btn-outline-dark mx-auto" data-toggle="collapse"
+                       href="#collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        인증번호입력하기
+                    </a>
+                </div>
+                <div class="collapse mt-3" id="collapse">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-control-user"
+                               id="inputCertifiedNumber" placeholder="인증번호입력">
+                    </div>
+
+                    <div class="text-center small mt-2" id="checkMsgPW" style="color: red"></div>
+                </div>
+                <!--                <h5 class="text-center"></h5>-->
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" id="checkBtn">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+        $('#sendPhoneNumber').click(function(){
+            let phoneNumber = $('#inputPhoneNumber').val();
+            Swal.fire('인증번호 발송 완료!')
+
+
+            $.ajax({
+                type: "GET",
+                url: "/check/sendSMS",
+                data: {
+                    "phoneNumber" : phoneNumber
+                },
+                success: function(res){
+                    $('#checkBtn').click(function(){
+                        if($.trim(res) ==$('#inputCertifiedNumber').val()){
+                            $.ajax({
+                                type: "GET",
+                                url: "/update/phone",
+                                data: {
+                                    "phoneNumber" : $('#inputPhoneNumber').val()
+                                }
+                            })
+
+                            Swal.fire(
+                                '인증성공!',
+                                '휴대폰 인증이 정상적으로 완료되었습니다.',
+                                'success'
+                            ).then((OK)=> {
+                                if(OK){
+                                    window.location.href= "/user/mypage/home";
+                                }
+                            })
+
+                        }else{
+                            Swal.fire({
+                                icon: 'error',
+                                title: '인증오류',
+                                text: '인증번호가 올바르지 않습니다!',
+                                footer: '<a href="/home">다음에 인증하기</a>'
+                            })
+                        }
+                    })
+
+
+                }
+            })
+        });
+</script>
+
+
 </html>
+
+

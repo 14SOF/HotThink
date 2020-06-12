@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {{> include/header}}
+    <link rel="stylesheet" type="text/css" href="/style/user.css">
+</head>
+
+<body>
+{{> include/navBar}}
+
+
+<div class="container mt-5 mb-5 shadow-lg" style="font-family: Noto Sans KR,sans-serif; width: 1000px">
+    <div style="padding: 20px">
+        <div class="row">
+            <div class="col">
+                <h1 class="display-4" style="font-weight: bolder">{{overlap.title}}</h1>
+            </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <h3 style="width: 100%; height: 350px">
+            {{overlap.content}}
+        </h3>
+        <hr>
+        <div> 신고 대상 게시글 IDX : {{overlap.postId}}
+        <hr>
+        <div> 유사한 게시글 링크 : {{overlap.evidence}}</div>
+
+    </div>
+
+
+</div>
+</div>
+
+</body>
+<footer>
+    {{> include/footer}}
+</footer>
+
+
+</html>

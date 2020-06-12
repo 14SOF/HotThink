@@ -10,7 +10,7 @@
     {{> include/mypage_sticker}}
     <div class="shadow-lg myPage-component">
         <div class="mypage-inner-component">
-            <div class="card mb-4 py-3 border-left-info" style="height: 100%">
+            <div class="card mb-4 py-3 border-left-in#36b9ccfo" style="height: 100%">
                 <div class="card-body">
                     <div class="messaging">
                         <div class="inbox_msg">
@@ -18,62 +18,44 @@
                                 <div class="headind_srch">
                                     <div class="srch_bar">
                                         <div class="row">
-                                            <input type="text" class="search-bar col text-gray-300 fa-xs"
+                                            <input id="searchInput" type="text"
+                                                   class="search-bar col text-gray-500 fa-xs"
                                                    placeholder="찾기">
                                             <span class="input-group-addon col-auto">
-                                        <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                                        <button id="searchButton" type="button" onclick="search()">
+                                            <i class="fa fa-search" aria-hidden="true"></i> </button>
                                             </span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="inbox_chat">
-                                    <div class="chat_list active_chat">
-                                        <div class="chat_people">
-                                            <div class="chat_ib">
-                                                <h5>정기혁 <span class="chat_date">4월 5일</span></h5>
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                            </div>
+                                        <div id="searchContainer" class="row" style="display: none">
+                                            <div id="searchlistNone" style='width: 100%; text-align: center'>없음</div>
+                                            <button onclick="searchDisplayNone()" type="button"
+                                                    class="btn btn-sm btn-block btn-danger">닫기
+                                            </button>
                                         </div>
                                     </div>
-                                    <div class="chat_list active_chat">
 
-                                        <div class="chat_people">
-                                            <div class="chat_ib">
-                                                <h5>김영곤 <span class="chat_date">4월 5일</span></h5>
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                </div>
+                                <div id="chat_list" class="inbox_chat">
+                                    <!--                                    <div class="chat_list active_chat">-->
+
+                                    <!--                                        <div class="chat_people">-->
+                                    <!--                                            <div class="chat_ib">-->
+                                    <!--                                                <h5>김영곤 <span class="chat_date">4월 5일</span></h5>-->
+                                    <!--                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>-->
+                                    <!--                                            </div>-->
+                                    <!--                                        </div>-->
+                                    <!--                                    </div>-->
                                 </div>
                             </div>
+                            <div id="target" class="mt-2" style="width: 100%; text-align: center"></div>
                             <div class="mesgs">
                                 <div class="msg_history">
-                                    <div class="incoming_msg">
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p>생일 축하합니다생일 축하합니다생일 축하합니다</p>
-                                                <span class="time_date"> 00:00 AM    |    4월 5일</span></div>
-                                        </div>
-                                    </div>
-                                    <div class="outgoing_msg">
-                                        <div class="sent_msg">
-                                            <p>Test which is a new approach to have all
-                                                solutions</p>
-                                            <span class="time_date"> 11:01 AM    |    June 9</span></div>
-                                    </div>
-                                    <div class="incoming_msg">
-                                        <div class="received_msg">
-                                            <div class="received_withd_msg">
-                                                <p>Test, which is a new approach to have</p>
-                                                <span class="time_date"> 11:01 AM    |    Yesterday</span></div>
-                                        </div>
-                                    </div>
-
                                 </div>
                                 <div class="type_msg">
                                     <div class="input_msg_write">
-                                        <input type="text" class="write_msg" placeholder="메세지 입력"/>
-                                        <button class="msg_send_btn" type="button" style="outline: none">
+                                        <input id="msgInput" type="text" class="write_msg" placeholder="메세지 입력"/>
+                                        <button id="msgSendBtn" class="msg_send_btn" type="button"
+                                                style="outline: none">
                                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                                         </button>
                                     </div>
@@ -86,8 +68,264 @@
         </div>
     </div>
 </div>
-
 </body>
+<script>
+    let me
+    let nowTarget = null
+    let targetList = []
+    let targetElements = []
+    let messageList = []
+    let options = {
+        year: 'numeric', month: 'numeric', day: 'numeric',
+        hour: 'numeric', minute: 'numeric',
+        hour12: true,
+        // timeZone: 'America/Los_Angeles'
+    }
+
+    $.ajax({
+        type: "GET",
+        url: "/user/mypage/message/list",
+        success: function (data) {
+            $('#messageBell').removeClass('fas')
+            $('#messageBell').css("fontSize", "larger")
+            $('#messageBell').css("color", "")
+            $('#messageBell').addClass('far')
+            me = data['me']
+            messageList = data['list']
+            for (let i = 0; i < data['list'].length; i++) {
+                let element = data['list'][i]
+                if (me === element['sender']['id']) {
+                    element = element['receiver']
+                } else {
+                    element = element['sender']
+                }
+
+                let check = true
+                for (let j = 0; j < targetList.length; j++) {
+                    if (targetList[j]['id'] === element['id']) {
+                        check = false
+                        break
+                    }
+                }
+                if (check) {
+                    targetList.push(element)
+                }
+            }
+
+            for (let i = 0; i < targetList.length; i++) {
+                let e = $("<div class=\"chat_list\" onclick='addAndClick(" + JSON.stringify(targetList[i]) + ")'>\n" +
+                    "<div class=\"chat_people\">\n" +
+                    "<div class=\"chat_ib\">\n" +
+                    " <h5>" + targetList[i]['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                    "<p></p></div></div></div>")
+                $('#chat_list').append(e)
+                targetElements.push(e)
+            }
+
+            for (let i = 0; i < data['new'].length; i++) {
+                for (let j = 0; j < targetList.length; j++) {
+                    if (targetList[j]['id'] === data['new'][i]) {
+                        targetElements[j].css("background-color", "#36b9cc");
+                        break
+                    }
+                }
+
+            }
+        }
+    })
+
+    function search() {
+        let input = $('#searchInput').val()
+        if (input !== '') {
+            $.ajax(
+                {
+                    type: "GET",
+                    url: "/user/mypage/message/search?nick=" + input,
+                    success: function (data) {
+                        let list = data['list']
+                        $('.search_element').remove()
+
+                        if (list.length === 0) {
+                            $('#searchlistNone').css('display', '')
+                        } else {
+                            $('#searchlistNone').css('display', 'none')
+                            for (let i = list.length - 1; i >= 0; i--) {
+                                $('#searchContainer').prepend("<button type='button' class='btn btn-sm btn-block search_element' " +
+                                    "onclick='searchAndAdd(" + JSON.stringify(list[i]) + ")'>" + list[i]['nick'] + "</button>")
+                            }
+                        }
+                        $('#searchContainer').css('display', '');
+                    }
+                }
+            )
+        }
+    }
+
+    function searchDisplayNone() {
+        $('#searchContainer').css("display", "none");
+    }
+
+    function searchAndAdd(data) {
+        let check = true
+        for (let i = 0; i < targetList.length; i++) {
+            if (data['id'] === targetList[i]['id']) {
+                check = false
+            }
+        }
+        if (me === data['id']) check = false
+        if (check) {
+            $('#chat_list').append(" <div class=\"chat_list active_chat\" onclick='addAndClick(" + JSON.stringify(data) + ")'>\n" +
+                "                                        <div class=\"chat_people\">\n" +
+                "                                            <div class=\"chat_ib\">\n" +
+                "                                                <h5>" + data['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                "                                                <p></p>\n" +
+                "                                            </div>\n" +
+                "                                        </div>\n" +
+                "                                    </div>")
+        }
+    }
+
+    function addAndClick(data) {
+        for (let i = 0; i < targetList.length; i++) {
+            targetElements[i].removeClass('active_chat')
+            if (data['id'] === targetList[i]['id']) {
+                targetElements[i].css('background-color', '')
+                targetElements[i].addClass('active_chat')
+            }
+        }
+        nowTarget = data
+        $('.msg_history').remove()
+        $('.mesgs').prepend("<div class='msg_history'></div>")
+        $('#target').text(data['nick'])
+        clickAndDraw()
+    }
+
+    function clickAndDraw() {
+        for (let i = 0; i < messageList.length; i++) {
+            let message = messageList[i]
+            if (message['sender']['id'] === me) {
+                if (message['receiver']['id'] === nowTarget['id']) {
+                    let date = new Date(message['dateTime'][0],
+                        message['dateTime'][1] - 1,
+                        message['dateTime'][2],
+                        message['dateTime'][3],
+                        message['dateTime'][4],)
+                    date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                    $('.msg_history').append("<div class=\"outgoing_msg\">\n" +
+                        "<div class=\"sent_msg\">\n" +
+                        "<p>" + message['content'] + "</p>\n" +
+                        "<span class=\"time_date\">" +
+                        "" + date + " </span></div>\n" +
+                        "</div>")
+                }
+            } else {
+                if (message['sender']['id'] === nowTarget['id']) {
+                    let date = new Date(message['dateTime'][0],
+                        message['dateTime'][1] - 1,
+                        message['dateTime'][2],
+                        message['dateTime'][3],
+                        message['dateTime'][4],)
+                    date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                    $('.msg_history').append("<div class=\"incoming_msg\">\n" +
+                        "<div class=\"received_msg\">\n" +
+                        "<div class=\"received_withd_msg\">\n" +
+                        "<p>" + message['content'] + "</p>\n" +
+                        "<span class=\"time_date\"> " + date + "</span></div></div></div>")
+                }
+            }
+        }
+    }
+
+    $('#msgSendBtn').click(function () {
+        if (nowTarget === null) {
+            console.log("보낼 사람 음슴")
+        } else if ($('#msgInput').val() !== null) {
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "/send-message",
+                    contentType: 'application/json;charset=UTF-8',
+                    dataType: 'json',
+                    data: JSON.stringify({
+                        "content": $('#msgInput').val(),
+                        "receiver": {
+                            "id": nowTarget['id']
+                        }
+                    }),
+                    success: function (data) {
+                        let date = new Date(Date.now())
+                        date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+                        $('.msg_history').append("<div class=\"outgoing_msg\">\n" +
+                            "<div class=\"sent_msg\">\n" +
+                            "<p>" + data['content'] + "</p>\n" +
+                            "<span class=\"time_date\">" +
+                            "" + date + " </span></div>\n" +
+                            "</div>")
+                        $('#msgInput').val('')
+                        messageList.push(data)
+                    }
+                }
+            )
+        }
+    })
+
+    sse.onmessage = function (evt) {
+        let data = JSON.parse(evt.data)
+        console.log(data)
+
+        if (data['id']===undefined) {
+            if(data['content']===undefined){
+                return;
+            }
+            let sender = data['sender']
+            let date = new Date(Date.now())
+            date = new Intl.DateTimeFormat('kr-KR', options).format(date)
+            if (nowTarget !== null && nowTarget['id'] === sender['id']) {
+                $('.msg_history').append("<div class=\"incoming_msg\">\n" +
+                    "<div class=\"received_msg\">\n" +
+                    "<div class=\"received_withd_msg\">\n" +
+                    "<p>" + data['content'] + "</p>\n" +
+                    "<span class=\"time_date\"> " + date + "</span></div></div></div>")
+            } else {
+                let check = true
+                for (let i = 0; i < targetList.length; i++) {
+                    if (targetList[i]['id'] === sender['id']) {
+                        targetElements[i].css("background-color", "#36b9cc");
+                        messageList.push(data)
+                        check = false
+                        break
+                    }
+                }
+                //채팅 리스트에 없으면
+                if (check) {
+                    let e = $("<div class=\"chat_list\" onclick='addAndClick(" + JSON.stringify(sender) + ")'>\n" +
+                        "<div class=\"chat_people\">\n" +
+                        "<div class=\"chat_ib\">\n" +
+                        " <h5>" + sender['nick'] + "<span class=\"chat_date\"></span></h5>\n" +
+                        "<p></p></div></div></div>")
+                    $('#chat_list').append(e)
+                    e.css("background-color", "#36b9cc");
+                    targetList.push(sender)
+                    targetElements.push(e)
+                    messageList.push(data)
+                }
+            }
+        } else {
+            $('#alarmBell').removeClass('far')
+            $('#alarmBell').css("fontSize", "xx-large")
+            $('#alarmBell').css("color", "gold")
+            $('#alarmBell').addClass('fas')
+        }
+    }
+
+    $(window).on("beforeunload", function() {
+        $.ajax({
+            type: "GET",
+            url: "/commit-message"
+        })
+    });
+
+</script>
 <footer>
     {{> include/footer}}
 </footer>

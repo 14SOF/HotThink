@@ -19,15 +19,29 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostById(Long id);
 
+    List<Post> findAllByUser(User user);
+
     Page<Post> findAllByTitleContainingAndType(String title, String type, Pageable pageable);
 
     Page<Post> findAllByType(String type, Pageable pageable);
+
+    Page<Post> findAllByTitleContains(String title, Pageable pageable); //통합검색용
+
+    default  List<Post> findAllByTitleContains(Pagination pagination){ //통합검색용
+        int size =10;
+        Pageable pageable = PageRequest.of(pagination.getPage()-1, size);
+        Page<Post> page;
+        page = findAllByTitleContains(pagination.getTitle(), pageable);
+        pagination.setRecordCount((int) page.getTotalElements());
+        return page.getContent();
+
+    }
 
     default List<Post> findAllByType(String type, Pagination pagination) {
         int size = 10;
         if(type.equals("핫")) size = 6;
         else if(type.equals("리얼")) size = 5;
-        Pageable pageable = PageRequest.of(pagination.getPage() - 1, size);
+        Pageable pageable = PageRequest.of(pagination.getPage()-1, size);
         Page<Post> page;
         if(pagination.getTitle() == null) page = findAllByType(type, pageable);
         else page = findAllByTitleContainingAndType(pagination.getTitle(), type, pageable);
@@ -56,6 +70,8 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update Post p set p.hit= 0, p.type='핫', p.hit=0 where p.id = ?1")
-    void updatePostToHot(Long id);
+    @Query("update Post p set p.hit= 0, p.type='핫', p.hit=0 where p.user= ?1")
+    void updatePostToHot(Long user);
+
+
 }

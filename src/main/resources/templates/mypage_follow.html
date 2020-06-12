@@ -2,6 +2,7 @@
 <html lang="kr">
 <head>
     {{> include/header}}
+    <script src="/js/user_click_func.js"></script>
     <link rel="stylesheet" type="text/css" href="/style/user.css">
 </head>
 <body>
@@ -16,130 +17,23 @@
                     <div class="ml-3 container row" style="height: 100%">
                         <ul class="col list-group mr-2" style="overflow: auto; height: 100%">
                             <li class="small list-group-item text-center">내가 팔로우한 사람들</li>
+                            {{#followingList}}
                             <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="container btn" onclick="userClick({{userFollowing.id}})">
+                                    <div class="text-center align-self-center">{{userFollowing.nick}}</div>
                                 </div>
                             </li>
+                            {{/followingList}}
                         </ul>
                         <ul class="col list-group mr-2" style="overflow: auto; height: 100%">
                             <li class="small list-group-item text-center">나를 팔로우한 사람들</li>
-
+                            {{#followerList}}
                             <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-heart" style="color: red"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                <div class="container btn" onclick="userClick({{userFollower.id}})">
+                                    <div class="text-center align-self-center">{{userFollower.nick}}</div>
                                 </div>
                             </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light" disabled>
-                                                <i class="fas fa-heart" style="color: white"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="container btn">
-                                    <div class="row">
-                                        <div class="col text-center align-self-center">zeroGone</div>
-                                        <div class="col-auto">
-                                            <button type="button" class="btn btn-light">
-                                                <i class="fas fa-times"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
+                            {{/followerList}}
                         </ul>
                     </div>
                 </div>
@@ -147,6 +41,8 @@
         </div>
     </div>
 </div>
-{{> include/footer}}
 </body>
+<footer>
+    {{> include/footer}}
+</footer>
 </html>

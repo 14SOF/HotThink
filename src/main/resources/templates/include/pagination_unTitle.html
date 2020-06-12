@@ -1,0 +1,33 @@
+<div class="mt-5" style="height: 200px">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <button class="page-link" onclick=pagingFirst() id="first">First</button>
+            </li>
+            <li class="page-item">
+                <button id="pre" class="page-link" aria-label="Previous" onclick="pagingPre({{page}})">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </button>
+            </li>
+            <li class="page-item " id="page1">
+                <button class="page-link" href="" id="page1btn"></button>
+            </li>
+            <li class="page-item" id="page2">
+                <button class="page-link" href="?page=2" id="page2btn"></button>
+            </li>
+            <li class="page-item" id="page3">
+                <button class="page-link" href="" id="page3btn" ></button>
+            </li>
+            <li class="page-item">
+                <button id="next" class="page-link" aria-label="Next" onclick="pagingNext({{page}})">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </button>
+            </li>
+            <li class="page-item" onclick="pagingLast({{size}})">
+                <button class="page-link" id="last">Last</button>
+            </li>
+        </ul>
+    </nav>
+</div>

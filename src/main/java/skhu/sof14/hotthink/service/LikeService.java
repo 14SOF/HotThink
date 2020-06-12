@@ -3,13 +3,13 @@ package skhu.sof14.hotthink.service;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import skhu.sof14.hotthink.model.dto.post.PostBase;
-import skhu.sof14.hotthink.model.dto.user.UserBase;
+import skhu.sof14.hotthink.model.dto.message.AlertDto;
 import skhu.sof14.hotthink.model.entity.Comment;
 import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.LikeRepository;
+import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.util.List;
 
@@ -23,7 +23,9 @@ public class LikeService {
     PostService postService;
 
     @Autowired
-    ModelMapper mapper;
+    KafkaService kafkaService;
+
+
 
     //좋아요 생성
     public int createLike(Long id, boolean check) {
@@ -33,8 +35,12 @@ public class LikeService {
         user.setId(UserService.getIdFromAuth());
         entity.setUser(user);
         List<Like> likeList;
+
+        AlertDto alertDto = new AlertDto();
+        alertDto.setId(Math.toIntExact(id));//Long 형이라서
         //true면 게시판
         if (check) {
+            alertDto.setType(AlertDto.Type.LikePost);
             Post post = new Post();
             post.setId(id);
             entity.setPost(post);
@@ -42,12 +48,14 @@ public class LikeService {
             likeList = repository.findAllByPost(post);
             if(likeList!=null && likeList.size()>=2) postService.freeToHot(id);
         } else {//댓글
+            alertDto.setType(AlertDto.Type.LikeComment);
             Comment comment = new Comment();
             comment.setId(id);
             entity.setComment(comment);
             repository.save(entity);
             likeList = repository.findAllByComment(comment);
         }
+        kafkaService.sendAlert(alertDto);
         return likeList == null ? 0 : likeList.size();
 
     }
