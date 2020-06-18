@@ -9,6 +9,7 @@ import skhu.sof14.hotthink.model.dto.transaction.TransactionDto;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.Transaction;
 import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.TransactionRepository;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,12 @@ public class TransactionService {
     TransactionRepository transactionRepository;
 
     @Autowired
+    CertificationService certificationService;
+
+    @Autowired
+    PostRepository postRepository;
+
+    @Autowired
     ModelMapper mapper;
 
     public TransactionDto findByPostId(Long id){
@@ -32,19 +39,23 @@ public class TransactionService {
 
     public void update(Long id, int price){
         pointService.chargePoint(price);
-        transactionRepository.queryTransactionByPost(buildPostEntity(id));
+        Post post = buildPostEntity(id);
+        Transaction entity = transactionRepository.findByPost(post);
+        certificationService.sendSmsByTransaction(true, entity.getBuyer().getPhone());
+        transactionRepository.queryTransactionByPost(post);
     }
 
     public boolean save(TransactionDto dto){
         if(!pointService.payPoint(dto.getPrice())) return false;
         User buyer = new User();
         buyer.setId(UserService.getIdFromAuth());
-
         Transaction entity = mapper.map(dto, Transaction.class);
         entity.setBuyer(buyer);
         entity.setDateTime(LocalDateTime.now());
-
+        log.info(entity.toString());
         transactionRepository.save(entity);
+        Post post = postRepository.findPostById(entity.getPost().getId());
+        certificationService.sendSmsByTransaction(post.getTitle() ,post.getUser().getPhone());
         return true;
     }
 
@@ -54,6 +65,7 @@ public class TransactionService {
 
         pointService.delete(amount, user);
         transactionRepository.deleteTransactionByPost(buildPostEntity(id));
+        certificationService.sendSmsByTransaction(false, user.getPhone());
     }
 
     private Post buildPostEntity(Long id){

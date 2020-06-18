@@ -24,6 +24,7 @@ public class Transaction {
     private boolean status;
 
     @OneToOne
+    @JoinColumn(name = "post_post_idx")
     Post post;
 
     @ManyToOne
