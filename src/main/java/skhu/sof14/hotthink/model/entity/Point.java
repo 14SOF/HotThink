@@ -1,6 +1,5 @@
 package skhu.sof14.hotthink.model.entity;
 
-import com.sun.javafx.geom.transform.Identity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,7 +23,6 @@ public class Point {
 
     @Column(name ="point_date_time")
     private LocalDateTime createDate;
-
 
     @OneToOne
     @JoinColumn(name ="user_user_idx")

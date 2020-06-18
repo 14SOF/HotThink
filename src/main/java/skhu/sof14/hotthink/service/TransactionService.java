@@ -17,6 +17,9 @@ import java.time.LocalDateTime;
 @Slf4j
 public class TransactionService {
     @Autowired
+    PointService pointService;
+
+    @Autowired
     TransactionRepository transactionRepository;
 
     @Autowired
@@ -27,11 +30,13 @@ public class TransactionService {
         return entity == null? null : mapper.map(entity, TransactionDto.class);
     }
 
-    public void update(Long id){
+    public void update(Long id, int price){
+        pointService.chargePoint(price);
         transactionRepository.queryTransactionByPost(buildPostEntity(id));
     }
 
-    public void save(TransactionDto dto){
+    public boolean save(TransactionDto dto){
+        if(!pointService.payPoint(dto.getPrice())) return false;
         User buyer = new User();
         buyer.setId(UserService.getIdFromAuth());
 
@@ -39,12 +44,15 @@ public class TransactionService {
         entity.setBuyer(buyer);
         entity.setDateTime(LocalDateTime.now());
 
-        log.info(this.getClass()+" : " + entity);
         transactionRepository.save(entity);
+        return true;
     }
 
-    @Transactional
-    public void delete(Long id){
+    public void delete(Long id, int amount){
+        Transaction entity = transactionRepository.findByPost(buildPostEntity(id));
+        User user = entity.getBuyer();
+
+        pointService.delete(amount, user);
         transactionRepository.deleteTransactionByPost(buildPostEntity(id));
     }
 

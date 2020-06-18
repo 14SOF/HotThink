@@ -16,30 +16,33 @@ public class TransactionController {
 
     @GetMapping("/check/transaction")
     public @ResponseBody
-    Map<String, Object> findByPostId(Long postId){
+    Map<String, Object> findByPostId(Long postId) {
         TransactionDto dto = transactionService.findByPostId(postId);
-        if(dto == null) return null;
+        if (dto == null) return null;
         Map<String, Object> json = new HashMap<>();
         json.put("status", dto.isStatus());
         json.put("price", dto.getPrice());
+        json.put("buyer", dto.getBuyer());
         return json;
     }
 
     @PostMapping("/create/transaction")
-    public @ResponseBody boolean createTransaction(@RequestBody TransactionDto dto){
-        transactionService.save(dto);
-        return true;
+    public @ResponseBody
+    boolean createTransaction(@RequestBody TransactionDto dto) {
+        return transactionService.save(dto);
     }
 
     @PutMapping("/update/transaction")
-    public @ResponseBody boolean transactionAccept(Long postId){
-        transactionService.update(postId);
+    public @ResponseBody
+    boolean transactionAccept(Long postId, @RequestBody String price) {
+        transactionService.update(postId, Integer.parseInt(price.split("=")[1]));
         return true;
     }
 
     @DeleteMapping("/delete/transaction")
-    public @ResponseBody boolean transactionReject(Long postId){
-        transactionService.delete(postId);
+    public @ResponseBody
+    boolean transactionReject(Long postId, @RequestBody String price) {
+        transactionService.delete(postId, Integer.parseInt(price.split("=")[1]));
         return true;
     }
 }
