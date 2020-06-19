@@ -1,25 +1,17 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
-import skhu.sof14.hotthink.model.dto.post.*;
-import skhu.sof14.hotthink.model.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
-import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
-import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
+import org.springframework.transaction.annotation.Transactional;
+import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
+import skhu.sof14.hotthink.model.dto.post.*;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.entity.Comment;
+import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
+import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 
@@ -50,7 +42,7 @@ public class PostService {
         PostReadDto dto = mapper.map(entity, PostReadDto.class);
         //댓글
         int nowUser = UserService.getIdFromAuth();
-        if(dto.getUser().getId()==nowUser) dto.getUser().setWriter(true);
+        if (dto.getUser().getId() == nowUser) dto.getUser().setWriter(true);
 
         for (CommentReadDto comment : dto.getCommentList()) {
             if (comment.getUser().getId() == nowUser)
@@ -117,9 +109,9 @@ public class PostService {
 
     public List<SearchAllElementDto> findAllSearch(Pagination page) {
         List<Post> postList = postRepository.findAllByTitleContains(page);
-        Type dtoListType = new TypeToken<List<SearchAllElementDto>>(){
+        Type dtoListType = new TypeToken<List<SearchAllElementDto>>() {
         }.getType();
-        return mapper.map(postList,dtoListType);
+        return mapper.map(postList, dtoListType);
     }
 
 
@@ -162,11 +154,12 @@ public class PostService {
         }
     }
 
-    public List<PostTitleAndTypeDto> findAllByUserId(int id){
+    public List<PostTitleAndTypeDto> findAllByUserId(int id) {
         User user = new User();
         user.setId(id);
         List<Post> posts = postRepository.findAllByUser(user);
-        Type dtoListType = new TypeToken<List<PostTitleAndTypeDto>>(){}.getType();
+        Type dtoListType = new TypeToken<List<PostTitleAndTypeDto>>() {
+        }.getType();
         return mapper.map(posts, dtoListType);
     }
 

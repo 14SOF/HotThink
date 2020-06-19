@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import skhu.sof14.hotthink.model.dto.transaction.TransactionDto;
 import skhu.sof14.hotthink.service.TransactionService;
+import skhu.sof14.hotthink.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +24,7 @@ public class TransactionController {
         json.put("status", dto.isStatus());
         json.put("price", dto.getPrice());
         json.put("buyer", dto.getBuyer());
+        json.put("buyerCheck", !dto.isRateStatus() && (dto.getBuyer().getId() == UserService.getIdFromAuth()));
         return json;
     }
 

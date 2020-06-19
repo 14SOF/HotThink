@@ -19,4 +19,15 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
 
     @Transactional
     void deleteTransactionByPost(Post post);
+
+    @Transactional
+    @Modifying
+    @Query(
+            value = "update transaction t " +
+                    "inner join post p on t.post_post_idx = p.post_idx " +
+                    "set transaction_rate = true " +
+                    "where p.user_user_idx = ?1",
+            nativeQuery = true
+    )
+    void queryTransactionByPost_User(int id);
 }

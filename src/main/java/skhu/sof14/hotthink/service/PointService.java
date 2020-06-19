@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.Point.PointChargeDto;
 import skhu.sof14.hotthink.model.entity.Point;
 import skhu.sof14.hotthink.model.entity.User;

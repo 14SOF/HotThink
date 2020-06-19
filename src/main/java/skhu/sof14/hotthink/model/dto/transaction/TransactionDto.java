@@ -14,4 +14,5 @@ public class TransactionDto {
     UserDetailDto buyer;
     PostBase post;
     boolean status;
+    boolean rateStatus;
 }

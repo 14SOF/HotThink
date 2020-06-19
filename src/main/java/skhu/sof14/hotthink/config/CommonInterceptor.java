@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import skhu.sof14.hotthink.config.security.SecurityConfig;
 import skhu.sof14.hotthink.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;

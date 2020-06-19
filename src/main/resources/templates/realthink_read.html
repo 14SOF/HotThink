@@ -323,6 +323,29 @@
         </div>
     </div>
 </div>
+<div id="ratingModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">판매자를 평가해주세요!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mx-auto">
+                    <div class="col-6">
+                        <input required class="mx-auto" type="number" max="5.0" min="0" id="InputRating" style="font-size: x-large">
+                    </div>
+                    <div class="col"><h3>/5.0</h3></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="ratingBtn" onclick="ratingModalBtnClick()">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     let postId = {{real.id}}
     let writer = {{real.user.writer}}
@@ -341,13 +364,16 @@
                 }
             }else if(data['status'] === true){
                 $('#transactionStatus').css('display', 'none')
-                $('#transactionStatus').css('display', 'none')
                 $('#buyBtn').css('display', 'none')
                 $('#msgBtn').css('display', 'none')
                 $('#priceInfo').css('display', 'none')
                 $('#transacionDone').css('display', '')
                 $('#buyer').css('display', '')
                 $('#buyerNick').text(data['buyer']['nick'])
+                console.log(data['buyerCheck'])
+                if(data['buyerCheck']){
+                    $('#ratingModal').modal('show',true)
+                }
             }else{
                 $('#transactionStatus').css('display', '')
                 $('#buyBtn').css('display', 'none')
@@ -439,6 +465,30 @@
             }
         })
     }
+
+    let user = {{real.user.id}}
+    function ratingModalBtnClick(){
+        let rating = $('#InputRating').val()
+        if(rating>5){
+            rating = 5
+        }else if(rating<0){
+            rating = 0
+        }
+        $.ajax({
+            type: "POST",
+            url: "/create/rate",
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify({
+                "score" : rating,
+                "user" : user
+            }),
+            complete : function (data) {
+               $('#ratingModal').modal('hide')
+            }
+        })
+    }
+
 
 
 

@@ -6,6 +6,7 @@ import org.springframework.kafka.listener.AcknowledgingMessageListener;
 import org.springframework.kafka.support.Acknowledgment;
 import skhu.sof14.hotthink.controller.KafkaController;
 import skhu.sof14.hotthink.model.dto.message.AlertDto;
+
 import java.util.ArrayList;
 import java.util.List;
 

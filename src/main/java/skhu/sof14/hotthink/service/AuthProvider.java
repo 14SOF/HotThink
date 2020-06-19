@@ -1,4 +1,5 @@
 package skhu.sof14.hotthink.service;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
+
 import java.util.Collection;
 
 // 이 클래스가  AuthenticationProvider 를 구현한 클래스이다.

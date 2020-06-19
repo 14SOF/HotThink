@@ -11,8 +11,6 @@ import skhu.sof14.hotthink.model.dto.overlap.OverlapDto;
 import skhu.sof14.hotthink.model.dto.overlap.OverlapElementDto;
 import skhu.sof14.hotthink.model.dto.overlap.OverlapReadDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
-import skhu.sof14.hotthink.repository.OverlapRepository;
 import skhu.sof14.hotthink.service.OverlapService;
 import skhu.sof14.hotthink.service.PostService;
 

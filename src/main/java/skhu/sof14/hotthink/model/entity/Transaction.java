@@ -23,6 +23,9 @@ public class Transaction {
     @Column(name = "transaction_status")
     private boolean status;
 
+    @Column(name = "transaction_rate")
+    private boolean rateStatus;
+
     @OneToOne
     @JoinColumn(name = "post_post_idx")
     Post post;
