@@ -5,6 +5,12 @@
     <link rel="stylesheet" type="text/css" href="/style/user.css">
 
     <style>
+        .backslash {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="0" x2="100%" y2="100%" stroke="red" /></svg>');
+        }
+        .slash {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><line x1="0" y1="100%" x2="100%" y2="0" stroke="red" /></svg>');
+        }
         .real-container {
             font-family: "Noto Sans KR", sans-serif;
             width: 1340px;
@@ -120,10 +126,38 @@
 </head>
 <body>
 {{> include/navBar}}
-<div class="container real-container shadow-lg mt-5 mb-5">
+<div class="container mt-5 mb-5"
+     style="height: 960px;
+     margin-left: 12%;
+     /*margin-right: 20%;*/
+     position:absolute; z-index: 2; display: none" id="transactionStatus">
+    <div class="row justify-content-between" style="height: 40%">
+        <div class="col-5 backslash">
+
+        </div>
+        <div class="col-5 slash">
+
+        </div>
+    </div>
+    <div class="row text-center">
+        <button id="transactionBtn" type="button" class="btn btn-danger mx-auto" disabled style="font-size:48px; z-index: auto">거래 중</button>
+    </div>
+    <div class="row justify-content-between" style="height: 40%">
+        <div class="col-5 slash">
+
+        </div>
+        <div class="col-5 backslash">
+
+        </div>
+    </div>
+</div>
+<div class="container real-container shadow-lg mt-5 mb-5" style="z-index: 1">
     <div class="row real-container-header">
         <div class="col">
-            <h1 class="display-4" style="font-weight: bolder">{{real.title}}</h1>
+                <h1 class="display-4" style="font-weight: bolder">{{real.title}}</h1>
+        </div>
+        <div class="col-auto">
+            <button id="transacionDone" type="button" class="btn btn-primary" style="pointer-events: none; display: none" >거래완료</button>
         </div>
         <div class="col-auto">
             <div>2020/04/12</div>
@@ -146,7 +180,7 @@
         </ul>
     </div>
     <div class="row" style="height: 600px">
-        <div id="content" class="shadow">
+        <div id="content" class="shadow" style="z-index: 1">
             <div id="tab1">
                 <p>{{realContent.outline}}</p>
             </div>
@@ -172,7 +206,7 @@
     <div class="row justify-content-between">
         <div class="col-auto ml-3">
             <div class="row">
-                <div class="col-auto shadow border-left-warning card mr-5" style="padding: 20px">
+                <div id="priceInfo" class="col-auto shadow border-left-warning card mr-5" style="padding: 20px">
                     <div class="mx-auto mt-1 text-gray-500">
                         희망가격
                     </div>
@@ -182,14 +216,24 @@
                 </div>
             </div>
             <div class="row mt-3">
-                <a href="myapge" class="btn btn-info btn-icon-split shadow">
+                <a id="buyer" class="shadow border-left-primary card small"
+                   style="padding: 20px; text-decoration: none; color: black; display: none">
+                    <div class="mx-auto mt-1 text-gray-500">
+                        구매자
+                    </div>
+                    <div class="mx-auto text-gray-900">
+                        <div id="buyerNick" class="h1"></div>
+                    </div>
+                </a>
+
+                <a id="msgBtn" href="/user/mypage/message" class="btn btn-info btn-icon-split shadow">
                     <span class="icon text-white-50">
 <i class="fas fa-paper-plane"></i>
                     </span>
                     <span class="text">쪽지보내기</span>
                 </a>
 
-                <a href="/" class="ml-3 btn btn-warning btn-icon-split shadow">
+                <a id="buyBtn" class="ml-3 btn btn-warning btn-icon-split shadow" onclick="buyBtnClick()">
                     <span class="icon text-white-50">
                         <i class="fas fa-won-sign"></i>
                     </span>
@@ -199,7 +243,7 @@
         </div>
 
         <div class="col-auto justify-content-end mr-4">
-            <a href="mypage" class="shadow border-left-secondary card small"
+            <a href="/user?id={{real.user.id}}" class="shadow border-left-secondary card small"
                style="padding: 20px; text-decoration: none; color: black">
                 <div class="mx-auto mt-1 text-gray-500">
                     작성자
@@ -218,21 +262,249 @@
         </div>
     </div>
 </div>
-
+<div class="modal" tabindex="-1" role="dialog" id="TransactionModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">거래 창</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1 class="display-4 text-center" style="color: red">★주의★</h1>
+                <div class="dropdown-divider"></div>
+                <div class="text-center" style="font-weight: bold">
+                거래완료시 지식 재산권이 해당 유저에게 넘어갑니다.<br>
+                거절하고 싶으시면 거절을 눌러주세요.<br>
+                나중에 거래를 결정하고 싶으시면 오른쪽 상단의 X를 눌러주세요.
+                </div>
+                <div class="dropdown-divider"></div>
+                <div class="text-center">유저가 제시한 금액</div>
+                <div class="text-center">
+                    <button id="userPrice" type="button" class="btn btn-outline-info" style="pointer-events: none">5000원</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="transactionReject()">거절</button>
+                <button type="button" class="btn btn-primary" onclick="transactionAccept()">거래완료</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="InputPriceModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">희망가격 입력</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">$</span>
+                    </div>
+                    <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" id="InputPrice" min="0">
+                    <div class="input-group-append">
+                        <span class="input-group-text">원</span>
+                    </div>
+                </div>
+                <div id="buyerAlert" style="display: none">
+                    <div class="vertical-divider"></div>
+                    <div style="color: red">포인트가 부족합니다</div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modalBuyBtn" disabled onclick="modalBuyBtnClick()">구매 신청</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="ratingModal" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">판매자를 평가해주세요!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row mx-auto">
+                    <div class="col-6">
+                        <input required class="mx-auto" type="number" max="5.0" min="0" id="InputRating" style="font-size: x-large">
+                    </div>
+                    <div class="col"><h3>/5.0</h3></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="ratingBtn" onclick="ratingModalBtnClick()">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    let postId = {{real.id}}
+    let writer = {{real.user.writer}}
+
+    let price = 0
+    //상태 읽기
+    $.ajax({
+        type: "GET",
+        url: "/check/transaction?postId=" + postId,
+        success : function (data) {
+            if (data === '') {
+                $('#transactionStatus').css('display', 'none')
+                if (writer) {
+                    $('#buyBtn').css('display', 'none')
+                    $('#msgBtn').css('display', 'none')
+                }
+            }else if(data['status'] === true){
+                $('#transactionStatus').css('display', 'none')
+                $('#buyBtn').css('display', 'none')
+                $('#msgBtn').css('display', 'none')
+                $('#priceInfo').css('display', 'none')
+                $('#transacionDone').css('display', '')
+                $('#buyer').css('display', '')
+                $('#buyerNick').text(data['buyer']['nick'])
+                console.log(data['buyerCheck'])
+                if(data['buyerCheck']){
+                    $('#ratingModal').modal('show',true)
+                }
+            }else{
+                $('#transactionStatus').css('display', '')
+                $('#buyBtn').css('display', 'none')
+                $('#msgBtn').css('display', 'none')
+                price = data['price']
+                $('#userPrice').text(data['price']+"원")
+                if(writer){
+                    $('#transactionBtn')
+                        .removeClass("btn-danger").addClass("btn-primary")
+                        .removeAttr("disabled")
+                        .text("거래진행하기")
+                        .click(function () {
+                            $('#TransactionModal').modal('show', true)
+                        })
+                }
+            }
+        }
+    })
+
+    //구매 클릭
+    function buyBtnClick(){
+        $('#InputPriceModal').modal('show')
+    }
+
+    //구매 동의
+    function transactionAccept(){
+        $.ajax({
+            type: "PUT",
+            url: "/update/transaction?postId=" + postId,
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data : {
+                'price': price
+            },
+            success : function () {
+                location.reload()
+            }
+        })
+    }
+
+    //구매 거절
+    function transactionReject(){
+        $.ajax({
+            type: "DELETE",
+            url: "/delete/transaction?postId=" + postId,
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data : {
+                'price': price
+            },
+            success : function () {
+                location.reload()
+            }
+        })
+    }
+
+    //구매 모달
+    $(function () {
+        $('#InputPrice').keyup(function (event) {
+            let price = $('#InputPrice').val()
+            if(price < 0){
+                $('#modalBuyBtn').attr("disabled", "disabled")
+            }else{
+                $('#modalBuyBtn').removeAttr("disabled")
+            }
+        })
+    })
+
+    //구매 요청
+    function modalBuyBtnClick() {
+        let price = $('#InputPrice').val()
+        $.ajax({
+            type: "POST",
+            url: "/create/transaction",
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify({
+                "price" : price,
+                "post" : {
+                    "id" : postId
+                },
+            }),
+            success : function (data) {
+                if(data===false){
+                    $('#buyerAlert').css('display', '')
+                }else{
+                    location.reload()
+                }
+            }
+        })
+    }
+
+    let user = {{real.user.id}}
+    function ratingModalBtnClick(){
+        let rating = $('#InputRating').val()
+        if(rating>5){
+            rating = 5
+        }else if(rating<0){
+            rating = 0
+        }
+        $.ajax({
+            type: "POST",
+            url: "/create/rate",
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json',
+            data: JSON.stringify({
+                "score" : rating,
+                "user" : user
+            }),
+            complete : function (data) {
+               $('#ratingModal').modal('hide')
+            }
+        })
+    }
+
+
+
+
     $(document).ready(function () {
-        $("#content div").hide(); // Initially hide all content
-        $("#tabs li:first").attr("id", "current"); // Activate first tab
-        $("#content div:first").fadeIn(); // Show first tab content
+        $("#content div").hide() // Initially hide all content
+        $("#tabs li:first").attr("id", "current") // Activate first tab
+        $("#content div:first").fadeIn() // Show first tab content
 
         $('#tabs a').click(function (e) {
-            e.preventDefault();
-            $("#content div").hide(); //Hide all content
-            $("#tabs li").attr("id", ""); //Reset id's
-            $(this).parent().attr("id", "current"); // Activate this
-            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
-        });
-    })();
+            e.preventDefault()
+            $("#content div").hide() //Hide all content
+            $("#tabs li").attr("id", "") //Reset id's
+            $(this).parent().attr("id", "current") // Activate this
+            $('#' + $(this).attr('title')).fadeIn() // Show content for current tab
+        })
+    })
 </script>
 </body>
 <footer>

@@ -1,15 +1,10 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import skhu.sof14.hotthink.model.dto.user.UserBase;
-import skhu.sof14.hotthink.model.entity.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 @Getter
 @Setter

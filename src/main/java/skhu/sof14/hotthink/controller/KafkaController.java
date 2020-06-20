@@ -1,9 +1,7 @@
 package skhu.sof14.hotthink.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;

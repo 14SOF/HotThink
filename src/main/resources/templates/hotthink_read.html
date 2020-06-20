@@ -66,17 +66,17 @@
             </div>
             {{/writer}}
             <div class="col-auto justify-content-end">
-                <a href="mypage" class="shadow border-left-secondary card small"
+                {{#user}}
+                <a href="/user?id={{id}}" class="shadow border-left-secondary card small"
                    style="height: 100px; padding: 10px; text-decoration: none">
                     <div class="mx-auto mt-1 text-gray-500">
                         작성자
                     </div>
-                    {{#user}}
                     <div class="mx-auto text-gray-900">
                         <h2>{{nick}}</h2>
                     </div>
-                    {{/user}}
                 </a>
+                {{/user}}
             </div>
         </div>
 

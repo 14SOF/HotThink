@@ -24,7 +24,6 @@ public class Point {
     @Column(name ="point_date_time")
     private LocalDateTime createDate;
 
-
     @OneToOne
     @JoinColumn(name ="user_user_idx")
     private User user;

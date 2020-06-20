@@ -1,21 +1,12 @@
 package skhu.sof14.hotthink.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import skhu.sof14.hotthink.model.dto.overlap.OverlapDto;
-import skhu.sof14.hotthink.model.dto.report.PostReportDto;
-import skhu.sof14.hotthink.model.entity.Overlap;
-import skhu.sof14.hotthink.service.OverlapService;
 import skhu.sof14.hotthink.service.ReportService;
-import skhu.sof14.hotthink.service.UserService;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 

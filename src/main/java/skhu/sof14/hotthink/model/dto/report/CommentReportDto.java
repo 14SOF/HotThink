@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
 import skhu.sof14.hotthink.model.entity.User;
 
 import java.time.LocalDateTime;

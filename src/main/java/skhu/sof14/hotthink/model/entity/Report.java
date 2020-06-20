@@ -3,6 +3,10 @@ package skhu.sof14.hotthink.model.entity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
 /*
 user_user_idx : 게시글(신고된 게시글) 올린 사람의 IDX
 report_report_idx : 신고한 사람의 IDX
@@ -18,8 +22,6 @@ comment(댓글) 신고시 - Report 컨트롤러 기준
 -> report_report_idx : 현재 로그인된 id / reportId
 ->report_type_idx : commentId
  */
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name="report")

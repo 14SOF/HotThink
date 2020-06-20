@@ -15,12 +15,9 @@ public class CertificationService {
     @Autowired
     UserRepository userRepository;
 
+    private Message coolsms = new Message( "NCSBVON9BZGTHH2U","CLFRQNF13AWV5VHXSMTFWZKIZRJISLK7" );
+
     public void certifiedPhoneNumber(String phoneNumber, String cerNum) {
-
-        String api_key = "NCSBVON9BZGTHH2U";
-        String api_secret = "CLFRQNF13AWV5VHXSMTFWZKIZRJISLK7";
-        Message coolsms = new Message(api_key, api_secret);
-
         // 4 params(to, from, type, text) are mandatory. must be filled
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("to", phoneNumber);    // 수신전화번호
@@ -36,7 +33,46 @@ public class CertificationService {
             System.out.println(e.getMessage());
             System.out.println(e.getCode());
         }
+    }
 
+    //거래신청
+    public void sendSmsByTransaction(String title, String phoneNumber){
+        // 4 params(to, from, type, text) are mandatory. must be filled
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("to", phoneNumber);    // 수신전화번호
+        params.put("from", "01020180103");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("type", "SMS");
+        params.put("text", "\""+title+"\"란 글에 거래 신청이 도착했습니다.");
+        params.put("app_version", "test app 1.2"); // application name and version
+
+        System.out.println(phoneNumber);
+        try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString());
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
+    }
+
+    public void sendSmsByTransaction(boolean check, String phoneNumber){
+        // 4 params(to, from, type, text) are mandatory. must be filled
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("to", phoneNumber);    // 수신전화번호
+        params.put("from", "01020180103");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("type", "SMS");
+        if(check) params.put("text", "거래가 완료되었습니다.");
+        else params.put("text", "거래가 취소되었습니다.");
+        params.put("app_version", "test app 1.2"); // application name and version
+
+        System.out.println(phoneNumber);
+        try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString());
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+        }
     }
 
     public void updatePhoneNumber(String phoneNumber) {

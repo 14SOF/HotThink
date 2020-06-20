@@ -1,9 +1,7 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.entity.Follow;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.FollowRepository;
@@ -51,7 +49,6 @@ public class FollowService {
 
         List<Follow> entity = followRepository.findAllByUserFollowerOrUserFollowing(pageUser, pageUser);
 
-        System.out.println(entity);
         List<Follow> followerList = new ArrayList<>();
         List<Follow> followingList = new ArrayList<>();
 

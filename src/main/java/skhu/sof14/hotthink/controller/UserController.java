@@ -10,11 +10,10 @@ import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostTitleAndTypeDto;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.user.UserPostDto;
-import skhu.sof14.hotthink.service.*;
-
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
+import skhu.sof14.hotthink.service.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +27,6 @@ public class UserController {
 
     @Autowired
     KafkaService kafkaService;
-
 
     @Autowired
     PointService pointService;
@@ -105,7 +103,6 @@ public class UserController {
     public String alarm() {
         return "mypage_alarm";
     }
-
 
     @GetMapping("/user/mypage/myboards")
     public String myBoards(Model model, Pagination page) {
