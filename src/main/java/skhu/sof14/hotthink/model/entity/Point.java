@@ -1,6 +1,5 @@
 package skhu.sof14.hotthink.model.entity;
 
-import com.sun.javafx.geom.transform.Identity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

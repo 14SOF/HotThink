@@ -17,3 +17,11 @@ spring:
     bootstrap-servers: 13.209.73.144:9092
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rlgur405@gmail.com
+    password: ff870800
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true

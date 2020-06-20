@@ -11,7 +11,6 @@ import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
 @Service
-@AllArgsConstructor
 public class SendEmailService{
 
     @Autowired

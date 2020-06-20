@@ -1,7 +1,6 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import org.modelmapper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,10 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import skhu.sof14.hotthink.model.dto.comment.CommentReadDto;
 import skhu.sof14.hotthink.model.dto.post.*;
-import skhu.sof14.hotthink.model.entity.Comment;
-import skhu.sof14.hotthink.model.entity.Like;
-import skhu.sof14.hotthink.model.entity.Post;
-import skhu.sof14.hotthink.model.entity.User;
+import skhu.sof14.hotthink.model.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +50,8 @@ public class PostService {
         PostReadDto dto = mapper.map(entity, PostReadDto.class);
         //댓글
         int nowUser = UserService.getIdFromAuth();
+        if(dto.getUser().getId()==nowUser) dto.getUser().setWriter(true);
+
         for (CommentReadDto comment : dto.getCommentList()) {
             if (comment.getUser().getId() == nowUser)
                 comment.getUser().setWriter(true);
@@ -164,7 +162,6 @@ public class PostService {
         }
     }
 
-
     public List<PostTitleAndTypeDto> findAllByUserId(int id){
         User user = new User();
         user.setId(id);
@@ -172,7 +169,6 @@ public class PostService {
         Type dtoListType = new TypeToken<List<PostTitleAndTypeDto>>(){}.getType();
         return mapper.map(posts, dtoListType);
     }
-
 
 
 }
