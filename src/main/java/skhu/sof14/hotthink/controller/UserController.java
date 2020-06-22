@@ -37,6 +37,9 @@ public class UserController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    RateService rateService;
+
 
     @GetMapping("/user/mypage/home")
     public ModelAndView myPage(){
@@ -49,6 +52,8 @@ public class UserController {
         attr.put("userPhone", dto.getPhone());
         modelAndView.addObject("point", pointService.ChargeList());
         modelAndView.addObject("sum", pointService.amountSum());
+        modelAndView.addObject("rateAvg", RateService.loginUserAvgRate);
+        modelAndView.addObject("rate", RateService.rateDtoList);
         modelAndView.addAllObjects(attr);
         modelAndView.setViewName("mypage");
         return modelAndView;
@@ -130,6 +135,7 @@ public class UserController {
         modelAndView.addObject("followingList", followList.get("followingList"));
         modelAndView.addObject("check", followList.get("check"));
         modelAndView.addObject("boardList", postDtoList);
+        modelAndView.addObject("rate", rateService.findRateAvg(id));
         modelAndView.setViewName("user_page");
         return modelAndView;
     }

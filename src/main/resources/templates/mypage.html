@@ -3,6 +3,17 @@
 <head>
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="/style/user.css">
+    <style>
+        .my-custom-scrollbar {
+            position: relative;
+            height: 300px;
+            overflow: auto;
+        }
+        .table-wrapper-scroll-y {
+            display: block;
+        }
+
+    </style>
 </head>
 <body>
 {{> include/navbar}}
@@ -71,109 +82,27 @@
                     <div class="col-auto align-self-center">
                         <div class="row fa-xs text-gray-500 justify-content-center">구매자들의 평가</div>
                         <div class="row justify-content-center">
-                            <h1 style="font-size: 48px">0.0</h1>
-                        </div>
-                        <div class="row justify-content-center">
-                            <i class="fas fa-star" style="color:gold"></i>
-                            <i class="far fa-star"></i>
-                            <i class="far fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
+                            <h1 style="font-size: 48px">{{rateAvg}}</h1>
                         </div>
                     </div>
-                    <div class="vertical-divider"></div>
-                    <div class="col-auto row">
-                        <a class="btn btn-light align-self-center" href="#carouselRating" role="button"
-                           data-slide="prev">
-                            <i class="fas fa-arrow-left"></i>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <div id="carouselRating" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <table class="table table-borderless">
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">4</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">5</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="carousel-item">
-                                    <table class="table table-borderless">
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row">6</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">7</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">8</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">9</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-auto row mr-3">
-                        <a class="btn btn-light align-self-center" href="#carouselRating" role="button"
-                           data-slide="next">
-                            <i class="fas fa-arrow-right"></i>
-                            <span class="sr-only">Next</span>
-                        </a>
+                    <div class="col-auto vertical-divider"></div>
+                    <div class="col table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-bordered table-striped mb-0">
+                            <thead>
+                            <tr>
+                                <th scope="col">날짜</th>
+                                <th scope="col">점수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{#rate}}
+                            <tr>
+                                <td>{{dateTime}}</td>
+                                <td>{{score}}</td>
+                            </tr>
+                            {{/rate}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -199,63 +128,25 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="vertical-divider"></div>
-                        <div class="col-auto row">
-                            <a class="btn btn-light align-self-center" href="#carouselPoint" role="button"
-                               data-slide="prev">
-                                <i class="fas fa-arrow-left"></i>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <div id="carouselPoint" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <table class="table table-borderless">
-                                            <thead>
-
-                                            <tr>
-                                                <th scope="col">날짜</th>
-                                                <th scope="col">충전내역</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            {{#point}}
-                                            <tr>
-                                                <th scope="row">{{createDate}}</th>
-                                                <td>{{amount}}</td>
-                                            </tr>
-                                            {{/point}}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <table class="table table-borderless">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">날짜</th>
-                                                <th scope="col">사용내역</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td colspan="2">Larry the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        <div class="col-auto vertical-divider"></div>
+                            <div class="col table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-bordered table-striped mb-0">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">날짜</th>
+                                        <th scope="col">금액</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {{#point}}
+                                    <tr>
+                                        <th scope="row">{{createDate}}</th>
+                                        <td>{{amount}}</td>
+                                    </tr>
+                                    {{/point}}
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        <div class="col-auto row mr-3">
-                            <a class="btn btn-light align-self-center" href="#carouselPoint" role="button"
-                               data-slide="next">
-                                <i class="fas fa-arrow-right"></i>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -276,9 +167,6 @@
 {{>include/mypage_delete_modal}}
 {{>include/mypage_edit_modal}}
 {{>include/footer}}
-
-
-
 
 </body>
 <!--휴대폰 인증 모달-->
@@ -377,9 +265,8 @@
                 }
             })
         });
+
 </script>
-
-
 </html>
 
 
