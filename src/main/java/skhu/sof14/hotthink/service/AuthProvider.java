@@ -21,6 +21,10 @@ import java.util.Collection;
 public class AuthProvider implements AuthenticationProvider {
     @Autowired
     UserDetailService userDetailsService;
+
+    @Autowired
+    RateService rateService;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userId = authentication.getName();
@@ -29,6 +33,7 @@ public class AuthProvider implements AuthenticationProvider {
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 
 //        ConsumerConfiguration.startUserTopicConsumeContainer(user.getId());
+        rateService.login(user.getId());
         return new UserToken(userId, userPassword, null, user); //UserToken에 userId와 userPassword, user(loginDto , id,pw,status)
     }
 

@@ -3,11 +3,13 @@ package skhu.sof14.hotthink.config.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.stereotype.Component;
+import skhu.sof14.hotthink.service.RateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @Component
 public class LogoutHandler implements LogoutSuccessHandler {
@@ -15,6 +17,9 @@ public class LogoutHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 //        ConsumerConfiguration.stopUserTopicConsumeContainer();
 //        KafkaController.sseClose();
+
+        RateService.loginUserAvgRate = 0;
+        RateService.rateDtoList = new ArrayList<>();
         response.sendRedirect("/login");
     }
 }
