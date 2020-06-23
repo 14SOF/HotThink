@@ -17,22 +17,22 @@ public class TempController {
         return "freeThink";
     }
 
-    @GetMapping("footer1")
+    @GetMapping("footer/policy")
     public String footer1() {
         return "footer_policy";
     }
 
-    @GetMapping("faq")
+    @GetMapping("footer/faq")
     public String faq() {
         return "footer_faq";
     }
 
-    @GetMapping("operation")
+    @GetMapping("footer/operation")
     public String op() {
         return "footer_operation";
     }
 
-    @GetMapping("producer")
+    @GetMapping("footer/producer")
     public String producer() {
         return "footer_producer";
     }

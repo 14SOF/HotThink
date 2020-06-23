@@ -25,6 +25,8 @@ public class RealThinkController {
     @Autowired
     RateService rateService;
 
+
+
     @GetMapping("/read/post/real/list")
     public String realThinkListView(Model model, Pagination page) {
         List<PostListElementDto> list = postService.findAllPage(page,"리얼");
