@@ -25,6 +25,7 @@ import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -169,6 +170,21 @@ public class PostService {
         Type dtoListType = new TypeToken<List<PostTitleAndTypeDto>>(){}.getType();
         return mapper.map(posts, dtoListType);
     }
+
+
+    public List<MainRealDto> mainRealDto() {
+        List<Post> list = postRepository.findAllByType("리얼");
+        List<Post> realList = new ArrayList<>();
+        for(int i=0; i<4; i++){
+            realList.add(list.get(i));
+        }
+
+        Type dtoListType = new TypeToken<List<MainRealDto>>(){}.getType();
+        return mapper.map(realList,dtoListType);
+
+
+    }
+
 
 
 }

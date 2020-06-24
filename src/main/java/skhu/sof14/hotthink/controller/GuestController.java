@@ -19,16 +19,14 @@ import java.util.List;
 
 @Controller
 public class GuestController {
-
     @Autowired
     UserService userService;
     @Autowired
-    PostRepository postRepository;
+    PostService postService;
 
     @GetMapping("home")
-    public String index() {
-
-
+    public String index(Model model) {
+        model.addAttribute("real",postService.mainRealDto());
         return "index";
 
     }

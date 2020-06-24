@@ -40,6 +40,11 @@ public class UserController {
     @Autowired
     RateService rateService;
 
+    @GetMapping("/user/mypage/exchange")
+    public String exchange(){
+        return "mypage_exchange";
+    }
+
 
     @GetMapping("/user/mypage/home")
     public ModelAndView myPage(){
