@@ -133,3 +133,6 @@ QNA
 -> 거래 후 판매자 평가 / 거래시 인증된 휴대폰으로 거래 정보 발송 / 완료시 문자 발송
 18. 회원 탈퇴시 user의 status 가 1 -> 0 으로 변경
 19. 회원정보 수정(pw/닉네임)
+
+![main](https://user-images.githubusercontent.com/39195377/85849144-63eb9a00-b7e5-11ea-9a27-7d9ad526424c.png)
+
