@@ -34,11 +34,8 @@ public class OverlapService {
         user= userRepository.findUserById(UserService.getIdFromAuth());
         dto.setUser(user);
         dto.setPostId(postId);
-
-
         return overlapRepository.save(mapper.map(dto,Overlap.class));
     }
-
     //표절신고중복체크
     public boolean overlapCheckService(Long postId){
         User curUser = userRepository.findUserById(UserService.getIdFromAuth());
