@@ -135,4 +135,4 @@ QNA
 19. 회원정보 수정(pw/닉네임)
 
 ![main](https://user-images.githubusercontent.com/39195377/85849144-63eb9a00-b7e5-11ea-9a27-7d9ad526424c.png)
-![main](file:///C:/Users/jungk/Desktop/%EC%8A%A4%ED%8A%B8%EB%A6%BC%20%EC%A4%91%EA%B0%84%EC%97%B0%EC%82%B0%EA%B3%BC%20%EC%B5%9C%EC%A2%85%EC%97%B0%EC%82%B0.PNG)
+
