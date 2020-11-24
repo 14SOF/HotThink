@@ -1,4 +1,5 @@
 package skhu.sof14.hotthink.service;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
-import skhu.sof14.hotthink.config.kafka.ConsumerConfiguration;
 import skhu.sof14.hotthink.model.dto.user.UserLoginDto;
 import skhu.sof14.hotthink.utils.EncryptionUtils;
+
 import java.util.Collection;
 
 // 이 클래스가  AuthenticationProvider 를 구현한 클래스이다.
@@ -20,6 +21,10 @@ import java.util.Collection;
 public class AuthProvider implements AuthenticationProvider {
     @Autowired
     UserDetailService userDetailsService;
+
+    @Autowired
+    RateService rateService;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String userId = authentication.getName();
@@ -28,6 +33,7 @@ public class AuthProvider implements AuthenticationProvider {
         if(!user.getPassword().equals(EncryptionUtils.encryptMD5(userPassword))) throw new BadCredentialsException("패스워드가 일치하지 않습니다");
 
 //        ConsumerConfiguration.startUserTopicConsumeContainer(user.getId());
+        rateService.login(user.getId());
         return new UserToken(userId, userPassword, null, user); //UserToken에 userId와 userPassword, user(loginDto , id,pw,status)
     }
 

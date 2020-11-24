@@ -375,7 +375,10 @@
             type = "free"
         }else if(type==="핫띵크"){
             type = "hot"
-        }else{
+        }else if(type === "자유게시판"){
+            type ="freeboard"
+        }
+        else{
             type = "real"
         }
         window.location.href = "/read/post/" + type + "?id=" + id

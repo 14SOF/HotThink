@@ -10,11 +10,10 @@ import skhu.sof14.hotthink.model.dto.post.MyPostDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.PostTitleAndTypeDto;
 import skhu.sof14.hotthink.model.dto.user.UserCreateDto;
-import skhu.sof14.hotthink.model.dto.user.UserPostDto;
-import skhu.sof14.hotthink.service.*;
-
 import skhu.sof14.hotthink.model.dto.user.UserDetailDto;
+import skhu.sof14.hotthink.model.dto.user.UserPostDto;
 import skhu.sof14.hotthink.model.dto.user.UserUpdateDto;
+import skhu.sof14.hotthink.service.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +37,14 @@ public class UserController {
     @Autowired
     PostService postService;
 
+    @Autowired
+    RateService rateService;
+
+    @GetMapping("/user/mypage/exchange")
+    public String exchange(){
+        return "mypage_exchange";
+    }
+
 
     @GetMapping("/user/mypage/home")
     public ModelAndView myPage(){
@@ -50,6 +57,8 @@ public class UserController {
         attr.put("userPhone", dto.getPhone());
         modelAndView.addObject("point", pointService.ChargeList());
         modelAndView.addObject("sum", pointService.amountSum());
+        modelAndView.addObject("rateAvg", RateService.loginUserAvgRate);
+        modelAndView.addObject("rate", RateService.rateDtoList);
         modelAndView.addAllObjects(attr);
         modelAndView.setViewName("mypage");
         return modelAndView;
@@ -131,6 +140,7 @@ public class UserController {
         modelAndView.addObject("followingList", followList.get("followingList"));
         modelAndView.addObject("check", followList.get("check"));
         modelAndView.addObject("boardList", postDtoList);
+        modelAndView.addObject("rate", rateService.findRateAvg(id));
         modelAndView.setViewName("user_page");
         return modelAndView;
     }

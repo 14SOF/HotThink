@@ -6,9 +6,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import skhu.sof14.hotthink.model.entity.User;
-import skhu.sof14.hotthink.repository.PostRepository;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Setter

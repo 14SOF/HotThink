@@ -9,9 +9,7 @@ import skhu.sof14.hotthink.model.dto.overlap.OverlapDto;
 import skhu.sof14.hotthink.model.dto.overlap.OverlapElementDto;
 import skhu.sof14.hotthink.model.dto.overlap.OverlapReadDto;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
-import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
 import skhu.sof14.hotthink.model.entity.Overlap;
-import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.OverlapRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
@@ -36,11 +34,8 @@ public class OverlapService {
         user= userRepository.findUserById(UserService.getIdFromAuth());
         dto.setUser(user);
         dto.setPostId(postId);
-
-
         return overlapRepository.save(mapper.map(dto,Overlap.class));
     }
-
     //표절신고중복체크
     public boolean overlapCheckService(Long postId){
         User curUser = userRepository.findUserById(UserService.getIdFromAuth());

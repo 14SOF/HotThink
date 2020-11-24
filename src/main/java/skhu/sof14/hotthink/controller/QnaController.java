@@ -1,22 +1,22 @@
 package skhu.sof14.hotthink.controller;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import skhu.sof14.hotthink.model.dto.post.Pagination;
 import skhu.sof14.hotthink.model.dto.post.QnaCreateDto;
 import skhu.sof14.hotthink.model.dto.post.QnaListElementDto;
 import skhu.sof14.hotthink.model.dto.post.QnaReadDto;
-import skhu.sof14.hotthink.model.entity.Post;
-import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.PostRepository;
 import skhu.sof14.hotthink.repository.UserRepository;
 import skhu.sof14.hotthink.service.PostService;
 import skhu.sof14.hotthink.service.UserService;
-import org.modelmapper.ModelMapper;
 
-import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;

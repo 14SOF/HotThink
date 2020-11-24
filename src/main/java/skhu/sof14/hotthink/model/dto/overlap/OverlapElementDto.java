@@ -2,7 +2,6 @@ package skhu.sof14.hotthink.model.dto.overlap;
 
 import lombok.Setter;
 import lombok.ToString;
-import skhu.sof14.hotthink.model.entity.User;
 
 @ToString
 @Setter

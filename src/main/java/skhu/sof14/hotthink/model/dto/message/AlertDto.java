@@ -1,6 +1,8 @@
 package skhu.sof14.hotthink.model.dto.message;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 

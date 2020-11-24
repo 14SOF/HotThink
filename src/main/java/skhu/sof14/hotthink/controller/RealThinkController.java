@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import skhu.sof14.hotthink.model.dto.post.*;
 import skhu.sof14.hotthink.service.PostService;
+import skhu.sof14.hotthink.service.RateService;
 import skhu.sof14.hotthink.utils.RealContentUtil;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class RealThinkController {
 
     @Autowired
     PostService postService;
+
+    @Autowired
+    RateService rateService;
+
+
 
     @GetMapping("/read/post/real/list")
     public String realThinkListView(Model model, Pagination page) {
@@ -42,6 +48,7 @@ public class RealThinkController {
         model.addAttribute("real", dto);
         RealContentUtil.getRealContent(dto.getContent());
         model.addAttribute("realContent", new RealReadDto(dto.getContent()));
+        model.addAttribute("rate", rateService.findRateAvg(dto.getUser().getId()));
         return "realthink_read";
     }
 

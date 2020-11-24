@@ -2,14 +2,15 @@ package skhu.sof14.hotthink.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import skhu.sof14.hotthink.model.dto.user.MailDto;
 import skhu.sof14.hotthink.service.SendEmailService;
 import skhu.sof14.hotthink.service.UserService;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 @Controller
 public class CheckController {
@@ -61,7 +62,7 @@ public class CheckController {
 
     }
 
-    
+
 
 
 

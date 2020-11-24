@@ -1,6 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://hotthinkdatabase.cjditpwe7bq8.ap-northeast-2.rds.amazonaws.com/HotThink?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/student1?useUnicode=yes&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Seoul
+
     username: admin
     password: test1234
     driver-class-name: com.mysql.jdbc.Driver
@@ -17,3 +18,11 @@ spring:
     bootstrap-servers: 13.209.73.144:9092
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rlgur405@gmail.com
+    password: ff870800
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true

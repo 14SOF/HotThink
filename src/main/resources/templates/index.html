@@ -1,183 +1,803 @@
 <!DOCTYPE html>
-<html lang="kr">
+<html lang="ko">
 <head>
-    {{> include/header}}
-    <link rel="stylesheet" type="text/css" href="style/index.css">
-    <script src="js/modernizr.custom.34807.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+    <meta name="author" content="ji won">
+    <meta name="description" content="아이디어 공유">
+    <meta name="keywords" content="HotThink, 아이디어, 아이디어 공유">
+    <title>HotThink</title>
 
+    <!--style-->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="stylesheet" href="css/font-awesome.css">-->
+    <link rel="stylesheet" href="css/swiper.css">
+
+    <!--web font-->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+    <!-- HTLM5shiv ie6~8 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.min.js"></script>
+    <script type="text/javascript">
+        alert("현재 당신이 보는 브라우저는 지원하지 않습니다. 크롬브라우저를 추천합니다!");
+    </script>
+    <![endif]-->
 </head>
 <body>
-{{>include/navBar}}
-
-<!--slide start-->
-<div id="slide">
-    <input type="radio" name="pos" id="pos1" checked>
-    <input type="radio" name="pos" id="pos2">
-    <input type="radio" name="pos" id="pos3">
-
-    <ul>
-        <li>
-                <img src="image/mainImage1.jpg">
-        </li>
-        <li>
-                <img src="image/mainImage2.jpg">
-        </li>
-        <li>
-                <img src="image/mainImage3.jpg">
-        </li>
-    </ul>
-
-    <p class="pos">
-        <label for="pos1"></label>
-        <label for="pos2"></label>
-        <label for="pos3"></label>
-    </p>
+<!--skip menu-->
+<div id="skip">
+    <a rel="bookmark" href="#free_think">프리띵크</a>
+    <a rel="bookmark" href="#hot_think">핫띵크</a>
+    <a rel="bookmark" href="#real_think">리얼띵크</a>
+    <a rel="bookmark" href="#customer_sevice">고객지원</a>
 </div>
-<!--slide end-->
-<div id="searchContainer">
-    <input id="searchBar" type="text" placeholder="검색어입력">
-    <button id="searchButton">
-        <i class="fas fa-search fa-lg"></i>
-        &nbsp;&nbsp;검색
-    </button>
-</div>
-<article>
+<!--//skip menu-->
 
-<br/><br/>
+<!--header-->
+<header id="header">
+    <div class="header clearfix">
+        <div class="container">
+            <div class="header_row">
+                <h1>
+                    <a href="/home">
+                        <img src="/images/logo3.png" alt="HotThink">
+                    </a>
+                </h1>
+                <button type="button" class="btn_gnb">메인메뉴 열기</button>
+                <button type="button" class="btn_gnb">검색영역 펼치기</button>
+                <div class="search_wrap">
+                    <span class="ir_so">검색</span>
+                    <div class="search_field">
+                        <input type="text" id="searchBar" class="txt_search" title="검색어 입력" placeholder="당신의 생각을 검색해보세요!">
+                        <button class="btn" type="button" id="searchButton">
+                            <span>검색버튼</span>
+                        </button>
+                        <form>
+                            <input type="hidden">
+                        </form>
+                    </div>
+                    <button type="button" class="btn_gnb">검색영역닫기</button>
+                </div>
 
-<section>
-    <article>
-        <div id="container">
+                {{#userNick}}
+                <ul class="utill_list_login">
+                    <li class="user"><a href="#"><span class="user_name" style="font-size: 20px; color: #285e8e"  > {{userNick}}</span> 님</a></li>
+                    <li class="util_01"><a href="/logout_processing">로그아웃</a></li>
+                    <li class="util_02"><a href="/user/mypage/home">마이페이지</a></li>
+                </ul>
+                {{/userNick}}
 
-            <div id="portfolio"></div>
-
-            <ul id="portfolio-item">
-                // 조회순
-                <li><img src="/images/box_socks_teaser.jpeg" alt="정형일"/></li>
-                <li><img src="/images/rrwooo_rrwooo_teaser.jpeg" alt="김영곤"/></li>
-                <li><img src="/images/dozer_teaser.jpeg" alt="오일권"/></li>
-                <li><img src="/images/ltah_teaser.jpeg" alt="정기혁"/></li>
-                <li><img src="/images/pirates_teaser.jpeg" alt="정형일"/></li>
-                <li><img src="/images/rustler_teaser.jpeg" alt="정형일"/></li>
-                <li><img src="/images/satellite_teaser.jpeg" alt="정형일"/></li>
-                <li><img src="/images/werewolf_teaser.jpeg" alt="정형일"/></li>
+                {{^userNick}}
+                <ul class="utill_list">
+                    <li class="util_01"><a href="/login">로그인</a></li>
+                    <li class="util_02"><a href="/create/user">회원가입</a></li>
+                </ul>
+                {{/userNick}}
 
 
-                // 최신순
-                <li><img src="/images/box_socks_teaser.jpeg" alt="Box Socks"/></li>
-                <li><img src="/images/capt_kidd_teaser.jpeg" alt="Capt Kidd"/></li>
-                <li><img src="/images/bat_bedtime_teaser.jpeg" alt="Bat Bedtime"/></li>
-                <li><img src="/images/grrr_teaser.jpeg" alt="Grrr"/></li>
-                <li><img src="/images/eensy_teaser.jpeg" alt="Eensy"/></li>
-                <li><img src="/images/derby_lady_teaser.jpeg" alt="Derby Lady"/></li>
-                <li><img src="/images/carrot_teaser.jpeg" alt="Carrot"/></li>
-                <li><img src="/images/brush_teaser.jpeg" alt="Brush"/></li>
-
-
-            </ul>
-            <nav id="navigation">
-                <a href="#1" class="nav selected" data-page="1"><font size="5px" face="'Nanum Gothic', sans-serif"
-                                                                      color="black">조회순</font></a>
-                <a href="#2" class="nav" data-page="2"><font size="5px" face="'Nanum Gothic', sans-serif"
-                                                             color="black">최신순</font></a>
-
-            </nav>
-
+            </div>
         </div>
 
-        <script>!window.jQuery && document.write(unescape('%3Cscript src="/js/jquery-1.7.2.min.js"%3E%3C/script%3E'))</script>
-        <script> if (!Modernizr.csstransforms3d) document.getElementById('information').style.display = 'block'; </script>
-        <script src="/js/demo.js"></script>
-        <br/><br/>
+        <div class="row">
+            <div id="pc_gnb_wrap">
+                <div class="gnb_wrap">
+                    <nav class="pc_gnb">
+                        <ul>
+                            <li><a href="/read/post/free/list?page=1">프리띵크</a></li>
+                            <li><a href="/read/post/hot/list?page=1">핫띵크</a></li>
+                            <li><a href="/read/post/real/list?page=1">리얼띵크</a></li>
+                            <li><a href="/read/post/qna/list?page=1">Q&A</a></li>
+                            <li><a href="/read/post/freeboard/list?page=1">자유게시판</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
-        <hr style="border: solid 1px #BDBDBD; width: 77%; margin: 0px auto;">
-    </article>
-
-    <article>
-        <!--판매완료-->
-        <br/><br/>
-        <div id="Exchangecomplet">
-            <font size="20px" face="'Nanum Gothic', sans-serif"
-                  color="black"><strong>판매완료</strong></font><br/><br/><br/>
-            <ul>
-                <li>
-                    <p><img src="images\box_socks_teaser.jpeg" style="float:left"/><br>
-
-                        <font size="6px" face="'Nanum Gothic', sans-serif" color="black">
-                            <strong>코로나 마스크 재고 수량</strong>
-                        </font><br/>
-                        <font size="4px" face="'Nanum Gothic', sans-serif" color="black">
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다.
-                        </font>
-                    </p>
-                    <br style="clear:both"/>
-                </li>
-                <li>
-                    <p><img src="images\box_socks_teaser.jpeg" style="float:left"/><br>
-
-                        <font size="6px" face="'Nanum Gothic', sans-serif" color="black">
-                            <strong>코로나 마스크 재고 수량</strong>
-                        </font><br/>
-                        <font size="4px" face="'Nanum Gothic', sans-serif" color="black">
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다.
-                        </font>
-                    </p>
-                    <br style="clear:both"/>
-                </li>
-            </ul>
-
-            <br/>
-            <hr style="border: solid 1px #BDBDBD; width: 100%; margin: 0px auto;">
-            <br/><br/>
-
-            <!--후기-->
-            <font size="20px" face="'Nanum Gothic', sans-serif" color="black"><strong>후기</strong></font><br/><br/>
-            <ul>
-                <li>
-                    <p><br>
-                        <img src="images\dozer_teaser.jpeg" style="float:right"/><br/>
-                        <font size="6px" face="'Nanum Gothic', sans-serif" color="black">
-                            <strong>코로나 마스크 재고 수량</strong></font><br/>
-                        <font size="4px" face="'Nanum Gothic', sans-serif" color="black">
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다.
-                        </font>
-                    </p>
-                    <br style="clear:both"/>
-                </li>
-                <li>
-                    <p><br>
-                        <img src="images\dozer_teaser.jpeg" style="float:right"/><br/>
-                        <font size="6px" face="'Nanum Gothic', sans-serif" color="black">
-                            <strong>코로나 마스크 재고 수량</strong><br/>
-                        </font>
-                        <font size="4px" face="'Nanum Gothic', sans-serif" color="black">
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다
-                            아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다. 감사합니다.아이디어 너무 좋습니다.
-                        </font>
-                    </p>
-                    <br style="clear:both"/>
-                </li>
-            </ul>
-
+            <!--<div id="m_gnb_wrap">
+                <div class="gnb_wrap">
+                    <nav class="m_gnb">
+                        <div class="gnb_top">
+                           <a href="#">로그인</a>
+                           <a href="#">회원가입</a>
+                        </div>
+                        <ul>
+                            <li><a href="#">프리띵크</a></li>
+                            <li><a href="#">핫띵크</a></li>
+                            <li><a href="#">리얼띵크</a></li>
+                            <li><a href="#">고객지원</a></li>
+                        </ul>
+                        <button type="메인메뉴 닫기"></button>
+                    </nav>
+                </div>
+            </div>-->
         </div>
+    </div>
+</header>
+<!--//header-->
 
-    </article>
+<!--section_01-->
+<section id="section_01">
+    <div class="slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide ss1"></div>
+                <div class="swiper-slide ss2"></div>
+            </div>
+            <!--custom-->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-stop">정지</div>
+        </div>
+    </div>
 </section>
-</article>
+<!--//section_01-->
+
+<!--section_02-->
+<section id="section_02">
+    <div class="container">
+        <div class="row">
+            <div class="hotThink">
+                <h2 class="ir_so">핫띵크</h2>
+                <div class="hotThink_title">
+                    <ul>
+                        <li class="active"><a href="#">좋아요순</a></li>
+                        <li><a href="#">조회순</a></li>
+                        <li><a href="#">최신순</a></li>
+                    </ul>
+                </div>
+                <div class="hotThink_chart">
+                    <div class="swiper-container2">
+                        <div class="chart_cont1 swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img01.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>1</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img02.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>2</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img03.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>3</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img04.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>4</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img05.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>5</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img06.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>6</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img07.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>7</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img08.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>8</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-container2">
+                        <div class="chart_cont2 swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img08.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>1</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img07.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>2</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img06.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>3</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img05.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>4</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img04.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>5</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img03.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>6</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img02.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>7</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img01.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>8</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-container2">
+                        <div class="chart_cont3 swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img05.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>1</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img04.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>2</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img03.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>3</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img02.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>4</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img01.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>5</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img08.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>6</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img07.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>7</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="swiper-slide">
+                                <div class="repre_img">
+                                    <figure>
+                                        <a href="#">
+                                            <img src="./images/section_02_img06.jpg" alt="">
+                                        </a>
+                                    </figure>
+                                    <div class="rank"><strong>8</strong></div>
+                                </div>
+                                <div class="info">
+                                    <div class="info_good">
+                                        <span class="good_count">100</span>
+                                        <span class="unit">개</span>
+                                    </div>
+                                    <div class="info_hits">
+                                        <span>조회수 <span class="hits_rate">1,002</span> 만회</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--//section_02-->
+
+<!--section_03-->
+
+<!--//section_03-->
+<section id="section_03">
+    <div class="container">
+        <div class="row">
+            <div class="section_03 clearfix">
+                <h2>실시간으로 <em>"HOT THINK"</em> 살펴보자!</h2>
+                <article class="box_01">
+                    <div class="box_cont">
+                        <h3>실시간 <em>리얼띵크</em></h3>
+                        <ul>
+                            {{#real}}
+                            <li>
+                                <a href="/read/post/real?id={{id}}">
+                                    <em>{{createDate}}</em>
+                                    <span>{{title}}</span>
+                                </a>
+                            </li>
+                            {{/real}}
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="box_02">
+                    <div class="box_cont">
+                        <h3>실시간 <em>후기</em></h3>
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    <em>2020.06.08</em>
+                                    <span>[생활] 어케 이런생각을!!!!!!!!!!!!</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <em>2020.06.07</em>
+                                    <span>[생활] 오~ 나도 이생각 해봤음ㅋㅋ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <em>2020.06.06</em>
+                                    <span>[생활] ㅂㄱㄴ임 저거ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <em>2020.06.05</em>
+                                    <span>[생활] 흠...너무 간거 아닌가요?????</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+<!--footer-->
+{{> include/footer_index}}
+<!--//footer-->
+
+<!--javascript library-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="js/swiper.js"></script>
+<script src="https://use.fontawesome.com/46112c95a4.js"></script>
 
 <script>
+
+
     $('#searchButton').click(function () {
         window.location.href = "/read/post/search/list?page=1&title=" + $('#searchBar').val();
     })
 
+
+    $(document).ready(function(){
+        //상단 네비게이션바 고정
+        var navoffset = $("header").offset();
+        $(window).scroll(function(){
+            if($(document).scrollTop() > navoffset.top){
+                $("header").addClass("fixed_active");
+            }else{
+                $("header").removeClass("fixed_active");
+            }
+        });
+
+        //메인 이미지 슬라이드
+        var mySwiper = new Swiper('.swiper-container', {
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // pagination
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            autoplay: {
+                delay: 3000,
+            },
+        });
+
+        //핫띵크 이미지 슬라이드
+        var mySwiper = new Swiper('.swiper-container2', {
+            slidesPerView: 4,
+            spaceBetween: 24,
+            //            mousewheel: {
+            //                invert: true,
+            //            },
+            keyboard: {
+                enabled: true,
+                onlyInViewport: false,
+            },
+            //            autoplay: {
+            //                delay: 6000,
+            //            },
+            breakpoints: {
+                600: {
+                    slidesPerView: 3,
+                    spaceBetween: 24
+                },
+                768: {
+                    slidesPerView: 4,
+                    spaceBetween: 24
+                },
+                960: {
+                    slidesPerView: 5,
+                    spaceBetween: 24
+                }
+            }
+        });
+
+        //핫띵크 탭 메뉴
+        var hotBtn = $(".hotThink_title > ul > li");
+        var hotCont = $(".hotThink_chart > div");
+
+        hotCont.hide().eq(0).show();
+
+        hotBtn.click(function(e){
+            e.preventDefault();
+            var target = $(this);
+            var index = target.index();
+            hotBtn.removeClass("active");
+            target.addClass("active");
+            hotCont.css("display","none");
+            hotCont.eq(index).css("display","block");
+        })
+    });
 </script>
-
 </body>
-
-<footer>
-    {{>include/footer}}
-</footer>
 </html>

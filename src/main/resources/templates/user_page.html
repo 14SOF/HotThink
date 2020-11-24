@@ -44,14 +44,7 @@
                                     <div class="col-auto align-self-center mx-auto">
                                         <div class="row fa-xs text-gray-500 justify-content-center">구매자들의 평가</div>
                                         <div class="row justify-content-center">
-                                            <h1 style="font-size: 48px">0.0</h1>
-                                        </div>
-                                        <div class="row justify-content-center">
-                                            <i class="fas fa-star" style="color:gold"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                            <h1 style="font-size: 48px">{{rate}}</h1>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +84,9 @@
                                     style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
                                     <li style="text-align: center">
                                         {{#followerList}}
-                                        <button type="button" class="btn" onclick="userClick({{userFollower.id}})">{{userFollower.nick}}</button>
+                                        <div>
+                                            <button type="button" class="btn" onclick="userClick({{userFollower.id}})">{{userFollower.nick}}</button>
+                                        </div>
                                         {{/followerList}}
                                     </li>
                                 </ul>
@@ -104,7 +99,9 @@
                                     style="overflow: auto; height: 100%; list-style: none; padding-left: 0">
                                     <li style="text-align: center">
                                         {{#followingList}}
-                                        <button type="button" class="btn" onclick="userClick({{userFollowing.id}})">{{userFollowing.nick}}</button>
+                                        <div>
+                                            <button type="button" class="btn" onclick="userClick({{userFollowing.id}})">{{userFollowing.nick}}</button>
+                                        </div>
                                         {{/followingList}}
                                     </li>
                                 </ul>

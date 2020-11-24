@@ -4,6 +4,32 @@
     {{> include/header}}
     <link rel="stylesheet" type="text/css" href="/style/user.css">
     <style>
+        .myButton {
+            box-shadow:inset -9px 0px 10px -50px #f5978e;
+            background:linear-gradient(to bottom, #f24537 5%, #c62d1f 100%);
+            background-color:#f24537;
+            border-radius:9px;
+            border:1px solid #d02718;
+            display:inline-block;
+            cursor:pointer;
+            color:#ffffff;
+            font-family:Trebuchet MS;
+            font-size:16px;
+            font-weight:bold;
+            padding:8px 11px;
+            text-decoration:none;
+            text-shadow:-2px 0px 2px #810e05;
+        }
+        .myButton:hover {
+            background:linear-gradient(to bottom, #c62d1f 5%, #f24537 100%);
+            background-color:#c62d1f;
+        }
+        .myButton:active {
+            position:relative;
+            top:1px;
+        }
+
+
         body {
             font-family: "Noto Sans KR", sans-serif;
             width: 100%;
@@ -414,11 +440,8 @@
             <div class="userInfoBox">
                 <i class="profileImg"></i>
                 {{#user}}
-                <a class="username">{{nick}}</a>
+                <a class="username" href="/user?id={{id}}" >{{nick}}</a>
                 {{/user}}
-                <a class="followbtn">
-                    <i class="followimg"></i>
-                    <b>팔로우</b>
                 </a>
                 <div class="InfoRight">
                         <span>
@@ -427,9 +450,6 @@
                         <span>
                             <b>조회 : {{hit}}</b>
                         </span>
-<!--                        <span>-->
-<!--                            <b>댓글 : 2</b>-->
-<!--                        </span>-->
                 </div>
             </div>
             <div>
@@ -440,35 +460,13 @@
         </div>
 
         <div class="boardButton">
-            {{#userLikeStatus}}
-            <a type="button" class="btn btn-danger" onclick="likeCancelPost({{id}})" style="float: left">
-                좋아요 취소<span class="badge badge-light ml-1">{{likeList}}</span>
-            </a>
-            {{/userLikeStatus}}
-            {{^userLikeStatus}}
-            <a type="button" class="btn btn-light" onclick="likePost({{id}})" style="border:solid 1px red; float: left">
-                <!--                    좋아요-->
-                좋아요<span class="badge badge-danger ml-1">{{likeList}}</span>
-            </a>
-            {{/userLikeStatus}}
-            <button type="button" class="btn btn-primary" style="float:left">신고하기</button>
+
+            <button type="button" class="btn btn-primary" data-toggle="modal"
+                    data-target="#declarationModal">신고하기</button>
             <a class="button-write" href="/create/post/freeboard">글쓰기</a>
             <a class="button-list" href="/read/post/freeboard/list?page=1">목록</a>
         </div>
-        <ul class="listMove">
-            <li>
-                    <span class="up">
-                        윗글
-                    </span>
-                <a>윗글 게시글의 제목이들어감</a>
-            </li>
-            <li>
-                    <span class="down">
-                        아랫글
-                    </span>
-                <a>아랫글 게시글의 제목이 들어감</a>
-            </li>
-        </ul>
+
         <div class="comment">
             <div class="text">
 <!--                    <span>-->
@@ -532,6 +530,30 @@
         </div>
     </div>
 </div>
+
+
+<!--게시글 신고 Modal -->
+<div class="modal fade" id="declarationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">게시글 신고</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p style="font-weight: bold">[신고] 버튼 클릭시, 정상적으로 신고가 접수되며 신고횟수 누적 시 운영진의 확인 후 삭제 및 경고 조치 될 수 있습니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-primary" onclick="report({{user.id}} , {{freeboard.id}})">신고</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 <script>
     let reply = $('#InputReply');
@@ -623,6 +645,33 @@
             }
         )
     }
+
+    function report(userId,postId) {
+        console.log(userId);
+        console.log(postId);
+        $.ajax({
+            type :"POST",
+            url: "/report/post",
+            data : {
+                "id" : userId,
+                "postId" : postId
+            },
+            success: function (res) {
+                if(res['check']) {
+                    swal("신고 완료", "신고가 정상적으로 접수되었습니다.", "success");
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: '오류',
+                        text: '이미 신고한 게시글입니다.',
+                    })
+                }
+
+            }
+        })
+        $('#declarationModal').modal("hide");
+    };
 
 </script>
 {{/freeboard}}

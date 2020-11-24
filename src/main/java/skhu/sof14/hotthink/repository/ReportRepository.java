@@ -1,10 +1,7 @@
 package skhu.sof14.hotthink.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ResponseBody;
 import skhu.sof14.hotthink.model.entity.Report;
 
 import java.util.List;

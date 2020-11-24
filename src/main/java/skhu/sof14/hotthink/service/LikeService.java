@@ -1,6 +1,5 @@
 package skhu.sof14.hotthink.service;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import skhu.sof14.hotthink.model.dto.message.AlertDto;
@@ -9,7 +8,6 @@ import skhu.sof14.hotthink.model.entity.Like;
 import skhu.sof14.hotthink.model.entity.Post;
 import skhu.sof14.hotthink.model.entity.User;
 import skhu.sof14.hotthink.repository.LikeRepository;
-import skhu.sof14.hotthink.repository.UserRepository;
 
 import java.util.List;
 

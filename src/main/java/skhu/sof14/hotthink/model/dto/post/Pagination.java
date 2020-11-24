@@ -1,7 +1,6 @@
 package skhu.sof14.hotthink.model.dto.post;
 
 import lombok.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 @ToString
 @RequiredArgsConstructor
